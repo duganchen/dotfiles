@@ -1,0 +1,24 @@
+XTerm*faceName: Inconsolata
+XTerm*faceSize: 12
+XTerm*cursorBlink: true
+XTerm*cursorUnderLine: true
+XTerm*saveLines:  32768
+XTerm*locale: true
+XTerm*reverseVideo: true
+
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+URxvt.font: xft:Inconsolata:pixelsize=13
+URxvt.saveLines: 65535
+URxvt.scrollBar: false
+URxvt.reverseVideo: true
+URxvt.depth: 32
+URxvt.foreground: rgba:0000/0000/0000/cccc
+URxvt.background: white
+Rxvt.cursorBlink: true
+Rxvt.visualBell: true
