@@ -4,4 +4,10 @@ syntax enable
 autocmd FileType python setlocal expandtab 
 autocmd FileType text setlocal spell ignorecase noexpandtab textwidth=78
 set t_Co=256
+
+" Download from:
+" http://www.vim.org/scripts/script.php?script_id=2140
+"
+" Maching mc theme:
+" http://www.midnight-commander.org/browser/misc/skins/xoria256.ini
 color xoria256
