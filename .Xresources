@@ -1,10 +1,10 @@
-XTerm*faceName: Inconsolata
+XTerm*faceName: Anonymous\ Pro
 XTerm*faceSize: 12
 XTerm*cursorBlink: true
 XTerm*cursorUnderLine: true
 XTerm*saveLines:  32768
 XTerm*locale: true
-XTerm*reverseVideo: true
+XTerm*reverseVideo: false
 
 Xft.dpi: 96
 Xft.antialias: 1
