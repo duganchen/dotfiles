@@ -4,7 +4,7 @@ XTerm*cursorBlink: true
 XTerm*cursorUnderLine: true
 XTerm*saveLines:  32768
 XTerm*locale: true
-XTerm*reverseVideo: false
+XTerm*reverseVideo: true
 XTerm*utf8: 1
 
 Xft.dpi: 96
