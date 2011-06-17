@@ -5,6 +5,7 @@ XTerm*cursorUnderLine: true
 XTerm*saveLines:  32768
 XTerm*locale: true
 XTerm*reverseVideo: false
+XTerm*utf8: 1
 
 Xft.dpi: 96
 Xft.antialias: 1
