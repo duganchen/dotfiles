@@ -13,6 +13,7 @@ Xft.hinting: 1
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
+Xft.autohint: 0
 
 URxvt.font: xft:Inconsolata:pixelsize=13
 URxvt.saveLines: 65535
