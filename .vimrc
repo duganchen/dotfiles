@@ -5,6 +5,7 @@ set shiftwidth=4 tabstop=4 softtabstop=4 showcmd hlsearch incsearch smartcase au
 
 autocmd FileType python setlocal expandtab list colorcolumn=80 encoding=latin1
 autocmd FileType text setlocal spell ignorecase noexpandtab textwidth=72 colorcolumn=73
+autocmd Filetype c,cpp,cs,java,objc,php set cindent
 
 " http://www.vim.org/scripts/script.php?script_id=1143
 color inkpot
