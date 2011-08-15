@@ -24,6 +24,14 @@ if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
 
+# Set the path for Qt plugins provided by KDE
+if test -n "$QT_PLUGIN_PATH"; then
+  QT_PLUGIN_PATH="$QT_PLUGIN_PATH:`kde4-config --path qtplugins`"
+else
+  QT_PLUGIN_PATH="`kde4-config --path qtplugins`"
+fi
+export QT_PLUGIN_PATH
+
 nvidia-settings --load-config-only
 xfsettingsd
 xfce4-panel &
