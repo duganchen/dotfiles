@@ -74,5 +74,11 @@ Processes:$color $processes Running:$color $running_processes
 $hr
 File systems:
  / $color${fs_used /}/${fs_size /} ${fs_bar 6 /}
-Networking:
-Up:$color ${upspeed wlan0} - Down:$color ${downspeed wlan0}
+${if_existing /sys/class/net/wlan0/operstate up}
+Down: $color${downspeed wlan0} k/s ${alignr}Up: ${upspeed wlan0} k/s
+${downspeedgraph wlan0 25,140 000000 ff0000} ${alignr}${upspeedgraph wlan0
+25,140 000000 00ff00}
+Total: ${totaldown wlan0} ${alignr}Total: ${totalup wlan0}
+Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
+61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
+${endif}
