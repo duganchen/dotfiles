@@ -36,6 +36,8 @@ nvidia-settings --load-config-only
 xfsettingsd
 xfce4-panel &
 wicd-client &
+conky &
+dropbox start
 kdeinit4
 
 # Start the window manager:
