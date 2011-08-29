@@ -24,6 +24,16 @@ if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
 
+# Make GTK apps look and behave how they were set up in the gnome config tools
+if test -x /usr/libexec/gnome-settings-daemon >/dev/null; then
+  /usr/libexec/gnome-settings-daemon &
+elif which gnome-settings-daemon >/dev/null; then
+  gnome-settings-daemon &
+# Make GTK apps look and behave how they were set up in the XFCE config tools
+elif which xfce-mcs-manager >/dev/null; then
+  xfce-mcs-manager n &
+fi
+
 # Set the path for Qt plugins provided by KDE
 if test -n "$QT_PLUGIN_PATH"; then
   QT_PLUGIN_PATH="$QT_PLUGIN_PATH:`kde4-config --path qtplugins`"
@@ -32,17 +42,21 @@ else
 fi
 export QT_PLUGIN_PATH
 
+# Preload stuff for KDE apps
+if which start_kdeinit >/dev/null; then
+  LD_BIND_NOW=true start_kdeinit --new-startup +kcminit_startup &
+fi
+
 nvidia-settings --load-config-only
-xfsettingsd
-xfce4-panel &
 wicd-client &
-conky &
 dropbox start
-kdeinit4
+trayer --edge top --align right --SetDockType true --SetPartialStrut true  --expand true --width 10 --transparent true --tint 0x191970 --height 18 &
+nitrogen --restore
+xsetroot -cursor_name left_ptr
 
 # Start the window manager:
 if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
-  exec fusion-icon
+  exec ck-launch-session /usr/bin/xmonad
 else
-  exec /usr/bin/fusion-icon
+  exec /usr/bin/xmonad
 fi
