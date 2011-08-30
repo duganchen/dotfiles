@@ -7,9 +7,10 @@ import XMonad.Config.Desktop
 
 main =  xmonad $ ewmh defaultConfig
 	{
-		manageHook = manageDocks <+> manageHook desktopConfig,
-		layoutHook = avoidStruts $ layoutHook defaultConfig,
-		terminal = "urxvt"
+		modMask = mod4Mask
+		, manageHook = manageDocks <+> manageHook desktopConfig
+		, layoutHook = avoidStruts $ layoutHook defaultConfig
+		, terminal = "urxvt"
 	}
 	`additionalKeysP`
 	[
