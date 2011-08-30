@@ -5,11 +5,12 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Config.Desktop
 import XMonad.Layout.LayoutHints
+import XMonad.Hooks.SetWMName
 
-main =  xmonad $ ewmh defaultConfig
+conf = ewmh defaultConfig
 	{
 		modMask = mod4Mask
-		, manageHook = manageDocks <+> manageHook desktopConfig
+		, manageHook = manageDocks <+> manageHook defaultConfig
 		, layoutHook = layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
 		, terminal = "urxvt"
 	}
@@ -19,4 +20,8 @@ main =  xmonad $ ewmh defaultConfig
 		("M-n", sendMessage ToggleStruts)
 	]
 
-
+main = do
+	xmonad conf
+		{
+			startupHook = startupHook conf >> setWMName "LG3D"
+		}
