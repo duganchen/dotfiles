@@ -22,7 +22,7 @@ URxvt.reverseVideo: true
 URxvt.depth: 32
 URxvt*cursorUnderline: true
 URxvt*transparent: true
-URxvt*shading: 80
+URxvt*shading: 20
 URxvt*cusorBlink: false
 
 Rxvt*cursorBlink: true
