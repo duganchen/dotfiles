@@ -4,12 +4,13 @@ import XMonad.Util.EZConfig
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Config.Desktop
+import XMonad.Layout.LayoutHints
 
 main =  xmonad $ ewmh defaultConfig
 	{
 		modMask = mod4Mask
 		, manageHook = manageDocks <+> manageHook desktopConfig
-		, layoutHook = avoidStruts $ layoutHook defaultConfig
+		, layoutHook = layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
 		, terminal = "urxvt"
 	}
 	`additionalKeysP`
