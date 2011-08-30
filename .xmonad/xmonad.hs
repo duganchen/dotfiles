@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.EZConfig
+import XMonad.Hooks.EwmhDesktops
 
-main=xmonad=<< dzen myConfig
-myConfig=defaultConfig `additionalKeysP` [("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'")]
+main =  xmonad $ ewmh defaultConfig `additionalKeysP` [("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'")]
+
