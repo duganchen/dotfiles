@@ -15,12 +15,14 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 Xft.autohint: 0
 
-URxvt.font: xft:Inconsolata:pixelsize=13
+URxvt.font: xft:Inconsolata:pixelsize=15
 URxvt.saveLines: 65535
 URxvt.scrollBar: false
 URxvt.reverseVideo: true
 URxvt.depth: 32
-URxvt.foreground: rgba:0000/0000/0000/cccc
-URxvt.background: white
+URxvt*cursorUnderline: true
+URxvt*transparent: true
+URxvt*shading: 80
+
 Rxvt.cursorBlink: true
 Rxvt.visualBell: true
