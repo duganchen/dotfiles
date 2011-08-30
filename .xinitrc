@@ -30,8 +30,8 @@ if test -x /usr/libexec/gnome-settings-daemon >/dev/null; then
 elif which gnome-settings-daemon >/dev/null; then
   gnome-settings-daemon &
 # Make GTK apps look and behave how they were set up in the XFCE config tools
-elif which xfce-mcs-manager >/dev/null; then
-  xfce-mcs-manager n &
+elif which xfsettingsd >/dev/null; then
+  xfsettingsd &
 fi
 
 # Set the path for Qt plugins provided by KDE
