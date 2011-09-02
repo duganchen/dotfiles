@@ -6,6 +6,7 @@ XTerm*saveLines:  32768
 XTerm*locale: true
 XTerm*reverseVideo: true
 XTerm*utf8: 1
+XTerm*termName: xterm-256color
 
 Xft.dpi: 96
 Xft.antialias: 1
@@ -24,6 +25,7 @@ URxvt*cursorUnderline: true
 URxvt*transparent: true
 URxvt*shading: 20
 URxvt*cusorBlink: false
+URxvt*termName: rxvt-unicode-256color
 
 Rxvt*cursorBlink: true
 Rxvt*visualBell: true
