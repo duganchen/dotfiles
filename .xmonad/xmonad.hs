@@ -6,12 +6,13 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Config.Desktop
 import XMonad.Layout.LayoutHints
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.NoBorders
 
 conf = ewmh defaultConfig
 	{
 		modMask = mod4Mask
 		, manageHook = manageDocks <+> manageHook defaultConfig
-		, layoutHook = layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
+		, layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
 		, terminal = "urxvt"
 	}
 	`additionalKeysP`
@@ -23,5 +24,6 @@ conf = ewmh defaultConfig
 main = do
 	xmonad conf
 		{
+			-- To make Netbeans works. Should be unncessary with JDK7.
 			startupHook = startupHook conf >> setWMName "LG3D"
 		}
