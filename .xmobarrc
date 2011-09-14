@@ -1,0 +1,10 @@
+Config { font = "xft:Droid Sans-10"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run StdinReader ] 
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader%"
+       }
