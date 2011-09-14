@@ -7,11 +7,15 @@ import XMonad.Config.Desktop
 import XMonad.Layout.LayoutHints
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
+import XMonad.Hooks.ManageHelpers
 
 conf = ewmh defaultConfig
 	{
 		modMask = mod4Mask
-		, manageHook = manageDocks <+> manageHook defaultConfig
+		, manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll
+		[
+			isFullscreen --> doFullFloat
+		]
 		, layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
 		, terminal = "urxvt"
 	}
