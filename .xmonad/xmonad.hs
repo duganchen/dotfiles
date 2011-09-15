@@ -28,6 +28,5 @@ conf = ewmh defaultConfig
 main = do
 	xmonad =<< xmobar conf
 		{
-			-- To make Netbeans works. Should be unncessary with JDK7.
 			startupHook = startupHook conf >> setWMName "LG3D"
 		}
