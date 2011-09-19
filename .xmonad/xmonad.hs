@@ -22,7 +22,8 @@ conf = ewmh defaultConfig
 	`additionalKeysP`
 	[
 		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'"),
-		("M-e", sendMessage ToggleStruts)
+		("M-e", sendMessage ToggleStruts),
+		("M-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
 	]
 
 main = do
