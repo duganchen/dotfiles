@@ -22,7 +22,7 @@ conf = ewmh defaultConfig
 	`additionalKeysP`
 	[
 		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'"),
-		("M-n", sendMessage ToggleStruts)
+		("M-e", sendMessage ToggleStruts)
 	]
 
 main = do
