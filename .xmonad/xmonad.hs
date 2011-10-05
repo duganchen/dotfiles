@@ -19,7 +19,7 @@ conf = ewmh defaultConfig
 		]
 		, layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
 		, terminal = "urxvt"
-		, logHook = dynamicLog >> updatePointer Nearest
+		, logHook = dynamicLog >> updatePointer (Relative 0.5 0.5)
 	}
 	`additionalKeysP`
 	[
