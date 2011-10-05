@@ -8,6 +8,7 @@ import XMonad.Layout.LayoutHints
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.ManageHelpers
+import XMonad.Actions.UpdatePointer
 
 conf = ewmh defaultConfig
 	{
@@ -18,6 +19,7 @@ conf = ewmh defaultConfig
 		]
 		, layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts $ layoutHook defaultConfig 
 		, terminal = "urxvt"
+		, logHook = dynamicLog >> updatePointer Nearest
 	}
 	`additionalKeysP`
 	[
