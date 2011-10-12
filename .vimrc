@@ -8,6 +8,8 @@ autocmd FileType text setlocal spell ignorecase noexpandtab textwidth=72 colorco
 autocmd Filetype c,cpp,cs,java,objc,php setlocal cindent
 autocmd Filetype javascript setlocal foldlevel=0
 
+let g:neocomplcache_enable_at_startup = 1
+
 " http://www.vim.org/scripts/script.php?script_id=1143
 color inkpot
 
@@ -19,3 +21,9 @@ color inkpot
 " Matching mc theme:
 " http://www.midnight-commander.org/browser/misc/skins/xoria256.ini
 " color xoria256
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
