@@ -1,0 +1,6 @@
+stop-xscreensaver=1
+ao=alsa
+vo=xv
+ass=true
+ass-hinting=3
+embeddedfonts=true
