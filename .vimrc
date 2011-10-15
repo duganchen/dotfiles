@@ -1,14 +1,25 @@
 filetype plugin indent on
 syntax enable
 
-set shiftwidth=4 tabstop=4 softtabstop=4 showcmd hlsearch incsearch smartcase autoindent ruler showmode visualbell ruler nobackup textwidth=0 wrap noignorecase smarttab spelllang=en_ca number omnifunc=syntaxcomplete#Complete showmatch title noerrorbells noswapfile t_Co=256 mouse=a nocompatible wildmenu ttyfast encoding=utf-8
+set shiftwidth=4 tabstop=4 softtabstop=4 showcmd hlsearch incsearch smartcase autoindent ruler showmode visualbell ruler nobackup textwidth=0 wrap noignorecase smarttab spelllang=en_ca number omnifunc=syntaxcomplete#Complete showmatch title noerrorbells noswapfile t_Co=256 mouse=a nocompatible wildmenu ttyfast encoding=utf-8 laststatus=2
 
 autocmd FileType python setlocal expandtab list colorcolumn=80 encoding=latin1 foldmethod=indent foldlevel=99
 autocmd FileType text setlocal spell ignorecase noexpandtab textwidth=72 colorcolumn=73
 autocmd Filetype c,cpp,cs,java,objc,php setlocal cindent
 autocmd Filetype javascript setlocal foldlevel=0
 
+" for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
+
+" for syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+
+" for fugitive
+set statusline+=%{fugitive#statusline()}
 
 " http://www.vim.org/scripts/script.php?script_id=1143
 color inkpot
@@ -22,8 +33,4 @@ color inkpot
 " http://www.midnight-commander.org/browser/misc/skins/xoria256.ini
 " color xoria256
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
+
