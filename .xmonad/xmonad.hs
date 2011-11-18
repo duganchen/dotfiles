@@ -1,6 +1,7 @@
 
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
 import XMonad.Actions.UpdatePointer
 import XMonad.Util.EZConfig
@@ -9,7 +10,8 @@ import XMonad.Layout.LayoutHints
 import XMonad.Hooks.SetWMName
 
 conf = defaultConfig
-              { manageHook = manageDocks <+> manageHook defaultConfig
+              { manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll
+			  [ isFullscreen --> doFullFloat ]
               , layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts  $  layoutHook defaultConfig
 			  , terminal = "urxvt"
 			  , logHook = dynamicLog >> updatePointer (Relative 0.5 0.5)
