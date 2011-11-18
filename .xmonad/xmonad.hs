@@ -6,6 +6,7 @@ import XMonad.Actions.UpdatePointer
 import XMonad.Util.EZConfig
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LayoutHints
+import XMonad.Hooks.SetWMName
 
 conf = defaultConfig
               { manageHook = manageDocks <+> manageHook defaultConfig
@@ -13,6 +14,7 @@ conf = defaultConfig
 			  , terminal = "urxvt"
 			  , logHook = dynamicLog >> updatePointer (Relative 0.5 0.5)
 			  , modMask = mod4Mask
+			  , startupHook = setWMName "LG3D"
 
               }  
 	`additionalKeysP`
