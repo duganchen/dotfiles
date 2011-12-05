@@ -1,15 +1,15 @@
 import XMonad
+import XMonad.Actions.UpdatePointer
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.DynamicLog
-import XMonad.Actions.UpdatePointer
-import XMonad.Util.EZConfig
-import XMonad.Layout.NoBorders
-import XMonad.Layout.LayoutHints
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.LayoutHints
+import XMonad.Layout.NoBorders
+import XMonad.Util.EZConfig
 
--- EXPORT SAL_USE_VCLPLUGIN=gen must be set before you can use LibreOffice.
--- http://code.google.com/p/xmonad/issues/detail?id=200
+-- You must export SAL_USE_VCLPLUGIN=gen before using LibreOffice.
+-- See: http://code.google.com/p/xmonad/issues/detail?id=200
 
 conf = defaultConfig
               { manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll
@@ -29,7 +29,3 @@ conf = defaultConfig
 	]
 
 main = do xmonad =<< xmobar conf
-
-
-			  
-
