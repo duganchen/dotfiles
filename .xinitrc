@@ -24,15 +24,9 @@ if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
 
-# Make GTK apps look and behave how they were set up in the gnome config tools
-if test -x /usr/libexec/gnome-settings-daemon >/dev/null; then
-  /usr/libexec/gnome-settings-daemon &
-elif which gnome-settings-daemon >/dev/null; then
-  gnome-settings-daemon &
-# Make GTK apps look and behave how they were set up in the XFCE config tools
-elif which xfsettingsd >/dev/null; then
-  xfsettingsd &
-fi
+# Loading of gnome-settings-daemon or xfsettingsd removed.
+# Use a theme switcher for the GTK theme, and manipulate
+# /etc/fonts/conf.d for the font settings.
 
 # Set the path for Qt plugins provided by KDE
 if test -n "$QT_PLUGIN_PATH"; then
