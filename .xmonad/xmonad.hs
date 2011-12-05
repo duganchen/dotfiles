@@ -1,4 +1,3 @@
-
 import XMonad
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -8,6 +7,9 @@ import XMonad.Util.EZConfig
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LayoutHints
 import XMonad.Hooks.SetWMName
+
+-- EXPORT SAL_USE_VCLPLUGIN=gen must be set before you can use LibreOffice.
+-- http://code.google.com/p/xmonad/issues/detail?id=200
 
 conf = defaultConfig
               { manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll
