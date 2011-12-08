@@ -10,7 +10,8 @@ autocmd Filetype javascript setlocal foldlevel=0
 
 let g:neocomplcache_enable_at_startup = 1
 let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
 
-set statusline=%n\ %f\ %y\ %R\ %m\ %{SyntasticStatuslineFlag()}\ %{fugitive#statusline()}%=%l/%L,%c
+set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%=%l/%L,%c
 
 color inkpot
