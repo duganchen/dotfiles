@@ -8,29 +8,9 @@ autocmd FileType text setlocal spell ignorecase noexpandtab textwidth=72 colorco
 autocmd Filetype c,cpp,cs,java,objc,php setlocal cindent
 autocmd Filetype javascript setlocal foldlevel=0
 
-" for neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-
-" for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
 
-" for fugitive
-set statusline+=%{fugitive#statusline()}
+set statusline=%n\ %f\ %y\ %R\ %m\ %{SyntasticStatuslineFlag()}\ %{fugitive#statusline()}%=%l/%L,%c
 
-" http://www.vim.org/scripts/script.php?script_id=1143
 color inkpot
-
-" Switch to xoria256 when mc 4.8 comes out.
-"
-" Download from:
-" http://www.vim.org/scripts/script.php?script_id=2140
-"
-" Matching mc theme:
-" http://www.midnight-commander.org/browser/misc/skins/xoria256.ini
-" color xoria256
-
-
