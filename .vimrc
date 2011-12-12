@@ -1,10 +1,10 @@
 filetype plugin indent on
 syntax enable
 
-set shiftwidth=4 tabstop=4 softtabstop=4 showcmd hlsearch incsearch smartcase autoindent ruler showmode visualbell ruler nobackup textwidth=0 wrap noignorecase smarttab spelllang=en_ca number omnifunc=syntaxcomplete#Complete showmatch title noerrorbells noswapfile t_Co=256 mouse=a nocompatible wildmenu ttyfast encoding=utf-8 laststatus=2
+set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab spelllang=en_ca t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap 
 
-autocmd FileType python setlocal expandtab list colorcolumn=80 encoding=latin1 foldmethod=indent foldlevel=99
-autocmd FileType text setlocal spell ignorecase noexpandtab textwidth=72 colorcolumn=73
+autocmd FileType python setlocal colorcolumn=80 encoding=latin1 expandtab list foldlevel=99 foldmethod=indent
+autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab spell textwidth=72 
 autocmd Filetype c,cpp,cs,java,objc,php setlocal cindent
 autocmd Filetype javascript setlocal foldlevel=0
 

@@ -17,7 +17,7 @@ conf = defaultConfig
 			  [ isFullscreen --> doFullFloat ]
               , layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts  $  layoutHook defaultConfig
 			  , terminal = "urxvt"
-			  , logHook = takeTopFocus >> dynamicLog >> updatePointer (Relative 0.5 0.5)
+			  , logHook = takeTopFocus
 			  , modMask = mod4Mask
 			  , startupHook = setWMName "LG3D"
 
