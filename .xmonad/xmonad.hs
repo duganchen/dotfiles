@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
@@ -16,7 +17,7 @@ conf = defaultConfig
 			  [ isFullscreen --> doFullFloat ]
               , layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts  $  layoutHook defaultConfig
 			  , terminal = "urxvt"
-			  , logHook = dynamicLog >> updatePointer (Relative 0.5 0.5)
+			  , logHook = takeTopFocus
 			  , modMask = mod4Mask
 			  , startupHook = setWMName "LG3D"
 
