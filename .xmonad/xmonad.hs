@@ -13,20 +13,19 @@ import XMonad.Util.EZConfig
 -- See: http://code.google.com/p/xmonad/issues/detail?id=200
 
 conf = defaultConfig
-              { manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll
-			  [ isFullscreen --> doFullFloat ]
-              , layoutHook = smartBorders $ layoutHintsToCenter $ avoidStruts  $  layoutHook defaultConfig
-			  , terminal = "urxvt"
-			  , logHook = takeTopFocus
-			  , modMask = mod4Mask
-			  , startupHook = setWMName "LG3D"
-
-              }  
+    { manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll
+	    [ isFullscreen --> doFullFloat ]
+        , layoutHook = avoidStruts $ layoutHintsToCenter $ smartBorders $ layoutHook defaultConfig
+		, logHook = takeTopFocus >> updatePointer (Relative 0.5 0.5)
+		, modMask = mod4Mask
+		, startupHook = setWMName "LG3D"
+		, terminal = "urxvt"
+    }  
 	`additionalKeysP`
 	[
-		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'"),
-		("M-e", sendMessage ToggleStruts),
-		("M-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
+		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'")
+		, ("M-e", sendMessage ToggleStruts)
+		, ("M-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
 	]
 
 main = do xmonad =<< xmobar conf
