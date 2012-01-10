@@ -1,4 +1,7 @@
+-- Uses a transparent fork. See here:
+-- http://blog.ezyang.com/2011/11/transparent-xmobar/
 Config { font = "xft:Droid Sans-10"
+	   , alpha = 50
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
