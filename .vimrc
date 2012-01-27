@@ -1,3 +1,10 @@
+" I use the following plugins:
+"	* neocomplache
+"	* syntastic
+"	* fugitive
+"	* command-t
+"	* inkpot color scheme
+
 filetype plugin indent on
 syntax enable
 
