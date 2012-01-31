@@ -1,0 +1,3 @@
+[submodule "bashconfig"]
+	path = bashconfig
+	url = git://github.com/roman/bashconfig.git
