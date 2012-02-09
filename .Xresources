@@ -12,7 +12,7 @@ XTerm*autoWrap: true
 Xft.dpi: 96
 Xft.antialias: 1
 Xft.hinting: 1
-Xft.hintstyle: hintfull
+Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 Xft.autohint: 0
