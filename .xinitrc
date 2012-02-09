@@ -24,10 +24,6 @@ if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
 
-# Loading of gnome-settings-daemon or xfsettingsd removed.
-# Use a theme switcher for the GTK theme, and manipulate
-# /etc/fonts/conf.d for the font settings.
-
 # Set the path for Qt plugins provided by KDE
 if test -n "$QT_PLUGIN_PATH"; then
   QT_PLUGIN_PATH="$QT_PLUGIN_PATH:`kde4-config --path qtplugins`"
@@ -41,6 +37,7 @@ if which start_kdeinit >/dev/null; then
   LD_BIND_NOW=true start_kdeinit --new-startup +kcminit_startup &
 fi
 
+xfsettingsd
 nvidia-settings --load-config-only
 wicd-client &
 dropbox start
