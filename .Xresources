@@ -25,7 +25,7 @@ URxvt.depth: 32
 URxvt*cursorUnderline: true
 URxvt*transparent: true
 URxvt*shading: 20
-URxvt*cusorBlink: false
+URxvt*cursorBlink: false
 URxvt*termName: rxvt-unicode-256color
 
 Rxvt*cursorBlink: true
