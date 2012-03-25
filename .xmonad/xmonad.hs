@@ -11,17 +11,17 @@ import XMonad.Util.EZConfig
 conf = ewmh defaultConfig
     {
     layoutHook = smartBorders $ layoutHintsToCenter $ layoutHook defaultConfig
-    , manageHook = composeAll [isFullscreen --> doFullFloat]
+    , manageHook = manageHook defaultConfig <+> composeAll [isFullscreen --> doFullFloat]
     , modMask = mod4Mask
     , terminal = "urxvt"
     }
- 	`additionalKeysP`
- 	[
- 		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'")
- 		, ("M-e", sendMessage ToggleStruts)
- 		, ("M-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
- 	]
+    `additionalKeysP`
+	[
+		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'")
+		, ("M-e", sendMessage ToggleStruts)
+		, ("M-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
+	]
 
-main = do xmonad =<< xmobar conf {
+main = xmonad =<< xmobar conf {
     startupHook = startupHook conf >> setWMName "LG3D"
 }
