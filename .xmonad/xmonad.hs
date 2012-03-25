@@ -23,5 +23,7 @@ conf = ewmh defaultConfig
  	]
 
 main = do xmonad =<< xmobar conf {
-    startupHook = startupHook conf >> setWMName "LG3D"
+    manageHook = composeOne
+    [ className =? "adl" -?> doIgnore ]
+    , startupHook = startupHook conf >> setWMName "LG3D"
 }
