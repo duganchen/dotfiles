@@ -43,8 +43,7 @@ wicd-client &
 dropbox start
 nitrogen --restore
 xsetroot -cursor_name left_ptr
-trayer --edge top --align right --SetDockType true --SetPartialStrut true \
- --expand true --width 10 --transparent true --alpha 205 --tint 0x000000 --height 21 &
+stalonetray &
 
 # Start the window manager:
 if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then

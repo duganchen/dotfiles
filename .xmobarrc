@@ -4,7 +4,7 @@ Config { font = "xft:Droid Sans-10"
 	   , alpha = 50
        , bgColor = "black"
        , fgColor = "grey"
-       , position = TopW L 90
+       , position = Top
        , lowerOnStart = True
        , commands = [ Run StdinReader
 	       , Run MultiCpu [] 10
@@ -17,5 +17,5 @@ Config { font = "xft:Droid Sans-10"
 	   ] 
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% } { %multicpu% | %memory% | %swap% | %wlan0% | %battery% | %cpufreq% | <fc=#ee9a00>%date%</fc> "
+       , template = "}{ %StdinReader% %multicpu% | %memory% | %swap% | %wlan0% | %battery% | %cpufreq% | <fc=#ee9a00>%date%</fc> "
        }

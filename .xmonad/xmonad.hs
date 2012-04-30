@@ -8,10 +8,16 @@ import XMonad.Layout.LayoutHints
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 
+myManageHook = composeAll
+    [
+    isFullscreen --> doFullFloat
+    , className =? "stalonetray" --> doIgnore
+    ]
+
 conf = ewmh defaultConfig
     {
     layoutHook = avoidStruts $ smartBorders $ layoutHintsToCenter $ layoutHook defaultConfig
-    , manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll [isFullscreen --> doFullFloat]
+    , manageHook = manageDocks <+> manageHook defaultConfig <+> myManageHook
     , modMask = mod4Mask
     , terminal = "urxvt"
     }
