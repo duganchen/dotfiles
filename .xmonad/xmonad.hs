@@ -10,7 +10,7 @@ import XMonad.Util.EZConfig
 
 conf = ewmh defaultConfig
     {
-    layoutHook = smartBorders $ layoutHintsToCenter $ layoutHook defaultConfig
+    layoutHook = avoidStruts $ smartBorders $ layoutHintsToCenter $ layoutHook defaultConfig
     , manageHook = manageDocks <+> manageHook defaultConfig <+> composeAll [isFullscreen --> doFullFloat]
     , modMask = mod4Mask
     , terminal = "urxvt"
