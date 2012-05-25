@@ -15,4 +15,8 @@ source $modules/prompt.sh
 # == Git Completion utility
 source $modules/git-completion.sh
 
+# Set up the LS_COLORS environment:
+if [ -f $HOME/.dir_colors ]; then
+  eval `/bin/dircolors -b $HOME/.dir_colors`
+fi
 
