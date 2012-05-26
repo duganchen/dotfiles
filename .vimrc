@@ -3,12 +3,12 @@
 "	* syntastic
 "	* fugitive
 "	* command-t
-"	* inkpot color scheme
+"	* solarized color theme
 
 filetype plugin indent on
 syntax enable
 
-set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab spelllang=en_ca t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap 
+set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab spelllang=en_ca t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap 
 
 autocmd FileType haskell setlocal expandtab 
 autocmd FileType python setlocal colorcolumn=80 encoding=latin1 expandtab list foldlevel=99 foldmethod=indent
@@ -22,4 +22,4 @@ let g:syntastic_auto_loc_list=1
 
 set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%=%l/%L,%c
 
-color inkpot
+color solarized
