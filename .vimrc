@@ -12,6 +12,7 @@ set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mo
 
 autocmd FileType haskell setlocal expandtab 
 autocmd FileType python setlocal colorcolumn=80 encoding=latin1 expandtab list foldlevel=99 foldmethod=indent
+autocmd Filetype python autocmd BufWritePre <buffer> :%s/\s\+$//e
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab spell textwidth=72 
 autocmd Filetype c,cpp,cs,java,objc,php setlocal cindent
 autocmd Filetype javascript setlocal foldlevel=0
