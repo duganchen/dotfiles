@@ -39,11 +39,12 @@ fi
 
 xfsettingsd
 nvidia-settings --load-config-only
+stalonetray &
+sleep 1
 wicd-client &
 dropbox start
 nitrogen --restore
 xsetroot -cursor_name left_ptr
-stalonetray &
 
 # Start the window manager:
 if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
