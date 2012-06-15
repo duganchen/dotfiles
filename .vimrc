@@ -1,27 +1,28 @@
 
 " I use the following plugins:
-"	* neocomplache
+"	* neocomplache (with snippets)
 "	* syntastic
 "	* fugitive
 "	* command-t
 "	* solarized color theme
+"	* supertab
 
 filetype plugin indent on
 syntax enable
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab spelllang=en_ca t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
+set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
 
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
-autocmd FileType html,markdown,plaintex,tex,text set spell
+autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
 autocmd FileType coffee,haskell,python,ruby setlocal expandtab
 autocmd FileType python setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
 autocmd FileType javascript setlocal foldlevel=0
-autocmd FileType snippet setlocal noexpandtab
+autocmd FileType snippet setlocal noexpandtab nospell
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
