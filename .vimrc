@@ -18,7 +18,7 @@ autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
 autocmd FileType coffee,haskell,python,ruby setlocal expandtab
-autocmd FileType python setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent nospell
+autocmd FileType python,python.django setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent nospell
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
 autocmd FileType javascript setlocal foldlevel=0
