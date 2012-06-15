@@ -21,7 +21,6 @@ autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
 autocmd FileType javascript setlocal foldlevel=0
 autocmd FileType snippet setlocal noexpandtab
 
-let g:neocomplcache_enable_at_startup = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
