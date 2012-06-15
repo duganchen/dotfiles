@@ -14,11 +14,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
 
-autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
-
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
 autocmd FileType coffee,haskell,python,ruby setlocal expandtab
-autocmd FileType python,python.django setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent nospell
+autocmd FileType python setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
 autocmd FileType javascript setlocal foldlevel=0
@@ -102,7 +100,7 @@ if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
