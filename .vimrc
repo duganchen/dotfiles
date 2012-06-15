@@ -11,7 +11,7 @@ syntax enable
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab spell spelllang=en_ca t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
+set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab spelllang=en_ca t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
 
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
