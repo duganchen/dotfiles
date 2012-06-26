@@ -1,16 +1,17 @@
-
 " I use the following plugins:
 "	* neocomplache (with snippets)
 "	* syntastic
 "	* fugitive
 "	* command-t
 "	* solarized color theme
-"	* supertab
 
 filetype plugin indent on
 syntax enable
 
 autocmd BufWritePre * :%s/\s\+$//e
+
+" We don't want the default filetype to be text.
+autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
 
 set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
 
@@ -21,6 +22,8 @@ autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=7
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
 autocmd FileType javascript setlocal foldlevel=0
 autocmd FileType snippet setlocal noexpandtab nospell
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
