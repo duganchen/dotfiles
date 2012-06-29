@@ -15,3 +15,5 @@ source $modules/prompt.sh
 # == Git Completion utility
 source $modules/git-completion.sh
 
+# Not done automatically on all distributions.
+eval `dircolors -b ~/.dir_colors`
