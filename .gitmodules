@@ -1,3 +1,34 @@
 [submodule "bashconfig"]
 	path = bashconfig
 	url = git://github.com/roman/bashconfig.git
+[submodule ".vim/bundle/neocomplcache"]
+	path = .vim/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
+[submodule ".vim/bundle/neocomplcache-snippets-complete"]
+	path = .vim/bundle/neocomplcache-snippets-complete
+	url = https://github.com/Shougo/neocomplcache-snippets-complete.git
+[submodule ".vim/bundle/vim-fugitive"]
+	path = .vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/bundle/vim-unimpaired"]
+	path = .vim/bundle/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule ".vim/bundle/vim-extradite"]
+	path = .vim/bundle/vim-extradite
+	url = https://github.com/int3/vim-extradite
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized
+[submodule ".vim/bundle/Command-T"]
+	path = .vim/bundle/Command-T
+	url = https://github.com/wincent/Command-T.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic
+[submodule ".vim/bundle/bufexplorer"]
+	path = .vim/bundle/bufexplorer
+	url = https://github.com/c9s/bufexplorer
+
+[submodule ".vim/bundle/ack"]
+	path = .vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim.git

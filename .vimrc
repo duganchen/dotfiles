@@ -1,10 +1,4 @@
-" I use the following plugins:
-"	* neocomplache (with snippets)
-"	* syntastic
-"	* fugitive
-"	* command-t
-"	* solarized color theme
-
+call pathogen#infect()
 filetype plugin indent on
 syntax enable
 
