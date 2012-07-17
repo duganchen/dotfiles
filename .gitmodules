@@ -44,3 +44,6 @@
 [submodule ".vim/bundle/golden-ratio"]
 	path = .vim/bundle/golden-ratio
 	url = http://github.com/roman/golden-ratio
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git

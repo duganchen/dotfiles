@@ -1,3 +1,7 @@
 My personal dotfiles.
 
 The bash config uses some elements from Roman's.
+
+The CoffeeScript vim configuration additionally benefits from:
+
+https://github.com/vitaly/vim-syntastic-coffee
