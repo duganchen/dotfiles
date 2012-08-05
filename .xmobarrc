@@ -1,4 +1,4 @@
-Config { font = "xft:Droid Sans-10"
+Config { font = "xft:Source Sans Pro-10"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run StdinReader
@@ -9,7 +9,7 @@ Config { font = "xft:Droid Sans-10"
 		   , Run Battery [] 10
 		   , Run CpuFreq [] 10
            , Run Date "%a %b %_d %l:%M" "date" 10
-	   ] 
+	   ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "}{ %StdinReader% %multicpu% | %memory% | %swap% | %wlan0% | %battery% | %cpufreq% | <fc=#ee9a00>%date%</fc> "
