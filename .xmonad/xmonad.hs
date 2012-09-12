@@ -27,8 +27,8 @@ conf = ewmh defaultConfig
     `additionalKeysP`
 	[
 		("<Print>", spawn "scrot -e 'mv $f ~/Pictures/screenshots'")
-		, ("M-e", sendMessage ToggleStruts)
-		, ("M-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
+		, ("C-M-S-e", sendMessage ToggleStruts)
+		, ("C-M-S-w", spawn "nitrogen --sort=rtime ~/Pictures/wallpaper")
 	]
 
 main = xmonad =<< xmobar conf {
