@@ -16,7 +16,7 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 Xft.autohint: 0
 
-URxvt.font: xft:Source Code Pro:pixelsize=16
+URxvt.font: xft:Source Code Pro:pixelsize=15
 URxvt.saveLines: 65535
 URxvt.scrollBar: false
 URxvt.depth: 32
