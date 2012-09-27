@@ -21,7 +21,7 @@ URxvt.saveLines: 65535
 URxvt.scrollBar: false
 URxvt.depth: 32
 URxvt*cursorUnderline: true
-URxvt*letterSpace: -1.5
+URxvt*letterSpace: -1
 URxvt*termName: rxvt-unicode-256color
 
 Rxvt*cursorBlink: true
