@@ -37,7 +37,6 @@ conf = ewmh defaultConfig
     , manageHook = manageDocks <+> manageHook defaultConfig <+> myManageHook
     , modMask = mod4Mask
     , handleEventHook = fullscreenEventHook
-    , terminal = "urxvt"
     }
     `additionalKeysP` myKeys
 
