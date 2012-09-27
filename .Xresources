@@ -1,5 +1,5 @@
-XTerm*faceName: Inconsolata
-XTerm*faceSize: 13
+XTerm*faceName: Source Code Pro
+XTerm*faceSize: 12
 XTerm*cursorBlink: true
 XTerm*cursorUnderLine: true
 XTerm*saveLines:  32768
@@ -16,7 +16,7 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 Xft.autohint: 0
 
-URxvt.font: xft:Inconsolata:pixelsize=17
+URxvt.font: xft:Source Code Pro:pixelsize=16
 URxvt.saveLines: 65535
 URxvt.scrollBar: false
 URxvt.depth: 32
