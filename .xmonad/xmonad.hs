@@ -36,6 +36,7 @@ conf = ewmh defaultConfig
     layoutHook = avoidStruts $ windowArrange $ mouseResize $ smartBorders $ layoutHintsToCenter $ layoutHook defaultConfig
     , manageHook = manageDocks <+> manageHook defaultConfig <+> myManageHook
     , modMask = mod4Mask
+    , terminal = "Terminal"
     , handleEventHook = fullscreenEventHook
     }
     `additionalKeysP` myKeys
