@@ -47,3 +47,15 @@
 [submodule ".vim/bundle/vim-coffee-script"]
 	path = .vim/bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "misc_submodules/mc-solarized-skin"]
+	path = misc_submodules/mc-solarized-skin
+	url = https://github.com/nkulikov/mc-solarized-skin
+[submodule "misc_submodules/xfce4-terminal-colors-solarized"]
+	path = misc_submodules/xfce4-terminal-colors-solarized
+	url = https://github.com/sgerrand/xfce4-terminal-colors-solarized.git
+[submodule "misc_submodules/vim-syntastic-coffee"]
+	path = misc_submodules/vim-syntastic-coffee
+	url = https://github.com/vitaly/vim-syntastic-coffee.git
+[submodule "misc_submodules/dircolors-solarized"]
+	path = misc_submodules/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
