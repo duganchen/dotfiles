@@ -7,13 +7,13 @@ alias df='df -h'
 # The OS we are currently using
 platform=`uname`
 
-modules="$HOME/.bash/modules"
+mymodules="$HOME/.bash/modules"
 # == General colors to use on the terminal
-source $modules/colors.sh
+source $mymodules/colors.sh
 # == Pimped prompt
-source $modules/prompt.sh
+source $mymodules/prompt.sh
 # == Git Completion utility
-source $modules/git-completion.sh
+source $mymodules/git-completion.sh
 
 # Not done automatically on all distributions.
 eval `dircolors -b ~/.dir_colors`
