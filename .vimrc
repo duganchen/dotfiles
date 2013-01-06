@@ -10,7 +10,7 @@ autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
 set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wrap
 
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
-autocmd FileType coffee,haskell,python,ruby setlocal expandtab
+autocmd FileType coffee,haskell,javascript,python,ruby setlocal expandtab
 autocmd FileType python setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
