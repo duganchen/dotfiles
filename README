@@ -1,6 +1,6 @@
 My personal dotfiles.
 
-The bash config uses some elements from Roman's.
+The bash config uses some elements from [Roman's](https://github.com/roman/vimconfig).
 
 The CoffeeScript vim configuration additionally benefits from:
 
