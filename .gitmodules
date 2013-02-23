@@ -22,7 +22,6 @@
 [submodule ".vim/bundle/bufexplorer"]
 	path = .vim/bundle/bufexplorer
 	url = https://github.com/c9s/bufexplorer
-
 [submodule ".vim/bundle/ack"]
 	path = .vim/bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
@@ -47,9 +46,6 @@
 [submodule "misc_submodules/xfce4-terminal-colors-solarized"]
 	path = misc_submodules/xfce4-terminal-colors-solarized
 	url = https://github.com/sgerrand/xfce4-terminal-colors-solarized.git
-[submodule "misc_submodules/vim-syntastic-coffee"]
-	path = misc_submodules/vim-syntastic-coffee
-	url = https://github.com/vitaly/vim-syntastic-coffee.git
 [submodule "misc_submodules/dircolors-solarized"]
 	path = misc_submodules/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
