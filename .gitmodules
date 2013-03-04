@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/neosnippet"]
 	path = .vim/bundle/neosnippet
 	url = https://github.com/Shougo/neosnippet.git
+[submodule "misc_submodules/vim-pathogen"]
+	path = misc_submodules/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen.git
