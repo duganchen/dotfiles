@@ -6,6 +6,7 @@ ruby extconf.rb
 make
 cd ~
 ln -sf $CWD/.vimrc .
+ln -sf $CWD/.Xresources .
 ln -sf $CWD/misc_submodules/dircolors-solarized/dircolors.256dark .dir_colors
 mkdir -p .vim/autoload
 cd .vim/autoload
