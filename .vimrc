@@ -13,7 +13,7 @@ set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mo
 
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
 autocmd FileType coffee,haskell,javascript,python,ruby setlocal expandtab
-autocmd FileType python setlocal colorcolumn=80 encoding=latin1 foldlevel=99 foldmethod=indent
+autocmd FileType python setlocal colorcolumn=80 foldlevel=99 foldmethod=indent
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
 autocmd FileType javascript setlocal foldlevel=0
