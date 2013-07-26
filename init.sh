@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 set -e
 CWD=`pwd`
 cd .vim/bundle/Command-T/ruby/command-t
