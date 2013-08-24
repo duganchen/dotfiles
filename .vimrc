@@ -24,8 +24,12 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
+let g:syntastic_c_compiler = 'clang'
+let g:syntastic_cpp_compiler = 'clang++'
+
 " Syntastic assumes C++11 support.
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 
 let g:virtualenv_stl_format = '[%n]'
 
@@ -115,3 +119,6 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+
+" let g:syntastic_cpp_include_dirs = [ '/usr/include/SDL2' ]
