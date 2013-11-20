@@ -24,3 +24,6 @@ ln -sf $CWD/misc_submodules/xfce4-terminal-colors-solarized/dark/terminalrc .
 mkdir -p ~/.local/share/mc/skins
 cd ~/.local/share/mc/skins
 ln -sf $CWD/misc_submodules/mc-solarized-skin/solarized.ini .
+mkdir -p ~/.config/fontconfig
+cd ~/.config/fontconfig
+ln -s $CWD/.config/fontconfig/fonts.conf .
