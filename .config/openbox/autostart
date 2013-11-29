@@ -1,0 +1,8 @@
+# Heavily derived from Crunchbang's.
+
+## GNOME PolicyKit and Keyring
+eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+
+nitrogen --restore
+tint2 &
+conky -q &
