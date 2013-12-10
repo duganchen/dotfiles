@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+
+	<menu id="xdg-apps-menu" label="Applications" execute="~/.virtualenvs/obpipe2/bin/python ~/Documents/a/ob_xdg_app_pipe/ob_xdg_apps.py" />
+
+	<menu id="settings-menu" label="Settings">
+		<item label="Openbox Configuration Manager">
+			<action name="Execute">
+				<command>obconf</command>
+				<startupnotify><enabled>yes</enabled></startupnotify>
+			</action>
+		</item>
+		<item label="Theme Settings">
+			<action name="Execute">
+				<command>lxappearance</command>
+				<startupnotify><enabled>yes</enabled></startupnotify>
+			</action>
+		</item>
+		<item label="Choose Wallaper">
+			<action name="Execute">
+				<command>nitrogen ~/Pictures/wallpaper</command>
+			</action>
+		</item>
+		<separator />
+		<item label="Reconfigure Openbox">
+			<action name="Reconfigure" />
+		</item>
+	</menu>
+
+	<menu id="root-menu" label="Openbox 3">
+		<menu id="xdg-apps-menu"/>
+		<menu id="settings-menu"/>
+		<separator />
+		<item label="Lock Screen">
+			<action name="Execute">
+				<command>xscreensaver-command -lock</command>
+			</action>
+		</item>
+		<item label="Exit">
+			<action name="Execute">
+				<command>ob-exit</command>
+			</action>
+		</item>
+	</menu>
+
+</openbox_menu>
