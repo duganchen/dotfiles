@@ -14,6 +14,8 @@ cd .vim/autoload
 ln -sf $CWD/misc_submodules/vim-pathogen/autoload/pathogen.vim .
 cd ~/.vim
 ln -sf $CWD/.vim/bundle .
+cd bundle
+ln -sf $CWD/misc_submodules/solarized/vim-colors-solarized .
 cd ~
 mkdir -p .mplayer
 cd .mplayer
