@@ -20,7 +20,7 @@ cd .mplayer
 ln -sf $CWD/.mplayer/config .
 mkdir -p ~/.config/Terminal
 cd ~/.config/Terminal
-ln -sf $CWD/misc_submodules/xfce4-terminal-colors-solarized/dark/terminalrc .
+cp $CWD/misc_submodules/solarized/xfce4-terminal/dark/terminalrc .
 mkdir -p ~/.local/share/mc/skins
 cd ~/.local/share/mc/skins
 ln -sf $CWD/misc_submodules/mc-solarized-skin/solarized.ini .
