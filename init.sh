@@ -28,3 +28,4 @@ ln -sf $CWD/misc_submodules/mc-solarized-skin/solarized.ini .
 mkdir -p ~/.config/fontconfig
 cd ~/.config/fontconfig
 ln -s $CWD/.config/fontconfig/fonts.conf .
+cp misc_submodules/LS_COLORS/LS_COLORS ~/.dir_colors

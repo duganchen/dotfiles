@@ -67,3 +67,6 @@
 [submodule ".vim/bundle/molokai"]
 	path = .vim/bundle/molokai
 	url = https://github.com/tomasr/molokai.git
+[submodule "misc_submodules/LS_COLORS"]
+	path = misc_submodules/LS_COLORS
+	url = https://github.com/trapd00r/LS_COLORS
