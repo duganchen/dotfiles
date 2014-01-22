@@ -37,7 +37,7 @@ set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ 
 
 " set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%=%l/%L,%c
 
-color solarized
+color molokai
 
 " The rest is copy and pasted from Shougo.
 

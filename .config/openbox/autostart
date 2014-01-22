@@ -14,4 +14,3 @@ tint2 &
 conky -q &
 
 dropbox start
-VBoxClient --display

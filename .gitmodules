@@ -64,3 +64,6 @@
 [submodule "misc_submodules/solarized"]
 	path = misc_submodules/solarized
 	url = git://github.com/altercation/solarized.git
+[submodule ".vim/bundle/molokai"]
+	path = .vim/bundle/molokai
+	url = https://github.com/tomasr/molokai.git
