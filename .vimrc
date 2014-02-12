@@ -4,6 +4,7 @@ Helptags
 filetype plugin indent on
 syntax enable
 
+" http://vim.wikia.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
 " We don't want the default filetype to be text.
