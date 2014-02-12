@@ -5,6 +5,9 @@ cd .vim/bundle/Command-T/ruby/command-t
 ruby extconf.rb
 make
 
+cd .vim/bundle/vimproc
+make
+
 cd ~
 
 if [ ! -e .vimrc ]; then
