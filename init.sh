@@ -5,7 +5,7 @@ cd .vim/bundle/Command-T/ruby/command-t
 ruby extconf.rb
 make
 
-cd .vim/bundle/vimproc
+cd $CWD/.vim/bundle/vimproc
 make
 
 cd ~
