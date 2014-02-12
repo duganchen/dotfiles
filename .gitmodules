@@ -70,3 +70,12 @@
 [submodule "misc_submodules/LS_COLORS"]
 	path = misc_submodules/LS_COLORS
 	url = https://github.com/trapd00r/LS_COLORS
+[submodule ".vim/bundle/vimproc"]
+	path = .vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git
+[submodule ".bundle/vimshell"]
+	path = .bundle/vimshell
+	url = https://github.com/Shougo/vimproc.vim.git
+[submodule ".vim/bundle/vimshell"]
+	path = .vim/bundle/vimshell
+	url = https://github.com/Shougo/vimshell.vim.git
