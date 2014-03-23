@@ -82,3 +82,6 @@
 [submodule ".vim/bundle/unite"]
 	path = .vim/bundle/unite
 	url = https://github.com/Shougo/unite.vim.git
+[submodule ".vim/bundle/vundle"]
+	path = .vim/bundle/vundle
+	url = https://github.com/gmarik/Vundle.vim.git
