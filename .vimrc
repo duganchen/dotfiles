@@ -18,6 +18,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tomasr/molokai'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'tpope/vim-fugitive'
+Bundle 'Valloric/YouCompleteMe'
 
 " My stuff starts here
 
