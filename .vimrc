@@ -19,6 +19,7 @@ Bundle 'tomasr/molokai'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'kien/rainbow_parentheses.vim'
 
 " My stuff starts here
 
@@ -56,6 +57,11 @@ let g:virtualenv_stl_format = '[%n]'
 
 set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%{virtualenv#statusline()}%=%l/%L,%c
 
-" set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%=%l/%L,%c
-
 color molokai
+
+" Rainbow parentheses are always wrong. They break with some templating
+" languages, but whatever.
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
