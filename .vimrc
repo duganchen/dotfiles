@@ -20,6 +20,7 @@ Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'SirVer/ultisnips'
 
 " My stuff starts here
 
@@ -59,9 +60,15 @@ set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ 
 
 color molokai
 
-" Rainbow parentheses are always wrong. They break with some templating
+" Rainbow parentheses are always on. They break with some templating
 " languages, but whatever.
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical"
