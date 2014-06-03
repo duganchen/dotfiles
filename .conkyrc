@@ -28,18 +28,17 @@ own_window_argb_visual yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
 use_xft yes
-xftfont Droid Sans Mono:size=12
-alignment top_right
+xftfont Source Code Pro:size=12
+alignment top_left
 format_human_readable yes
-gap_x 0
-gap_y 0
+gap_50
+gap_y 50
 
+default_color white
 
 background no
 border_width 1
 cpu_avg_samples 2
-default_outline_color white
-default_shade_color black
 draw_borders no
 draw_graph_borders yes
 draw_outline no
