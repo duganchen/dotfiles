@@ -35,6 +35,8 @@ autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
 
 set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wildignore+=*.pyc wrap
 
+set wildignore+=build
+
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
 autocmd FileType coffee,haskell,javascript,python,ruby setlocal expandtab
 autocmd FileType python setlocal colorcolumn=80 foldlevel=99 foldmethod=indent
@@ -72,3 +74,7 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
+
+" For YouCompleteMe
+" With YouCompleteMe enabled, Syntastic is usused for C++.
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
