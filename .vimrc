@@ -38,7 +38,7 @@ set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell nu
 set wildignore+=build
 
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
-autocmd FileType coffee,haskell,javascript,python,ruby setlocal expandtab
+autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
 autocmd FileType python setlocal colorcolumn=80 foldlevel=99 foldmethod=indent
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
