@@ -74,6 +74,4 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 " For YouCompleteMe
-" With YouCompleteMe enabled, Syntastic is usused for C++.
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
