@@ -31,7 +31,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 " We don't want the default filetype to be text.
 autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
 
-set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler smartcase shiftwidth=4 showcmd showmatch showmode softtabstop=4 smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wildignore+=*.pyc wrap
+set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler shell=/bin/sh shiftwidth=4 showcmd showmatch showmode softtabstop=4 smartcase smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wildignore+=*.pyc wrap
 
 set wildignore+=build
 

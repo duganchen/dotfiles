@@ -1,1 +1,1 @@
-set background=dark guifont=Source\ Code\ Pro\ 12
+set background=dark guifont=Monospace\ 12
