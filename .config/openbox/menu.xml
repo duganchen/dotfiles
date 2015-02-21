@@ -3,7 +3,7 @@
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
 
 
-	<menu id="xdg-apps-menu" label="Applications" execute="~/.virtualenvs/ob_xdg_app_pipe/bin/python ~/Documents/ob_xdg_app_pipe/ob_xdg_apps.py" />
+	<menu id="xdg-apps-menu" label="Applications" execute="ob_xdg_apps" />
 
 	<menu id="settings-menu" label="Settings">
 		<item label="Openbox Configuration Manager">
@@ -40,7 +40,7 @@
 		</item>
 		<item label="Exit">
 			<action name="Execute">
-				<command>~/Documents/ob-exit/ob-exit.py</command>
+				<command>ob-exit</command>
 			</action>
 		</item>
 	</menu>
