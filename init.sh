@@ -55,3 +55,10 @@ cd ~/.config/tint2
 if [ ! -e tint2rc ]; then
 	ln -s "$CWD/.config/tint2/tint2rc"
 fi
+
+mkdir -p ~/.config/fish
+cd ~/.config/fish
+if [ ! -e config.fish ]; then
+	ln -s "$CWD/.config/fish/config.fish"
+fi
+
