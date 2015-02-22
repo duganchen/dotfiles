@@ -19,6 +19,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'SirVer/ultisnips'
+Bundle "dag/vim-fish"
 
 " My stuff starts here
 
