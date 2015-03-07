@@ -62,8 +62,8 @@ if [ ! -e config.fish ]; then
 	ln -s "$CWD/.config/fish/config.fish"
 fi
 
-if [ ! -e ~/config/compton.conf ]; then
-	cd ~/config
+if [ ! -e ~/.config/compton.conf ]; then
+	cd ~/.config
 	ln -s $CWD/.config/compton.conf
 	cd -
 fi
