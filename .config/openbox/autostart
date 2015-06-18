@@ -3,7 +3,7 @@
 ## GNOME PolicyKit and Keyring
 eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 
-compton -b
+compton -b --unredir-if-possible
 
 nitrogen --restore
 
