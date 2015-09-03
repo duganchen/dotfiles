@@ -1,1 +1,2 @@
-set background=dark guifont=Monospace\ 12
+set background=dark guifont=Monospace\ 11
+color flatcolor

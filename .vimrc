@@ -13,6 +13,7 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'wincent/Command-T'
 Bundle 'scrooloose/syntastic'
+Bundle 'MaxSt/FlatColor'
 Bundle 'tomasr/molokai'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'tpope/vim-fugitive'
@@ -32,7 +33,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 " We don't want the default filetype to be text.
 autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
 
-set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler shell=/bin/sh shiftwidth=4 showcmd showmatch showmode softtabstop=4 smartcase smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wildignore+=*.pyc wrap
+set autoindent background=dark encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler shell=/bin/sh shiftwidth=4 showcmd showmatch showmode softtabstop=4 smartcase smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wildignore+=*.pyc wrap
 
 set wildignore+=build
 
@@ -59,7 +60,7 @@ let g:virtualenv_stl_format = '[%n]'
 
 set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%{virtualenv#statusline()}%=%l/%L,%c
 
-color molokai
+color flatcolor
 
 " Rainbow parentheses are always on. They break with some templating
 " languages, but whatever.
