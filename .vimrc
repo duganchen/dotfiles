@@ -60,7 +60,7 @@ let g:virtualenv_stl_format = '[%n]'
 
 set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%{virtualenv#statusline()}%=%l/%L,%c
 
-color molokai
+color flatcolor
 
 " Rainbow parentheses are always on. They break with some templating
 " languages, but whatever.
