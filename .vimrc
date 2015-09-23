@@ -21,7 +21,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'SirVer/ultisnips'
 Bundle "dag/vim-fish"
 Bundle "godlygeek/csapprox"
-Bundle "vim-lapis256"
+Bundle "andrwb/vim-lapis256"
 Bundle "junegunn/seoul256.vim"
 Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-unimpaired"
