@@ -20,6 +20,11 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'SirVer/ultisnips'
 Bundle "dag/vim-fish"
+Bundle "godlygeek/csapprox"
+Bundle "junegunn/seoul256.vim"
+Bundle "suan/vim-instant-markdown"
+Bundle "tpope/vim-unimpaired"
+Bundle "tpope/vim-repeat"
 
 " My stuff starts here
 
@@ -32,16 +37,52 @@ autocmd BufWritePre * :%s/\s\+$//e
 " We don't want the default filetype to be text.
 autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
 
-set autoindent encoding=utf-8 hlsearch incsearch laststatus=2 mouse=a nospell number nobackup nocompatible noerrorbells noignorecase noswapfile omnifunc=syntaxcomplete#Complete ruler shell=/bin/sh shiftwidth=4 showcmd showmatch showmode softtabstop=4 smartcase smarttab t_Co=256 tabstop=4 textwidth=0 title ttyfast visualbell wildmenu wildignore+=*.pyc wrap
-
+set autoindent
+set background=dark
+set encoding=utf-8
+set hlsearch
+set incsearch
+set laststatus=2
+set list
+set mouse=a
+set nospell
+set number
+set nobackup
+set nocompatible
+set noerrorbells
+set noignorecase
+set noswapfile
+set omnifunc=syntaxcomplete#Complete
+set ruler
+set shell=/bin/sh
+set shiftwidth=4
+set showcmd
+set showmatch
+set showmode
+set softtabstop=4
+set smartcase
+set smarttab
+set t_Co=256
+set tabstop=4
+set textwidth=0
+set title
+set ttyfast
+set visualbell
+set wildmenu
+set wildignore+=*.pyc
 set wildignore+=build
+set wrap
+
+let &lcs = 'tab:┆ '
 
 autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
 autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
 autocmd FileType python setlocal colorcolumn=80 foldlevel=99 foldmethod=indent
 autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
+let &lcs = 'tab:︙ '
 autocmd FileType javascript setlocal foldlevel=0
+let &lcs = 'tab:︙ '
 autocmd FileType snippet setlocal noexpandtab nospell
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
@@ -59,7 +100,10 @@ let g:virtualenv_stl_format = '[%n]'
 
 set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%{virtualenv#statusline()}%=%l/%L,%c
 
-color molokai
+color seoul256
+
+" Transparent background for the terminal vim.
+hi Normal cterm=NONE ctermbg=NONE
 
 " Rainbow parentheses are always on. They break with some templating
 " languages, but whatever.
