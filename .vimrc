@@ -21,6 +21,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'SirVer/ultisnips'
 Bundle "dag/vim-fish"
 Bundle "godlygeek/csapprox"
+Bundle "vim-lapis256"
 Bundle "junegunn/seoul256.vim"
 Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-unimpaired"
@@ -100,7 +101,7 @@ let g:virtualenv_stl_format = '[%n]'
 
 set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%{virtualenv#statusline()}%=%l/%L,%c
 
-color seoul256
+color lapis256
 
 " Transparent background for the terminal vim.
 hi Normal cterm=NONE ctermbg=NONE
