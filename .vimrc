@@ -26,6 +26,8 @@ Bundle "junegunn/seoul256.vim"
 Bundle "suan/vim-instant-markdown"
 Bundle "tpope/vim-unimpaired"
 Bundle "tpope/vim-repeat"
+Bundle "ervandew/supertab"
+Bundle "davidhalter/jedi-vim"
 
 " My stuff starts here
 
@@ -96,6 +98,8 @@ let g:syntastic_cpp_compiler = 'clang++'
 " Syntastic assumes C++11 support.
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+
+let g:syntastic_python_checkers = ['flake8']
 
 let g:virtualenv_stl_format = '[%n]'
 
