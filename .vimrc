@@ -1,127 +1,85 @@
-" Boilerplate to get vundle to work.
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set shell=/bin/bash           " Needed to get vundle to work when you're not using BASH.
 
-set nocompatible               " be iMproved
-filetype off                   " required!
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-" original repos on github
-Bundle 'wincent/Command-T'
-Bundle 'scrooloose/syntastic'
-Bundle 'tomasr/molokai'
-Bundle 'jmcantrell/vim-virtualenv'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'SirVer/ultisnips'
-Bundle "dag/vim-fish"
-Bundle "godlygeek/csapprox"
+Plugin 'tpope/vim-sensible'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
 Bundle "andrwb/vim-lapis256"
 Bundle "junegunn/seoul256.vim"
-Bundle "suan/vim-instant-markdown"
-Bundle "tpope/vim-unimpaired"
-Bundle "tpope/vim-repeat"
-Bundle "ervandew/supertab"
-Bundle "davidhalter/jedi-vim"
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'dag/vim-fish'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
 
-" My stuff starts here
+call vundle#end()
 
 filetype plugin indent on
-syntax enable
 
-" http://vim.wikia.com/wiki/Remove_unwanted_spaces
-autocmd BufWritePre * :%s/\s\+$//e
+" End of Vundle initialization code.:
 
-" We don't want the default filetype to be text.
-autocmd BufEnter * if &filetype == "" | setlocal ft=unknown | endif
-
-set autoindent
 set background=dark
-set encoding=utf-8
-set hlsearch
-set incsearch
-set laststatus=2
-set list
-set mouse=a
-set nospell
-set number
 set nobackup
-set nocompatible
-set noerrorbells
-set noignorecase
-set noswapfile
-set omnifunc=syntaxcomplete#Complete
-set ruler
-set shell=/bin/sh
+
+" Tab stops are 4.
 set shiftwidth=4
-set showcmd
-set showmatch
-set showmode
 set softtabstop=4
-set smartcase
-set smarttab
-set t_Co=256
 set tabstop=4
-set textwidth=0
-set title
-set ttyfast
-set visualbell
-set wildmenu
-set wildignore+=*.pyc
-set wildignore+=build
-set wrap
 
-let &lcs = 'tab:┆ '
+set statusline+=%t " file basename"
+set statusline+=\ %y
+set statusline+=%h
+set statusline+=%m
+set statusline+=%r
+set statusline+=%{fugitive#statusline()}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%=
+set statusline+=BUF:\ %n
+set statusline+=\ \|\ %l/%L\ (%P)
+set statusline+=\ \|\ COL:\ %v
 
-autocmd FileType html,markdown,plaintex,tex,text set spell spelllang=en_ca
-autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
-autocmd FileType python setlocal colorcolumn=80 foldlevel=99 foldmethod=indent
-autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
-autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
-let &lcs = 'tab:︙ '
-autocmd FileType javascript setlocal foldlevel=0
-let &lcs = 'tab:︙ '
-autocmd FileType snippet setlocal noexpandtab nospell
-autocmd BufReadPost fugitive://* set bufhidden=delete
+" Don't show the YouCompleteMe preview window.
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
 
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-
-let g:syntastic_c_compiler = 'clang'
-let g:syntastic_cpp_compiler = 'clang++'
-
-" Syntastic assumes C++11 support.
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
-
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_enable_signs = 1
 
-let g:virtualenv_stl_format = '[%n]'
-
-set statusline=%n\ %f\ %y\ %R\ %m\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %{fugitive#statusline()}%{virtualenv#statusline()}%=%l/%L,%c
-
-color lapis256
+set t_Co=256
+colorscheme lapis256
 
 " Transparent background for the terminal vim.
-hi Normal cterm=NONE ctermbg=NONE
+highlight Normal cterm=NONE ctermbg=NONE
 
-" Rainbow parentheses are always on. They break with some templating
-" languages, but whatever.
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+augroup initialization
+	autocmd!
+	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
+	autocmd BufWritePre * :%s/\s\+$//e
 
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="vertical"
+	" Rainbow parentheses are always on. They break with some templating
+	" languages, but whatever.
+	autocmd VimEnter * RainbowParenthesesToggle
+	autocmd Syntax * RainbowParenthesesLoadRound
+	autocmd Syntax * RainbowParenthesesLoadSquare
+	autocmd Syntax * RainbowParenthesesLoadBraces
 
-" For YouCompleteMe
-let g:ycm_confirm_extra_conf = 0
+	autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
+	autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
+	autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
+augroup END
