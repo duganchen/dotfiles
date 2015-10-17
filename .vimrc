@@ -17,10 +17,11 @@ Plugin 'Valloric/YouCompleteMe'
 Bundle "andrwb/vim-lapis256"
 Bundle "junegunn/seoul256.vim"
 Bundle 'tpope/vim-fugitive'
-Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'luochen1990/rainbow'
 Bundle 'dag/vim-fish'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
 
 call vundle#end()
 
@@ -61,6 +62,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_enable_signs = 1
 
+let g:rainbow_active = 1
+
 set t_Co=256
 colorscheme lapis256
 
@@ -72,12 +75,6 @@ augroup initialization
 	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
 	autocmd BufWritePre * :%s/\s\+$//e
 
-	" Rainbow parentheses are always on. They break with some templating
-	" languages, but whatever.
-	autocmd VimEnter * RainbowParenthesesToggle
-	autocmd Syntax * RainbowParenthesesLoadRound
-	autocmd Syntax * RainbowParenthesesLoadSquare
-	autocmd Syntax * RainbowParenthesesLoadBraces
 
 	autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
 	autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
