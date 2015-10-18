@@ -22,6 +22,7 @@ Bundle 'dag/vim-fish'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'lilydjwg/colorizer'
 
 call vundle#end()
 
