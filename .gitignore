@@ -1,1 +1,5 @@
 *~
+*.swp
+.vim/bundle/
+!.vim/bundle/Vundle.vim
+
