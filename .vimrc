@@ -23,6 +23,8 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'lilydjwg/colorizer'
+Bundle 'jmcantrell/vim-virtualenv'
+Bundle 'hynek/vim-python-pep8-indent'
 
 call vundle#end()
 
@@ -46,6 +48,7 @@ set statusline+=%r
 set statusline+=%{fugitive#statusline()}
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{virtualenv#statusline()}
 set statusline+=%*
 set statusline+=%=
 set statusline+=BUF:\ %n
@@ -75,8 +78,7 @@ augroup initialization
 	autocmd!
 	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
 	autocmd BufWritePre * :%s/\s\+$//e
-
-
+	autocmd FileType python setlocal colorcolumn=80
 	autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
 	autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
 	autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
