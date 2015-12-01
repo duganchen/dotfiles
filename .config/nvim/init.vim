@@ -38,6 +38,8 @@ colorscheme kalisi
 let g:airline_theme='kalisi'
 
 set background=dark
+set wildmenu
+set wildignore=*.pyc,*.swp,*.o
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
