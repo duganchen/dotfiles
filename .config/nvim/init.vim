@@ -1,6 +1,6 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'freeo/vim-kalisi'
-Plug 'bling/vim-airline'
+Plug 'morhetz/gruvbox'
+Plug 'itchyny/lightline.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
@@ -31,18 +31,15 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-let g:airline_powerline_fonts = 1
-
 syntax enable
-colorscheme kalisi
-let g:airline_theme='kalisi'
+colorscheme gruvbox
 
 set background=dark
 set wildmenu
 set wildignore=*.pyc,*.swp,*.o
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
+let g:lightline = { 'colorscheme': 'wombat', }
 augroup initialization
 	autocmd!
 	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
