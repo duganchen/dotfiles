@@ -7,6 +7,7 @@ if [ ! -e .vimrc ]; then
 	ln -sf "$CWD/.vimrc"
 fi
 
+
 if [ ! -d .vim ]; then
 	ln -sf "$CWD/.vim"
 fi
