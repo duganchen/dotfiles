@@ -75,3 +75,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " I'll just use the Ctrl+P binding for now.
 nnoremap <silent><C-P> :Files<CR>
+
+" Transparent neovim
+highlight Normal guibg=None
+highlight NonText guibg=None
