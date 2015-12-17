@@ -73,8 +73,8 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-" I'll just use the Ctrl+P binding for now.
-nnoremap <silent><C-P> :Files<CR>
+nnoremap <leader>t :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 
 " Transparent neovim
 highlight Normal guibg=None
