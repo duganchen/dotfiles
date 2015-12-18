@@ -45,6 +45,8 @@ colorscheme gruvbox
 
 let g:lightline = { 'colorscheme': 'gruvbox', }
 
+let g:ycm_confirm_extra_conf = 0
+
 augroup initialization
 	autocmd!
 	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
