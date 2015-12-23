@@ -14,6 +14,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'beyondmarc/glsl.vim'
 call plug#end()
 
 " Don't show the YouCompleteMe preview window.
@@ -45,8 +46,6 @@ colorscheme gruvbox
 
 let g:lightline = { 'colorscheme': 'gruvbox', }
 
-let g:ycm_confirm_extra_conf = 0
-
 augroup initialization
 	autocmd!
 	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
@@ -54,7 +53,7 @@ augroup initialization
 	autocmd FileType python RainbowParentheses
 	autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
 	autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
-	autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
+	autocmd FileType c,cpp,cs,java,objc,php setlocal cindent tabstop=4 shiftwidth=4
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 augroup END
 
@@ -81,3 +80,5 @@ nnoremap <leader>b :Buffers<CR>
 " Transparent neovim
 highlight Normal guibg=None
 highlight NonText guibg=None
+
+let g:ycm_confirm_extra_conf = 0
