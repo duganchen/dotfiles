@@ -1,3 +1,5 @@
+let g:glsl_file_extensions = '*.glsl,*.frag,*.vert,*.slf,*.slv,*.vsh,*.fsh'
+
 call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
