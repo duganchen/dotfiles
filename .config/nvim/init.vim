@@ -15,6 +15,8 @@ Plug 'luochen1990/rainbow'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'beyondmarc/glsl.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 " Don't show the YouCompleteMe preview window.
