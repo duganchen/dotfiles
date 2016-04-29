@@ -11,6 +11,7 @@ XTerm*local: true
 XTerm*foreground: rgb:a7/a7/a7
 XTerm*background: rgb:1e/1e/1e
 XTerm*termName: xterm-256color
+XTerm*metaSendsEscape: true
 
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme
