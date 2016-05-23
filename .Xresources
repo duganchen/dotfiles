@@ -8,8 +8,11 @@ Xft.rgba: rgb
 XTerm*faceName: monospace
 XTerm*faceSize: 11
 XTerm*local: true
+
+# Taken from he https://github.com/neeasade/xst
 XTerm*foreground: rgb:a7/a7/a7
 XTerm*background: rgb:1e/1e/1e
+
 XTerm*termName: xterm-256color
 
 ! ------------------------------------------------------------------------------
@@ -27,3 +30,7 @@ rofi.color-active:                   argb:00000000,  #6699CC , argb:00000000,  #
 rofi.color-window:                   #333333,  #2D2D2D ,  #2D2D2D
 ! Separator style (none, dash, solid)
 rofi.separator-style:                solid
+rofi.lines: 3
+rofi.eh: 2
+rofi.width: 60
+rofi.opacity: 80
