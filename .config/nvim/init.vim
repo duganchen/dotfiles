@@ -5,19 +5,25 @@ Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-bufferline'
+Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'justinmk/vim-dirvish'
+Plug 'klen/python-mode'
+Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
+Plug 'morhetz/gruvbox'
 Plug 'scrooloose/syntastic'
+Plug 'shime/vim-livedown'
+Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 set background=dark
+set completeopt-=preview
 set nohlsearch
 set nobackup
 set hidden
@@ -51,21 +57,43 @@ nnoremap <leader>b :Buffers<CR>
 " Use the Platinum Searcher to grep
 let g:grepper = {'tools': ['pt']}
 
-" Integreate Fugitive into Lightline
+" Integrate Fugitive into Lightline
 let g:lightline = {
-\	'colorscheme': 'seoul256',
+\	'colorscheme': 'gruvbox',
 \	'active': {
 \		'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive' ] ],
 \	},
 \	'component': {
 \		'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+\		'readonly': '%{&readonly?"":""}',
 \	},
 \	'component_visible_condition': {
 \		'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
 \	},
+\	'separator': {
+\		'left': '',
+\		'right': '',
+\	},
+\	'subseparator': {
+\		'left': '',
+\		'right': '',
+\	}
 \}
 
 " Ultisnips YouCompleteMe compatibility
 let g:UltiSnipsExpandTrigger = "<c-j>"
 
-colorscheme seoul256
+" Let python-mode handle Python
+let g:syntastic_mode_map = {
+\	"mode": "active",
+\	"passive_filetypes": ["python"],
+\}
+let g:ycm_filetype_blacklist = {
+\	'python' : 1,
+\}
+
+let g:livedown_autorun = 1
+let g:livedown_open = 1
+
+let g:gruvbox_italic=1
+colorscheme gruvbox
