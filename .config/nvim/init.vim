@@ -92,8 +92,9 @@ let g:ycm_filetype_blacklist = {
 \	'python' : 1,
 \}
 
-let g:livedown_autorun = 1
-let g:livedown_open = 1
+let g:livedown_browser="/usr/lib64/chromium/chromium"
+let g:livedown_autorun=1
+let g:livedown_open=1
 
 let g:gruvbox_italic=1
 colorscheme gruvbox
