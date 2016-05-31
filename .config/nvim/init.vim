@@ -38,6 +38,7 @@ set shiftwidth=4
 set smartcase
 set smarttab
 set tabstop=4
+set visualbell
 set wildmenu
 set wildmode=full
 
@@ -46,6 +47,9 @@ nnoremap <Left> zh
 nnoremap <Right> zl
 nnoremap <Up> gk
 nnoremap <Down> gj
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
@@ -96,5 +100,7 @@ let g:livedown_browser="/usr/lib64/chromium/chromium"
 let g:livedown_autorun=1
 let g:livedown_open=1
 
-let g:gruvbox_italic=1
+" They don't seem to work on 14.1. Sigh.
+let g:gruvbox_italic=0
+
 colorscheme gruvbox
