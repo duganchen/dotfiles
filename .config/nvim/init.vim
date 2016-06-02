@@ -3,7 +3,9 @@ syntax on
 call plug#begin('~/.config/nvim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe'
+Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'bling/vim-bufferline'
 Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
@@ -20,9 +22,13 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+
 call plug#end()
 
 set background=dark
+set clipboard+=unnamedplus
 set completeopt-=preview
 set nohlsearch
 set nobackup
