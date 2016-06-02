@@ -24,6 +24,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -106,7 +107,12 @@ let g:livedown_browser="/usr/lib64/chromium/chromium"
 let g:livedown_autorun=1
 let g:livedown_open=1
 
-" They don't seem to work on 14.1. Sigh.
-let g:gruvbox_italic=0
+let g:gruvbox_italic=1
+
+let g:vimwiki_list = [{
+\	'path': '~/vimwiki/',
+\	'syntax': 'markdown',
+\	'ext': '.md'
+\}]
 
 colorscheme gruvbox
