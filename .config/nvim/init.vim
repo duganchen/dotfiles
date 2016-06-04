@@ -109,10 +109,4 @@ let g:livedown_open=1
 
 let g:gruvbox_italic=1
 
-let g:vimwiki_list = [{
-\	'path': '~/vimwiki/',
-\	'syntax': 'markdown',
-\	'ext': '.md'
-\}]
-
 colorscheme gruvbox
