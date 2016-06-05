@@ -1,85 +1,119 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set shell=/bin/bash           " Needed to get vundle to work when you're not using BASH.
+syntax on 
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set nocompatible
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tpope/vim-sensible'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/UltiSnips'
 Plugin 'Valloric/YouCompleteMe'
-Bundle "andrwb/vim-lapis256"
-Bundle "junegunn/seoul256.vim"
-Bundle 'tpope/vim-fugitive'
-Bundle 'luochen1990/rainbow'
-Bundle 'dag/vim-fish'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'lilydjwg/colorizer'
-Bundle 'jmcantrell/vim-virtualenv'
-Bundle 'hynek/vim-python-pep8-indent'
-
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-rooter'
+Plugin 'bling/vim-bufferline'
+Plugin 'dag/vim-fish'
+Plugin 'itchyny/lightline.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'klen/python-mode'
+Plugin 'kshenoy/vim-signature'
+Plugin 'majutsushi/tagbar'
+Plugin 'mhinz/vim-grepper'
+Plugin 'scrooloose/syntastic'
+Plugin 'shime/vim-livedown'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vimwiki/vimwiki'
 call vundle#end()
 
 filetype plugin indent on
 
-" End of Vundle initialization code.:
-
 set background=dark
-set nobackup
-
-" Tab stops are 4.
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-
-set statusline+=%t " file basename"
-set statusline+=\ %y
-set statusline+=%h
-set statusline+=%m
-set statusline+=%r
-set statusline+=%{fugitive#statusline()}
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%{virtualenv#statusline()}
-set statusline+=%*
-set statusline+=%=
-set statusline+=BUF:\ %n
-set statusline+=\ \|\ %l/%L\ (%P)
-set statusline+=\ \|\ COL:\ %v
-
-" Don't show the YouCompleteMe preview window.
+set clipboard+=unnamedplus
 set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
+set nohlsearch
+set nobackup
+set hidden
+set incsearch
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_enable_signs = 1
+set nocompatible
 
-let g:rainbow_active = 1
+" Lightline provides this
+set noshowmode
 
-set t_Co=256
-colorscheme lapis256
+set number
+set relativenumber
+set shell=bash
+set shiftwidth=4
+set smartcase
+set smarttab
+set tabstop=4
+set visualbell
+set wildmenu
+set wildmode=full
 
-" Transparent background for the terminal vim.
-highlight Normal cterm=NONE ctermbg=NONE
+" Cursor keys scroll
+nnoremap <Left> zh
+nnoremap <Right> zl
+nnoremap <Up> gk
+nnoremap <Down> gj
 
-augroup initialization
-	autocmd!
-	" http://vim.wikia.com/wiki/Remove_unwanted_spaces
-	autocmd BufWritePre * :%s/\s\+$//e
-	autocmd FileType python setlocal colorcolumn=80
-	autocmd FileType coffee,haskell,html,javascript,python,ruby setlocal expandtab
-	autocmd FileType text setlocal colorcolumn=73 ignorecase noexpandtab textwidth=72
-	autocmd FileType c,cpp,cs,java,objc,php setlocal cindent
-augroup END
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+
+" Tagbar
+nnoremap <F8> :TagbarToggle<CR>
+
+" FZF to search files and buffers
+nnoremap <leader>t :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+
+" Use the Platinum Searcher to grep
+let g:grepper = {'tools': ['pt']}
+
+" Integrate Fugitive into Lightline
+let g:lightline = {
+\	'colorscheme': 'seoul256',
+\	'active': {
+\		'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive' ] ],
+\	},
+\	'component': {
+\		'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+\		'readonly': '%{&readonly?"":""}',
+\	},
+\	'component_visible_condition': {
+\		'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+\	},
+\	'separator': {
+\		'left': '',
+\		'right': '',
+\	},
+\	'subseparator': {
+\		'left': '',
+\		'right': '',
+\	}
+\}
+
+" Let python-mode handle Python
+let g:syntastic_mode_map = {
+\	"mode": "active",
+\	"passive_filetypes": ["python"],
+\}
+let g:ycm_filetype_blacklist = {
+\	'python' : 1,
+\}
+
+let g:livedown_browser="/usr/lib64/chromium/chromium"
+let g:livedown_autorun=1
+let g:livedown_open=1
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+colorscheme seoul256
+
+highlight normal ctermbg=None

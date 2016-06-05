@@ -1,4 +1,7 @@
+syntax on
+
 call plug#begin('~/.config/nvim/plugged')
+Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
@@ -22,10 +25,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vimwiki/vimwiki'
-call plug#end()
 
-syntax on 
-filetype plugin indent on
+call plug#end()
 
 set background=dark
 set clipboard+=unnamedplus
@@ -34,8 +35,6 @@ set nohlsearch
 set nobackup
 set hidden
 set incsearch
-
-set nocompatible
 
 " Lightline provides this
 set noshowmode
@@ -92,6 +91,9 @@ let g:lightline = {
 \	}
 \}
 
+" Ultisnips YouCompleteMe compatibility
+let g:UltiSnipsExpandTrigger = "<c-j>"
+
 " Let python-mode handle Python
 let g:syntastic_mode_map = {
 \	"mode": "active",
@@ -108,3 +110,7 @@ let g:livedown_open=1
 let g:gruvbox_italic=1
 
 colorscheme gruvbox
+
+" Transparency in neovim
+highlight normal guibg=None
+highlight NonText guibg=None
