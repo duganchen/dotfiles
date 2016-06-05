@@ -52,6 +52,7 @@ set shell=bash
 set shiftwidth=4
 set smartcase
 set smarttab
+set t_Co=256
 set tabstop=4
 set visualbell
 set wildmenu
