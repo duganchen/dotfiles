@@ -11,7 +11,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-plug'
-Plug 'junegunn/seoul256.vim'
 Plug 'klen/python-mode'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
@@ -19,6 +18,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/syntastic'
 Plug 'shime/vim-livedown'
+Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
@@ -77,7 +77,7 @@ let g:grepper = {'tools': ['pt']}
 
 " Integrate Fugitive into Lightline
 let g:lightline = {
-\	'colorscheme': 'seoul256',
+\	'colorscheme': 'gruvbox',
 \	'active': {
 \		'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive' ] ],
 \	},
@@ -113,7 +113,7 @@ let g:livedown_open=1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 
-if !empty($TMUX) && !has('gui')
+if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
 endif
