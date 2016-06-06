@@ -1,8 +1,6 @@
 call plug#begin()
 Plug 'SirVer/UltiSnips'
 Plug 'Valloric/YouCompleteMe'
-Plug 'VundleVim/Vundle.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'bling/vim-bufferline'
@@ -39,7 +37,6 @@ set nohlsearch
 set nobackup
 set hidden
 set incsearch
-set list
 set nocompatible
 
 " Lightline provides this
@@ -47,6 +44,11 @@ set noshowmode
 
 set number
 set relativenumber
+
+" https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/d2re0mg
+set showbreak=↪
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
 set shell=bash
 set shiftwidth=4
 set smartcase
@@ -55,8 +57,6 @@ set tabstop=4
 set visualbell
 set wildmenu
 set wildmode=full
-
-let &listchars = "tab:│ "
 
 " Cursor keys scroll
 nnoremap <Left> zh
