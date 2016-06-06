@@ -39,7 +39,7 @@ set nohlsearch
 set nobackup
 set hidden
 set incsearch
-
+set list
 set nocompatible
 
 " Lightline provides this
@@ -55,6 +55,8 @@ set tabstop=4
 set visualbell
 set wildmenu
 set wildmode=full
+
+let &listchars = "tab:│ "
 
 " Cursor keys scroll
 nnoremap <Left> zh
@@ -112,7 +114,6 @@ let g:livedown_autorun=1
 let g:livedown_open=1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
-
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
