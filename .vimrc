@@ -1,39 +1,38 @@
+call plug#begin()
+Plug 'SirVer/UltiSnips'
+Plug 'Valloric/YouCompleteMe'
+Plug 'VundleVim/Vundle.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'bling/vim-bufferline'
+Plug 'dag/vim-fish'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-plug'
+Plug 'junegunn/seoul256.vim'
+Plug 'klen/python-mode'
+Plug 'kshenoy/vim-signature'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper'
+Plug 'morhetz/gruvbox'
+Plug 'scrooloose/syntastic'
+Plug 'shime/vim-livedown'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vimwiki/vimwiki'
+call plug#end()
+
 syntax on 
-
-set nocompatible
-filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'SirVer/UltiSnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'airblade/vim-rooter'
-Plugin 'bling/vim-bufferline'
-Plugin 'dag/vim-fish'
-Plugin 'itchyny/lightline.vim'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/seoul256.vim'
-Plugin 'klen/python-mode'
-Plugin 'kshenoy/vim-signature'
-Plugin 'majutsushi/tagbar'
-Plugin 'mhinz/vim-grepper'
-Plugin 'scrooloose/syntastic'
-Plugin 'shime/vim-livedown'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'vimwiki/vimwiki'
-call vundle#end()
-
 filetype plugin indent on
 
 set background=dark
+
 set clipboard+=unnamedplus
 set completeopt-=preview
 set nohlsearch
@@ -52,7 +51,6 @@ set shell=bash
 set shiftwidth=4
 set smartcase
 set smarttab
-set t_Co=256
 set tabstop=4
 set visualbell
 set wildmenu
@@ -115,6 +113,25 @@ let g:livedown_open=1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 
-colorscheme seoul256
+if !empty($TMUX) && !has('gui')
+	set t_8f=[38;2;%lu;%lu;%lum
+	set t_8b=[48;2;%lu;%lu;%lum
+endif
 
-highlight normal ctermbg=None
+function ColorSchemeChange()
+	if !has('gui')
+		highlight Normal ctermbg=NONE guibg=NONE
+		highlight NonText ctermbg=NONE guibg=NONE
+
+		" termguicolors needs to be set after the colorscheme, it seems
+		set termguicolors
+	endif
+endfunction
+
+augroup autocmds
+	autocmd!
+	autocmd ColorScheme * call ColorSchemeChange()
+augroup END
+
+let g:gruvbox_italic=1
+colorscheme gruvbox
