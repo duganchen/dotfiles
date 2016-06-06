@@ -21,8 +21,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -113,11 +111,17 @@ let g:livedown_browser="/usr/lib64/chromium/chromium"
 let g:livedown_autorun=1
 let g:livedown_open=1
 
+
+let g:vimwiki_list = [{'path': '~/my_site/','syntax': 'markdown', 'ext': '.md'}]
+
+
+
 let g:UltiSnipsExpandTrigger="<c-j>"
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
 endif
+
 
 function ColorSchemeChange()
 	if !has('gui')
