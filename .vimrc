@@ -24,7 +24,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
-syntax on 
+syntax on
 filetype plugin indent on
 
 set background=dark
@@ -114,6 +114,8 @@ let g:livedown_open=1
 
 let g:vimwiki_list = [{'path': '~/my_site/','syntax': 'markdown', 'ext': '.md'}]
 
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -133,9 +135,22 @@ function ColorSchemeChange()
 	endif
 endfunction
 
+" Some stuff for a current project. Might not keep forever.
+function FileTypeC()
+	set expandtab
+endfunction()
+function PreWriteC()
+	:%s/\s\+$//e
+endfunction
+
 augroup autocmds
 	autocmd!
 	autocmd ColorScheme * call ColorSchemeChange()
+
+	" for a current C project
+	autocmd FileType c call FileTypeC()
+	autocmd FileType cpp call FileTypeC()
+	autocmd BufWritePre *.cpp,*.c,*.h call PreWriteC()
 augroup END
 
 let g:gruvbox_italic=1
