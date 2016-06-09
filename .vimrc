@@ -108,9 +108,6 @@ let g:ycm_filetype_blacklist = {
 \}
 
 let g:livedown_browser="/usr/lib64/chromium/chromium"
-let g:livedown_autorun=1
-let g:livedown_open=1
-
 
 let g:vimwiki_list = [{'path': '~/vimwiki/','syntax': 'markdown', 'ext': '.md'}]
 
