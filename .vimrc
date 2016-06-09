@@ -112,7 +112,7 @@ let g:livedown_autorun=1
 let g:livedown_open=1
 
 
-let g:vimwiki_list = [{'path': '~/my_site/','syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/vimwiki/','syntax': 'markdown', 'ext': '.md'}]
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
