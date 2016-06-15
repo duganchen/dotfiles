@@ -15,7 +15,6 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/syntastic'
-Plug 'shime/vim-livedown'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
@@ -110,16 +109,13 @@ let g:ycm_filetype_blacklist = {
 \	'python' : 1,
 \}
 
-let g:livedown_browser="/usr/lib64/chromium/chromium"
-let g:livedown_autorun=1
-let g:livedown_open=1
-
-
-let g:vimwiki_list = [{'path': '~/my_site/','syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{
+\	'path': '~/Dropbox/vimwiki/',
+\	'path_html': '~/Dropbox/vimwiki_html'
+\}]
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 if !has('gui')
