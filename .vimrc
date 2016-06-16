@@ -26,6 +26,11 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
+
+" Your lines can be 137 characters long before GitHub gives you a horizontal scrollbar.
+set colorcolumn=138
+set textwidth=137
+
 set background=dark
 
 set clipboard+=unnamedplus
@@ -53,7 +58,6 @@ set shiftwidth=4
 set smartcase
 set smarttab
 set tabstop=4
-set textwidth=80
 set visualbell
 set wildmenu
 set wildmode=full
