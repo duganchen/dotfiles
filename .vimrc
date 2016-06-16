@@ -3,7 +3,6 @@ Plug 'SirVer/UltiSnips'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'bling/vim-bufferline'
 Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -14,10 +13,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
-
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
@@ -72,15 +67,19 @@ nnoremap <Right> zl
 nnoremap <Up> gk
 nnoremap <Down> gj
 
+" :Lex(plore) replaces NerdTree
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
+
+" http://of-vim-and-vigor.blogspot.ca/p/vim-vigor-comic.html
+" This is my buffer manager.
+nnoremap <leader>b :ls<CR>:b<space>
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
 
-" FZF to search files and buffers
+" FZF to search for files
 nnoremap <leader>t :Files<CR>
-nnoremap <leader>b :Buffers<CR>
 
 " Use the Platinum Searcher to grep
 let g:grepper = {'tools': ['pt']}
