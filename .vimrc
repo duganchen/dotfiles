@@ -14,20 +14,23 @@ Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
+
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vimwiki/vimwiki'
 call plug#end()
 
 syntax on
 filetype plugin indent on
 
 
-" Your lines can be 137 characters long before GitHub gives you a horizontal scrollbar.
+" GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
 set textwidth=137
 
@@ -58,6 +61,7 @@ set shiftwidth=4
 set smartcase
 set smarttab
 set tabstop=4
+
 set visualbell
 set wildmenu
 set wildmode=full
