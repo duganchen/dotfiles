@@ -1,3 +1,5 @@
+set encoding=utf-8
+
 call plug#begin()
 Plug 'SirVer/UltiSnips'
 Plug 'Valloric/YouCompleteMe'
@@ -13,6 +15,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
@@ -23,7 +26,6 @@ call plug#end()
 
 syntax on
 filetype plugin indent on
-
 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
@@ -84,18 +86,17 @@ nnoremap <leader>t :Files<CR>
 " Use the Platinum Searcher to grep
 let g:grepper = {'tools': ['pt']}
 
-" Integrate Fugitive into Lightline
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
-\		'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive' ] ],
+\		'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive']],
 \	},
-\	'component': {
-\		'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-\		'readonly': '%{&readonly?"":""}',
-\	},
-\	'component_visible_condition': {
-\		'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+\	'component_function': {
+\		'modified': 'LightlineModified',
+\		'fugitive': 'LightlineFugitive',
+\		'readonly': 'LightLineReadonly',
+\		'lineinfo': 'LightlineFileType',
+\		'fileformat': 'LightlineFileFormat',
 \	},
 \	'separator': {
 \		'left': '',
@@ -104,8 +105,28 @@ let g:lightline = {
 \	'subseparator': {
 \		'left': '',
 \		'right': '',
-\	}
+\	},
 \}
+
+function! LightlineModified()
+	return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+	return &ft !~? 'help' && &readonly ? '' : ''
+endfunction
+
+function! LightlineFugitive()
+	return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LightlineFileType()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! LightlineFileFormat()
+	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 " Let python-mode handle Python
 let g:syntastic_mode_map = {
@@ -115,11 +136,6 @@ let g:syntastic_mode_map = {
 let g:ycm_filetype_blacklist = {
 \	'python' : 1,
 \}
-
-let g:vimwiki_list = [{
-\	'path': '~/Dropbox/vimwiki/',
-\	'path_html': '~/Dropbox/vimwiki_html'
-\}]
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -141,14 +157,6 @@ function ColorSchemeChange()
 	endif
 endfunction
 
-" Some stuff for a current project. Might not keep forever.
-function FileTypeC()
-	set expandtab
-endfunction()
-function PreWriteC()
-	:%s/\s\+$//e
-endfunction
-
 augroup autocmds
 	autocmd!
 	autocmd ColorScheme * call ColorSchemeChange()
@@ -161,3 +169,13 @@ augroup END
 
 let g:gruvbox_italic=1
 colorscheme gruvbox
+
+" Some stuff for a current project. Might not keep forever.
+
+function FileTypeC()
+	set expandtab
+endfunction()
+
+function PreWriteC()
+	:%s/\s\+$//e
+endfunction
