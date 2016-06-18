@@ -12,6 +12,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
@@ -48,7 +49,7 @@ set number
 " Controversial option. :)
 " I'm going to use :find as my fuzzyfinder for now. This should be appended-to for languages that have standard libraries (e.g. to
 " /usr/include).
-set path=.,**
+set path=.,**,,
 
 set relativenumber
 
@@ -89,11 +90,12 @@ let g:grepper = {'tools': ['pt']}
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
-\		'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive']],
+\		'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified'], ['fugitive', 'gutentags']],
 \	},
 \	'component_function': {
 \		'modified': 'LightlineModified',
 \		'fugitive': 'LightlineFugitive',
+\		'gutentags': 'LightlineGutenTags',
 \		'readonly': 'LightLineReadonly',
 \		'fileformat': 'LightlineFileFormat',
 \		'filetype': 'LightlineFileType'
@@ -120,6 +122,11 @@ function! LightlineFugitive()
 	return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 
+function! LightlineGutenTags()
+	return gutentags#statusline()
+endfunction
+
+
 function! LightlineFileType()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
@@ -141,6 +148,9 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 let g:UltiSnipsExpandTrigger="<c-j>"
+
+let g:gutentags_cache_dir = $HOME . "/.vim/tags"
+
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
@@ -173,6 +183,7 @@ colorscheme gruvbox
 
 function FileTypeC()
 	set expandtab
+	set path+=/usr/include
 endfunction()
 
 function PreWriteC()
