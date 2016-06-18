@@ -90,7 +90,6 @@ let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
 \		'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive']],
-\		'right':[['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']] 
 \	},
 \	'component_function': {
 \		'modified': 'LightlineModified',
