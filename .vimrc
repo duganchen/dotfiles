@@ -46,11 +46,6 @@ set nowrap
 
 set number
 
-" Controversial option. :)
-" I'm going to use :find as my fuzzyfinder for now. This should be appended-to for languages that have standard libraries (e.g. to
-" /usr/include).
-set path=.,**,,
-
 set relativenumber
 
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/d2re0mg
@@ -183,7 +178,6 @@ colorscheme gruvbox
 
 function FileTypeC()
 	set expandtab
-	set path+=/usr/include
 endfunction()
 
 function PreWriteC()
