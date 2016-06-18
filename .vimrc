@@ -4,11 +4,8 @@ call plug#begin()
 Plug 'SirVer/UltiSnips'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
 Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-plug'
 Plug 'klen/python-mode'
 Plug 'kshenoy/vim-signature'
@@ -47,6 +44,12 @@ set noshowmode
 set nowrap
 
 set number
+
+" Controversial option. :)
+" I'm going to use :find as my fuzzyfinder for now. This should be appended to for languages that have standard libraries (e.g. to
+" /usr/include).
+set path=.,**
+
 set relativenumber
 
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/d2re0mg
@@ -80,9 +83,6 @@ nnoremap <leader>b :ls<CR>:b<space>
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
 
-" FZF to search for files
-nnoremap <leader>t :Files<CR>
-
 " Use the Platinum Searcher to grep
 let g:grepper = {'tools': ['pt']}
 
@@ -90,13 +90,14 @@ let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
 \		'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified', 'fugitive']],
+\		'right':[['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']] 
 \	},
 \	'component_function': {
 \		'modified': 'LightlineModified',
 \		'fugitive': 'LightlineFugitive',
 \		'readonly': 'LightLineReadonly',
-\		'lineinfo': 'LightlineFileType',
 \		'fileformat': 'LightlineFileFormat',
+\		'filetype': 'LightlineFileType'
 \	},
 \	'separator': {
 \		'left': '',
@@ -145,7 +146,6 @@ if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
 endif
-
 
 function ColorSchemeChange()
 	if !has('gui')
