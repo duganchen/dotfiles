@@ -46,7 +46,7 @@ set nowrap
 set number
 
 " Controversial option. :)
-" I'm going to use :find as my fuzzyfinder for now. This should be appended to for languages that have standard libraries (e.g. to
+" I'm going to use :find as my fuzzyfinder for now. This should be appended-to for languages that have standard libraries (e.g. to
 " /usr/include).
 set path=.,**
 
