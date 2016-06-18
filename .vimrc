@@ -61,6 +61,7 @@ set tabstop=4
 set visualbell
 set wildmenu
 set wildmode=full
+set wildignore+=*.o,*.swp,*.pyc
 
 " Cursor keys scroll
 nnoremap <Left> zh
