@@ -84,8 +84,8 @@ nnoremap [A ddkP
 " CTRL+DOWN on my MacBook keyboard
 nnoremap [B ddp
 
-nvnoremap [A xkP`[V`]
-voremap [B xp`[V`]
+vnoremap [A xkP`[V`]
+vnoremap [B xp`[V`]
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
