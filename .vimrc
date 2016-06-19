@@ -1,3 +1,10 @@
+" For now I'll be using:
+"
+" grepper: vimgrep
+" fuzzyfinder: :e **/partial<TAB>
+" buffer manager: :ls :b as my 
+" file browser: lex
+
 set encoding=utf-8
 
 call plug#begin()
