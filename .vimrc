@@ -10,7 +10,6 @@ Plug 'junegunn/vim-plug'
 Plug 'klen/python-mode'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
@@ -77,11 +76,19 @@ let g:netrw_liststyle = 3
 " This is my buffer manager.
 nnoremap <leader>b :ls<CR>:b<space>
 
+" http://vimcasts.org/episodes/bubbling-text/
+"
+" CTRL+Up on my MacBook keyboard
+nnoremap [A ddkP
+
+" CTRL+DOWN on my MacBook keyboard
+nnoremap [B ddp
+
+nvnoremap [A xkP`[V`]
+voremap [B xp`[V`]
+
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
-
-" Use the Platinum Searcher to grep
-let g:grepper = {'tools': ['pt']}
 
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
