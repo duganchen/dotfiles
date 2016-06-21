@@ -86,10 +86,21 @@ nnoremap <leader>b :ls<CR>:b<space>
 " And this is my fuzzyfinder.
 nnoremap <leader>t :e **/
 
+" Idea from here: http://vim.wikia.com/wiki/Fast_window_resizing_with_plus/minus_keys
+" On my MacBook Pro, I've remapped the ALT+and Command keys to be more like PC keyboards.
+nnoremap <silent> <A-h> :vertical resize -1<CR>
+nnoremap <silent> h :vertical resize -1<CR>
+nnoremap <silent> <A-j> :resize -1<CR>
+nnoremap <silent> j :resize -1<CR>
+nnoremap <silent> <A-k> :vertical resize +1<CR>
+nnoremap <silent> k :vertical resize +1<CR>
+nnoremap <silent> <A-l> :resize +1<CR>
+nnoremap <silent> l :resize +1<CR>
+
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
 
-" http://vimcasts.org/episodes/bubbling-text/
+" http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 " Escape sequences are the same key sequences on my MacBook Pro keyboard
 nmap <C-Up> [e 
 nmap [A [e
@@ -138,7 +149,6 @@ endfunction
 function! LightlineGutenTags()
 	return gutentags#statusline()
 endfunction
-
 
 function! LightlineFileType()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
