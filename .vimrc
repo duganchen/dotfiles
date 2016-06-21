@@ -72,8 +72,8 @@ set wildignore+=*.o,*.swp,*.pyc
 " Cursor keys scroll
 nnoremap <Left> zh
 nnoremap <Right> zl
-nnoremap <Up> gk
 nnoremap <Down> gj
+nnoremap <Up> gk
 
 " :Lex(plore) replaces NerdTree
 let g:netrw_banner = 0
@@ -83,19 +83,22 @@ let g:netrw_liststyle = 3
 " This is my buffer manager.
 nnoremap <leader>b :ls<CR>:b<space>
 
-" http://vimcasts.org/episodes/bubbling-text/
-"
-" CTRL+Up on my MacBook keyboard
-nnoremap [A ddkP
-
-" CTRL+DOWN on my MacBook keyboard
-nnoremap [B ddp
-
-vnoremap [A xkP`[V`]
-vnoremap [B xp`[V`]
+" And this is my fuzzyfinder.
+nnoremap <leader>t :e **/
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
+
+" http://vimcasts.org/episodes/bubbling-text/
+" Escape sequences are the same key sequences on my MacBook Pro keyboard
+nmap <C-Up> [e 
+nmap [A [e
+nmap <C-Down> ]e 
+nmap [B ]e 
+vmap <C-Up> [egv
+vmap [A [egv
+vmap <C-Down> ]egv
+vmap [B ]egv
 
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
