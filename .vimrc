@@ -96,6 +96,7 @@ nnoremap <silent> <A-k> :vertical resize +1<CR>
 nnoremap <silent> k :vertical resize +1<CR>
 nnoremap <silent> <A-l> :resize +1<CR>
 nnoremap <silent> l :resize +1<CR>
+" See here for another implementation: http://stackoverflow.com/a/16600458
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
