@@ -36,22 +36,20 @@ set colorcolumn=138
 set textwidth=137
 
 set background=dark
-
 set clipboard+=unnamedplus
 set completeopt-=preview
 set nohlsearch
 set nobackup
 set hidden
 set incsearch
+set mouse=a
 set nocompatible
 
 " Lightline provides this
 set noshowmode
 
 set nowrap
-
 set number
-
 set relativenumber
 
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/d2re0mg
@@ -63,7 +61,7 @@ set shiftwidth=4
 set smartcase
 set smarttab
 set tabstop=4
-
+set ttymouse=xterm2
 set visualbell
 set wildmenu
 set wildmode=full
@@ -85,18 +83,6 @@ nnoremap <leader>b :ls<CR>:b<space>
 
 " And this is my fuzzyfinder.
 nnoremap <leader>t :e **/
-
-" Idea from here: http://vim.wikia.com/wiki/Fast_window_resizing_with_plus/minus_keys
-" On my MacBook Pro, I've remapped the ALT+and Command keys to be more like PC keyboards.
-nnoremap <silent> <A-h> :vertical resize -1<CR>
-nnoremap <silent> h :vertical resize -1<CR>
-nnoremap <silent> <A-j> :resize -1<CR>
-nnoremap <silent> j :resize -1<CR>
-nnoremap <silent> <A-k> :vertical resize +1<CR>
-nnoremap <silent> k :vertical resize +1<CR>
-nnoremap <silent> <A-l> :resize +1<CR>
-nnoremap <silent> l :resize +1<CR>
-" See here for another implementation: http://stackoverflow.com/a/16600458
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
