@@ -158,6 +158,10 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsEditSplit = "vertical"
+
+" https://github.com/SirVer/ultisnips/issues/711#issuecomment-227097103
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 let g:gutentags_cache_dir = $HOME . "/.vim/tags"
 
