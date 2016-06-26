@@ -65,7 +65,7 @@ set ttymouse=xterm2
 set visualbell
 set wildmenu
 set wildmode=full
-set wildignore+=*.o,*.swp,*.pyc
+set wildignore+=.*,*.o,*.pyc
 
 " Cursor keys scroll
 nnoremap <Left> zh
