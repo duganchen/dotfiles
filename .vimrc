@@ -35,11 +35,15 @@ filetype plugin indent on
 set colorcolumn=138
 set textwidth=137
 
+" Make sure this directory exists.
+set backupdir=~/.cache/vim//
+set directory=~/.cache/vim//
+set undodir=~/.cache/vim//
+
 set background=dark
 set clipboard+=unnamedplus
 set completeopt-=preview
 set nohlsearch
-set nobackup
 set hidden
 set incsearch
 set mouse=a
@@ -163,7 +167,7 @@ let g:UltiSnipsEditSplit = "vertical"
 " https://github.com/SirVer/ultisnips/issues/711#issuecomment-227159748
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
-let g:gutentags_cache_dir = $HOME . "/.vim/tags"
+let g:gutentags_cache_dir = $HOME . "/.cache/vim"
 
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
