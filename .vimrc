@@ -132,6 +132,8 @@ function! LightlineCapslock()
 	" 
 	" 	Linux X11: http://stackoverflow.com/a/8429021/240515
 	" 	OS X: http://macscripter.net/viewtopic.php?pid=114479#p114479
+	"
+	" You need to press a key after pressing CapsLock to get vim to refresh.
 	silent let l:state = system('capslock_state')
 	return v:shell_error ? "CAPSLOCK" : ""
 endfunction
