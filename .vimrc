@@ -105,7 +105,7 @@ vmap [B ]egv
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
-\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'gutentags'], ['capslock'],],
+\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'gutentags']],
 \	},
 \	'component_function': {
 \		'capslock': 'LightlineCapslock',
@@ -125,19 +125,6 @@ let g:lightline = {
 \		'right': '',
 \	},
 \}
-
-function! LightlineCapslock()
-	" This calls a compiled C program that returns 0 if caps lock is not on, any other
-	" number otherwise. Here are implementation ideas:
-	" 
-	" 	Linux X11: http://stackoverflow.com/a/8429021/240515
-	" 	OS X: http://macscripter.net/viewtopic.php?pid=114479#p114479
-	"
-	" You need to press a key after pressing CapsLock to get vim to refresh.
-	silent let l:state = system('capslock_state')
-	return v:shell_error ? "CAPSLOCK" : ""
-endfunction
-
 
 function! LightlineModified()
 	return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
