@@ -5,16 +5,18 @@
 " buffer manager: :ls :b as my 
 " file browser: lex
 
+" ~/.cache/vim needs to be created manually.
+
 set encoding=utf-8
 
 call plug#begin()
 Plug 'SirVer/UltiSnips'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-plug'
-Plug 'klen/python-mode'
+Plug 'klen/python-mode', {'branch': 'develop'}
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
