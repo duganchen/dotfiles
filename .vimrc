@@ -110,7 +110,6 @@ let g:lightline = {
 \		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'gutentags']],
 \	},
 \	'component_function': {
-\		'capslock': 'LightlineCapslock',
 \		'modified': 'LightlineModified',
 \		'fugitive': 'LightlineFugitive',
 \		'gutentags': 'LightlineGutenTags',
