@@ -1,3 +1,0 @@
-[submodule "misc_submodules/LS_COLORS/LS_COLORS"]
-	path = misc_submodules/LS_COLORS/LS_COLORS
-	url = https://github.com/trapd00r/LS_COLORS.git
