@@ -103,6 +103,11 @@ nnoremap <F2> :call Explorer()<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>t :Files<cr>
 
+" If you'd prefer to use fewer plugins, then these make for a decent fuzzy-finder and buffer-explorer.
+" http://of-vim-and-vigor.blogspot.ca/p/vim-vigor-comic.html
+" nnoremap <leader>b :ls<CR>:b<space>
+" nnoremap <leader>t :e **/
+
 let g:fzf_colors =
 			\ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
