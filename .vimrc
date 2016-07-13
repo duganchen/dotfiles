@@ -103,11 +103,6 @@ nnoremap <F2> :call Explorer()<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>t :Files<cr>
 
-" If you'd prefer to use fewer plugins, then these make for a decent fuzzy-finder and buffer-explorer.
-" http://of-vim-and-vigor.blogspot.ca/p/vim-vigor-comic.html
-" nnoremap <leader>b :ls<CR>:b<space>
-" nnoremap <leader>t :e **/
-
 let g:fzf_colors =
 			\ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -127,7 +122,7 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
-	" Alt+j and Alt+k on my MacBook's keyboard in iterm2. Haven't tried with an external keyboard yet.
+	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
 	nmap ˚ [e 
 	nmap ∆ ]e 
 	vmap ˚ [egv
