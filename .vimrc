@@ -105,7 +105,7 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
-	" Alt+j and Alt+k on my MacBook's keyboard. Haven't tried with an external keyboard yet.
+	" Alt+j and Alt+k on my MacBook's keyboard in iterm2. Haven't tried with an external keyboard yet.
 	nmap ˚ [e 
 	nmap ∆ ]e 
 	vmap ˚ [egv
