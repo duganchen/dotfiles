@@ -70,17 +70,34 @@ set ttymouse=xterm2
 set visualbell
 set wildmenu
 set wildmode=full
-set wildignore+=.*,*.o,*.pyc
+set wildignore+=.*,*.o,*.pyc,*.swp
 
 " Cursor keys scroll
-nnoremap <Left> zh
-nnoremap <Right> zl
-nnoremap <Down> gj
-nnoremap <Up> gk
+nnoremap silent <Left> zh
+nnoremap silent <Right> zl
+nnoremap silent <Down> gj
+nnoremap silent <Up> gk
 
 " :Lex(plore) replaces NerdTree
+"
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
+let g:netrw_list_hide = netrw_gitignore#Hide()
+
+function! Explorer()
+	" http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
+	if !exists("g:explorer_nr")
+		:Lexplore "" . getcwd()<cr>
+		let g:explorer_nr = bufnr("%")
+	else
+		unlet g:explorer_nr 
+		1wincmd w
+		bdelete
+	endif
+endfunction
+
+nnoremap <F2> :call Explorer()<cr>
+
 
 " FZF
 nnoremap <leader>b :Buffers<cr>
