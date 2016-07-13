@@ -1,8 +1,3 @@
-" For now I'll be using:
-"
-" grepper: vimgrep
-" file browser: lex
-
 " ~/.cache/vim needs to be created manually.
 
 set encoding=utf-8
@@ -43,7 +38,11 @@ set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 
 set background=dark
-set clipboard+=unnamedplus
+if has("osx")
+	set clipboard=unnamed
+else
+	set clipboard+=unnamedplus
+endif
 set completeopt-=preview
 set nohlsearch
 set hidden
@@ -105,15 +104,23 @@ let g:fzf_colors =
 nnoremap <F8> :TagbarToggle<CR>
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
-" Escape sequences are the same key sequences on my MacBook Pro keyboard
-nmap <C-Up> [e 
-nmap [A [e
-nmap <C-Down> ]e 
-nmap [B ]e 
-vmap <C-Up> [egv
-vmap [A [egv
-vmap <C-Down> ]egv
-vmap [B ]egv
+if has("osx")
+	" Alt+j and Alt+k on my MacBook's keyboard. Haven't tried with an external keyboard yet.
+	nmap ˚ [e 
+	nmap ∆ ]e 
+	vmap ˚ [egv
+	vmap ∆ ]egv
+else
+	" Escape sequences are the same key sequences on my MacBook Pro keyboard
+	nmap <C-Up> [e 
+	nmap [A [e
+	nmap <C-Down> ]e 
+	nmap [B ]e 
+	vmap <C-Up> [egv
+	vmap [A [egv
+	vmap <C-Down> ]egv
+	vmap [B ]egv
+endif
 
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
@@ -204,7 +211,7 @@ augroup autocmds
 	" for a current C project
 	autocmd FileType c call FileTypeC()
 	autocmd FileType cpp call FileTypeC()
-	" autocmd BufWritePre *.cpp,*.c,*.h call PreWriteC()
+	autocmd BufWritePre *.cpp,*.c,*.h call PreWriteC()
 augroup END
 
 let g:gruvbox_italic=1
