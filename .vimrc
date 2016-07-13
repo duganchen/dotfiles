@@ -1,8 +1,6 @@
 " For now I'll be using:
 "
 " grepper: vimgrep
-" fuzzyfinder: :e **/partial<TAB>
-" buffer manager: :ls :b as my 
 " file browser: lex
 
 " ~/.cache/vim needs to be created manually.
@@ -15,6 +13,8 @@ Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-plug'
 Plug 'klen/python-mode', {'branch': 'develop'}
 Plug 'kshenoy/vim-signature'
@@ -83,12 +83,23 @@ nnoremap <Up> gk
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
-" http://of-vim-and-vigor.blogspot.ca/p/vim-vigor-comic.html
-" This is my buffer manager.
-nnoremap <leader>b :ls<CR>:b<space>
+" FZF
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>t :Files<cr>
 
-" And this is my fuzzyfinder.
-nnoremap <leader>t :e **/
+let g:fzf_colors =
+			\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
@@ -193,7 +204,7 @@ augroup autocmds
 	" for a current C project
 	autocmd FileType c call FileTypeC()
 	autocmd FileType cpp call FileTypeC()
-	autocmd BufWritePre *.cpp,*.c,*.h call PreWriteC()
+	" autocmd BufWritePre *.cpp,*.c,*.h call PreWriteC()
 augroup END
 
 let g:gruvbox_italic=1
