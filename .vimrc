@@ -79,14 +79,13 @@ nnoremap silent <Down> gj
 nnoremap silent <Up> gk
 
 " :Lex(plore) replaces NERDTree
-"
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_list_hide = netrw_gitignore#Hide()
+" http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
 function! WDExplorer()
-	" http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
 	if !exists("g:explorer_nr")
-		:Lexplore "" . getcwd()<cr>
+		execute "Lexplore " . getcwd()
 		let g:explorer_nr = bufnr("%")
 	else
 		unlet g:explorer_nr 
@@ -95,10 +94,9 @@ function! WDExplorer()
 	endif
 endfunction
 nnoremap <F2> :call WDExplorer()<cr>
-" These seem to produce the same results. Check this.
 function! Explorer()
 	if !exists("g:explorer_nr")
-		:Lexplore<cr>
+		execute "Lexplore " . fnamemodify(expand('%s'), ':p:h')
 		let g:explorer_nr = bufnr("%")
 	else
 		unlet g:explorer_nr 
