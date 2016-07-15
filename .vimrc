@@ -162,6 +162,7 @@ let g:lightline = {
 \	},
 \}
 
+
 function! LightlineModified()
 	return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -171,7 +172,11 @@ function! LightLineReadonly()
 endfunction
 
 function! LightlineFugitive()
-	return exists('*fugitive#head') ? fugitive#head() : ''
+	let l:status = fugitive#statusline()
+	if strlen(l:status)
+		return l:status[1: -2]
+	endif
+	return ""
 endfunction
 
 function! LightlineGutenTags()
