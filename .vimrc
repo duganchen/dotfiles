@@ -128,15 +128,11 @@ if has("osx")
 	vmap ˚ [egv
 	vmap ∆ ]egv
 else
-	" Escape sequences are the same key sequences on my MacBook Pro keyboard
-	nmap <C-Up> [e 
-	nmap [A [e
-	nmap <C-Down> ]e 
-	nmap [B ]e 
-	vmap <C-Up> [egv
-	vmap [A [egv
-	vmap <C-Down> ]egv
-	vmap [B ]egv
+	" Same on Linux. 
+	nmap k [e 
+	vmap k [egv
+	nmap j ]e 
+	vmap j ]egv
 endif
 
 let g:lightline = {
