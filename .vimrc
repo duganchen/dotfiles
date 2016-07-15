@@ -93,7 +93,7 @@ function! WDExplorer()
 		bdelete
 	endif
 endfunction
-nnoremap <F2> :call WDExplorer()<cr>
+nnoremap <silent> <F2> :call WDExplorer()<cr>
 function! Explorer()
 	if !exists("g:explorer_nr")
 		execute "Lexplore " . fnamemodify(expand('%s'), ':p:h')
@@ -104,7 +104,7 @@ function! Explorer()
 		bdelete
 	endif
 endfunction
-nnoremap <leader>f :call Explorer()<cr>
+nnoremap <silent> <leader>f :call Explorer()<cr>
 
 " FZF
 nnoremap <leader>b :Buffers<cr>
