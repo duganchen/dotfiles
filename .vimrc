@@ -128,21 +128,26 @@ if has("osx")
 	vmap ˚ [egv
 	vmap ∆ ]egv
 else
-	" Same on Linux. 
-	nmap k [e 
-	vmap k [egv
-	nmap j ]e 
-	vmap j ]egv
+	" Escape sequences are the same key sequences on my MacBook Pro keyboard
+	nmap <C-Up> [e 
+	nmap [A [e
+	nmap <C-Down> ]e 
+	nmap [B ]e 
+	vmap <C-Up> [egv
+	vmap [A [egv
+	vmap <C-Down> ]egv
+	vmap [B ]egv
 endif
 
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
-\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'gutentags']],
+\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'syntastic'], ['gutentags']],
 \	},
 \	'component_function': {
 \		'modified': 'LightlineModified',
 \		'fugitive': 'LightlineFugitive',
+\		'syntastic': 'LightlineSyntastic',
 \		'gutentags': 'LightlineGutenTags',
 \		'readonly': 'LightLineReadonly',
 \		'fileformat': 'LightlineFileFormat',
@@ -175,6 +180,15 @@ function! LightlineFugitive()
 	return ""
 endfunction
 
+function! LightlineSyntastic()
+	let l:status = SyntasticStatuslineFlag()
+	if strlen(l:status)
+		return l:status[1: -2]
+	endif
+	return ""
+endfunction
+
+
 function! LightlineGutenTags()
 	return gutentags#statusline()
 endfunction
@@ -187,15 +201,6 @@ function! LightlineFileFormat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-" Let python-mode handle Python
-let g:syntastic_mode_map = {
-\	"mode": "active",
-\	"passive_filetypes": ["python"],
-\}
-let g:ycm_filetype_blacklist = {
-\	'python' : 1,
-\}
-
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
@@ -206,6 +211,12 @@ let g:UltiSnipsEditSplit = "vertical"
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 let g:gutentags_cache_dir = $HOME . "/.cache/vim"
+
+let g:pymode_lint = 0
+let g:pymode_options_max_line_length = 138
+let g:pymode_options_colorcolumn = 0
+let g:pymode_breakpoint = 0
+
 
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
