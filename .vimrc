@@ -1,6 +1,38 @@
 " ~/.cache/vim needs to be created manually.
 
+" Start with neovim defaults
+syntax on
+filetype plugin indent on
+set autoindent
+set autoread
+set backspace=indent,eol,start
+set complete-=i
+set display=lastline
 set encoding=utf-8
+set formatoptions=tcqj
+set history=10000
+set hlsearch
+set incsearch
+set langnoremap
+set laststatus=2
+set listchars=tab:>\ ,trail:-,nbsp:+
+set mouse=a
+set nocompatible
+set nrformats=bin,hex
+set sessionoptions-=options
+set smarttab
+set tabpagemax=50
+set tags=./tags;,tags
+set ttyfast
+set viminfo+=!
+set wildmenu
+
+" Add additional vim-sensible settings
+set ruler
+set ttimeout
+set ttimeoutlen=100
+set scrolloff=1
+set sidescrolloff=5
 
 call plug#begin()
 Plug 'SirVer/UltiSnips'
@@ -20,13 +52,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 call plug#end()
-
-syntax on
-filetype plugin indent on
 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
@@ -44,11 +72,7 @@ else
 	set clipboard+=unnamedplus
 endif
 set completeopt-=preview
-set nohlsearch
 set hidden
-set incsearch
-set mouse=a
-set nocompatible
 
 " Lightline provides this
 set noshowmode
@@ -57,18 +81,12 @@ set nowrap
 set number
 set relativenumber
 
-" https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/d2re0mg
-set showbreak=↪
-set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-
 set shell=bash
 set shiftwidth=4
 set smartcase
-set smarttab
 set tabstop=4
 set ttymouse=xterm2
 set visualbell
-set wildmenu
 set wildmode=full
 set wildignore+=.*,*.o,*.pyc,*.swp
 
@@ -78,7 +96,7 @@ nnoremap silent <Right> zl
 nnoremap silent <Down> gj
 nnoremap silent <Up> gk
 
-" :Lex(plore) replaces NERDTree
+" I use :Lex(plore) instead of NERDTree.
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_list_hide = netrw_gitignore#Hide()
@@ -110,19 +128,25 @@ nnoremap <silent> <leader>f :call Explorer()<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>t :Files<cr>
 
-let g:fzf_colors =
-			\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" If you'd prefer a setup with no or minimal plugins, then the following buffer exploer and file finder work acceptably:
+" nnoremap <leader>b :ls<CR>:b<space>
+" nnoremap <leader>t :e **/
+" For the buffer explorer, see: http://of-vim-and-vigor.blogspot.ca/p/vim-vigor-comic.html
+
+let g:fzf_colors = {
+\	'fg':      ['fg', 'Normal'],
+\	'bg':      ['bg', 'Normal'],
+\	'hl':      ['fg', 'Comment'],
+\	'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\	'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+\	'hl+':     ['fg', 'Statement'],
+\	'info':    ['fg', 'PreProc'],
+\	'prompt':  ['fg', 'Conditional'],
+\	'pointer': ['fg', 'Exception'],
+\	'marker':  ['fg', 'Keyword'],
+\	'spinner': ['fg', 'Label'],
+\	'header':  ['fg', 'Comment']
+\}
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
@@ -136,14 +160,14 @@ if has("osx")
 	vmap ∆ ]egv
 else
 	" Escape sequences are the same key sequences on my MacBook Pro keyboard
-	nmap <C-Up> [e 
 	nmap [A [e
-	nmap <C-Down> ]e 
 	nmap [B ]e 
-	vmap <C-Up> [egv
 	vmap [A [egv
-	vmap <C-Down> ]egv
 	vmap [B ]egv
+	nmap <C-Up> [e 
+	nmap <C-Down> ]e 
+	vmap <C-Up> [egv
+	vmap <C-Down> ]egv
 endif
 
 let g:lightline = {
@@ -195,7 +219,6 @@ function! LightlineSyntastic()
 	return ""
 endfunction
 
-
 function! LightlineGutenTags()
 	return gutentags#statusline()
 endfunction
@@ -223,7 +246,6 @@ let g:pymode_lint = 0
 let g:pymode_options_max_line_length = 138
 let g:pymode_options_colorcolumn = 0
 let g:pymode_breakpoint = 0
-
 
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
