@@ -36,7 +36,7 @@ set sidescrolloff=5
 
 call plug#begin()
 Plug 'SirVer/UltiSnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --all'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dag/vim-fish'
 Plug 'itchyny/lightline.vim'
