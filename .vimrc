@@ -100,6 +100,7 @@ nnoremap silent <Up> gk
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_list_hide = netrw_gitignore#Hide()
+let g:netrw_browse_split = 4
 " http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
 function! WDExplorer()
 	if !exists("g:explorer_nr")
