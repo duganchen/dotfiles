@@ -5,33 +5,18 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
-XTerm*faceName: monospace
-XTerm*faceSize: 11
-XTerm*local: true
+! Set to whatever it should be.
+! Xft.dpi: 96
 
-# Taken from he https://github.com/neeasade/xst
-XTerm*foreground: rgb:a7/a7/a7
-XTerm*background: rgb:1e/1e/1e
+! Arc Dark
+rofi.color-enabled: true
+rofi.color-window: #383c4a, #383c4a, #383c4a
+rofi.color-normal: #404552, #ffffff, #404552, #304d72, #ffffff
+rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
+rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 
-XTerm*termName: xterm-256color
-XTerm*metaSendsEscape: true
-
-! ------------------------------------------------------------------------------
-! ROFI Color theme
-! ------------------------------------------------------------------------------
-! Use extended color scheme
-rofi.color-enabled:                  true
-! Color scheme for normal row
-rofi.color-normal:                   argb:00000000,  #FFFFFF, argb:00000000,  #D64937,  #F9F9F9
-! Color scheme for urgent row
-rofi.color-urgent:                   argb:00000000,  #F99157 , argb:00000000,  #F99157 ,  #FF0000
-! Color scheme for active row
-rofi.color-active:                   argb:00000000,  #6699CC , argb:00000000,  #6699CC ,  #00FF00
-! Color scheme window
-rofi.color-window:                   #333333,  #2D2D2D ,  #2D2D2D
-! Separator style (none, dash, solid)
-rofi.separator-style:                solid
 rofi.lines: 3
 rofi.eh: 2
 rofi.width: 60
 rofi.opacity: 80
+rofi.separator-style:                solid
