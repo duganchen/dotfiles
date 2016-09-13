@@ -72,7 +72,13 @@ else
 	set clipboard+=unnamedplus
 endif
 set completeopt-=preview
+
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
+
 set hidden
+
+set nohlsearch
 
 " Lightline provides this
 set noshowmode
