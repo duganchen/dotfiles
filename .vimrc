@@ -51,9 +51,13 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'timakro/vim-searchant'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'unblevable/quick-scope'
 call plug#end()
 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
