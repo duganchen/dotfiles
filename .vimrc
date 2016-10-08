@@ -52,6 +52,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'thirtythreeforty/lessspace.vim'
 Plug 'timakro/vim-searchant'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -206,7 +207,6 @@ let g:lightline = {
 \	},
 \}
 
-
 function! LightlineModified()
 	return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -259,6 +259,9 @@ let g:pymode_options_max_line_length = 138
 let g:pymode_options_colorcolumn = 0
 let g:pymode_breakpoint = 0
 
+" lessspace does this
+let g:pymode_trim_whitespaces = 0
+
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
@@ -281,7 +284,7 @@ augroup autocmds
 	" for a current C project
 	autocmd FileType c call FileTypeC()
 	autocmd FileType cpp call FileTypeC()
-	autocmd BufWritePre *.cpp,*.c,*.h call PreWriteC()
+	autocmd FileType vifm set filetype=vim
 augroup END
 
 let g:gruvbox_italic=1
@@ -292,7 +295,3 @@ colorscheme gruvbox
 function FileTypeC()
 	set expandtab
 endfunction()
-
-function PreWriteC()
-	:%s/\s\+$//e
-endfunction
