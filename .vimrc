@@ -1,151 +1,58 @@
-" ~/.cache/vim needs to be created manually.
-
-" Start with neovim defaults
-syntax on
-filetype plugin indent on
-set autoindent
-set autoread
-set backspace=indent,eol,start
-set complete-=i
-set display=lastline
-set encoding=utf-8
-set formatoptions=tcqj
-set history=10000
-set hlsearch
-set incsearch
-set langnoremap
-set laststatus=2
-set listchars=tab:>\ ,trail:-,nbsp:+
-set mouse=a
-set nocompatible
-set nrformats=bin,hex
-set sessionoptions-=options
-set smarttab
-set tabpagemax=50
-set tags=./tags;,tags
-set ttyfast
-set viminfo+=!
-set wildmenu
-
-" Add additional vim-sensible settings
-set ruler
-set ttimeout
-set ttimeoutlen=100
-set scrolloff=1
-set sidescrolloff=5
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
 
 call plug#begin()
-Plug 'SirVer/UltiSnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'dag/vim-fish'
+Plug 'drgarcia1986/python-compilers.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-plug'
-Plug 'klen/python-mode', {'branch': 'develop'}
-Plug 'kshenoy/vim-signature'
-Plug 'majutsushi/tagbar'
-Plug 'morhetz/gruvbox'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/syntastic'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'thirtythreeforty/lessspace.vim'
-Plug 'timakro/vim-searchant'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'unblevable/quick-scope'
 call plug#end()
 
-" GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
-set colorcolumn=138
-set textwidth=137
+if has("osx")
+	set clipboard=unnamed
+else
+	set clipboard+=unnamedplus
+endif
+
+" Correct on OS X, AFAIK
+set ttymouse=xterm2
 
 " Make sure this directory exists.
 set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 
-set background=dark
-if has("osx")
-	set clipboard=unnamed
-else
-	set clipboard+=unnamedplus
-endif
-set completeopt-=preview
+let g:gutentags_cache_dir = $HOME . "/.cache/vim"
+
+" GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
+set colorcolumn=138
+set textwidth=137
+
+set number
+set relativenumber
 
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
-set hidden
-
-set nohlsearch
-
-" Lightline provides this
-set noshowmode
-
-set nowrap
-set number
-set relativenumber
-
 set shell=bash
-set shiftwidth=4
-set smartcase
-set tabstop=4
-set ttymouse=xterm2
-set visualbell
-set wildmode=full
-set wildignore+=.*,*.o,*.pyc,*.swp
-
-" Cursor keys scroll
-nnoremap silent <Left> zh
-nnoremap silent <Right> zl
-nnoremap silent <Down> gj
-nnoremap silent <Up> gk
-
-" I use :Lex(plore) instead of NERDTree.
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_list_hide = netrw_gitignore#Hide()
-let g:netrw_browse_split = 4
-" http://ivanbrennan.nyc/blog/2014/01/16/rigging-vims-netrw/
-function! WDExplorer()
-	if !exists("g:explorer_nr")
-		execute "Lexplore " . getcwd()
-		let g:explorer_nr = bufnr("%")
-	else
-		unlet g:explorer_nr 
-		1wincmd w
-		bdelete
-	endif
-endfunction
-nnoremap <silent> <F2> :call WDExplorer()<cr>
-function! Explorer()
-	if !exists("g:explorer_nr")
-		execute "Lexplore " . fnamemodify(expand('%s'), ':p:h')
-		let g:explorer_nr = bufnr("%")
-	else
-		unlet g:explorer_nr 
-		1wincmd w
-		bdelete
-	endif
-endfunction
-nnoremap <silent> <leader>f :call Explorer()<cr>
 
 " FZF
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>t :Files<cr>
-
-" If you'd prefer a setup with no or minimal plugins, then the following buffer exploer and file finder work acceptably:
-" nnoremap <leader>b :ls<CR>:b<space>
-" nnoremap <leader>t :e **/
-" For the buffer explorer, see: http://of-vim-and-vigor.blogspot.ca/p/vim-vigor-comic.html
-
 let g:fzf_colors = {
 \	'fg':      ['fg', 'Normal'],
 \	'bg':      ['bg', 'Normal'],
@@ -160,9 +67,6 @@ let g:fzf_colors = {
 \	'spinner': ['fg', 'Label'],
 \	'header':  ['fg', 'Comment']
 \}
-
-" Tagbar
-nnoremap <F8> :TagbarToggle<CR>
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
@@ -186,12 +90,11 @@ endif
 let g:lightline = {
 \	'colorscheme': 'gruvbox',
 \	'active': {
-\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'syntastic'], ['gutentags']],
+\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], ['fugitive', 'gutentags']],
 \	},
 \	'component_function': {
 \		'modified': 'LightlineModified',
 \		'fugitive': 'LightlineFugitive',
-\		'syntastic': 'LightlineSyntastic',
 \		'gutentags': 'LightlineGutenTags',
 \		'readonly': 'LightLineReadonly',
 \		'fileformat': 'LightlineFileFormat',
@@ -223,14 +126,6 @@ function! LightlineFugitive()
 	return ""
 endfunction
 
-function! LightlineSyntastic()
-	let l:status = SyntasticStatuslineFlag()
-	if strlen(l:status)
-		return l:status[1: -2]
-	endif
-	return ""
-endfunction
-
 function! LightlineGutenTags()
 	return gutentags#statusline()
 endfunction
@@ -243,30 +138,11 @@ function! LightlineFileFormat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsEditSplit = "vertical"
-
-" https://github.com/SirVer/ultisnips/issues/711#issuecomment-227159748
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-
-let g:gutentags_cache_dir = $HOME . "/.cache/vim"
-
-let g:pymode_lint = 0
-let g:pymode_options_max_line_length = 138
-let g:pymode_options_colorcolumn = 0
-let g:pymode_breakpoint = 0
-
-" lessspace does this
-let g:pymode_trim_whitespaces = 0
-
+set background=dark
 if !has('gui')
 	set t_8f=[38;2;%lu;%lu;%lum
 	set t_8b=[48;2;%lu;%lu;%lum
 endif
-
 function ColorSchemeChange()
 	if !has('gui')
 		highlight Normal ctermbg=NONE guibg=NONE
@@ -276,22 +152,12 @@ function ColorSchemeChange()
 		set termguicolors
 	endif
 endfunction
-
 augroup autocmds
 	autocmd!
 	autocmd ColorScheme * call ColorSchemeChange()
-
-	" for a current C project
-	autocmd FileType c call FileTypeC()
-	autocmd FileType cpp call FileTypeC()
 	autocmd FileType vifm set filetype=vim
 augroup END
 
+
 let g:gruvbox_italic=1
 colorscheme gruvbox
-
-" Some stuff for a current project. Might not keep forever.
-
-function FileTypeC()
-	set expandtab
-endfunction()
