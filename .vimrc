@@ -40,15 +40,22 @@ let g:gutentags_cache_dir = $HOME . "/.cache/vim"
 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
+set cscopetag
 set textwidth=137
 
 set number
 set relativenumber
 
+set completeopt-=preview
+set omnifunc=syntaxcomplete#Complete
+
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 set shell=bash
+
+set shiftwidth=4
+set tabstop=4
 
 " FZF
 nnoremap <leader>b :Buffers<cr>
@@ -152,10 +159,16 @@ function ColorSchemeChange()
 		set termguicolors
 	endif
 endfunction
+
+function FileTypePython()
+	compiler flake8
+endfunction
+
 augroup autocmds
 	autocmd!
 	autocmd ColorScheme * call ColorSchemeChange()
 	autocmd FileType vifm set filetype=vim
+	autocmd FileType python call FileTypePython()
 augroup END
 
 
