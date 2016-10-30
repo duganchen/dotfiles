@@ -17,6 +17,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 call plug#end()
 
+" Works well on Linux. Not tested on OS X.
 set clipboard^=unnamedplus,unnamed
 
 " Correct on Linux. Correct on OS X, AFAIK
