@@ -9,6 +9,7 @@ Plug 'junegunn/vim-plug'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
+Plug 'ryanoasis/vim-devicons'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -17,8 +18,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 call plug#end()
 
-" Works well on Linux. Not tested on OS X.
+set autoindent
+set autoread
+
 set clipboard^=unnamedplus,unnamed
+
+set infercase
 
 " Correct on Linux. Correct on OS X, AFAIK
 set ttymouse=xterm2
@@ -34,10 +39,20 @@ let g:gutentags_cache_dir = $HOME . "/.cache/vim"
 set colorcolumn=138
 set textwidth=137
 
+set complete-=i
+
 set cscopetag
+
+set display=lastline
+
+set formatoptions+=j
+
+set laststatus=2
 
 set number
 set relativenumber
+
+set sessionoptions-=options
 
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
@@ -50,11 +65,19 @@ set grepformat=%f:%l:%c:%m
 set shell=bash
 
 set shiftwidth=4
+set smartcase
+set smarttab
 set tabstop=4
 
 set ttyfast
 
+set viminfo^=!
+
 set path=.,**
+
+set visualbell
+
+nnoremap <leader>b :ls<CR>:b<space>
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
@@ -74,6 +97,44 @@ else
 	vmap <C-Up> [egv
 	vmap <C-Down> ]egv
 endif
+
+function! StatusReadOnly()
+	return &ft !~? 'help' && &readonly ? ' ' : ''
+endfunction
+
+function! StatusModified()
+	return &ft =~ 'help' ? '' : &modified ? '+ ' : &modifiable ? '' : '- '
+endfunction
+
+function! StatusFugitive()
+	let l:status = fugitive#statusline()
+	if strlen(l:status)
+		" TODO: Get rid of the Git()
+		" http://stackoverflow.com/a/3135448
+		return l:status[1: -2] . " "
+	endif
+	return ""
+endfunction
+
+
+function! StatusFileFormat()
+	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+function! StatusFileType()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+set statusline=
+			\%{StatusReadOnly()}
+			\%{StatusModified()}
+			\%{StatusFugitive()}
+			\%F
+			\%=
+			\%{StatusFileFormat()}
+			\%{StatusFileType()}
+			\%p%%
+			\\ %l:%v
 
 set background=dark
 if !has('gui')
