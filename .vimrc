@@ -82,18 +82,18 @@ nnoremap <leader>b :ls<CR>:b<space>
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
 	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
-	nmap ˚ [e 
-	nmap ∆ ]e 
+	nmap ˚ [e
+	nmap ∆ ]e
 	vmap ˚ [egv
 	vmap ∆ ]egv
 else
 	" Escape sequences are the same key sequences on my MacBook Pro keyboard
 	nmap [A [e
-	nmap [B ]e 
+	nmap [B ]e
 	vmap [A [egv
 	vmap [B ]egv
-	nmap <C-Up> [e 
-	nmap <C-Down> ]e 
+	nmap <C-Up> [e
+	nmap <C-Down> ]e
 	vmap <C-Up> [egv
 	vmap <C-Down> ]egv
 endif
@@ -133,23 +133,22 @@ set statusline=
 			\%=
 			\%{StatusFileFormat()}
 			\%{StatusFileType()}
-			\%p%%
+			\\ %p%%
 			\\ %l:%v
 
-set background=dark
-if !has('gui')
-	set t_8f=[38;2;%lu;%lu;%lum
-	set t_8b=[48;2;%lu;%lu;%lum
-endif
-function ColorSchemeChange()
-	if !has('gui')
-		highlight Normal ctermbg=NONE guibg=NONE
-		highlight NonText ctermbg=NONE guibg=NONE
-
-		" termguicolors needs to be set after the colorscheme, it seems
-		set termguicolors
-	endif
-endfunction
+" if !has('gui')
+" 	set t_8f=[38;2;%lu;%lu;%lum
+" 	set t_8b=[48;2;%lu;%lu;%lum
+" endif
+" function ColorSchemeChange()
+" 	if !has('gui')
+" 		highlight Normal ctermbg=NONE guibg=NONE
+" 		highlight NonText ctermbg=NONE guibg=NONE
+"
+" 		" termguicolors needs to be set after the colorscheme, it seems
+" 		set termguicolors
+" 	endif
+" endfunction
 
 function FileTypePython()
 	compiler flake8
@@ -157,10 +156,12 @@ endfunction
 
 augroup autocmds
 	autocmd!
-	autocmd ColorScheme * call ColorSchemeChange()
+	" autocmd ColorScheme * call ColorSchemeChange()
 	autocmd FileType vifm set filetype=vim
 	autocmd FileType python call FileTypePython()
 augroup END
 
-let g:gruvbox_italic=1
+set background=dark
 colorscheme gruvbox
+let g:gruvbox_italic=1
+set termguicolors
