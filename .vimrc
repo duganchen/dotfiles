@@ -67,6 +67,7 @@ set shell=bash
 set shiftwidth=4
 set smartcase
 set smarttab
+set softtabstop=4
 set tabstop=4
 
 set ttyfast
@@ -136,20 +137,6 @@ set statusline=
 			\\ %p%%
 			\\ %l:%v
 
-" if !has('gui')
-" 	set t_8f=[38;2;%lu;%lu;%lum
-" 	set t_8b=[48;2;%lu;%lu;%lum
-" endif
-" function ColorSchemeChange()
-" 	if !has('gui')
-" 		highlight Normal ctermbg=NONE guibg=NONE
-" 		highlight NonText ctermbg=NONE guibg=NONE
-"
-" 		" termguicolors needs to be set after the colorscheme, it seems
-" 		set termguicolors
-" 	endif
-" endfunction
-
 function FileTypePython()
 	compiler flake8
 endfunction
@@ -161,10 +148,21 @@ augroup autocmds
 	autocmd FileType python call FileTypePython()
 augroup END
 
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
 set background=dark
-colorscheme gruvbox
+
+if !has('gui')
+	" ^[ is a single character: Ctrl+V,<ESC>
+	let &t_8f = "[38;2;%lu;%lu;%lum"
+	let &t_8b = "[48;2;%lu;%lu;%lum"
+
+	set termguicolors
+
+	if !has('mac')
+		" My transparent terminals seem to need this
+		" https://sunaku.github.io/vim-256color-bce.html
+		set t_ut=
+	endif
+endif
+
 let g:gruvbox_italic=1
-set termguicolors
+colorscheme gruvbox
