@@ -143,7 +143,6 @@ endfunction
 
 augroup autocmds
 	autocmd!
-	" autocmd ColorScheme * call ColorSchemeChange()
 	autocmd FileType vifm set filetype=vim
 	autocmd FileType python call FileTypePython()
 augroup END
