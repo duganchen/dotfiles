@@ -21,7 +21,9 @@ call plug#end()
 set autoindent
 set autoread
 
-set clipboard^=unnamedplus,unnamed
+if !has('mac')
+	set clipboard^=unnamedplus,unnamed
+endif
 
 set infercase
 
