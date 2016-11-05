@@ -82,6 +82,9 @@ set visualbell
 
 nnoremap <leader>b :ls<CR>:b<space>
 
+let g:netrw_browse_split=4
+let g:netrw_keepdir=0
+
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
 	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
