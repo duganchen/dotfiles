@@ -3,6 +3,7 @@ source $VIMRUNTIME/defaults.vim
 
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'dag/vim-fish'
 Plug 'drgarcia1986/python-compilers.vim'
 Plug 'junegunn/vim-plug'
