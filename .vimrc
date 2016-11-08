@@ -63,6 +63,8 @@ set path=.,**
 
 set visualbell
 
+set nowrap
+
 nnoremap <leader>b :ls<CR>:b<space>
 
 let g:netrw_altv=1
