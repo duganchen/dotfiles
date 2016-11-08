@@ -1,0 +1,36 @@
+[submodule ".vim/pack/dugan/start/vim-gitgutter"]
+	path = .vim/pack/dugan/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule ".vim/pack/dugan/start/vim-rooter"]
+	path = .vim/pack/dugan/start/vim-rooter
+	url = https://github.com/airblade/vim-rooter.git
+[submodule ".vim/pack/dugan/start/vim-gutentags"]
+	path = .vim/pack/dugan/start/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule ".vim/pack/dugan/start/gruvbox"]
+	path = .vim/pack/dugan/start/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+[submodule ".vim/pack/dugan/vim-javascript"]
+	path = .vim/pack/dugan/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule ".vim/pack/dugan/start/lessspace.vim"]
+	path = .vim/pack/dugan/start/lessspace.vim
+	url = https://github.com/thirtythreeforty/lessspace.vim.git
+[submodule ".vim/pack/dugan/start/vim-commentary"]
+	path = .vim/pack/dugan/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule ".vim/pack/dugan/start/vim-fugitive"]
+	path = .vim/pack/dugan/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/pack/dugan/start/vim-repeat"]
+	path = .vim/pack/dugan/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule ".vim/pack/dugan/start/vim-surround"]
+	path = .vim/pack/dugan/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule ".vim/pack/dugan/start/vim-unimpaired"]
+	path = .vim/pack/dugan/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule ".vim/pack/dugan/start/vim-devicons"]
+	path = .vim/pack/dugan/start/vim-devicons
+	url = https://github.com/ryanoasis/vim-devicons.git

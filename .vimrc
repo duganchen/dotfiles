@@ -1,24 +1,6 @@
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
-call plug#begin()
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'dag/vim-fish'
-Plug 'drgarcia1986/python-compilers.vim'
-Plug 'junegunn/vim-plug'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'morhetz/gruvbox'
-Plug 'pangloss/vim-javascript'
-Plug 'ryanoasis/vim-devicons'
-Plug 'thirtythreeforty/lessspace.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-call plug#end()
-
 set autoindent
 set autoread
 
