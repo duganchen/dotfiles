@@ -121,7 +121,8 @@ function! StatusFileType()
 endfunction
 
 set statusline=
-			\%{StatusReadOnly()}
+			\%n
+			\\ %{StatusReadOnly()}
 			\%{StatusModified()}
 			\%{StatusFugitive()}
 			\%F
@@ -157,5 +158,9 @@ if !has('gui')
 	endif
 endif
 
-let g:gruvbox_italic=1
+if !has('mac')
+	" I'll have to get this working later.
+	let g:gruvbox_italic=1
+endif
+
 colorscheme gruvbox
