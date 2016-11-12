@@ -142,20 +142,26 @@ augroup autocmds
 	autocmd FileType python call FileTypePython()
 augroup END
 
-set background=dark
-
-if !has('gui')
+if !has('gui') && has('termguicolors')
 	" ^[ is a single character: Ctrl+V,<ESC>
+	" This is for tmux.
 	let &t_8f = "[38;2;%lu;%lu;%lum"
 	let &t_8b = "[48;2;%lu;%lu;%lum"
-
 	set termguicolors
 
 	if !has('mac')
-		" My transparent terminals seem to need this
-		" https://sunaku.github.io/vim-256color-bce.html
+		" Seems to be needed in transparent Termite.
 		set t_ut=
 	endif
 endif
 
-colorscheme koehler
+if !has('gui')
+	set background=dark
+endif
+
+" The reason for this? For now, I only have transparency with termguicolors in iterm2.
+if has('mac')
+	colorscheme koehler
+else
+	colorscheme evening
+endif
