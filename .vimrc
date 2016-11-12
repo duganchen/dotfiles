@@ -1,5 +1,7 @@
-unlet! skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+if !has('nvim')
+	unlet! skip_defaults_vim
+	source $VIMRUNTIME/defaults.vim
+endif
 
 set autoindent
 set autoread
@@ -11,7 +13,9 @@ endif
 set infercase
 
 " Correct on Linux. Correct on OS X, AFAIK
-set ttymouse=xterm2
+if !has('nvim')
+	set ttymouse=xterm2
+endif
 
 " Make sure this directory exists.
 set backupdir=~/.cache/vim//
@@ -136,21 +140,33 @@ function FileTypePython()
 	compiler flake8
 endfunction
 
+function! ColorSchemeChange()
+	if has('nvim')
+		highlight! Normal guibg=NONE
+		highlight! NonText guibg=NONE
+	endif
+endfunction
+
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
 	autocmd FileType python call FileTypePython()
+	autocmd ColorScheme * call ColorSchemeChange()
 augroup END
+
 
 if !has('gui') && has('termguicolors')
 	" ^[ is a single character: Ctrl+V,<ESC>
 	" This is for tmux.
-	let &t_8f = "[38;2;%lu;%lu;%lum"
-	let &t_8b = "[48;2;%lu;%lu;%lum"
+
+	if !has('nvim')
+		let &t_8f = "[38;2;%lu;%lu;%lum"
+		let &t_8b = "[48;2;%lu;%lu;%lum"
+	endif
 
 	set termguicolors
 
-	if !has('mac')
+	if !has('mac') && !has('nvim')
 		" Seems to be needed in transparent Termite.
 		set t_ut=
 	endif
@@ -160,8 +176,8 @@ if !has('gui')
 	set background=dark
 endif
 
-" The reason for this? For now, I only have transparency with termguicolors in iterm2.
-if has('mac')
+" koehler is good with transparent terminals; evening is better opaque.
+if has('mac') || has('nvim')
 	colorscheme koehler
 else
 	colorscheme evening
