@@ -158,4 +158,4 @@ if !has('gui')
 	endif
 endif
 
-colorscheme evening
+colorscheme koehler
