@@ -158,9 +158,4 @@ if !has('gui')
 	endif
 endif
 
-if !has('mac')
-	" I'll have to get this working later.
-	let g:gruvbox_italic=1
-endif
-
-colorscheme gruvbox
+colorscheme evening
