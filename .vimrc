@@ -147,6 +147,7 @@ if !has('gui') && has('termguicolors')
 	" This is for tmux.
 	let &t_8f = "[38;2;%lu;%lu;%lum"
 	let &t_8b = "[48;2;%lu;%lu;%lum"
+
 	set termguicolors
 
 	if !has('mac')
