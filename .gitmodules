@@ -8,7 +8,7 @@
 	path = .vim/pack/dugan/start/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
 [submodule ".vim/pack/dugan/vim-javascript"]
-	path = .vim/pack/dugan/vim-javascript
+	path = .vim/pack/dugan/start/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
 [submodule ".vim/pack/dugan/start/lessspace.vim"]
 	path = .vim/pack/dugan/start/lessspace.vim
@@ -31,3 +31,6 @@
 [submodule ".vim/pack/dugan/start/vim-devicons"]
 	path = .vim/pack/dugan/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons.git
+[submodule ".vim/pack/dugan/start/vim-gas"]
+	path = .vim/pack/dugan/start/vim-gas
+	url = https://github.com/Shirk/vim-gas.git
