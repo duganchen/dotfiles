@@ -106,9 +106,12 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_regexp = 1
 
 let g:lightline = {
+	\'component': {
+		\'filename': '%n:%t',
+	\},
 	\'component_function': {
-	\'filetype': 'MyFiletype',
-	\'fileformat': 'MyFileformat',
+		\'filetype': 'MyFiletype',
+		\'fileformat': 'MyFileformat',
 	\}
 \}
 
