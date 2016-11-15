@@ -49,3 +49,6 @@
 [submodule ".vim/pack/dugan/start/vim-dirvish"]
 	path = .vim/pack/dugan/start/vim-dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
+[submodule ".vim/pack/dugan/start/lightline"]
+	path = .vim/pack/dugan/start/lightline
+	url = https://github.com/itchyny/lightline.vim.git
