@@ -105,43 +105,20 @@ let g:ctrlp_user_command = {}
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_regexp = 1
 
-function! StatusReadOnly()
-	return &ft !~? 'help' && &readonly ? ' ' : ''
-endfunction
+let g:lightline = {
+	\'component_function': {
+	\'filetype': 'MyFiletype',
+	\'fileformat': 'MyFileformat',
+	\}
+\}
 
-function! StatusModified()
-	return &ft =~ 'help' ? '' : &modified ? '+ ' : &modifiable ? '' : '- '
-endfunction
-
-function! StatusFugitive()
-	let l:status = fugitive#statusline()
-	if strlen(l:status)
-		" TODO: Get rid of the Git()
-		" http://stackoverflow.com/a/3135448
-		return l:status[1: -2] . " "
-	endif
-	return ""
-endfunction
-
-function! StatusFileFormat()
-	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
-function! StatusFileType()
+function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
-set statusline=
-			\%n
-			\\ %{StatusReadOnly()}
-			\%{StatusModified()}
-			\%{StatusFugitive()}
-			\%.60F
-			\%=
-  			\%{StatusFileFormat()}
- 			\%{StatusFileType()}
-			\\ %p%%
-			\\ %l:%v
+function! MyFileformat()
+	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 function! ColorSchemeChange()
 	if has('nvim')
