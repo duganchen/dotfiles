@@ -46,3 +46,6 @@
 [submodule ".vim/pack/dugan/start/python-compilers.vim"]
 	path = .vim/pack/dugan/start/python-compilers.vim
 	url = https://github.com/drgarcia1986/python-compilers.vim.git
+[submodule ".vim/pack/dugan/start/vim-dirvish"]
+	path = .vim/pack/dugan/start/vim-dirvish
+	url = https://github.com/justinmk/vim-dirvish.git
