@@ -92,6 +92,18 @@ else
 	vmap <C-Down> ]egv
 endif
 
+" https://www.reddit.com/r/vim/comments/45qe2g/unite_vs_ctrlp_in_2016/d00u7y4/
+" https://robots.thoughtbot.com/faster-grepping-in-vim
+let g:ctrlp_user_command = {
+	\'types': {
+		\1: ['.git', 'cd %s && git ls-files --others --cached --exclude-standard'],
+	\},
+	\'fallback': 'ag %s -l --nocolor -g ""'
+	\}
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_user_command = {}
+let g:ctrlp_working_path_mode = 0
+
 function! StatusReadOnly()
 	return &ft !~? 'help' && &readonly ? ' ' : ''
 endfunction
