@@ -37,3 +37,6 @@
 [submodule ".vim/pack/dugan/start/nerdtree-git-plugin"]
 	path = .vim/pack/dugan/start/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule ".vim/pack/dugan/start/tagbar"]
+	path = .vim/pack/dugan/start/tagbar
+	url = https://github.com/majutsushi/tagbar.git
