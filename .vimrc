@@ -143,10 +143,6 @@ set statusline=
 			\\ %p%%
 			\\ %l:%v
 
-function FileTypePython()
-	compiler flake8
-endfunction
-
 function! ColorSchemeChange()
 	if has('nvim')
 		highlight! Normal guibg=NONE
@@ -157,7 +153,6 @@ endfunction
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
-	autocmd FileType python call FileTypePython()
 	autocmd ColorScheme * call ColorSchemeChange()
 augroup END
 
