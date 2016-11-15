@@ -31,6 +31,3 @@
 [submodule ".vim/pack/dugan/start/vim-devicons"]
 	path = .vim/pack/dugan/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons.git
-[submodule ".vim/pack/dugan/start/vim-gas"]
-	path = .vim/pack/dugan/start/vim-gas
-	url = https://github.com/Shirk/vim-gas.git
