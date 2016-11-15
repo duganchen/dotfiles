@@ -40,3 +40,6 @@
 [submodule ".vim/pack/dugan/start/tagbar"]
 	path = .vim/pack/dugan/start/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+[submodule ".vim/pack/dugan/start/VimCompletesMe"]
+	path = .vim/pack/dugan/start/VimCompletesMe
+	url = https://github.com/ajh17/VimCompletesMe.git
