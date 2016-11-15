@@ -103,6 +103,7 @@ let g:ctrlp_user_command = {
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_user_command = {}
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_regexp = 1
 
 function! StatusReadOnly()
 	return &ft !~? 'help' && &readonly ? ' ' : ''
