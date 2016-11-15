@@ -3,6 +3,8 @@ if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
 endif
 
+packadd vim-devicons
+
 set autoindent
 set autoread
 
@@ -113,7 +115,6 @@ function! StatusFugitive()
 	return ""
 endfunction
 
-
 function! StatusFileFormat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
@@ -129,8 +130,8 @@ set statusline=
 			\%{StatusFugitive()}
 			\%.60F
 			\%=
-			\%{StatusFileFormat()}
-			\%{StatusFileType()}
+  			\%{StatusFileFormat()}
+ 			\%{StatusFileType()}
 			\\ %p%%
 			\\ %l:%v
 

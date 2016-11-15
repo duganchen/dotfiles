@@ -29,5 +29,11 @@
 	path = .vim/pack/dugan/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
 [submodule ".vim/pack/dugan/start/vim-devicons"]
-	path = .vim/pack/dugan/start/vim-devicons
+	path = .vim/pack/dugan/opt/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons.git
+[submodule ".vim/pack/dugan/start/nerdtree"]
+	path = .vim/pack/dugan/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule ".vim/pack/dugan/start/nerdtree-git-plugin"]
+	path = .vim/pack/dugan/start/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
