@@ -127,7 +127,7 @@ set statusline=
 			\\ %{StatusReadOnly()}
 			\%{StatusModified()}
 			\%{StatusFugitive()}
-			\%F
+			\%.60F
 			\%=
 			\%{StatusFileFormat()}
 			\%{StatusFileType()}
