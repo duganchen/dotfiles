@@ -38,6 +38,8 @@ set display=lastline
 
 set formatoptions+=j
 
+set hidden
+
 set laststatus=2
 
 set number
@@ -70,13 +72,6 @@ set path=.,**
 set visualbell
 
 set nowrap
-
-let g:netrw_altv=1
-let g:netrw_browse_split=4
-let g:netrw_banner=0
-let g:netrw_keepdir=0
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_winsize=25
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
