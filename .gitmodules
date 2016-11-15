@@ -43,3 +43,6 @@
 [submodule ".vim/pack/dugan/start/vim-filebeagle"]
 	path = .vim/pack/dugan/start/vim-filebeagle
 	url = https://github.com/jeetsukumaran/vim-filebeagle.git
+[submodule ".vim/pack/dugan/start/python-compilers.vim"]
+	path = .vim/pack/dugan/start/python-compilers.vim
+	url = https://github.com/drgarcia1986/python-compilers.vim.git
