@@ -40,3 +40,6 @@
 [submodule ".vim/pack/dugan/start/vim-dirvish"]
 	path = .vim/pack/dugan/start/vim-dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
+[submodule ".vim/pack/dugan/start/ctrlp.vim"]
+	path = .vim/pack/dugan/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
