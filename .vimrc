@@ -105,14 +105,18 @@ let g:ctrlp_user_command = {}
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_regexp = 1
 
+set noshowmode
 let g:lightline = {
 	\'component': {
 		\'filename': '%n:%t',
+		\'lineinfo': ' %3l:%-2v',
 	\},
 	\'component_function': {
 		\'filetype': 'MyFiletype',
 		\'fileformat': 'MyFileformat',
-	\}
+		\'readonly': 'LightlineReadonly',
+	\},
+	\'colorscheme': 'seoul256'
 \}
 
 function! MyFiletype()
@@ -122,6 +126,18 @@ endfunction
 function! MyFileformat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
+
+function! LightlineReadonly()
+	if &filetype == "help"
+		return ""
+	elseif &readonly
+		return ''
+	else
+		return ""
+	endif
+endfunction
+
+
 
 function! ColorSchemeChange()
 	if has('nvim')
@@ -158,9 +174,4 @@ if !has('gui')
 	set background=dark
 endif
 
-" koehler is good with transparent terminals; evening is better opaque.
-if has('mac') || has('nvim')
-	colorscheme koehler
-else
-	colorscheme evening
-endif
+colorscheme seoul256
