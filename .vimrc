@@ -137,8 +137,6 @@ function! LightlineReadonly()
 	endif
 endfunction
 
-
-
 function! ColorSchemeChange()
 	if has('nvim')
 		highlight! Normal guibg=NONE
@@ -154,10 +152,9 @@ augroup END
 
 
 if !has('gui') && has('termguicolors')
-	" ^[ is a single character: Ctrl+V,<ESC>
-	" This is for tmux.
-
 	if !has('nvim')
+		" ^[ is a single character: Ctrl+V,<ESC>
+		" This is for tmux.
 		let &t_8f = "[38;2;%lu;%lu;%lum"
 		let &t_8b = "[48;2;%lu;%lu;%lum"
 	endif
@@ -170,8 +167,11 @@ if !has('gui') && has('termguicolors')
 	endif
 endif
 
-if !has('gui')
-	set background=dark
+if has('nvim') || has('mac')
+	let g:lightline.colorscheme = 'jellybeans'
+	colorscheme jellybeans
+else
+	let g:lightline.colorscheme = 'Dracula'
+	colorscheme dracula
 endif
-
-colorscheme seoul256
+set background=dark
