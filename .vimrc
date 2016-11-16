@@ -69,8 +69,7 @@ set sessionoptions-=options
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
  
-set fillchars=vert:\│
- 
+
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
  
@@ -91,7 +90,14 @@ set path=.,**
 set visualbell
  
 set nowrap
- 
+
+set fillchars=vert:\│
+
+" Ideas from here:
+" https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
+let &showbreak = '↪  '
+set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:·,trail:·,eol:↲
+
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
 	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
