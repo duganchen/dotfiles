@@ -181,8 +181,7 @@ endif
 set background=dark
 
 if has('nvim') || has('mac')
-	let g:lightline.colorscheme = 'jellybeans'
-	colorscheme jellybeans
+	colorscheme koehler
 else
 	let g:lightline.colorscheme = 'onedark'
 	let g:onedark_terminal_italics = 1

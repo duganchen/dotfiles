@@ -52,9 +52,6 @@
 [submodule ".vim/pack/dugan/start/lightline"]
 	path = .vim/pack/dugan/start/lightline
 	url = https://github.com/itchyny/lightline.vim.git
-[submodule ".vim/pack/dugan/start/jellybeans.vim"]
-	path = .vim/pack/dugan/start/jellybeans.vim
-	url = https://github.com/nanotech/jellybeans.vim.git
 [submodule ".vim/pack/dugan/start/onedark.vim"]
 	path = .vim/pack/dugan/start/onedark.vim
 	url = https://github.com/joshdick/onedark.vim.git
