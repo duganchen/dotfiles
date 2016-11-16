@@ -115,9 +115,13 @@ let g:lightline = {
 		\'filetype': 'MyFiletype',
 		\'fileformat': 'MyFileformat',
 		\'readonly': 'LightlineReadonly',
+		\'fugitive': 'LightlineFugitive',
 	\},
-	\'colorscheme': 'seoul256'
+	\'active': {
+		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
+	\},
 \}
+
 
 function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
@@ -150,6 +154,13 @@ augroup autocmds
 	autocmd ColorScheme * call ColorSchemeChange()
 augroup END
 
+function! LightlineFugitive()
+	if exists('*fugitive#head')
+		let branch = fugitive#head()
+		return branch !=# '' ? ' '.branch : ''
+	endif
+	return ''
+endfunction
 
 if !has('gui') && has('termguicolors')
 	if !has('nvim')
