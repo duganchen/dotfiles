@@ -7,9 +7,6 @@
 [submodule ".vim/pack/dugan/start/vim-gutentags"]
 	path = .vim/pack/dugan/start/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
-[submodule ".vim/pack/dugan/vim-javascript"]
-	path = .vim/pack/dugan/start/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
 [submodule ".vim/pack/dugan/start/lessspace.vim"]
 	path = .vim/pack/dugan/start/lessspace.vim
 	url = https://github.com/thirtythreeforty/lessspace.vim.git
@@ -43,9 +40,6 @@
 [submodule ".vim/pack/dugan/start/vim-filebeagle"]
 	path = .vim/pack/dugan/start/vim-filebeagle
 	url = https://github.com/jeetsukumaran/vim-filebeagle.git
-[submodule ".vim/pack/dugan/start/python-compilers.vim"]
-	path = .vim/pack/dugan/start/python-compilers.vim
-	url = https://github.com/drgarcia1986/python-compilers.vim.git
 [submodule ".vim/pack/dugan/start/vim-dirvish"]
 	path = .vim/pack/dugan/start/vim-dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
@@ -58,3 +52,6 @@
 [submodule ".vim/pack/dugan/start/lightline-onedark"]
 	path = .vim/pack/dugan/start/lightline-onedark
 	url = https://github.com/NovaDev94/lightline-onedark.git
+[submodule ".vim/pack/dugan/start/vim-polyglot"]
+	path = .vim/pack/dugan/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot
