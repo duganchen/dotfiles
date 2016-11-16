@@ -167,11 +167,13 @@ if !has('gui') && has('termguicolors')
 	endif
 endif
 
+set background=dark
+
 if has('nvim') || has('mac')
 	let g:lightline.colorscheme = 'jellybeans'
 	colorscheme jellybeans
 else
-	let g:lightline.colorscheme = 'Dracula'
-	colorscheme dracula
+	let g:lightline.colorscheme = 'onedark'
+	let g:onedark_terminal_italics = 1
+	colorscheme onedark
 endif
-set background=dark
