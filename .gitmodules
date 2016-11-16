@@ -52,6 +52,3 @@
 [submodule ".vim/pack/dugan/start/lightline"]
 	path = .vim/pack/dugan/start/lightline
 	url = https://github.com/itchyny/lightline.vim.git
-[submodule ".vim/pack/dugan/start/seoul256"]
-	path = .vim/pack/dugan/start/seoul256
-	url = https://github.com/junegunn/seoul256.vim.git
