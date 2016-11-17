@@ -119,6 +119,9 @@ else
 	vmap <C-Down> ]egv
 endif
  
+nnoremap <silent> - :NERDTreeToggle<cr>
+nnoremap <silent> <F8> :TagbarToggle<cr>
+
 " https://www.reddit.com/r/vim/comments/45qe2g/unite_vs_ctrlp_in_2016/d00u7y4/
 " https://robots.thoughtbot.com/faster-grepping-in-vim
 let g:ctrlp_user_command = {
