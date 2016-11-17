@@ -3,75 +3,102 @@ if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
 endif
 
-packadd vim-devicons
+call plug#begin()
+Plug 'ajh17/VimCompletesMe'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'shirataki/lightline-onedark'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+call plug#end()
 
 set autoindent
 set autoread
-
+ 
 if !has('mac')
 	set clipboard^=unnamedplus,unnamed
 endif
-
+ 
 set infercase
-
+ 
 " Correct on Linux. Correct on OS X, AFAIK
 if !has('nvim')
 	set ttymouse=xterm2
 endif
-
+ 
 " Make sure this directory exists.
 set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
-
+ 
 let g:gutentags_cache_dir = $HOME . "/.cache/vim"
-
+ 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
 set textwidth=137
-
+ 
 set complete-=i
-
+ 
 set cscopetag
-
+ 
 set display=lastline
-
+ 
 set formatoptions+=j
-
+ 
 set hidden
-
+ 
 set laststatus=2
-
+ 
 set number
 set relativenumber
-
+ 
 set sessionoptions-=options
-
+ 
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
-
-set fillchars=vert:\│
+ 
 
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
-
+ 
 set shell=bash
-
+ 
 set shiftwidth=4
 set smartcase
 set smarttab
 set softtabstop=4
 set tabstop=4
-
+ 
 set ttyfast
-
+ 
 set viminfo^=!
-
+ 
 set path=.,**
-
+ 
 set visualbell
+ 
+set wildignore+=*.pyc,*.o
 
 set nowrap
+
+set fillchars=vert:\│
+
+" Ideas from here:
+" https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
+let &showbreak = '↪  '
+set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has("osx")
@@ -91,7 +118,7 @@ else
 	vmap <C-Up> [egv
 	vmap <C-Down> ]egv
 endif
-
+ 
 " https://www.reddit.com/r/vim/comments/45qe2g/unite_vs_ctrlp_in_2016/d00u7y4/
 " https://robots.thoughtbot.com/faster-grepping-in-vim
 let g:ctrlp_user_command = {
@@ -104,7 +131,7 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_user_command = {}
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_regexp = 1
-
+ 
 set noshowmode
 let g:lightline = {
 	\'component': {
@@ -121,16 +148,16 @@ let g:lightline = {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
 	\},
 \}
-
-
+ 
+ 
 function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
-
+ 
 function! MyFileformat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
-
+ 
 function! LightlineReadonly()
 	if &filetype == "help"
 		return ""
@@ -140,20 +167,20 @@ function! LightlineReadonly()
 		return ""
 	endif
 endfunction
-
+ 
 function! ColorSchemeChange()
 	if has('nvim')
 		highlight! Normal guibg=NONE
 		highlight! NonText guibg=NONE
 	endif
 endfunction
-
+ 
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
 	autocmd ColorScheme * call ColorSchemeChange()
 augroup END
-
+ 
 function! LightlineFugitive()
 	if exists('*fugitive#head')
 		let branch = fugitive#head()
@@ -161,7 +188,7 @@ function! LightlineFugitive()
 	endif
 	return ''
 endfunction
-
+ 
 if !has('gui') && has('termguicolors')
 	if !has('nvim')
 		" ^[ is a single character: Ctrl+V,<ESC>
@@ -169,17 +196,17 @@ if !has('gui') && has('termguicolors')
 		let &t_8f = "[38;2;%lu;%lu;%lum"
 		let &t_8b = "[48;2;%lu;%lu;%lum"
 	endif
-
+ 
 	set termguicolors
-
+ 
 	if !has('mac') && !has('nvim')
 		" Seems to be needed in transparent Termite.
 		set t_ut=
 	endif
 endif
-
+ 
 set background=dark
-
+ 
 if has('nvim') || has('mac')
 	colorscheme koehler
 else
