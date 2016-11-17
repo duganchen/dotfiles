@@ -89,6 +89,8 @@ set path=.,**
  
 set visualbell
  
+set wildignore+=*.pyc,*.o
+
 set nowrap
 
 set fillchars=vert:\│
