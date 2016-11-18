@@ -182,6 +182,7 @@ augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
 	autocmd ColorScheme * call ColorSchemeChange()
+	autocmd VimResized * wincmd =
 augroup END
  
 function! LightlineFugitive()
