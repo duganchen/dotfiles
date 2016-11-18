@@ -8,6 +8,7 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
@@ -17,7 +18,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -129,22 +129,6 @@ else
 	vmap <C-Down> ]egv
 endif
 
-nnoremap <silent> - :NERDTreeToggle<cr>
-nnoremap <silent> <F8> :TagbarToggle<cr>
-
-" https://www.reddit.com/r/vim/comments/45qe2g/unite_vs_ctrlp_in_2016/d00u7y4/
-" https://robots.thoughtbot.com/faster-grepping-in-vim
-let g:ctrlp_user_command = {
-	\'types': {
-		\1: ['.git', 'cd %s && git ls-files --others --cached --exclude-standard'],
-	\},
-	\'fallback': 'ag %s -l --nocolor -g ""'
-	\}
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_user_command = {}
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_regexp = 1
-
 set noshowmode
 let g:lightline = {
 	\'component': {
@@ -161,7 +145,6 @@ let g:lightline = {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
 	\},
 \}
-
 
 function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
