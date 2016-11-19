@@ -6,6 +6,7 @@ endif
 call plug#begin()
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
+Plug 'gcmt/taboo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'justinmk/vim-dirvish'
