@@ -11,6 +11,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'joshdick/onedark.vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
 Plug 'shirataki/lightline-onedark'
 Plug 'tpope/vim-commentary'
@@ -90,6 +91,8 @@ set wildignore+=*.pyc,*.o
 set nowrap
 
 set fillchars=vert:\│
+
+nmap <F8> :TagbarToggle<CR>
 
 " https://www.reddit.com/r/vim/comments/2zc8sy/poors_man_vimrooter_git_only_using_fugitive/
 
