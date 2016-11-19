@@ -7,6 +7,7 @@ call plug#begin()
 Plug 'Rip-Rip/clang_complete'
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
+Plug 'davidhalter/jedi-vim'
 Plug 'gcmt/taboo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
