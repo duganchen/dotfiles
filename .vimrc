@@ -4,6 +4,7 @@ if !has('nvim')
 endif
 
 call plug#begin()
+Plug 'Rip-Rip/clang_complete'
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
