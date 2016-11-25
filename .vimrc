@@ -14,8 +14,10 @@ Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'joshdick/onedark.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+Plug 'python-rope/ropevim'
 Plug 'sheerun/vim-polyglot'
 Plug 'shirataki/lightline-onedark'
+Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -23,6 +25,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
+" I also tend to use the Flake8 compiler plugin from here:
+" https://github.com/drgarcia1986/python-compilers.vim
 
 set autoindent
 set autoread
