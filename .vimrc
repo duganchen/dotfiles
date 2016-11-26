@@ -29,6 +29,14 @@ call plug#end()
 " I also tend to use the Flake8 compiler plugin from here:
 " https://github.com/drgarcia1986/python-compilers.vim
 
+" Settings:
+" CompilerSet makeprg=flake8\ %
+" CompilerSet errorformat=%E%f:%l:\ could\ not\ compile,
+"                         \%-Z%p^,
+"                         \%A%f:%l:%c:\ %t%n\ %m,
+"                         \%A%f:%l:\ %t%n\ %m,
+"                         \%-G%.%#
+
 set autoindent
 set autoread
 
