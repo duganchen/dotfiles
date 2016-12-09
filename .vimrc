@@ -15,6 +15,10 @@ Plug 'joshdick/onedark.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'python-rope/ropevim'
+
+" https://www.reddit.com/r/vim/comments/5h6xkl/vimcool_is_indeed_cool/
+Plug 'junegunn/vim-slash'
+
 Plug 'sheerun/vim-polyglot'
 Plug 'shirataki/lightline-onedark'
 Plug 'tmhedberg/SimpylFold'
@@ -216,10 +220,10 @@ if !has('gui') && has('termguicolors')
 
 	set termguicolors
 
-	if !has('mac') && !has('nvim')
-		" Seems to be needed in transparent Termite.
-		set t_ut=
-	endif
+	" if !has('mac') && !has('nvim')
+	" 	" Seems to be needed in transparent Termite.
+	" 	set t_ut=
+	" endif
 endif
 
 function! MyFilename()
