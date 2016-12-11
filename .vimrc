@@ -12,13 +12,11 @@ Plug 'gcmt/taboo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'joshdick/onedark.vim'
+Plug 'junegunn/vim-slash'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'python-rope/ropevim'
-
-" https://www.reddit.com/r/vim/comments/5h6xkl/vimcool_is_indeed_cool/
-Plug 'junegunn/vim-slash'
-
 Plug 'sheerun/vim-polyglot'
 Plug 'shirataki/lightline-onedark'
 Plug 'tmhedberg/SimpylFold'
