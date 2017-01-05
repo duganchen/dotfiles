@@ -19,6 +19,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'python-rope/ropevim'
 Plug 'sheerun/vim-polyglot'
 Plug 'shirataki/lightline-onedark'
+Plug 'sjl/gundo.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -112,6 +113,8 @@ set fillchars=vert:\│
 nmap <F8> :TagbarToggle<CR>
 
 nnoremap <leader>be :ls<cr>:b<space>
+
+nnoremap <F5> :GundoToggle<CR>
 
 " https://www.reddit.com/r/vim/comments/2zc8sy/poors_man_vimrooter_git_only_using_fugitive/
 
