@@ -111,6 +111,8 @@ set fillchars=vert:\│
 
 nmap <F8> :TagbarToggle<CR>
 
+nnoremap <leader>be :ls<cr>:b<space>
+
 " https://www.reddit.com/r/vim/comments/2zc8sy/poors_man_vimrooter_git_only_using_fugitive/
 
 function! OnBufEnter()
