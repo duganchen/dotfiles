@@ -202,6 +202,9 @@ augroup autocmds
 	autocmd BufEnter * call OnBufEnter()
 	autocmd BufLeave * call OnBufLeave()
 	autocmd VimResized * wincmd =
+
+	" The only .ac files I've had to read are configure.ac.
+	autocmd BufEnter,BufRead configure.ac set filetype=m4
 augroup END
 
 function! LightlineFugitive()
