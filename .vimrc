@@ -50,56 +50,34 @@ let g:gutentags_cache_dir = $HOME . "/.cache/vim"
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
 set textwidth=137
-
 set complete-=i
-
 set cscopetag
-
 set display=lastline
-
 set formatoptions+=j
-
 set hidden
-
 set laststatus=2
-
 set number
 set relativenumber
-
 set sessionoptions-=options
-
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
-
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
-
 set shell=bash
-
 set shiftwidth=4
 set smartcase
 set smarttab
 set softtabstop=4
 set tabstop=4
-
 set ttyfast
-
 set viminfo^=!
-
 set path=.,**
-
 set visualbell
-
 set wildignore+=*.pyc,*.o
-
 set nowrap
 
-set fillchars=vert:\│
-
 nmap <F8> :TagbarToggle<CR>
-
 nnoremap <leader>be :ls<cr>:b<space>
-
 nnoremap <F5> :GundoToggle<CR>
 
 " https://www.reddit.com/r/vim/comments/2zc8sy/poors_man_vimrooter_git_only_using_fugitive/
@@ -173,3 +151,6 @@ function! LightlineReadonly()
 		return ""
 	endif
 endfunction
+
+set background=dark
+colorscheme koehler
