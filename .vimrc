@@ -11,14 +11,12 @@ Plug 'davidhalter/jedi-vim'
 Plug 'gcmt/taboo.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'joshdick/onedark.vim'
 Plug 'junegunn/vim-slash'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'python-rope/ropevim'
 Plug 'sheerun/vim-polyglot'
-Plug 'shirataki/lightline-onedark'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -27,17 +25,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
-
-" I also tend to use the Flake8 compiler plugin from here:
-" https://github.com/drgarcia1986/python-compilers.vim
-
-" Settings:
-" CompilerSet makeprg=flake8\ %
-" CompilerSet errorformat=%E%f:%l:\ could\ not\ compile,
-"                         \%-Z%p^,
-"                         \%A%f:%l:%c:\ %t%n\ %m,
-"                         \%A%f:%l:\ %t%n\ %m,
-"                         \%-G%.%#
 
 set autoindent
 set autoread
@@ -116,7 +103,6 @@ nnoremap <leader>be :ls<cr>:b<space>
 nnoremap <F5> :GundoToggle<CR>
 
 " https://www.reddit.com/r/vim/comments/2zc8sy/poors_man_vimrooter_git_only_using_fugitive/
-
 function! OnBufEnter()
 	if exists('b:last_cwd')
 		execute 'lcd' b:last_cwd
@@ -187,64 +173,3 @@ function! LightlineReadonly()
 		return ""
 	endif
 endfunction
-
-function! ColorSchemeChange()
-	if has('nvim')
-		highlight! Normal guibg=NONE
-		highlight! NonText guibg=NONE
-	endif
-endfunction
-
-augroup autocmds
-	autocmd!
-	autocmd FileType vifm set filetype=vim
-	autocmd ColorScheme * call ColorSchemeChange()
-	autocmd BufEnter * call OnBufEnter()
-	autocmd BufLeave * call OnBufLeave()
-	autocmd VimResized * wincmd =
-
-	" The only .ac files I've had to read are configure.ac.
-	autocmd BufEnter,BufRead configure.ac set filetype=m4
-augroup END
-
-function! LightlineFugitive()
-	if exists('*fugitive#head')
-		let branch = fugitive#head()
-		return branch !=# '' ? ' '.branch : ''
-	endif
-	return ''
-endfunction
-
-if !has('gui') && has('termguicolors')
-	if !has('nvim')
-		" ^[ is a single character: Ctrl+V,<ESC>
-		" This is for tmux.
-		let &t_8f = "[38;2;%lu;%lu;%lum"
-		let &t_8b = "[48;2;%lu;%lu;%lum"
-	endif
-
-	set termguicolors
-
-	" if !has('mac') && !has('nvim')
-	" 	" Seems to be needed in transparent Termite.
-	" 	set t_ut=
-	" endif
-endif
-
-if has("mac")
-	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-end
-
-function! MyFilename()
-	return bufnr('%') . ':' . fnamemodify(expand('%:p'), ':~:.')
-endfunction
-
-set background=dark
-
-if has('nvim') || has('mac')
-	colorscheme koehler
-else
-	let g:lightline.colorscheme = 'onedark'
-	let g:onedark_terminal_italics = 1
-	colorscheme onedark
-endif
