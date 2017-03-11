@@ -52,6 +52,7 @@ set display=lastline
 set formatoptions+=j
 set hidden
 set laststatus=2
+set noshowmode
 set number
 set relativenumber
 set sessionoptions-=options
@@ -113,22 +114,9 @@ else
 	vmap <C-Down> ]egv
 endif
 
-set noshowmode
-let g:lightline = {
-	\'component': {
-		\'lineinfo': ' %3l:%-2v',
-	\},
-	\'component_function': {
-		\'filename': 'MyFilename',
-		\'filetype': 'MyFiletype',
-		\'fileformat': 'MyFileformat',
-		\'readonly': 'LightlineReadonly',
-		\'fugitive': 'LightlineFugitive',
-	\},
-	\'active': {
-		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
-	\},
-\}
+function! MyFilename()
+	return bufnr('%') . ':' . fnamemodify(expand('%:p'), ':~:.')
+endfunction
 
 function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
@@ -147,6 +135,36 @@ function! LightlineReadonly()
 		return ""
 	endif
 endfunction
+
+function! LightlineFugitive()
+	if exists('*fugitive#head')
+		let branch = fugitive#head()
+		return branch !=# '' ? ' '.branch : ''
+	endif
+	return ''
+endfunction
+
+let g:lightline = {
+	\'component': {
+		\'lineinfo': ' %3l:%-2v',
+	\},
+	\'component_function': {
+		\'filename': 'MyFilename',
+		\'filetype': 'MyFiletype',
+		\'fileformat': 'MyFileformat',
+		\'readonly': 'LightlineReadonly',
+		\'fugitive': 'LightlineFugitive',
+	\},
+	\'active': {
+		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
+	\},
+\}
+
+augroup autocmds
+	autocmd!
+	autocmd FileType vifm set filetype=vim
+	autocmd BufEnter,BufNew configure.ac set filetype=m4
+augroup END
 
 set background=dark
 colorscheme koehler
