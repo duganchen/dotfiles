@@ -7,7 +7,9 @@ call plug#begin()
 Plug 'Rip-Rip/clang_complete'
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'davidhalter/jedi-vim'
+Plug 'drgarcia1986/python-compilers.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'junegunn/vim-slash'
@@ -15,6 +17,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -46,6 +49,7 @@ let g:gutentags_cache_dir = $HOME . "/.cache/vim"
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
 set textwidth=137
+
 set complete-=i
 set cscopetag
 set display=lastline
@@ -75,20 +79,6 @@ set nowrap
 
 nmap <F8> :TagbarToggle<CR>
 nnoremap <leader>be :ls<cr>:b<space>
-nnoremap <F5> :GundoToggle<CR>
-
-" https://www.reddit.com/r/vim/comments/2zc8sy/poors_man_vimrooter_git_only_using_fugitive/
-function! OnBufEnter()
-	if exists('b:last_cwd')
-		execute 'lcd' b:last_cwd
-	else
-		silent! Glcd
-	endif
-endfunction
-
-function! OnBufLeave()
-	let b:last_cwd = getcwd()
-endfunction
 
 " Ideas from here:
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
@@ -159,6 +149,10 @@ let g:lightline = {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
 	\},
 \}
+
+if has("mac")
+	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+end
 
 augroup autocmds
 	autocmd!
