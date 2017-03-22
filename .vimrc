@@ -15,6 +15,7 @@ Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -159,6 +160,14 @@ let g:lightline = {
 if has("mac")
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 end
+
+" For startify. From the vim-devicons README
+let entry_format = "'   ['. index .']'. repeat(' ', (3 - strlen(index)))"
+if exists('*WebDevIconsGetFileTypeSymbol')  " support for vim-devicons
+  let entry_format .= ". WebDevIconsGetFileTypeSymbol(entry_path) .' '.  entry_path"
+else
+  let entry_format .= '. entry_path'
+endif
 
 augroup autocmds
 	autocmd!
