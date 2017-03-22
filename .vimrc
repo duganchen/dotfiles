@@ -63,8 +63,11 @@ set relativenumber
 set sessionoptions-=options
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
-set grepprg=ag\ --vimgrep\ $*
-set grepformat=%f:%l:%c:%m
+if executable('rg')
+	set grepprg=rg\ --vimgrep
+elseif executable('ag')
+	set grepprg=ag\ --vimgrep
+endif
 set shell=bash
 set shiftwidth=4
 set smartcase
