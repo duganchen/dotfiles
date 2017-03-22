@@ -149,6 +149,8 @@ let g:lightline = {
 	\'active': {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
 	\},
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' }
 \}
 
 if has("mac")
