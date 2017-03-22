@@ -162,4 +162,11 @@ augroup autocmds
 augroup END
 
 set background=dark
-colorscheme koehler
+" Idea is:
+" evening for opaque backgrounds,
+" koheler for transparent backgrounds
+if has('gui') || &termguicolors
+	colorscheme evening
+else
+	colorscheme koehler
+endif
