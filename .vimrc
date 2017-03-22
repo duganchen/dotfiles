@@ -1,3 +1,6 @@
+" This is mainly for non-neo vim and gvim, using Python 3, on
+" OSX and Linux. RipGrep and a patch NERD font are expected.
+
 if !has('nvim')
 	unlet! skip_defaults_vim
 	source $VIMRUNTIME/defaults.vim
@@ -8,6 +11,7 @@ Plug 'Rip-Rip/clang_complete'
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'drgarcia1986/python-compilers.vim'
 Plug 'itchyny/lightline.vim'
@@ -16,6 +20,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
+Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -83,7 +88,6 @@ set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
 set nowrap
 
 nmap <F8> :TagbarToggle<CR>
-nnoremap <leader>be :ls<cr>:b<space>
 
 " Ideas from here:
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
@@ -164,10 +168,27 @@ end
 " For startify. From the vim-devicons README
 let entry_format = "'   ['. index .']'. repeat(' ', (3 - strlen(index)))"
 if exists('*WebDevIconsGetFileTypeSymbol')  " support for vim-devicons
-  let entry_format .= ". WebDevIconsGetFileTypeSymbol(entry_path) .' '.  entry_path"
+	let entry_format .= ". WebDevIconsGetFileTypeSymbol(entry_path) .' '.  entry_path"
 else
-  let entry_format .= '. entry_path'
+	let entry_format .= '. entry_path'
 endif
+
+let g:ctrlp_user_command = {
+	\'types': {
+		\1: ['.git', 'cd %s && git ls-files'],
+		\2: ['.hg', 'hg --cwd %s locate -I .'],
+	\},
+\} 
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+nnoremap <leader>b :CtrlPBuffer<cr>
+if executable('rg')
+	let g:ctrlp_user_command.fallback = 'rg %s --files --color=never --glob ""'
+elseif executable('ag')
+	let g:ctrlp_user_command.fallback = 'ag %s -l --nocolor -g ""'
+else
+	let g:ctrlp_user_command.fallback = 'find %s -type f'
+end
+let g:ctrlp_use_caching = 0
 
 augroup autocmds
 	autocmd!
