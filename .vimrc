@@ -82,7 +82,6 @@ set softtabstop=4
 set tabstop=4
 set ttyfast
 set viminfo^=!
-set path=.,**
 set visualbell
 set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
 set nowrap
