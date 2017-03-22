@@ -75,7 +75,7 @@ set ttyfast
 set viminfo^=!
 set path=.,**
 set visualbell
-set wildignore+=*.pyc,*.o
+set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
 set nowrap
 
 nmap <F8> :TagbarToggle<CR>
