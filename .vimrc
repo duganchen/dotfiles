@@ -181,6 +181,7 @@ let g:ctrlp_user_command = {
 \} 
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 nnoremap <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>o :CtrlPMRUFiles<cr>
 if executable('rg')
 	let g:ctrlp_user_command.fallback = 'rg %s --files --color=never --glob ""'
 elseif executable('ag')
