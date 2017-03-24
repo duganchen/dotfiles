@@ -21,7 +21,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
-Plug 'neovim/neovim'
+Plug 'neomake/neomake'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
