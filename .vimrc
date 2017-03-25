@@ -194,7 +194,7 @@ else
 end
 let g:ctrlp_use_caching = 0
 
-function FileTypeJavascript
+function FileTypeJavascript()
 	set expandtab
 endfunction
 
