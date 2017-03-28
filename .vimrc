@@ -201,7 +201,6 @@ endfunction
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
-	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
 	autocmd FileType Javascript call FileTypeJavascript()
 augroup END
