@@ -14,6 +14,7 @@ Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
@@ -183,7 +184,6 @@ let g:ctrlp_user_command = {
 	\},
 \} 
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>o :CtrlPMRUFiles<cr>
 if executable('rg')
 	let g:ctrlp_user_command.fallback = 'rg %s --files --color=never --glob ""'
@@ -197,6 +197,7 @@ let g:ctrlp_use_caching = 0
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
+	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
 augroup END
 
