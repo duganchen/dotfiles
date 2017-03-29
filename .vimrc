@@ -200,7 +200,6 @@ let g:ctrlp_use_caching = 0
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
-	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
 augroup END
 
