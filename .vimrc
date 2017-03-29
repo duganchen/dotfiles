@@ -24,10 +24,13 @@ Plug 'mhinz/vim-startify'
 Plug 'neomake/neomake'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
 Plug 'sheerun/vim-polyglot'
+Plug 'thirtythreeforty/lessspace.vim'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'ryanoasis/vim-devicons'
@@ -194,15 +197,11 @@ else
 end
 let g:ctrlp_use_caching = 0
 
-function FileTypeJavascript()
-	set expandtab
-endfunction
-
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
+	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
-	autocmd FileType Javascript call FileTypeJavascript()
 augroup END
 
 set background=dark
