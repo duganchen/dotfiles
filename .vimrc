@@ -197,9 +197,12 @@ else
 end
 let g:ctrlp_use_caching = 0
 
+let g:neomake_open_list = 1
+
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
+	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
 augroup END
 
