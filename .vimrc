@@ -81,9 +81,6 @@ endif
 set shell=bash
 set shiftwidth=4
 set smartcase
-set smarttab
-set softtabstop=4
-set tabstop=4
 set ttyfast
 set viminfo^=!
 set visualbell
