@@ -18,6 +18,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
@@ -209,6 +210,8 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
 
 let g:neomake_open_list = 1
+
+let g:rainbow_active = 1
 
 augroup autocmds
 	autocmd!
