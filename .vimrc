@@ -114,15 +114,11 @@ else
 	vmap <C-Down> ]egv
 endif
 
-function! MyFilename()
-	return bufnr('%') . ':' . fnamemodify(expand('%:p'), ':~:.')
-endfunction
-
-function! MyFiletype()
+function! LightlineFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
-function! MyFileformat()
+function! LightlineFileformat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
@@ -144,14 +140,27 @@ function! LightlineFugitive()
 	return ''
 endfunction
 
+function! LightlineModified()
+	if &filetype == "help"
+		return ""
+	elseif &modified
+		return "+"
+	elseif &modifiable
+		return ""
+	else
+		return ""
+	endif
+endfunction
+
 let g:lightline = {
 	\'component': {
+		\'filename': '%n:%t',
 		\'lineinfo': ' %3l:%-2v',
 	\},
 	\'component_function': {
-		\'filename': 'MyFilename',
-		\'filetype': 'MyFiletype',
-		\'fileformat': 'MyFileformat',
+		\'filetype': 'LightlineFiletype',
+		\'fileformat': 'LightlineFileformat',
+		\'modified': 'LightlineModified',
 		\'readonly': 'LightlineReadonly',
 		\'fugitive': 'LightlineFugitive',
 	\},
@@ -183,7 +192,7 @@ let g:ctrlp_user_command = {
 		\1: ['.git', 'cd %s && git ls-files'],
 		\2: ['.hg', 'hg --cwd %s locate -I .'],
 	\},
-\} 
+\}
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 nnoremap <leader>o :CtrlPMRUFiles<cr>
 if executable('rg')
