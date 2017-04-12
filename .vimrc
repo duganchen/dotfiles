@@ -157,17 +157,18 @@ let g:lightline = {
 		\'filename': '%n:%t',
 		\'lineinfo': ' %3l:%-2v',
 	\},
-	\'component_expand': {'sleuth': 'SleuthIndicator',},
 	\'component_function': {
 		\'filetype': 'LightlineFiletype',
 		\'fileformat': 'LightlineFileformat',
 		\'modified': 'LightlineModified',
 		\'readonly': 'LightlineReadonly',
 		\'fugitive': 'LightlineFugitive',
+		\'gutentags': 'gutentags#statusline',
+		\'sleuth': 'SleuthIndicator',
 	\},
 	\'active': {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
-		\'right': [ [ 'sleuth', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
+		\'right': [ [ 'sleuth', 'gutentags', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
 	\}
 \}
 
