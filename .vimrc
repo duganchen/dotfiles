@@ -157,6 +157,7 @@ let g:lightline = {
 		\'filename': '%n:%t',
 		\'lineinfo': ' %3l:%-2v',
 	\},
+	\'component_expand': {'sleuth': 'SleuthIndicator',},
 	\'component_function': {
 		\'filetype': 'LightlineFiletype',
 		\'fileformat': 'LightlineFileformat',
@@ -166,6 +167,7 @@ let g:lightline = {
 	\},
 	\'active': {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
+		\'right': [ [ 'sleuth', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
 	\}
 \}
 
