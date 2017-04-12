@@ -80,9 +80,7 @@ elseif executable('ag')
 	set grepprg=ag\ --vimgrep
 endif
 set shell=bash
-set shiftwidth=4
 set smartcase
-set tabstop=4
 set ttyfast
 set viminfo^=!
 set visualbell
