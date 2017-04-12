@@ -114,8 +114,14 @@ else
 	vmap <C-Down> ]egv
 endif
 
+" https://github.com/itchyny/lightline.vim/issues/58#issuecomment-38255510
 function! MyFilename()
-	return bufnr('%') . ':' . fnamemodify(expand('%:p'), ':~:.')
+	let fname = expand('%:t')
+	let nr = bufnr('')
+	return nr . ':' . (fname == 'ControlP' ? g:lightline.ctrlp_item :
+				\ ('' != MyReadonly() ? MyReadonly() . ' ' : '')
+				\ ('' != fname ? fname : '[No Name]')
+				\ ('' != MyModified() ? ' ' . MyModified() : ''))
 endfunction
 
 function! MyFiletype()
