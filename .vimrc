@@ -139,6 +139,20 @@ function! LightlineFugitive()
 	return ''
 endfunction
 
+function! LightlineMode()
+	let fname = expand('%:t')
+
+	if fname =~ 'Tagbar'
+		return 'Tagbar'
+	endif
+
+	if fname == 'ControlP'
+		return 'CtrlP'
+	endif
+
+	return lightline#mode()
+endfunction
+
 function! LightlineModified()
 	if &filetype == "help"
 		return ""
@@ -151,14 +165,70 @@ function! LightlineModified()
 	endif
 endfunction
 
+
+function! LightlineFilename()
+	let fname = expand('%:t')
+	let nr = bufnr('')
+
+	if fname == 'ControlP'
+		return g:lightline.ctrlp_item
+	endif
+
+	if fname =~ 'Tagbar'
+		return g:lightline.fname
+	endif
+
+	if fname == ''
+		return nr . ':' . '[No Name]'
+	endif
+
+	return nr . ':' . fname
+endfunction
+
+function! CtrlPMark()
+	if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+		call lightline#link('iR'[g:lightline.ctrlp_regex])
+		return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+					\ , g:lightline.ctrlp_next], 0)
+	else
+		return ''
+	endif
+endfunction
+
+let g:ctrlp_status_func = {
+			\ 'main': 'CtrlPStatusFunc_1',
+			\ 'prog': 'CtrlPStatusFunc_2',
+			\ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+	let g:lightline.ctrlp_regex = a:regex
+	let g:lightline.ctrlp_prev = a:prev
+	let g:lightline.ctrlp_item = a:item
+	let g:lightline.ctrlp_next = a:next
+	return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+	return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+	let g:lightline.fname = a:fname
+	return lightline#statusline(0)
+endfunction
+
 let g:lightline = {
 	\'component': {
-		\'filename': '%n:%t',
 		\'lineinfo': ' %3l:%-2v',
 	\},
 	\'component_function': {
+		\'ctrlpmark': 'CtrlPMark',
 		\'filetype': 'LightlineFiletype',
 		\'fileformat': 'LightlineFileformat',
+		\'filename': 'LightlineFilename',
+		\'mode': 'LightlineMode',
 		\'modified': 'LightlineModified',
 		\'readonly': 'LightlineReadonly',
 		\'fugitive': 'LightlineFugitive',
@@ -166,7 +236,7 @@ let g:lightline = {
 		\'sleuth': 'SleuthIndicator',
 	\},
 	\'active': {
-		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] ],
+		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] , [ 'ctrlpmark' ] ],
 		\'right': [ [ 'sleuth', 'gutentags', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
 	\}
 \}
@@ -204,8 +274,8 @@ elseif executable('ag')
 else
 	let g:ctrlp_user_command.fallback = 'find %s -type f'
 end
-let g:ctrlp_use_caching = 0
 let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
+let g:ctrlp_clear_cache_on_exit = 1
 
 let g:neomake_open_list = 1
 
