@@ -132,6 +132,10 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineFugitive()
+	if expand('%:t') =~ 'Tagbar'
+		return ''
+	endif
+
 	if exists('*fugitive#head')
 		let branch = fugitive#head()
 		return branch !=# '' ? ' '.branch : ''
