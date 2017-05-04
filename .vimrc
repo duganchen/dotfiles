@@ -281,8 +281,6 @@ end
 let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
 let g:ctrlp_clear_cache_on_exit = 1
 
-let g:neomake_open_list = 1
-
 let g:rainbow_active = 1
 
 augroup autocmds
