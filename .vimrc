@@ -22,7 +22,6 @@ Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
-Plug 'neomake/neomake'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
 Plug 'sheerun/vim-polyglot'
 Plug 'thirtythreeforty/lessspace.vim'
@@ -35,6 +34,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'ryanoasis/vim-devicons'
+Plug 'w0rp/ale'
 call plug#end()
 
 set autoindent
