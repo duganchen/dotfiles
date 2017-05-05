@@ -238,10 +238,11 @@ let g:lightline = {
 		\'fugitive': 'LightlineFugitive',
 		\'gutentags': 'gutentags#statusline',
 		\'sleuth': 'SleuthIndicator',
+		\'ale': 'ale#statusline#Status',
 	\},
 	\'active': {
 		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] , [ 'ctrlpmark' ] ],
-		\'right': [ [ 'sleuth', 'gutentags', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
+		\'right': [ [ 'sleuth', 'gutentags', 'lineinfo', 'ale' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
 	\}
 \}
 
