@@ -24,6 +24,7 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
 Plug 'sheerun/vim-polyglot'
+Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -283,6 +284,9 @@ let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
 let g:ctrlp_clear_cache_on_exit = 1
 
 let g:rainbow_active = 1
+
+let g:ale_sign_column_always = 1
+let g:ale_linters = {'python': ['mypy'],}
 
 augroup autocmds
 	autocmd!
