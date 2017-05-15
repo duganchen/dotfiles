@@ -288,6 +288,7 @@ let g:rainbow_active = 1
 let g:ale_sign_column_always = 1
 let g:ale_linters = {'python': ['mypy'],}
 
+
 augroup autocmds
 	autocmd!
 	autocmd FileType vifm set filetype=vim
