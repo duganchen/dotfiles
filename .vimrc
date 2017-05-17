@@ -16,7 +16,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vim-slash'
-Plug 'justinmk/vim-dirvish'
+   `l``Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
@@ -291,9 +291,10 @@ let g:ale_linters = {'python': ['mypy'],}
 
 augroup autocmds
 	autocmd!
-	autocmd FileType vifm set filetype=vim
+	autocmd FileType vifm setlocal filetype=vim
 	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
+	autocmd FileType qf setlocal nobuflisted
 augroup END
 
 set background=dark
