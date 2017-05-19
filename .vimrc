@@ -16,7 +16,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vim-slash'
-   `l``Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
@@ -286,8 +286,8 @@ let g:ctrlp_clear_cache_on_exit = 1
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
-let g:ale_linters = {'python': ['mypy'],}
-
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['mypy'],}
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 augroup autocmds
 	autocmd!
@@ -295,6 +295,7 @@ augroup autocmds
 	autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
 	autocmd BufEnter,BufNew configure.ac set filetype=m4
 	autocmd FileType qf setlocal nobuflisted
+	autocmd BufEnter,BufNew .tern_project set ft=json
 augroup END
 
 set background=dark
