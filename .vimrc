@@ -1,8 +1,10 @@
+scriptencoding utf-8
+
 " This is mainly for non-neo vim and gvim, using Python 3, on
 " OSX and Linux. RipGrep and a patch NERD font are expected.
 
 if !has('nvim')
-	unlet! skip_defaults_vim
+	unlet! g:skip_defaults_vim
 	source $VIMRUNTIME/defaults.vim
 endif
 
@@ -57,7 +59,7 @@ set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 
-let g:gutentags_cache_dir = $HOME . "/.cache/vim"
+let g:gutentags_cache_dir = $HOME . '/.cache/vim'
 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=138
@@ -96,7 +98,7 @@ let &showbreak = '↪  '
 set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
-if has("osx")
+if has('osx')
 	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
 	nmap ˚ [e
 	nmap ∆ ]e
@@ -123,35 +125,44 @@ function! LightlineFileformat()
 endfunction
 
 function! LightlineReadonly()
-	if &filetype == "help"
-		return ""
+	if &filetype ==# 'help'
+		return ''
 	elseif &readonly
 		return ''
 	else
-		return ""
+		return ''
 	endif
 endfunction
 
 function! LightlineFugitive()
-	if expand('%:t') =~ 'Tagbar'
+	if expand('%:t') =~# 'Tagbar'
 		return ''
 	endif
 
-	if exists('*fugitive#head')
-		let branch = fugitive#head()
-		return branch !=# '' ? ' '.branch : ''
+	let l:status = fugitive#statusline()
+	if l:status ==# ''
+		return l:status
 	endif
-	return ''
+
+	" [Git:6733b9bc(master)]
+	let l:start = stridx(l:status, ':')
+	let l:end = stridx(l:status, ']')
+	if l:start == -1
+		" [Git(master)]
+		let l:start = stridx(l:status, '(')
+		let l:end = stridx(l:status, ')')
+	endif
+	return ' '. strpart(l:status, l:start + 1, l:end - l:start - 1)
 endfunction
 
 function! LightlineMode()
-	let fname = expand('%:t')
+	let l:fname = expand('%:t')
 
-	if fname =~ 'Tagbar'
+	if l:fname =~# 'Tagbar'
 		return 'Tagbar'
 	endif
 
-	if fname == 'ControlP'
+	if l:fname ==# 'ControlP'
 		return 'CtrlP'
 	endif
 
@@ -159,39 +170,37 @@ function! LightlineMode()
 endfunction
 
 function! LightlineModified()
-	if &filetype == "help"
-		return ""
+	if &filetype ==# 'help'
+		return ''
 	elseif &modified
-		return "+"
-	elseif &modifiable
-		return ""
+		return '+'
 	else
-		return ""
+		return ''
 	endif
 endfunction
 
 
 function! LightlineFilename()
-	let fname = expand('%:t')
-	let nr = bufnr('')
+	let l:fname = expand('%:t')
+	let l:nr = bufnr('')
 
-	if fname == 'ControlP'
+	if l:fname ==# 'ControlP'
 		return g:lightline.ctrlp_item
 	endif
 
-	if fname =~ 'Tagbar'
+	if l:fname =~# 'Tagbar'
 		return g:lightline.fname
 	endif
 
-	if fname == ''
-		return nr . ':' . '[No Name]'
+	if l:fname ==# ''
+		return l:nr . ':' . '[No Name]'
 	endif
 
-	return nr . ':' . fname
+	return l:nr . ':' . l:fname
 endfunction
 
 function! CtrlPMark()
-	if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+	if expand('%:t') =~# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
 		call lightline#link('iR'[g:lightline.ctrlp_regex])
 		return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
 					\ , g:lightline.ctrlp_next], 0)
