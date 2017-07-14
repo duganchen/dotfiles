@@ -96,7 +96,7 @@ nmap <F8> :TagbarToggle<CR>
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
 let &showbreak = '↪  '
 set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
-set fillchars=vert:\ ,fold:-
+set fillchars=' '
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has('osx')
@@ -301,6 +301,7 @@ augroup autocmds
 	autocmd FileType qf setlocal nobuflisted
 	autocmd BufEnter,BufNew .tern_project set ft=json
 	autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2
+	autocmd FileType python setlocal foldmethod=indent
 augroup END
 
 set background=dark
