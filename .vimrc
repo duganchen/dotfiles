@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 " This is mainly for non-neo vim and gvim, using Python 3, on
-" OSX and Linux. RipGrep and a patch NERD font are expected.
+" OSX and Linux. RipGrep and a NERD font are expected.
 
 if !has('nvim')
 	unlet! g:skip_defaults_vim
@@ -84,6 +84,7 @@ elseif executable('ag')
 	set grepprg=ag\ --vimgrep
 endif
 set shell=bash
+set showmatch
 set smartcase
 set ttyfast
 set viminfo^=!
