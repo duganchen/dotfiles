@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 " This is mainly for non-neo vim and gvim, using Python 3, on
-" OSX and Linux. RipGrep and a patch NERD font are expected.
+" OSX and Linux. RipGrep and a NERD font are expected.
 
 if !has('nvim')
 	unlet! g:skip_defaults_vim
@@ -42,7 +42,9 @@ call plug#end()
 set autoindent
 set autoread
 
-if !has('mac')
+if has('mac')
+	set clipboard=unnamed
+else
 	set clipboard^=unnamedplus,unnamed
 endif
 
@@ -61,7 +63,7 @@ set undodir=~/.cache/vim//
 let g:gutentags_cache_dir = $HOME . '/.cache/vim'
 
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
-set colorcolumn=138
+set colorcolumn=+1
 set textwidth=137
 
 set complete-=i
@@ -82,6 +84,7 @@ elseif executable('ag')
 	set grepprg=ag\ --vimgrep
 endif
 set shell=bash
+set showmatch
 set smartcase
 set ttyfast
 set viminfo^=!
