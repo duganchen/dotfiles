@@ -43,9 +43,7 @@ call plug#end()
 set autoindent
 set autoread
 
-if has('mac')
-	set clipboard=unnamed
-else
+if !has('mac')
 	set clipboard^=unnamedplus,unnamed
 endif
 
@@ -261,10 +259,8 @@ let g:lightline = {
 \}
 
 " Having trouble with these on a Mac right now.
-if has('unix') && !has('mac')
-	let g:lightline.separator = { 'left': '', 'right': '' }
-	let g:lightline.subseparator = { 'left': '', 'right': '' }
-endif
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
@@ -306,7 +302,6 @@ augroup autocmds
 	autocmd BufEnter,BufNew .tern_project set ft=json
 	autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2 equalprg=prettier
 	autocmd FileType python setlocal foldmethod=indent equalprg=yapf
-	autocmd FileType c,cpp setlocal equalprg=clang-format
 	autocmd filetype c,cpp setlocal equalprg=clang-format\ -style=file -assume-filename=%
 augroup END
 
