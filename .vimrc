@@ -16,7 +16,6 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
-Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
@@ -37,6 +36,8 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'trevordmiller/nova-vim'
+Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -70,7 +71,6 @@ set cscopetag
 set display=lastline
 set formatoptions+=j
 set hidden
-set laststatus=2
 set noshowmode
 set number
 set relativenumber
@@ -118,150 +118,6 @@ else
 	vmap <C-Down> ]egv
 endif
 
-function! LightlineFiletype()
-	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! LightlineFileformat()
-	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
-function! LightlineReadonly()
-	if &filetype ==# 'help'
-		return ''
-	elseif &readonly
-		return ''
-	else
-		return ''
-	endif
-endfunction
-
-function! LightlineFugitive()
-	if expand('%:t') =~# 'Tagbar'
-		return ''
-	endif
-
-	let l:status = fugitive#statusline()
-	if l:status ==# ''
-		return l:status
-	endif
-
-	" [Git:6733b9bc(master)]
-	let l:start = stridx(l:status, ':')
-	let l:end = stridx(l:status, ']')
-	if l:start == -1
-		" [Git(master)]
-		let l:start = stridx(l:status, '(')
-		let l:end = stridx(l:status, ')')
-	endif
-	return ' '. strpart(l:status, l:start + 1, l:end - l:start - 1)
-endfunction
-
-function! LightlineMode()
-	let l:fname = expand('%:t')
-
-	if l:fname =~# 'Tagbar'
-		return 'Tagbar'
-	endif
-
-	if l:fname ==# 'ControlP'
-		return 'CtrlP'
-	endif
-
-	return lightline#mode()
-endfunction
-
-function! LightlineModified()
-	if &filetype ==# 'help'
-		return ''
-	elseif &modified
-		return '+'
-	else
-		return ''
-	endif
-endfunction
-
-
-function! LightlineFilename()
-	let l:fname = expand('%:t')
-	let l:nr = bufnr('')
-
-	if l:fname ==# 'ControlP'
-		return g:lightline.ctrlp_item
-	endif
-
-	if l:fname =~# 'Tagbar'
-		return g:lightline.fname
-	endif
-
-	if l:fname ==# ''
-		return l:nr . ':' . '[No Name]'
-	endif
-
-	return l:nr . ':' . l:fname
-endfunction
-
-function! CtrlPMark()
-	if expand('%:t') =~# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-		call lightline#link('iR'[g:lightline.ctrlp_regex])
-		return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-					\ , g:lightline.ctrlp_next], 0)
-	else
-		return ''
-	endif
-endfunction
-
-let g:ctrlp_status_func = {
-			\ 'main': 'CtrlPStatusFunc_1',
-			\ 'prog': 'CtrlPStatusFunc_2',
-			\ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-	let g:lightline.ctrlp_regex = a:regex
-	let g:lightline.ctrlp_prev = a:prev
-	let g:lightline.ctrlp_item = a:item
-	let g:lightline.ctrlp_next = a:next
-	return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-	return lightline#statusline(0)
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-	let g:lightline.fname = a:fname
-	return lightline#statusline(0)
-endfunction
-
-let g:lightline = {
-	\'component': {
-		\'lineinfo': ' %3l:%-2v',
-	\},
-	\'component_function': {
-		\'ctrlpmark': 'CtrlPMark',
-		\'filetype': 'LightlineFiletype',
-		\'fileformat': 'LightlineFileformat',
-		\'filename': 'LightlineFilename',
-		\'mode': 'LightlineMode',
-		\'modified': 'LightlineModified',
-		\'readonly': 'LightlineReadonly',
-		\'fugitive': 'LightlineFugitive',
-		\'gutentags': 'gutentags#statusline',
-		\'sleuth': 'SleuthIndicator',
-		\'ale': 'ale#statusline#Status',
-	\},
-	\'active': {
-		\'left': [  [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'modified' ] , [ 'ctrlpmark' ] ],
-		\'right': [ [ 'sleuth', 'gutentags', 'lineinfo', 'ale' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ],
-	\}
-\}
-
-" Having trouble with these on a Mac right now.
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
-
 if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 end
@@ -288,10 +144,12 @@ let g:ctrlp_clear_cache_on_exit = 1
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
-let g:ale_linters = {'javascript': ['eslint'], 'python': ['mypy'], 'bash': []}
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['mypy']}
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 let g:startify_change_to_dir = 0
+
+let g:airline_powerline_fonts = 1
 
 augroup autocmds
 	autocmd!
@@ -310,7 +168,9 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 set termguicolors
-set background=dark
-let g:nord_italic_comments = 1
-colorscheme nord
-let g:lightline.colorscheme = 'nord'
+if has('mac') || has('gui_running')
+	colorscheme nova
+else
+	let g:nord_italic_comments = 1
+	colorscheme nord
+endif
