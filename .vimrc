@@ -10,9 +10,11 @@ endif
 
 call plug#begin()
 Plug 'Rip-Rip/clang_complete'
-Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'ajh17/VimCompletesMe'
+Plug 'alnjxn/estilo-nova'
+Plug 'arcticicestudio/nord-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
@@ -24,6 +26,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
+Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'thirtythreeforty/lessspace.vim'
@@ -35,7 +38,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'ryanoasis/vim-devicons'
+Plug 'trevordmiller/nova-vim'
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -304,15 +307,22 @@ augroup autocmds
 	autocmd FileType qf setlocal nobuflisted
 	autocmd BufEnter,BufNew .tern_project set ft=json
 	autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2
-	autocmd FileType python setlocal foldmethod=indent
+	autocmd FileType python setlocal foldmethod=indent equalprg=yapf
+	autocmd FileType c,cpp setlocal equalprg=clang-format
+	autocmd filetype c,cpp setlocal equalprg=clang-format\ -style=file -assume-filename=%
 augroup END
 
+if !has('gui_running')
+	set t_8f=[38;2;%lu;%lu;%lum
+	set t_8b=[48;2;%lu;%lu;%lum
+end
+set termguicolors
 set background=dark
-" Idea is:
-" evening for opaque backgrounds,
-" koheler for transparent backgrounds
-if has('gui') || &termguicolors
-	colorscheme evening
+if !has('mac') && !has('gui_running')
+	let g:nord_italic_comments = 1
+	colorscheme nord
+	let g:lightline.colorscheme = 'nord'
 else
-	colorscheme koehler
+	let g:lightline.colorscheme = 'nova'
+	colorscheme nova
 endif
