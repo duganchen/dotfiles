@@ -261,10 +261,8 @@ let g:lightline = {
 \}
 
 " Having trouble with these on a Mac right now.
-if has('unix') && !has('mac')
-	let g:lightline.separator = { 'left': '', 'right': '' }
-	let g:lightline.subseparator = { 'left': '', 'right': '' }
-endif
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
