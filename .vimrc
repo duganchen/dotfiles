@@ -43,9 +43,7 @@ call plug#end()
 set autoindent
 set autoread
 
-if has('mac')
-	set clipboard=unnamed
-else
+if !has('mac')
 	set clipboard^=unnamedplus,unnamed
 endif
 
