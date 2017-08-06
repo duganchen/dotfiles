@@ -13,7 +13,6 @@ Plug 'Rip-Rip/clang_complete'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'ajh17/VimCompletesMe'
-Plug 'alnjxn/estilo-nova'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
@@ -38,7 +37,6 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'trevordmiller/nova-vim'
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -312,17 +310,12 @@ augroup autocmds
 	autocmd filetype c,cpp setlocal equalprg=clang-format\ -style=file -assume-filename=%
 augroup END
 
-if !has('gui_running')
-	set t_8f=[38;2;%lu;%lu;%lum
-	set t_8b=[48;2;%lu;%lu;%lum
-end
+" TMux compatibility
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
+
 set termguicolors
 set background=dark
-if !has('mac') && !has('gui_running')
-	let g:nord_italic_comments = 1
-	colorscheme nord
-	let g:lightline.colorscheme = 'nord'
-else
-	let g:lightline.colorscheme = 'nova'
-	colorscheme nova
-endif
+let g:nord_italic_comments = 1
+colorscheme nord
+let g:lightline.colorscheme = 'nord'
