@@ -13,9 +13,9 @@ Plug 'Rip-Rip/clang_complete'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'ajh17/VimCompletesMe'
-Plug 'arcticicestudio/nord-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
+Plug 'dracula/vim'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
@@ -25,7 +25,6 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
 Plug 'ryanoasis/vim-devicons'
-Plug 'sheerun/vim-polyglot'
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'tpope/vim-commentary'
@@ -36,7 +35,6 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'trevordmiller/nova-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
 call plug#end()
@@ -168,9 +166,4 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 set termguicolors
-if has('mac') || has('gui_running')
-	colorscheme nova
-else
-	let g:nord_italic_comments = 1
-	colorscheme nord
-endif
+colorscheme dracula
