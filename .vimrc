@@ -24,6 +24,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'thirtythreeforty/lessspace.vim'
