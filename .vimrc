@@ -95,7 +95,8 @@ nmap <F8> :TagbarToggle<CR>
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
 let &showbreak = '↪  '
 set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
-let &fillchars='vert: ,fold: '
+
+set fillchars=vert:\│
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has('osx')
