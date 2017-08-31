@@ -86,6 +86,7 @@ set shell=bash
 set showmatch
 set smartcase
 set ttyfast
+set undofile
 set viminfo^=!
 set visualbell
 set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
