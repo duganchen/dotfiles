@@ -12,12 +12,12 @@ call plug#begin()
 Plug 'Rip-Rip/clang_complete'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'arcticicestudio/nord-vim'
 Plug 'ajh17/VimCompletesMe'
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'davidhalter/jedi-vim'
+Plug 'dracula/vim'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'ludovicchabant/vim-gutentags'
@@ -170,5 +170,4 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 set termguicolors
-let g:nord_italic_comments = 1
-colorscheme nord
+colorscheme dracula
