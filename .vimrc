@@ -152,6 +152,7 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:startify_change_to_dir = 0
 
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
 
 augroup autocmds
 	autocmd!
