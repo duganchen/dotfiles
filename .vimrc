@@ -12,7 +12,6 @@ call plug#begin()
 Plug 'Rip-Rip/clang_complete'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'ajh17/VimCompletesMe'
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
@@ -20,6 +19,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'dracula/vim'
 Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
+Plug 'lifepillar/vim-mucomplete'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
@@ -91,6 +91,12 @@ set viminfo^=!
 set visualbell
 set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
 set nowrap
+
+" For MUcomplete
+set completeopt+=menuone,noinsert,noselect
+set shortmess+=c
+set belloff+=ctrlg
+let g:mucomplete#enable_auto_at_startup = 1
 
 nmap <F8> :TagbarToggle<CR>
 
