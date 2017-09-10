@@ -8,38 +8,38 @@ if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
 endif
 
-call plug#begin()
-Plug 'Rip-Rip/clang_complete'
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'chrisbra/Colorizer'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dag/vim-fish'
-Plug 'davidhalter/jedi-vim'
-Plug 'dracula/vim'
-Plug 'junegunn/vim-slash'
-Plug 'justinmk/vim-dirvish'
-Plug 'lifepillar/vim-mucomplete'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'luochen1990/rainbow'
-Plug 'majutsushi/tagbar'
-Plug 'mbbill/undotree'
-Plug 'mhinz/vim-startify'
-Plug 'nixprime/cpsm', {'do': 'env PY3=ON ./install.sh'}
-Plug 'ryanoasis/vim-devicons'
-Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
-Plug 'thirtythreeforty/lessspace.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline'
-Plug 'w0rp/ale'
-call plug#end()
+packadd minpac
+call minpac#init()
+call minpac#add('Rip-Rip/clang_complete')
+call minpac#add('airblade/vim-gitgutter')
+call minpac#add('airblade/vim-rooter')
+call minpac#add('chrisbra/Colorizer')
+call minpac#add('ctrlpvim/ctrlp.vim')
+call minpac#add('dag/vim-fish')
+call minpac#add('davidhalter/jedi-vim')
+call minpac#add('dracula/vim')
+call minpac#add('junegunn/vim-slash')
+call minpac#add('justinmk/vim-dirvish')
+call minpac#add('lifepillar/vim-mucomplete')
+call minpac#add('ludovicchabant/vim-gutentags')
+call minpac#add('luochen1990/rainbow')
+call minpac#add('majutsushi/tagbar')
+call minpac#add('mbbill/undotree')
+call minpac#add('mhinz/vim-startify')
+call minpac#add('nixprime/cpsm', {'do': {-> system('env PY3=ON ./install.sh')}})
+call minpac#add('ryanoasis/vim-devicons')
+call minpac#add('ternjs/tern_for_vim', {'do': {-> system('npm install')}})
+call minpac#add('thirtythreeforty/lessspace.vim')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-endwise')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-repeat')
+call minpac#add('tpope/vim-rsi')
+call minpac#add('tpope/vim-sleuth')
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('w0rp/ale')
 
 set autoindent
 set autoread
