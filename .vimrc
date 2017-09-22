@@ -27,6 +27,7 @@ call minpac#add('majutsushi/tagbar')
 call minpac#add('mbbill/undotree')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('nixprime/cpsm', {'do': {-> system('env PY3=ON ./install.sh')}})
+call minpac#add('pavel-belikov/vim-qmake')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('ternjs/tern_for_vim', {'do': {-> system('npm install')}})
 call minpac#add('thirtythreeforty/lessspace.vim')
@@ -70,7 +71,6 @@ set complete-=i
 set cscopetag
 set display=lastline
 set formatoptions+=j
-set hidden
 set noshowmode
 set number
 set relativenumber
