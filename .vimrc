@@ -11,9 +11,9 @@ endif
 packadd minpac
 call minpac#init()
 call minpac#add('Rip-Rip/clang_complete')
-call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
+call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('ctrlpvim/ctrlp.vim')
 call minpac#add('dag/vim-fish')
@@ -22,6 +22,7 @@ call minpac#add('dracula/vim')
 call minpac#add('euclio/vim-markdown-composer', {'do': '!cargo build --release --no-default-features --features json-rpc'})
 call minpac#add('junegunn/vim-slash')
 call minpac#add('justinmk/vim-dirvish')
+call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('luochen1990/rainbow')
 call minpac#add('majutsushi/tagbar')
@@ -33,7 +34,6 @@ call minpac#add('racer-rust/vim-racer')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('ternjs/tern_for_vim', {'do': '!npm install'})
 call minpac#add('thirtythreeforty/lessspace.vim')
-call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-endwise')
 call minpac#add('tpope/vim-fugitive')
@@ -42,6 +42,7 @@ call minpac#add('tpope/vim-rsi')
 call minpac#add('tpope/vim-sleuth')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tyrannicaltoucan/vim-quantum')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('w0rp/ale')
 
@@ -71,9 +72,9 @@ set colorcolumn=+1
 set textwidth=137
 
 set complete-=i
-set cscopetag
 set display=lastline
 set formatoptions+=j
+set hidden
 set noshowmode
 set number
 set relativenumber
@@ -94,12 +95,6 @@ set viminfo^=!
 set visualbell
 set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
 set nowrap
-
-" For MUcomplete
-set completeopt+=menuone,noinsert,noselect
-set shortmess+=c
-set belloff+=ctrlg
-let g:mucomplete#enable_auto_at_startup = 1
 
 nmap <F8> :TagbarToggle<CR>
 
@@ -129,13 +124,10 @@ else
 	vmap <C-Down> ]egv
 endif
 
-"if has('mac')
-"	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-"
-"end
-"
-"let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
-let g:clang_library_path = '/Users/dugan/Qt//Qt Creator.app/Contents/Frameworks/libclang.dylib'
+let g:racer_cmd = expand("~/.cargo/bin/racer")
+
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+"let g:clang_library_path = '/Users/dugan/Qt//Qt Creator.app/Contents/Frameworks/libclang.dylib'
 
 let g:ctrlp_user_command = {
 	\'types': {
@@ -184,4 +176,6 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 set termguicolors
-colorscheme dracula
+let g:quantum_italics=1
+colorscheme quantum
+let g:airline_theme='quantum'
