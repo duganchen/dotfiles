@@ -13,7 +13,6 @@ call minpac#init()
 call minpac#add('Rip-Rip/clang_complete')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
-call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('cespare/vim-toml')
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('ctrlpvim/ctrlp.vim')
@@ -26,6 +25,7 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('luochen1990/rainbow')
 call minpac#add('majutsushi/tagbar')
+call minpac#add('maralla/completor.vim')
 call minpac#add('mbbill/undotree')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('rust-lang/rust.vim')
@@ -126,8 +126,10 @@ endif
 
 let g:racer_cmd = expand("~/.cargo/bin/racer")
 
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
-"let g:clang_library_path = '/Users/dugan/Qt//Qt Creator.app/Contents/Frameworks/libclang.dylib'
+if has('mac')
+	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+	"let g:clang_library_path = '/Users/dugan/Qt//Qt Creator.app/Contents/Frameworks/libclang.dylib'
+endif
 
 let g:ctrlp_user_command = {
 	\'types': {
