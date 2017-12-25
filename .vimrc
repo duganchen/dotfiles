@@ -170,7 +170,8 @@ augroup autocmds
 	autocmd BufEnter,BufNew .tern_project set ft=json
 	autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2 equalprg=prettier
 	autocmd FileType python setlocal foldmethod=indent equalprg=yapf
-	autocmd filetype c,cpp setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
+	autocmd FileType c,cpp setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
+	autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh
 augroup END
 
 " TMux compatibility
