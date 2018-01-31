@@ -27,6 +27,7 @@ call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('luochen1990/rainbow')
 call minpac#add('majutsushi/tagbar')
 call minpac#add('mbbill/undotree')
+call minpac#add('mhinz/vim-sayonara')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('rust-lang/rust.vim')
 call minpac#add('nixprime/cpsm', {'do': {->system('env PY3=ON ./install.sh')}})
@@ -45,6 +46,7 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tyrannicaltoucan/vim-quantum')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('w0rp/ale')
+call minpac#add('xtal8/traces.vim')
 
 set autoindent
 set autoread
