@@ -15,10 +15,11 @@ call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('cespare/vim-toml')
 call minpac#add('chrisbra/Colorizer')
-call minpac#add('ctrlpvim/ctrlp.vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
 call minpac#add('euclio/vim-markdown-composer', {'do': '!cargo build --release --no-default-features --features json-rpc'})
+call minpac#add('junegunn/fzf')
+call minpac#add('junegunn/fzf.vim')
 call minpac#add('junegunn/vim-slash')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -30,7 +31,6 @@ call minpac#add('mbbill/undotree')
 call minpac#add('mhinz/vim-sayonara')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('rust-lang/rust.vim')
-call minpac#add('nixprime/cpsm', {'do': {->system('env PY3=ON ./install.sh')}})
 call minpac#add('racer-rust/vim-racer')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('ternjs/tern_for_vim', {'do': '!npm install'})
@@ -149,9 +149,6 @@ elseif executable('ag')
 else
 	let g:ctrlp_user_command.fallback = 'find %s -type f'
 end
-let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
-let g:ctrlp_clear_cache_on_exit = 1
-
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
@@ -162,6 +159,25 @@ let g:startify_change_to_dir = 0
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1
+
+" For FZF
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" " Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" " Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+
+nnoremap <c-p> :Files<cr>
+
 
 augroup autocmds
 	autocmd!
