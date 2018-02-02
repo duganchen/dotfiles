@@ -108,7 +108,7 @@ set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 set fillchars=vert:\│
 
 " https://stackoverflow.com/a/16084326/240515
-nnoremap <leader>b :buffer<space>
+nnoremap <leader>b :ls<cr>:buffer<space>
 
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has('osx')
