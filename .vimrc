@@ -107,6 +107,9 @@ set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 set fillchars=vert:\│
 
+" https://stackoverflow.com/a/16084326/240515
+nnoremap <leader>b :buffer<space>
+
 " http://vimcasts.org/episodes/bubbling-text/ using unimpaired
 if has('osx')
 	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
@@ -133,22 +136,6 @@ if has('mac')
 	"let g:clang_library_path = '/Users/dugan/Qt//Qt Creator.app/Contents/Frameworks/libclang.dylib'
 endif
 
-let g:ctrlp_user_command = {
-	\'types': {
-		\1: ['.git', 'cd %s && git ls-files'],
-		\2: ['.hg', 'hg --cwd %s locate -I .'],
-	\},
-\}
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-nnoremap <leader>o :CtrlPMRUFiles<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
-if executable('rg')
-	let g:ctrlp_user_command.fallback = 'rg %s --files --color=never --glob ""'
-elseif executable('ag')
-	let g:ctrlp_user_command.fallback = 'ag %s -l --nocolor -g ""'
-else
-	let g:ctrlp_user_command.fallback = 'find %s -type f'
-end
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
