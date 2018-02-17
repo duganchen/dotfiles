@@ -139,7 +139,7 @@ endif
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
-let g:ale_linters = {'javascript': ['eslint'], 'python': ['mypy']}
+let g:ale_linters = {'javascript': ['jshint'], 'python': ['mypy']}
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 let g:startify_change_to_dir = 0
