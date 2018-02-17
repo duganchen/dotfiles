@@ -129,7 +129,7 @@ else
 	vmap <C-Down> ]egv
 endif
 
-let g:racer_cmd = expand("~/.cargo/bin/racer")
+let g:racer_cmd = expand('~/.cargo/bin/racer')
 
 if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
@@ -177,6 +177,7 @@ augroup autocmds
 	autocmd FileType python setlocal foldmethod=indent equalprg=yapf
 	autocmd FileType c,cpp setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
 	autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
+	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
 augroup END
 
 " TMux compatibility
