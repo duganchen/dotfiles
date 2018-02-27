@@ -45,7 +45,7 @@ call minpac#add('tpope/vim-sleuth')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes'
+call minpac#add('vim-airline/vim-airline-themes')
 call minpac#add('w0rp/ale')
 call minpac#add('xtal8/traces.vim')
 
