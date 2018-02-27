@@ -15,6 +15,7 @@ call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('cespare/vim-toml')
 call minpac#add('chrisbra/Colorizer')
+call minpac#add('chriskempson/base16-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
 call minpac#add('euclio/vim-markdown-composer', {'do': '!cargo build --release --no-default-features --features json-rpc'})
@@ -43,8 +44,8 @@ call minpac#add('tpope/vim-rsi')
 call minpac#add('tpope/vim-sleuth')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tyrannicaltoucan/vim-quantum')
 call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes'
 call minpac#add('w0rp/ale')
 call minpac#add('xtal8/traces.vim')
 
@@ -185,6 +186,6 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 set termguicolors
-let g:quantum_italics=1
-colorscheme quantum
-let g:airline_theme='quantum'
+set background=dark
+colorscheme base16-tomorrow-night
+let g:airline_theme='tomorrow'
