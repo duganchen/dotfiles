@@ -24,14 +24,9 @@ call minpac#add('junegunn/vim-slash')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('luochen1990/rainbow')
-call minpac#add('majutsushi/tagbar')
 call minpac#add('mbbill/undotree')
 call minpac#add('mhinz/vim-sayonara')
 call minpac#add('mhinz/vim-startify')
-call minpac#add('prabirshrestha/async.vim')`
-call minpac#add('prabirshrestha/vim-lsp')
-call minpac#add('prabirshrestha/asyncomplete.vim')
-call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
 call minpac#add('racer-rust/vim-racer')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('ternjs/tern_for_vim', {'do': '!npm install'})
@@ -98,8 +93,6 @@ set viminfo^=!
 set visualbell
 set wildignore+=*.pyc,*.o,*/.git/*,*/build/*,*.swp,*/.svn,*/.hg
 set nowrap
-
-nmap <F8> :TagbarToggle<CR>
 
 " Ideas from here:
 " https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
