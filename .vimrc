@@ -176,6 +176,10 @@ augroup autocmds
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
 augroup END
 
+:nmap <F4> :Gtags -f %<CR>
+:nmap <C-\><C-]> :GtagsCursor<CR>
+set cscopeprg=gtags-cscope
+
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
