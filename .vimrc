@@ -183,4 +183,5 @@ set t_8b=[48;2;%lu;%lu;%lum
 set termguicolors
 set background=dark
 colorscheme base16-tomorrow-night
+highlight! Normal guibg=NONE
 let g:airline_theme='tomorrow'
