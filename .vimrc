@@ -160,7 +160,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 nnoremap <c-p> :Files<cr>
-
+nnoremap <leader>b :Buffers<cr>
 
 augroup autocmds
 	autocmd!
