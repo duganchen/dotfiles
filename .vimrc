@@ -10,12 +10,14 @@ endif
 
 packadd minpac
 call minpac#init()
+call minpac#add('Rip-Rip/clang_complete')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('cespare/vim-toml')
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('chriskempson/base16-vim')
 call minpac#add('dag/vim-fish')
+call minpac#add('davidhalter/jedi-vim')
 call minpac#add('euclio/vim-markdown-composer', {'do': '!cargo build --release --no-default-features --features json-rpc'})
 call minpac#add('jparise/vim-graphql')
 call minpac#add('junegunn/fzf')
@@ -29,6 +31,7 @@ call minpac#add('mhinz/vim-sayonara')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('roxma/nvim-completion-manager')
 call minpac#add('roxma/vim-hug-neovim-rpc')
+call minpac#add('jfelchner/base16-vim-airline-template')
 call minpac#add('racer-rust/vim-racer')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('ternjs/tern_for_vim', {'do': '!npm install'})
@@ -65,8 +68,6 @@ set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 
-let g:gutentags_cache_dir = $HOME . '/.cache/vim'
-
 " GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
 set colorcolumn=+1
 set textwidth=137
@@ -81,11 +82,7 @@ set relativenumber
 set sessionoptions-=options
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
-if executable('rg')
-	set grepprg=rg\ --vimgrep
-elseif executable('ag')
-	set grepprg=ag\ --vimgrep
-endif
+set grepprg=rg\ --vimgrep
 set shell=bash
 set showmatch
 set smartcase
@@ -102,28 +99,6 @@ let &showbreak = '↪  '
 set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 set fillchars=vert:\│
-
-" https://stackoverflow.com/a/16084326/240515
-nnoremap <leader>b :ls<cr>:buffer<space>
-
-" http://vimcasts.org/episodes/bubbling-text/ using unimpaired
-if has('osx')
-	" Alt+k and Alt+j bubble up on OS X. This works in iterm2.
-	nmap ˚ [e
-	nmap ∆ ]e
-	vmap ˚ [egv
-	vmap ∆ ]egv
-else
-	" Escape sequences are the same key sequences on my MacBook Pro keyboard
-	nmap [A [e
-	nmap [B ]e
-	vmap [A [egv
-	vmap [B ]egv
-	nmap <C-Up> [e
-	nmap <C-Down> ]e
-	vmap <C-Up> [egv
-	vmap <C-Down> ]egv
-endif
 
 let g:racer_cmd = expand('~/.cargo/bin/racer')
 
