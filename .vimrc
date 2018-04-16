@@ -52,11 +52,9 @@ call minpac#add('xtal8/traces.vim')
 set autoindent
 set autoread
 
-if !has('mac')
-	set clipboard^=unnamedplus,unnamed
-endif
-
-set infercase
+" If you're having trouble on OS X, try building vim without --with-client-server.
+" https://github.com/spf13/spf13-vim/issues/1018#issuecomment-287197190
+set clipboard^=unnamedplus,unnamed
 
 " Correct on Linux. Correct on OS X, AFAIK
 if !has('nvim')
@@ -76,6 +74,7 @@ set complete-=i
 set display=lastline
 set formatoptions+=j
 set hidden
+set infercase
 set noshowmode
 set number
 set relativenumber
