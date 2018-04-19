@@ -13,6 +13,7 @@ call minpac#init()
 call minpac#add('Rip-Rip/clang_complete')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
+call minpac#add('challenger-deep-theme/vim', {'name': 'challenger-deep-theme'})
 call minpac#add('cespare/vim-toml')
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('chriskempson/base16-vim')
@@ -26,6 +27,7 @@ call minpac#add('junegunn/vim-slash')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('luochen1990/rainbow')
+call minpac#add('machakann/vim-Verdin')
 call minpac#add('mbbill/undotree')
 call minpac#add('mhinz/vim-sayonara')
 call minpac#add('mhinz/vim-startify')
@@ -33,6 +35,7 @@ call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./i
 call minpac#add('roxma/nvim-completion-manager')
 call minpac#add('roxma/vim-hug-neovim-rpc')
 call minpac#add('racer-rust/vim-racer')
+call minpac#add('rstacruz/vim-closer')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('ternjs/tern_for_vim', {'do': '!npm install'})
 call minpac#add('thirtythreeforty/lessspace.vim')
@@ -177,7 +180,12 @@ set cscopeprg=gtags-cscope
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
-set termguicolors
-set background=dark
-colorscheme base16-tomorrow-night
-let g:airline_theme='base16_tomorrow'
+if has('gui_running')
+	colorscheme challenger_deep
+	let g:airline_theme='challenger_deep'
+else
+	set termguicolors
+	set background=dark
+	colorscheme base16-tomorrow-night
+	let g:airline_theme='base16_tomorrow'
+endii
