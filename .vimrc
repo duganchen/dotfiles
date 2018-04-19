@@ -3,7 +3,7 @@ scriptencoding utf-8
 " This is mainly for non-neo vim and gvim, using Python 3, on
 " OSX and Linux. fd and a NERD font are expected.
 
-if !empty(glob('$VIMRUNTIME/defaults.vim'))
+if filereadable(expand('$VIMRUNTIME/defaults.vim'))
 	unlet! g:skip_defaults_vim
 	source $VIMRUNTIME/defaults.vim
 endif
