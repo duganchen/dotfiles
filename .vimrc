@@ -10,11 +10,9 @@ endif
 
 packadd minpac
 call minpac#init()
-call minpac#add('Rip-Rip/clang_complete')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('challenger-deep-theme/vim', {'name': 'challenger-deep-theme'})
-call minpac#add('cespare/vim-toml')
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('chriskempson/base16-vim')
 call minpac#add('ctrlpvim/ctrlp.vim', {'type': 'opt'})
@@ -28,16 +26,13 @@ call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-Verdin')
-call minpac#add('mbbill/undotree')
 call minpac#add('mhinz/vim-sayonara')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./install.sh')}})
 call minpac#add('roxma/nvim-completion-manager')
 call minpac#add('roxma/vim-hug-neovim-rpc')
-call minpac#add('racer-rust/vim-racer')
 call minpac#add('rstacruz/vim-closer')
 call minpac#add('ryanoasis/vim-devicons')
-call minpac#add('ternjs/tern_for_vim', {'do': '!npm install'})
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-endwise')
@@ -50,7 +45,6 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 call minpac#add('w0rp/ale')
-call minpac#add('xtal8/traces.vim')
 
 if has('gui_running')
 	packadd ctrlp.vim
@@ -109,8 +103,6 @@ let &showbreak = '↪  '
 set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 set fillchars=vert:\│
-
-let g:racer_cmd = expand('~/.cargo/bin/racer')
 
 if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
@@ -188,4 +180,4 @@ else
 	set background=dark
 	colorscheme base16-tomorrow-night
 	let g:airline_theme='base16_tomorrow'
-endii
+endif
