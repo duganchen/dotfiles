@@ -162,7 +162,14 @@ augroup autocmds
 	autocmd FileType c,cpp setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
 	autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
+	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
 augroup END
+
+function CheckSlackBuildInfo()
+	if filereadable(expand('%:p:r'). '.SlackBuild')
+		setlocal filetype=sh
+	endif
+endfunction
 
 :nmap <F4> :Gtags -f %<CR>
 :nmap <C-\><C-]> :GtagsCursor<CR>
