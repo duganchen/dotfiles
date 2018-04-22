@@ -163,6 +163,14 @@ augroup autocmds
 	autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
 	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
+
+	if !empty('$tmux') && !has('gui_running')
+		" Open a TMux split to show live rendered previews in Lynx. Gist is here:
+		" https://gist.github.com/duganchen/32a5ca43bf309b2eed61f70615ab8c7a
+		autocmd BufNewFile,BufReadPost *.html,*.md,*.rst call StartMDPreview()
+		autocmd TextChanged,TextChangedI *.html,*.md,*.rst,*.tex call UpdateMDPreview()
+		autocmd BufUnload *.html,*.md,*.rst,*.tex call StopMDPreview()
+	endif
 augroup END
 
 function CheckSlackBuildInfo()
@@ -170,6 +178,38 @@ function CheckSlackBuildInfo()
 		setlocal filetype=sh
 	endif
 endfunction
+
+" TMux/Lynx previewer section start
+
+let s:extensionTypes = {
+	\'md': 'gfm',
+	\'html': 'html',
+	\'rst': 'rst',
+	\'tex': 'latex'}
+
+function ReceivePreviewPane(channel, msg)
+	let b:preview.pane = a:msg
+endfunction
+
+function StartPreview()
+	let b:preview = {'html': tempname() . '.html'}
+	let b:preview.html = tempname() . '.html'
+	let b:preview.job = job_start(
+		\['tmux_split_preview_start.sh', s:extensionTypes[expand('%:e')], b:preview.html],
+		\{'in_io': 'buffer', 'in_buf': bufnr('%'), 'callback': 'ReceivePreviewPane'})
+endfunction
+
+function UpdatePreview()
+	let b:preview.job = job_start(
+		\['tmux_split_preview_update.sh', s:extensionTypes[expand('%:e')], b:preview.html, b:preview.pane],
+		\{'in_io': 'buffer', 'in_buf': bufnr('%')})
+endfunction
+
+function StopPreview()
+	call system('tmux_split_preview_stop.sh ' . b:preview.pane)
+endfunction
+
+" TMux/Lynx previewer section end
 
 :nmap <F4> :Gtags -f %<CR>
 :nmap <C-\><C-]> :GtagsCursor<CR>
