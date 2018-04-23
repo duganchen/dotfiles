@@ -167,9 +167,9 @@ augroup autocmds
 	if !empty('$tmux') && !has('gui_running')
 		" Open a TMux split to show live rendered previews in Lynx. Gist is here:
 		" https://gist.github.com/duganchen/32a5ca43bf309b2eed61f70615ab8c7a
-		autocmd BufNewFile,BufReadPost *.html,*.md,*.rst call StartMDPreview()
-		autocmd TextChanged,TextChangedI *.html,*.md,*.rst,*.tex call UpdateMDPreview()
-		autocmd BufUnload *.html,*.md,*.rst,*.tex call StopMDPreview()
+		autocmd BufNewFile,BufReadPost *.html,*.md,*.rst call StartPreview()
+		autocmd TextChanged,TextChangedI *.html,*.md,*.rst,*.tex call UpdatePreview()
+		autocmd BufUnload *.html,*.md,*.rst,*.tex call StopPreview()
 	endif
 augroup END
 
