@@ -68,7 +68,9 @@ if !has('nvim')
 	set ttymouse=xterm2
 endif
 
-" Make sure this directory exists.
+if !isdirectory(expand('~/.cache/vim'))
+	call mkdir(expand('~/.cache/vim'))
+endif
 set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
