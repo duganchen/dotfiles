@@ -46,12 +46,14 @@ call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 call minpac#add('w0rp/ale')
 
+packadd! matchit
+
 if has('gui_running')
-	packadd ctrlp.vim
-	packadd cpsm
+	packadd! ctrlp.vim
+	packadd! cpsm
 else
-	packadd fzf
-	packadd fzf.vim
+	packadd! fzf
+	packadd! fzf.vim
 endif
 
 set autoindent
