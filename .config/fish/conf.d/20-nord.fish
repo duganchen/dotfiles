@@ -24,11 +24,11 @@ set fish_color_error $nord11
 set fish_color_param $nord4
 set fish_color_comment $nord3
 set fish_color_match $nord8
-set fish_color_search_match $nord10
+set fish_color_search_match $nord8
 set fish_color_operator $nord9
 set fish_color_escape $nord13
 set fish_color_cwd $nord8
-set fish_color_autosuggestion $nord4
+set fish_color_autosuggestion $nord6
 set fish_color_user $nord4
 set fish_color_host $nord9
 set fish_color_cancel $nord15
