@@ -32,8 +32,8 @@ set fish_color_autosuggestion $nord4
 set fish_color_user $nord4
 set fish_color_host $nord9
 set fish_color_cancel $nord15
-set fish_pager_color_prefix $nord6
-set fish_pager_color_completion $nord4
+set fish_pager_color_prefix $nord13
+set fish_pager_color_completion $nord6
 set fish_pager_color_description $nord10
 set fish_pager_color_progress $nord12
 set fish_pager_color_secondary $nord1
