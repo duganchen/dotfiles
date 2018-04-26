@@ -12,9 +12,9 @@ packadd minpac
 call minpac#init()
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
+call minpac#add('arcticicestudio/nord-vim')
 call minpac#add('challenger-deep-theme/vim', {'name': 'challenger-deep-theme'})
 call minpac#add('chrisbra/Colorizer')
-call minpac#add('chriskempson/base16-vim')
 call minpac#add('ctrlpvim/ctrlp.vim', {'type': 'opt'})
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
@@ -43,7 +43,6 @@ call minpac#add('tpope/vim-sleuth')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
 call minpac#add('w0rp/ale')
 
 packadd! matchit
@@ -228,7 +227,8 @@ if has('gui_running')
 	let g:airline_theme='challenger_deep'
 else
 	set termguicolors
+	let g:nord_italic = 1
+	let g:nord_italic_comments = 1
 	set background=dark
-	colorscheme base16-tomorrow-night
-	let g:airline_theme='base16_tomorrow'
+	colorscheme nord
 endif
