@@ -174,7 +174,7 @@ augroup autocmds
 	endif
 augroup END
 
-function CheckSlackBuildInfo()
+function! CheckSlackBuildInfo()
 	if filereadable(expand('%:p:r'). '.SlackBuild')
 		setlocal filetype=sh
 	endif
@@ -188,11 +188,11 @@ let s:extensionTypes = {
 	\'rst': 'rst',
 	\'tex': 'latex'}
 
-function ReceivePreviewPane(channel, msg)
+function! ReceivePreviewPane(channel, msg)
 	let b:preview.pane = a:msg
 endfunction
 
-function StartPreview()
+function! StartPreview()
 	let b:preview = {'html': tempname() . '.html'}
 	let b:preview.html = tempname() . '.html'
 	let b:preview.job = job_start(
@@ -200,14 +200,28 @@ function StartPreview()
 		\{'in_io': 'buffer', 'in_buf': bufnr('%'), 'callback': 'ReceivePreviewPane'})
 endfunction
 
-function UpdatePreview()
+function! UpdatePreview()
 	let b:preview.job = job_start(
 		\['tmux_split_preview_update.sh', s:extensionTypes[expand('%:e')], b:preview.html, b:preview.pane],
 		\{'in_io': 'buffer', 'in_buf': bufnr('%')})
 endfunction
 
-function StopPreview()
+function! StopPreview()
 	call system('tmux_split_preview_stop.sh ' . b:preview.pane)
+endfunction
+
+function! DeleteHiddenBuffers()
+	"https://stackoverflow.com/a/30101152/240515
+	let tpbl=[]
+	let closed = 0
+	call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+	for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+		if getbufvar(buf, '&mod') == 0
+			silent execute 'bwipeout' buf
+			let closed += 1
+		endif
+	endfor
+	echo "Closed ".closed." hidden buffers"
 endfunction
 
 " TMux/Lynx previewer section end
