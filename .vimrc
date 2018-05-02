@@ -210,6 +210,8 @@ function! StopPreview()
 	call system('tmux_split_preview_stop.sh ' . b:preview.pane)
 endfunction
 
+" TMux/Lynx previewer section end
+
 function! DeleteHiddenBuffers()
 	"https://stackoverflow.com/a/30101152/240515
 	let tpbl=[]
@@ -224,7 +226,9 @@ function! DeleteHiddenBuffers()
 	echo "Closed ".closed." hidden buffers"
 endfunction
 
-" TMux/Lynx previewer section end
+" https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o/
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk
 
 :nmap <F4> :Gtags -f %<CR>
 :nmap <C-\><C-]> :GtagsCursor<CR>
