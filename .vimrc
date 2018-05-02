@@ -228,7 +228,7 @@ endfunction
 
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o/
 nnoremap <expr> j v:count ? 'j' : 'gj'
-nnoremap <expr> k v:count ? 'k' : 'gk
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 :nmap <F4> :Gtags -f %<CR>
 :nmap <C-\><C-]> :GtagsCursor<CR>
