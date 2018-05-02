@@ -156,6 +156,7 @@ augroup autocmds
 	autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
 	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
+	autocmd FileType markdown setlocal wrap textwidth=0
 
 	if !empty('$tmux') && !has('gui_running')
 		" Open a TMux split to show live rendered previews in Lynx. Gist is here:
