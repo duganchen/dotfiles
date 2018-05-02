@@ -27,16 +27,11 @@ call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-Verdin')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./install.sh')}})
-call minpac#add('roxma/nvim-completion-manager')
-call minpac#add('roxma/vim-hug-neovim-rpc')
-call minpac#add('rstacruz/vim-closer')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-endwise')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-repeat')
-call minpac#add('tpope/vim-rsi')
 call minpac#add('tpope/vim-sleuth')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
@@ -225,6 +220,12 @@ function! DeleteHiddenBuffers()
 	endfor
 	echo 'Closed '.l:closed.' hidden buffers'
 endfunction
+
+" mucomplete
+set completeopt-=preview
+set completeopt+=longest,menuone,noselect
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#chains = {'default': ['path', 'omni']}
 
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o/
 nnoremap <expr> j v:count ? 'j' : 'gj'
