@@ -102,11 +102,6 @@ set listchars=tab:\│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,eol:↲
 
 set fillchars=vert:\│
 
-if has('mac')
-	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
-	"let g:clang_library_path = '/Users/dugan/Qt//Qt Creator.app/Contents/Frameworks/libclang.dylib'
-endif
-
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
