@@ -76,6 +76,7 @@ set display=lastline
 set formatoptions+=j
 set hidden
 set infercase
+set linebreak
 set noshowmode
 set number
 set relativenumber
