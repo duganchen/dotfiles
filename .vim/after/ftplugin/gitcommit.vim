@@ -1,1 +1,1 @@
-MucompleteAutoOff
+MUcompleteAutoOff
