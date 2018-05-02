@@ -214,16 +214,16 @@ endfunction
 
 function! DeleteHiddenBuffers()
 	"https://stackoverflow.com/a/30101152/240515
-	let tpbl=[]
-	let closed = 0
-	call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-	for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-		if getbufvar(buf, '&mod') == 0
-			silent execute 'bwipeout' buf
-			let closed += 1
+	let l:tpbl=[]
+	let l:closed = 0
+	call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
+	for l:buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
+		if getbufvar(l:buf, '&mod') == 0
+			silent execute 'bwipeout' l:buf
+			let l:closed += 1
 		endif
 	endfor
-	echo "Closed ".closed." hidden buffers"
+	echo 'Closed '.l:closed.' hidden buffers'
 endfunction
 
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o/
