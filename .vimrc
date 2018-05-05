@@ -12,6 +12,7 @@ packadd minpac
 call minpac#init()
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
+call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('arcticicestudio/nord-vim')
 call minpac#add('challenger-deep-theme/vim', {'name': 'challenger-deep-theme'})
 call minpac#add('chrisbra/Colorizer')
@@ -23,7 +24,6 @@ call minpac#add('junegunn/fzf.vim', {'type': 'opt'})
 call minpac#add('junegunn/vim-slash')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
-call minpac#add('lifepillar/vim-mucomplete')
 call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-Verdin')
 call minpac#add('mhinz/vim-startify')
@@ -218,12 +218,6 @@ function! DeleteHiddenBuffers()
 	endfor
 	echo 'Closed '.l:closed.' hidden buffers'
 endfunction
-
-" mucomplete
-set completeopt-=preview
-set completeopt+=longest,menuone,noselect
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#chains = {'default': ['path', 'omni']}
 
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o/
 nnoremap <expr> j v:count ? 'j' : 'gj'
