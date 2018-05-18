@@ -226,6 +226,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 :nmap <F4> :Gtags -f %<CR>
 :nmap <C-\><C-]> :GtagsCursor<CR>
 set cscopeprg=gtags-cscope
+set cscopetag
 
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
