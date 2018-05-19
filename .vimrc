@@ -31,6 +31,7 @@ call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./i
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-rhubarb')
