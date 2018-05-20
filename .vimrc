@@ -155,7 +155,8 @@ augroup autocmds
 	autocmd BufEnter,BufNew .tern_project set ft=json
 	autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2 equalprg=prettier
 	autocmd FileType python setlocal foldmethod=indent equalprg=yapf
-	autocmd FileType c,cpp setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
+	autocmd FileType c call OnC()
+	autocmd FileType cpp call OnCXX()
 	autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
 	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
@@ -169,6 +170,27 @@ augroup autocmds
 		autocmd BufUnload *.html,*.md,*.rst,*.tex call StopPreview()
 	endif
 augroup END
+
+function OnC()
+       setlocal makeprg=clang\ %
+       setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
+       let &l:errorformat = '%E%f:%l:%c: fatal error: %m,' .
+	      \ '%E%f:%l:%c: error: %m,' .
+	      \ '%W%f:%l:%c: warning: %m,' .
+	      \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
+	      \ '%E%m'
+endfunction
+
+function OnCXX()
+       setlocal makeprg=clang++\ -std=c++14\ %
+       setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
+       let &l:errorformat = '%E%f:%l:%c: fatal error: %m,' .
+	      \ '%E%f:%l:%c: error: %m,' .
+	      \ '%W%f:%l:%c: warning: %m,' .
+	      \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
+	      \ '%E%m'
+endfunction
+
 
 function! CheckSlackBuildInfo()
 	if filereadable(expand('%:p:r'). '.SlackBuild')
