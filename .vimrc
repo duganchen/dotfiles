@@ -154,7 +154,7 @@ augroup autocmds
     autocmd FileType qf setlocal nobuflisted
     autocmd BufEnter,BufNew .tern_project set ft=json
     autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2 equalprg=prettier
-    autocmd FileType python setlocal foldmethod=indent equalprg=yapf
+    autocmd FileType python call OnPython()
     autocmd FileType c call OnC()
     autocmd FileType cpp call OnCXX()
     autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
@@ -195,12 +195,10 @@ function OnCXX()
           \ '%E%m'
 endfunction
 
-function! CheckSlackBuildInfo()
-    if filereadable(expand('%:p:r'). '.SlackBuild')
-        setlocal filetype=sh
-    endif
+function! OnPython()
+    setlocal foldmethod=indent equalprg=yapf makeprg=mypy\ --show-column-numbers\ %
+    let &l:errorformat = '%f:%l:%c:%t:%m,%f:%l:%t:%m'
 endfunction
-
 
 function! CheckSlackBuildInfo()
     if filereadable(expand('%:p:r'). '.SlackBuild')
