@@ -161,6 +161,7 @@ augroup autocmds
     autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
     autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
     autocmd FileType markdown setlocal wrap textwidth=0
+    autocmd FileType vim call OnVimScript()
 
     if !empty('$tmux') && !has('gui_running')
         " Open a TMux split to show live rendered previews in Lynx. Gist is here:
@@ -193,6 +194,13 @@ function OnCXX()
           \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
           \ '%E%m'
 endfunction
+
+function! CheckSlackBuildInfo()
+    if filereadable(expand('%:p:r'). '.SlackBuild')
+        setlocal filetype=sh
+    endif
+endfunction
+
 
 function! CheckSlackBuildInfo()
     if filereadable(expand('%:p:r'). '.SlackBuild')
