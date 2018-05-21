@@ -171,6 +171,9 @@ augroup autocmds
 	endif
 augroup END
 
+" See:
+" https://github.com/ajh17/dotfiles/blob/master/.vim/after/ftplugin/cpp.vim
+
 function OnC()
        setlocal makeprg=clang\ %
        setlocal equalprg=clang-format\ -style=file\ -assume-filename=%
@@ -190,7 +193,6 @@ function OnCXX()
 	      \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
 	      \ '%E%m'
 endfunction
-
 
 function! CheckSlackBuildInfo()
 	if filereadable(expand('%:p:r'). '.SlackBuild')
