@@ -153,7 +153,13 @@ augroup autocmds
     autocmd BufEnter,BufNew configure.ac set filetype=m4
     autocmd FileType qf setlocal nobuflisted
     autocmd BufEnter,BufNew .tern_project set ft=json
-    autocmd FileType javascript.jsx setlocal expandtab tabstop=2 shiftwidth=2 equalprg=prettier
+
+    " https://github.com/sharat87/lawn/blob/master/vim/after/compiler/jshint.vim
+    autocmd FileType javascript setlocal
+        \ equalprg=prettier
+        \ makeprg=jshint\ --verbose\ %\ \\\|\ head\ -n-2
+        \ errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m\ (%t%n)
+
     autocmd FileType python call OnPython()
     autocmd FileType c call OnC()
     autocmd FileType cpp call OnCXX()
