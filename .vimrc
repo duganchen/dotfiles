@@ -108,7 +108,8 @@ set fillchars=vert:\│
 let g:rainbow_active = 1
 
 let g:ale_sign_column_always = 1
-let g:ale_linters = {'javascript': ['jshint'], 'python': ['mypy']}
+let g:ale_linters_explicit = 1
+let g:ale_linters = {'javascript': ['jshint'], 'python': ['mypy'], 'sh': ['shellcheck'], 'c': ['clang'], 'cpp': ['clang']}
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 let g:startify_change_to_dir = 0
