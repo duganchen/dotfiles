@@ -160,7 +160,6 @@ augroup autocmds
         \ makeprg=jshint\ --verbose\ %\ \\\|\ head\ -n-2
         \ errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m\ (%t%n)
 
-    autocmd FileType python call OnPython()
     autocmd FileType c call OnC()
     autocmd FileType cpp call OnCXX()
     autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
@@ -199,11 +198,6 @@ function OnCXX()
           \ '%W%f:%l:%c: warning: %m,' .
           \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
           \ '%E%m'
-endfunction
-
-function! OnPython()
-    setlocal foldmethod=indent equalprg=yapf makeprg=mypy\ --show-column-numbers\ %
-    let &l:errorformat = '%f:%l:%c:%t:%m,%f:%l:%t:%m'
 endfunction
 
 function! CheckSlackBuildInfo()
