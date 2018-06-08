@@ -167,7 +167,6 @@ augroup autocmds
     autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
     autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
     autocmd FileType markdown setlocal wrap textwidth=0
-    autocmd FileType vim call OnVimScript()
 
     if !empty('$tmux') && !has('gui_running')
         " Open a TMux split to show live rendered previews in Lynx. Gist is here:
