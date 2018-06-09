@@ -150,19 +150,10 @@ endif
 augroup autocmds
     autocmd!
     autocmd FileType vifm setlocal filetype=vim
-    autocmd FileType bash,sh set makeprg=shellcheck\ -f\ gcc\ %
     autocmd BufEnter,BufNew configure.ac set filetype=m4
     autocmd FileType qf setlocal nobuflisted
     autocmd BufEnter,BufNew .tern_project set ft=json
-
-    " https://github.com/sharat87/lawn/blob/master/vim/after/compiler/jshint.vim
-    autocmd FileType javascript setlocal
-        \ equalprg=prettier
-        \ makeprg=jshint\ --verbose\ %\ \\\|\ head\ -n-2
-        \ errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m\ (%t%n)
-
     autocmd BufEnter,BufNew *.SlackBuild setlocal filetype=sh shiftwidth=2 expandtab tabstop=4
-    autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ %
     autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
     autocmd FileType markdown setlocal wrap textwidth=0
 
