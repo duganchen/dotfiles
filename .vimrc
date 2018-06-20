@@ -222,8 +222,8 @@ endfunction
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-:nmap <F4> :Gtags -f %<CR>
 :nmap <C-\><C-]> :GtagsCursor<CR>
+:nnoremap <Leader>g% ::Gtags -f %<CR>
 set cscopeprg=gtags-cscope
 set cscopetag
 
