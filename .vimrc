@@ -27,6 +27,7 @@ call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-Verdin')
+call minpac#add('majutsushi/tagbar')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./install.sh')}})
 call minpac#add('ryanoasis/vim-devicons')
@@ -222,10 +223,10 @@ endfunction
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-:nmap <C-\><C-]> :GtagsCursor<CR>
-:nnoremap <Leader>g% ::Gtags -f %<CR>
+" I use ctags as intended, gtags for cscope. This works well for most languages.
 set cscopeprg=gtags-cscope
-set cscopetag
+
+nmap <F8> :TagbarToggle<CR>
 
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
