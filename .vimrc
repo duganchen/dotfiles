@@ -10,6 +10,7 @@ endif
 
 packadd minpac
 call minpac#init()
+call minpac#add('Rip-Rip/clang_complete', {'do': {->system('make install')}})
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('ajh17/VimCompletesMe')
@@ -233,6 +234,11 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 set cscopeprg=gtags-cscope
 
 nmap <F8> :TagbarToggle<CR>
+
+if has('mac')
+	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+	" let g:clang_library_path = expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
+endif
 
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
