@@ -73,9 +73,9 @@ set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 
-" GitHub's desktop-browser web interface can display 137 characters per line without a horizontal scrollbar.
+" GitHub's desktop-browser web interface can display 127 characters per line without a horizontal scrollbar.
 set colorcolumn=+1
-set textwidth=137
+set textwidth=127
 
 set complete-=i
 set display=lastline
