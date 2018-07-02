@@ -235,6 +235,7 @@ set cscopeprg=gtags-cscope
 
 nmap <F8> :TagbarToggle<CR>
 
+" For clang_complete
 if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 	" let g:clang_library_path = expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
