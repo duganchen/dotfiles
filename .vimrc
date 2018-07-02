@@ -241,6 +241,23 @@ if has('mac')
 	" let g:clang_library_path = expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
 endif
 
+" For C++ I'm using clang, clang_complete, and ALE with a clang backend. So for Qt:
+"
+" Put something like this in .clang_complete for clang_complete:
+"
+"   -fPIC
+"   -I/usr/include/qt5
+"   -I/usr/include/qt5/QtWidgets
+"   -I/usr/include/qt5/QtCore
+"
+" And set the same options for ALE:
+"
+"    let g:ale_pattern_options = {
+"        \ '/qzdl/': {
+"            \ 'ale_cpp_clang_options': '-fPIC -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtCore',
+"            \}
+"         \}
+
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
