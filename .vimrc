@@ -14,8 +14,7 @@ call minpac#add('Rip-Rip/clang_complete', {'do': {->system('make install')}})
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('ajh17/VimCompletesMe')
-call minpac#add('arcticicestudio/nord-vim')
-call minpac#add('challenger-deep-theme/vim', {'name': 'challenger-deep-theme'})
+call minpac#add('arcticicestudio/nord-vim', {'type': 'opt'})
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('ctrlpvim/ctrlp.vim', {'type': 'opt'})
 call minpac#add('dag/vim-fish')
@@ -30,6 +29,7 @@ call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-Verdin')
 call minpac#add('majutsushi/tagbar')
 call minpac#add('mhinz/vim-startify')
+call minpac#add('morhetz/gruvbox', {'type': 'opt'})
 call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./install.sh')}})
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
@@ -49,9 +49,11 @@ packadd! matchit
 if has('gui_running')
     packadd! ctrlp.vim
     packadd! cpsm
+    packadd! gruvbox
 else
     packadd! fzf
     packadd! fzf.vim
+    packadd! nord-vim
 endif
 
 set autoindent
@@ -263,8 +265,7 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
 if has('gui_running')
-    colorscheme challenger_deep
-    let g:airline_theme='challenger_deep'
+    colorscheme gruvbox
 else
     set termguicolors
     let g:nord_italic = 1
