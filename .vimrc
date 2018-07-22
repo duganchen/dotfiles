@@ -8,6 +8,11 @@ if filereadable(expand('$VIMRUNTIME/defaults.vim'))
     source $VIMRUNTIME/defaults.vim
 endif
 
+
+" Workaround for jedi-vim on Python 3.7. See:
+" https://github.com/davidhalter/jedi-vim/issues/844#issuecomment-404352275
+silent! python3 1
+
 packadd minpac
 call minpac#init()
 call minpac#add('Rip-Rip/clang_complete', {'do': {->system('make install')}})
