@@ -15,15 +15,15 @@ silent! python3 1
 
 packadd minpac
 call minpac#init()
-call minpac#add('Rip-Rip/clang_complete', {'do': {->system('make install')}})
+call minpac#add('Shougo/deoplete.nvim')
+call minpac#add('Shougo/neco-vim')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
-call minpac#add('ajh17/VimCompletesMe')
+call minpac#add('autozimu/LanguageClient-neovim', {'do': {->system('bash install.sh')}})
 call minpac#add('arcticicestudio/nord-vim', {'type': 'opt'})
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('ctrlpvim/ctrlp.vim', {'type': 'opt'})
 call minpac#add('dag/vim-fish')
-call minpac#add('davidhalter/jedi-vim')
 call minpac#add('junegunn/fzf', {'type': 'opt'})
 call minpac#add('junegunn/fzf.vim', {'type': 'opt'})
 call minpac#add('junegunn/gv.vim')
@@ -31,11 +31,12 @@ call minpac#add('junegunn/vim-slash')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('luochen1990/rainbow')
-call minpac#add('machakann/vim-Verdin')
 call minpac#add('majutsushi/tagbar')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('morhetz/gruvbox', {'type': 'opt'})
 call minpac#add('nixprime/cpsm', {'type': 'opt', 'do': {->system('env PY3=ON ./install.sh')}})
+call minpac#add('roxma/nvim-yarp')
+call minpac#add('roxma/vim-hug-neovim-rpc')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('tpope/vim-commentary')
@@ -48,6 +49,7 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('w0rp/ale')
+call minpac#add('zchee/deoplete-jedi')
 
 packadd! matchit
 
@@ -116,21 +118,20 @@ set fillchars=vert:\│
 
 let g:rainbow_active = 1
 
-let g:ale_sign_column_always = 1
+" I use ctags as intended, gtags for cscope. This works well for most languages.
+set cscopeprg=gtags-cscope
+
+let g:deoplete#enable_at_startup = 1
+let g:LanguageClient_serverCommands = {
+    \'python': ['pyls']}
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-    \'javascript': ['jshint'],
-    \'python': ['mypy'],
     \'sh': ['shellcheck'],
-    \'c': ['clang'],
-    \'cpp': ['clang'],
     \'vim': ['vint']}
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 let g:startify_change_to_dir = 0
 
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#ale#enabled = 1
 
 if has('gui_running')
     let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
@@ -187,38 +188,6 @@ function! CheckSlackBuildInfo()
     endif
 endfunction
 
-" TMux/Lynx previewer section start
-
-let s:extensionTypes = {
-    \'md': 'gfm',
-    \'html': 'html',
-    \'rst': 'rst',
-    \'tex': 'latex'}
-
-function! ReceivePreviewPane(channel, msg)
-    let b:preview.pane = a:msg
-endfunction
-
-function! StartPreview()
-    let b:preview = {'html': tempname() . '.html'}
-    let b:preview.html = tempname() . '.html'
-    let b:preview.job = job_start(
-        \['tmux_split_preview_start.sh', s:extensionTypes[expand('%:e')], b:preview.html],
-        \{'in_io': 'buffer', 'in_buf': bufnr('%'), 'callback': 'ReceivePreviewPane'})
-endfunction
-
-function! UpdatePreview()
-    let b:preview.job = job_start(
-        \['tmux_split_preview_update.sh', s:extensionTypes[expand('%:e')], b:preview.html, b:preview.pane],
-        \{'in_io': 'buffer', 'in_buf': bufnr('%')})
-endfunction
-
-function! StopPreview()
-    call system('tmux_split_preview_stop.sh ' . b:preview.pane)
-endfunction
-
-" TMux/Lynx previewer section end
-
 function! DeleteHiddenBuffers()
     "https://stackoverflow.com/a/30101152/240515
     let l:tpbl=[]
@@ -237,9 +206,6 @@ endfunction
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-" I use ctags as intended, gtags for cscope. This works well for most languages.
-set cscopeprg=gtags-cscope
-
 nmap <F8> :TagbarToggle<CR>
 
 " For clang_complete
@@ -247,23 +213,6 @@ if has('mac')
 	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 	" let g:clang_library_path = expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
 endif
-
-" For C++ I'm using clang, clang_complete, and ALE with a clang backend. So for Qt:
-"
-" Put something like this in .clang_complete for clang_complete:
-"
-"   -fPIC
-"   -I/usr/include/qt5
-"   -I/usr/include/qt5/QtWidgets
-"   -I/usr/include/qt5/QtCore
-"
-" And set the same options for ALE:
-"
-"    let g:ale_pattern_options = {
-"        \ '/qzdl/': {
-"            \ 'ale_cpp_clang_options': '-fPIC -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtCore',
-"            \}
-"         \}
 
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
