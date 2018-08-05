@@ -44,6 +44,7 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('w0rp/ale')
+call minpac#add('zchee/deoplete-clang')
 call minpac#add('zchee/deoplete-jedi')
 
 packadd! matchit
@@ -117,8 +118,11 @@ let g:rainbow_active = 1
 set cscopeprg=gtags-cscope
 
 let g:deoplete#enable_at_startup = 1
+
 let g:LanguageClient_serverCommands = {
-    \'python': ['pyls']}
+    \'python': ['pyls'],
+    \'c': ['clangd'],
+    \'cpp': ['clangd'],}
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
     \'sh': ['shellcheck'],
