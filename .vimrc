@@ -119,6 +119,11 @@ set cscopeprg=gtags-cscope
 
 let g:deoplete#enable_at_startup = 1
 
+" For most C++ projects, make a CMake file and then use it to generate
+" a compile_commands.json. Add compile_commands.json to .gitignore.
+" cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=On
+" Both deoplete-clang and clangd will recognize it.
+
 let g:LanguageClient_serverCommands = {
     \'python': ['pyls'],
     \'c': ['clangd'],
