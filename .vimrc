@@ -124,10 +124,19 @@ set cscopeprg=gtags-cscope
 
 let g:deoplete#enable_at_startup = 1
 
+if has('mac')
+    let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+    " Or expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
+    " Or /usr/local/opt/llvm/lib/libclang.dylib
+endif
+
+
 " For most C++ projects, make a CMake file and then use it to generate
 " a compile_commands.json. Add compile_commands.json to .gitignore.
 " cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 " Both deoplete-clang and clangd will recognize it.
+" On OS X, this works for me for Qt:
+" env CMAKE_PREFIX_PATH=~/Qt/5.10.1/clang_64/lib/cmake/Qt5 cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 
 let g:LanguageClient_serverCommands = {
     \'python': ['pyls'],
@@ -216,12 +225,6 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 nmap <F8> :TagbarToggle<CR>
-
-" For clang_complete
-if has('mac')
-	let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-	" let g:clang_library_path = expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
-endif
 
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
