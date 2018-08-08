@@ -9,7 +9,7 @@ if filereadable(expand('$VIMRUNTIME/defaults.vim'))
 endif
 
 
-" Workaround for jedi-vim on Python 3.7. See:
+" Workaround for Python 3.7. See:
 " https://github.com/davidhalter/jedi-vim/issues/844#issuecomment-404352275
 silent! python3 1
 
@@ -49,8 +49,6 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('w0rp/ale')
-call minpac#add('zchee/deoplete-clang')
-call minpac#add('zchee/deoplete-jedi')
 
 packadd! matchit
 
@@ -134,7 +132,6 @@ endif
 " For most C++ projects, make a CMake file and then use it to generate
 " a compile_commands.json. Add compile_commands.json to .gitignore.
 " cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=On
-" Both deoplete-clang and clangd will recognize it.
 " On OS X, this works for me for Qt:
 " env CMAKE_PREFIX_PATH=~/Qt/5.10.1/clang_64/lib/cmake/Qt5 cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 
