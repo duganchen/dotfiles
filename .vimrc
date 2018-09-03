@@ -20,11 +20,11 @@ call minpac#add('Shougo/neco-vim')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('airblade/vim-rooter')
 call minpac#add('autozimu/LanguageClient-neovim', {'do': {->system('bash install.sh')}})
-call minpac#add('arcticicestudio/nord-vim', {'type': 'opt'})
 call minpac#add('chrisbra/Colorizer')
 call minpac#add('ctrlpvim/ctrlp.vim', {'type': 'opt'})
 call minpac#add('dag/vim-fish')
 call minpac#add('junegunn/fzf', {'type': 'opt'})
+call minpac#add('joshdick/onedark.vim')
 call minpac#add('junegunn/fzf.vim', {'type': 'opt'})
 call minpac#add('junegunn/gv.vim')
 call minpac#add('junegunn/vim-slash')
@@ -52,14 +52,21 @@ call minpac#add('w0rp/ale')
 
 packadd! matchit
 
+set background=dark
+
 if has('gui_running')
     packadd! ctrlp.vim
     packadd! cpsm
     packadd! gruvbox
+    colorscheme gruvbox
 else
     packadd! fzf
     packadd! fzf.vim
-    packadd! nord-vim
+    set termguicolors
+    packadd! onedark.vim
+    let g:onedark_terminal_italics = 1
+    colorscheme onedark
+    highlight normal guibg=NONE
 endif
 
 set autoindent
@@ -226,13 +233,3 @@ nmap <F8> :TagbarToggle<CR>
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
-
-if has('gui_running')
-    colorscheme gruvbox
-else
-    set termguicolors
-    let g:nord_italic = 1
-    let g:nord_italic_comments = 1
-    set background=dark
-    colorscheme nord
-endif
