@@ -4,29 +4,17 @@
 # https://github.com/rafaelrinaldi/pure
 
 set pure_color_blue (set_color "61afef")
-set pure_color_cyan (set_color "23878c")
+set pure_color_cyan (set_color "56b6c2")
 set pure_color_gray (set_color "abb2bf")
-set pure_color_green (set_color "699959")
-set pure_color_normal (set_color "000000")
-set pure_color_red (set_color "be5046")
-set pure_color_yellow (set_color "d19a66")
+set pure_color_green (set_color "98c379")
+set pure_color_normal (set_color "abb2bf") # Why is this black in the examples?
+set pure_color_red (set_color "e06c75")
+set pure_color_yellow (set_color "e5c07b")
 
 set -x EDITOR vim
 set -x PAGER most
 
 if status is-interactive
-    set -l onedark_options '-b'
-
-    if set -q VIM
-        # Using from vim/neovim.
-        set onedark_options "-256"
-    else if string match -iq "eterm*" $TERM
-        # Using from emacs.
-        function fish_title; true; end
-        set onedark_options "-256"
-    end
-
-    set_onedark $onedark_options
-
+    set_onedark -b
     keychain --eval --quiet -Q id_rsa | source
 end
