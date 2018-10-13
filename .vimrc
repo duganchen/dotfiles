@@ -129,13 +129,6 @@ set cscopeprg=gtags-cscope
 
 let g:deoplete#enable_at_startup = 1
 
-if has('mac')
-    let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-    " Or expand('~/Qt/Qt Creator.app/Contents/Frameworks/libclang.dylib')
-    " Or /usr/local/opt/llvm/lib/libclang.dylib
-endif
-
-
 " For most C++ projects, make a CMake file and then use it to generate
 " a compile_commands.json. Add compile_commands.json to .gitignore.
 " cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=On
