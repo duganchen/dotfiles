@@ -14,9 +14,9 @@ class cdmru(Command):
             return
 
         if arg:
-            command = f"bash -c 'tail -n +2 {conf} | fzf --preview-window=hidden -1 -0 --query=\"{arg}\"'"
+            command = f"sh -c 'tail -n +2 {conf} | fzf --preview-window=hidden -1 -0 --query=\"{arg}\"'"
         else:
-            command = f"bash -c 'tail -n +2 {conf} | fzf --preview-window=hidden -1 -0'"
+            command = f"sh -c 'tail -n +2 {conf} | fzf --preview-window=hidden -1 -0'"
 
         fzf = self.fm.execute_command(command, universal_newlines=True, stdout=subprocess.PIPE)
         stdout, _ = fzf.communicate()
