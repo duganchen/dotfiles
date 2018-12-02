@@ -33,3 +33,20 @@ class cdmru(Command):
         if fzf_file.is_dir():
             self.fm.cd(str(fzf_file))
 
+
+class cdfzf(Command):
+
+    def execute(self):
+
+        if 'TMUX_PANE' in os.environ:
+            fzf = 'fzf-tmux'
+        else:
+            fzf = 'fzf'
+
+        command = f'fd --type directory | {fzf} --preview-window=hidden'
+
+        proc = subprocess.run(['sh', '-c', command], stdout=subprocess.PIPE, encoding='utf-8')
+
+        directory = pathlib.Path(proc.stdout.strip()).resolve()
+        if directory.is_dir():
+            self.fm.cd(str(directory))
