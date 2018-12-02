@@ -27,12 +27,9 @@ class cdmru(Command):
         command = f"tail -n +2 {conf} | {fzf_cmd} --preview-window=hidden -1 -0 {query}"
         command = command.strip()
 
-        try:
-            stdout = subprocess.check_output(['sh', '-c', command])
-        except subprocess.CalledProcessError:
-            return
+        proc = subprocess.run(['sh', '-c', command], stdout=subprocess.PIPE, encoding='utf-8')
 
-        fzf_file = pathlib.Path(stdout.strip()).resolve()
+        fzf_file = pathlib.Path(proc.stdout.strip()).resolve()
         if fzf_file.is_dir():
             self.fm.cd(str(fzf_file))
 
