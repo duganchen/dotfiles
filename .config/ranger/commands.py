@@ -1,3 +1,4 @@
+import os
 import pathlib
 import subprocess
 
@@ -14,14 +15,24 @@ class cdmru(Command):
             return
 
         if arg:
-            command = f"tail -n +2 {conf} | fzf --preview-window=hidden -1 -0 --query=\"{arg}\""
+            query = '--query="{arg}"'
         else:
-            command = f"tail -n +2 {conf} | fzf --preview-window=hidden -1 -0"
+            query = ''
 
-        fzf = self.fm.execute_command(command, universal_newlines=True, stdout=subprocess.PIPE)
-        stdout, _ = fzf.communicate()
-        if fzf.returncode == 0:
-            fzf_file = pathlib.Path(stdout.strip()).resolve()
-            if fzf_file.is_dir():
-                self.fm.cd(str(fzf_file))
+        if 'TMUX_PANE' in os.environ:
+            fzf_cmd = 'fzf-tmux'
+        else:
+            fzf_cmd = 'fzf'
+
+        command = f"tail -n +2 {conf} | {fzf_cmd} --preview-window=hidden -1 -0 {query}"
+        command = command.strip()
+
+        try:
+            stdout = subprocess.check_output(['sh', '-c', command])
+        except subprocess.CalledProcessError:
+            return
+
+        fzf_file = pathlib.Path(stdout.strip()).resolve()
+        if fzf_file.is_dir():
+            self.fm.cd(str(fzf_file))
 
