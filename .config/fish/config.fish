@@ -19,27 +19,10 @@ set -l color0C '#76c7b7'
 set -l color0D '#6fb3d2'
 set -l color0E '#d381c3'
 set -l color0F '#be643c'
-# Currently using Fisherman with the following two plugins:
+set -x FZF_DEFAULT_OPTS "--color=bg+:$color01,spinner:$color0C,hl:$color0D --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
 
-# https://github.com/rkbk60/onedark-fish
-# https://github.com/rafaelrinaldi/pure
-
-set pure_color_blue (set_color "61afef")
-set pure_color_cyan (set_color "56b6c2")
-set pure_color_gray (set_color "abb2bf")
-set pure_color_green (set_color "98c379")
-set pure_color_normal (set_color "abb2bf") # Why is this black in the examples?
-set pure_color_red (set_color "e06c75")
-set pure_color_yellow (set_color "e5c07b")
-
-set -x FZF_DEFAULT_OPTS "
-  --color=bg+:$color01,spinner:$color0C,hl:$color0D
-  --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
-  --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
-"
-
-set -x FZF_DEFAULT_COMMAND 'fzffind'
 set -x FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS -0 -1 --preview='bat -p --color=always --italic-text=always {}'"
+set -x FZF_DEFAULT_COMMAND 'fzffind'
 
 set -x EDITOR vim
 set -x PAGER most

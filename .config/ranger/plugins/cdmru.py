@@ -22,10 +22,10 @@ def hook_ready(fm):
         except ValueError:
             visitIndex = None
 
-        if visitIndex is not None:
-            mru.insert(0, mru.pop(visitIndex))
-        else:
+        if visitIndex is None:
             mru.insert(0, visit)
+        else:
+            mru.insert(0, mru.pop(visitIndex))
 
         with conf.open(mode="w") as f:
             for directory in mru:
