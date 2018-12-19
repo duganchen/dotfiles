@@ -1,2 +1,11 @@
+# For FISH on Slackware with Plasma 5. The files in /etc/profile.d aren't
+# normally sourced if you're running sddm and FISH.
+export PATH=$PATH:/usr/games
+for file in /etc/profile.d/*.sh; do
+	if [ -x "$file" ]; then
+		. "$file"
+	fi
+done
+
 export XDG_CURRENT_DESKTOP=kde
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
