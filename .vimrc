@@ -8,6 +8,7 @@ if filereadable(expand('$VIMRUNTIME/defaults.vim'))
     source $VIMRUNTIME/defaults.vim
 endif
 
+echom a
 
 " Workaround for Python 3.7. See:
 " https://github.com/davidhalter/jedi-vim/issues/844#issuecomment-404352275
