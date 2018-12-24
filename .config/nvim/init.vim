@@ -22,8 +22,6 @@ scriptencoding utf-8
 packadd minpac
 call minpac#init()
 
-" Note: ALE seems to have issues with neovim > 0.3.1
-" https://github.com/w0rp/ale/issues/2160
 call minpac#add('w0rp/ale')
 
 " Been having installation issues with this. Not sure if it's because it's
