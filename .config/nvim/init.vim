@@ -78,5 +78,6 @@ set termguicolors
 colorscheme base16-bright
 augroup cmds
 autocmd!
+autocmd BufEnter,BufNew * silent! Glcd
 autocmd ColorScheme base16-bright highlight Normal guibg=None
 augroup END
