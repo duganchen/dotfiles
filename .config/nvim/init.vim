@@ -55,6 +55,7 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-vinegar')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('Yggdroot/LeaderF', {'do': {->system('bash install.sh')}})
 
 if !isdirectory(expand('~/.cache/vim'))
     call mkdir(expand('~/.cache/vim'))
@@ -63,8 +64,6 @@ set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 set undofile
-
-nnoremap <leader>b :buffers<cr>:b<space>
 
 " For vim-gitgutter. Recommended by its README.
 set updatetime=100
