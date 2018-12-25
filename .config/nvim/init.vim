@@ -19,6 +19,10 @@ scriptencoding utf-8
 " * semshi (syntax-highlighting)
 " * deoplete/LanguageClient-neovim (pyls integration)
 
+" This is what minpac recommends:
+" https://github.com/k-takata/minpac/issues/29#issuecomment-313543768
+set runtimepath+=~/.fzf
+
 packadd minpac
 call minpac#init()
 
@@ -37,6 +41,7 @@ call minpac#add('arakashic/chromatica.nvim')
 call minpac#add('chriskempson/base16-vim')
 
 call minpac#add('dag/vim-fish')
+call minpac#add('junegunn/fzf.vim')
 call minpac#add('junegunn/gv.vim')
 call minpac#add('junegunn/vim-slash')
 call minpac#add('luochen1990/rainbow')
@@ -50,6 +55,7 @@ call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-rhubarb')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tpope/vim-vinegar')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 
@@ -60,6 +66,8 @@ set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 set undofile
+
+set hidden
 
 " For vim-gitgutter. Recommended by its README.
 set updatetime=100
