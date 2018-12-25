@@ -20,6 +20,7 @@ scriptencoding utf-8
 " * deoplete/LanguageClient-neovim (pyls integration)
 "
 " C/C++:
+" * Chromatica (syntax-highlighting)
 " * deoplete/LanguageClient_neovim (clangd integration)
 
 packadd minpac
@@ -36,6 +37,7 @@ call minpac#add('Shougo/deoplete.nvim')
 call minpac#add('Shougo/neco-vim')
 
 call minpac#add('airblade/vim-gitgutter')
+call minpac#add('arakashic/chromatica.nvim')
 call minpac#add('chriskempson/base16-vim')
 
 call minpac#add('dag/vim-fish')
@@ -78,6 +80,11 @@ let g:LanguageClient_serverCommands = {
     \'python': ['pyls'],
     \'c': ['clangd'],
     \'cpp': ['clangd'],}
+
+if filereadable('/usr/lib64/libclang.so')
+	let g:chromatica#libclang_path='/usr/lib64/libclang.so'
+endif
+let g:chromatica#enable_at_startup=1
 
 set termguicolors
 colorscheme base16-bright
