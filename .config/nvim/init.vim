@@ -22,10 +22,6 @@ scriptencoding utf-8
 " C/C++:
 " * deoplete/LanguageClient_neovim (clangd integration)
 
-" This is what minpac recommends:
-" https://github.com/k-takata/minpac/issues/29#issuecomment-313543768
-set runtimepath+=~/.fzf
-
 packadd minpac
 call minpac#init()
 
@@ -43,7 +39,6 @@ call minpac#add('airblade/vim-gitgutter')
 call minpac#add('chriskempson/base16-vim')
 
 call minpac#add('dag/vim-fish')
-call minpac#add('junegunn/fzf.vim')
 call minpac#add('junegunn/gv.vim')
 call minpac#add('junegunn/vim-slash')
 call minpac#add('luochen1990/rainbow')
@@ -69,7 +64,7 @@ set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 set undofile
 
-set hidden
+nnoremap <leader>b :buffers<cr>:b<space>
 
 " For vim-gitgutter. Recommended by its README.
 set updatetime=100
@@ -78,9 +73,6 @@ let g:airline_powerline_fonts = 1
 let g:ale_sign_column_always = 1
 let g:deoplete#enable_at_startup = 1
 let g:rainbow_active = 1
-
-nnoremap <leader>t :Files<cr>
-nnoremap <leader>b :Buffers<cr>
 
 let g:ale_linters_explicit = 1
 let g:LanguageClient_serverCommands = {
