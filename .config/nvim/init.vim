@@ -23,6 +23,10 @@ scriptencoding utf-8
 " * Chromatica (syntax-highlighting)
 " * deoplete/LanguageClient_neovim (clangd integration)
 
+" This is what minpac recommends:
+" https://github.com/k-takata/minpac/issues/29#issuecomment-313543768
+set runtimepath+=~/.fzf
+
 packadd minpac
 call minpac#init()
 
@@ -41,6 +45,7 @@ call minpac#add('arakashic/chromatica.nvim')
 call minpac#add('chriskempson/base16-vim')
 
 call minpac#add('dag/vim-fish')
+call minpac#add('junegunn/fzf.vim')
 call minpac#add('junegunn/gv.vim')
 call minpac#add('junegunn/vim-slash')
 call minpac#add('luochen1990/rainbow')
@@ -74,6 +79,11 @@ let g:airline_powerline_fonts = 1
 let g:ale_sign_column_always = 1
 let g:deoplete#enable_at_startup = 1
 let g:rainbow_active = 1
+
+nnoremap <leader>t :Files<cr>
+
+" Currently having some issues with :Buffers. So falling back to this.
+nnoremap <leader>b :buffers<cr>:b<space>
 
 let g:ale_linters_explicit = 1
 let g:LanguageClient_serverCommands = {
