@@ -23,10 +23,6 @@ scriptencoding utf-8
 " * Chromatica (syntax-highlighting)
 " * deoplete/LanguageClient_neovim (clangd integration)
 
-" This is what minpac recommends:
-" https://github.com/k-takata/minpac/issues/29#issuecomment-313543768
-set runtimepath+=~/.fzf
-
 packadd minpac
 call minpac#init()
 
