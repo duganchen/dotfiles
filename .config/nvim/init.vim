@@ -68,6 +68,8 @@ set undodir=~/.cache/vim//
 set undofile
 set grepprg=rg\ --vimgrep
 set shell=bash
+set number
+set relativenumber
 
 " For vim-gitgutter. Recommended by its README.
 set updatetime=100
