@@ -95,7 +95,9 @@ let g:LanguageClient_serverCommands = {
     \'c': ['clangd'],
     \'cpp': ['clangd'],}
 
-if filereadable('/usr/lib64/libclang.so')
+if filereadable('/usr/local/opt/llvm/lib/libclang.dylib')
+	let g:chromatica#libclang_path='/usr/local/opt/llvm/lib/libclang.dylib'
+elseif filereadable('/usr/lib64/libclang.so')
 	let g:chromatica#libclang_path='/usr/lib64/libclang.so'
 endif
 let g:chromatica#enable_at_startup=1
