@@ -61,7 +61,6 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-vinegar')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
-call minpac#add('Yggdroot/LeaderF', {'do': {->system('bash install.sh')}})
 
 if !isdirectory(expand('~/.cache/vim'))
     call mkdir(expand('~/.cache/vim'))
