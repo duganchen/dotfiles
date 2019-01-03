@@ -72,6 +72,7 @@ set grepprg=rg\ --vimgrep
 set shell=bash
 set number
 set relativenumber
+set hidden
 
 " For vim-gitgutter. Recommended by its README.
 set updatetime=100
