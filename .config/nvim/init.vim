@@ -81,8 +81,8 @@ let g:ale_sign_column_always = 1
 let g:deoplete#enable_at_startup = 1
 let g:rainbow_active = 1
 
-nnoremap <leader>t :Files<cr>
-nnoremap <leader>b :Buffers<cr>
+nnoremap <silent> <leader>t :Files<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
 
 let g:ale_linters_explicit = 1
 let g:LanguageClient_serverCommands = {
