@@ -1,4 +1,5 @@
-let b:ale_linters = {'fish': ['fish']}
+let b:ale_linters_explicit = 1
+let b:ale_linters = ['fish']
 
 " Stolen from:
 " https://github.com/nthapaliya/dotfiles/blob/master/home/.config/nvim/init.vim

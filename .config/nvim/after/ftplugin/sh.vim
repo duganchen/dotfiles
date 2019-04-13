@@ -1,1 +1,2 @@
-let b:ale_linters = {'sh': ['shellcheck']}
+let b:ale_linters_explicit = 1
+let b:ale_linters = ['shellcheck']
