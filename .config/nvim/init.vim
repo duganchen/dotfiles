@@ -83,7 +83,8 @@ endfunction
 
 augroup cmds
 	autocmd!
-	autocmd ColorScheme * call RemoveBackground()
+	"  Don't want a transparent background with Solarized.
+	" autocmd ColorScheme * call RemoveBackground()
 augroup end
 
 
