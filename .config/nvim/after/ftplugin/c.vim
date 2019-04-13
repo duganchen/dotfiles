@@ -1,1 +1,0 @@
-setlocal formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
