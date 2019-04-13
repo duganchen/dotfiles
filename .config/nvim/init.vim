@@ -2,10 +2,6 @@ scriptencoding utf-8
 
 " The plugins I use for language support are:
 "
-" VimL:
-" * ALE (lint using vint)
-" * deoplete/neco (autocompletion)
-"
 " BASH:
 " * ALE (lint using shellcheck)
 "
@@ -15,44 +11,35 @@ scriptencoding utf-8
 "   * fix using fish_indent
 " * vim-fish (colors/indent)
 "
+" VimL:
+" * ALE (lint using vint)
+"
+" JSON:
+" * ALE (lint using jsonlint, fix using fixjson)
+"
 " Python:
+" * jedi-vim/VimCompletesMe (completion)
+" * ALE (lint with pyflakes)
 " * semshi (syntax-highlighting)
-" * deoplete/LanguageClient-neovim (pyls integration)
 "
 " C/C++:
-" * deoplete/LanguageClient_neovim (clangd integration)
-
-" This is what minpac recommends:
-" https://github.com/k-takata/minpac/issues/29#issuecomment-313543768
-set runtimepath+=~/.fzf
+" * VimCompletesMe/clang_complete: completion 
+" * ALE (lint with clang)
 
 packadd minpac
 call minpac#init()
 
-call minpac#add('w0rp/ale')
-
-" Been having installation issues with this. Not sure if it's because it's
-" sensitive to ordering, or if it's because I'm quitting vim too early.
-call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': {->system('bash install.sh')}})
-
-call minpac#add('Shougo/deoplete.nvim')
-
-call minpac#add('Shougo/neco-vim')
-
-call minpac#add('airblade/vim-gitgutter')
-call minpac#add('chriskempson/base16-vim')
+call minpac#add('Rip-Rip/clang_complete')
+call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('dag/vim-fish')
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('junegunn/gv.vim')
+call minpac#add('davidhalter/jedi-vim')
 call minpac#add('junegunn/vim-slash')
-call minpac#add('justinmk/vim-dirvish')
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-highlightedyank')
-call minpac#add('romainl/vim-qf')
 call minpac#add('numirias/semshi')
 call minpac#add('ryanoasis/vim-devicons')
-call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-repeat')
@@ -61,41 +48,34 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('w0rp/ale')
 
 if !isdirectory(expand('~/.cache/vim'))
     call mkdir(expand('~/.cache/vim'))
 endif
+
 set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
-set undodir=~/.cache/vim//
-set undofile
 set grepprg=rg\ --vimgrep
-set shell=bash
+set hidden
 set number
 set relativenumber
-set hidden
-
-" For vim-gitgutter. Recommended by its README.
+set shell=bash
+set termguicolors
+set undodir=~/.cache/vim//
+set undofile
 set updatetime=100
 
+colorscheme  solarized8
+
+let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
-let g:ale_sign_column_always = 1
-let g:deoplete#enable_at_startup = 1
+
 let g:rainbow_active = 1
 
-nnoremap <silent> <leader>t :Files<cr>
-nnoremap <silent> <leader>b :Buffers<cr>
+let g:clang_library_path = '/usr/lib64/libclang.so'
 
-let g:ale_linters_explicit = 1
-let g:LanguageClient_serverCommands = {
-    \'python': ['pyls'],
-    \'c': ['clangd'],
-    \'cpp': ['clangd'],}
+" TMux compatibility
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
 
-set termguicolors
-colorscheme base16-bright
-augroup cmds
-autocmd!
-autocmd BufEnter,BufNew * silent! Glcd
-autocmd ColorScheme base16-bright highlight Normal guibg=None
-augroup END
