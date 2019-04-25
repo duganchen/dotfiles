@@ -1,4 +1,3 @@
-let b:ale_fix_on_save = 1
-let b:ale_fixers =  ['fixjson']
-let b:ale_linters = ['jsonlint']
-let b:ale_linters_explicit = 1
+setlocal formatprg=prettier\ --stdin\ --parser\ json
+" This is consistent with the default prettier settings.
+setlocal expandtab tabstop=2 shiftwidth=2
