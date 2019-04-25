@@ -75,6 +75,19 @@ let g:rainbow_active = 1
 
 let g:clang_library_path = '/usr/lib64/libclang.so'
 
+
+function!RemoveBackground()
+	highlight Normal guibg=NONE
+	highlight NonText guibg=NONE
+endfunction
+
+augroup cmds
+	autocmd!
+	"  Don't want a transparent background with Solarized.
+	" autocmd ColorScheme * call RemoveBackground()
+augroup end
+
+
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
