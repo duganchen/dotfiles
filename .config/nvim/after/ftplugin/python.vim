@@ -1,2 +1,3 @@
-let b:ale_linters_explicit = 1
-let b:ale_linters = ['pyflakes']
+setlocal makeprg=mypy\ --strict\ %
+setlocal formatprg=black\ -
+setlocal expandtab tabstop=4 shiftwidth=4
