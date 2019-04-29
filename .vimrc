@@ -11,6 +11,11 @@ scriptencoding utf-8
 " * ctags (with Universal Ctags)
 " * cscope (with GNU Global)
 
+" Currently using Solarized with Powerline and Linux, and base16 on OS X. My
+" base16 setup is:
+" * https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
+" * https://github.com/jatap/tmux-base16-statusline
+
 if filereadable(expand('$VIMRUNTIME/defaults.vim'))
     unlet! g:skip_defaults_vim
     source $VIMRUNTIME/defaults.vim
@@ -19,6 +24,7 @@ packadd minpac
 call minpac#init()
 
 call minpac#add('ajh17/VimCompletesMe')
+call minpac#add('chriskempson/base16-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
 call minpac#add('junegunn/vim-slash')
@@ -54,9 +60,16 @@ set undofile
 set updatetime=100
 
 set background=dark
-colorscheme solarized8
 
-let g:airline_theme='solarized'
+if has('mac')
+	colorscheme base16-default-dark
+	let g:airline_theme='base16_default'
+	highlight Normal guibg=NONE
+else
+	colorscheme solarized8
+	let g:airline_theme='solarized'
+end
+
 let g:airline_powerline_fonts = 1
 
 let g:rainbow_active = 1
