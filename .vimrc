@@ -2,7 +2,7 @@ scriptencoding utf-8
 
 " Needs a NERD font.
 "
-" For the most part, I'm going for vim purity otherwise. My language support
+" Apart from the NERD font, I'm going for vim purity. My language support
 " is:
 "
 " * makeprg
