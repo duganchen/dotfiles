@@ -11,10 +11,7 @@ scriptencoding utf-8
 " * ctags (with Universal Ctags)
 " * cscope (with GNU Global)
 
-" Currently using Solarized with Powerline and Linux, and base16 on OS X. My
-" base16 setup is:
-" * https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
-" * https://github.com/jatap/tmux-base16-statusline
+" Currently using Solarized with Powerline and Linux, and Gruvbox on OS X.
 
 if filereadable(expand('$VIMRUNTIME/defaults.vim'))
     unlet! g:skip_defaults_vim
@@ -24,7 +21,6 @@ packadd minpac
 call minpac#init()
 
 call minpac#add('ajh17/VimCompletesMe')
-call minpac#add('chriskempson/base16-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
 call minpac#add('junegunn/fzf')
@@ -34,6 +30,7 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-highlightedyank')
+call minpac#add('morhetz/gruvbox')
 call minpac#add('romainl/vim-qf')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('tpope/vim-commentary')
@@ -65,13 +62,16 @@ set updatetime=100
 set background=dark
 
 if has('mac')
-	colorscheme base16-default-dark
-	let g:airline_theme='base16_default'
-	highlight Normal guibg=NONE
+	let g:gruvbox_italic = 1
+	colorscheme gruvbox
 else
 	colorscheme solarized8
 	let g:airline_theme='solarized'
 end
+
+
+" Uncomment for a transparent background.
+" highlight Normal guibg=NONE
 
 let g:airline_powerline_fonts = 1
 
