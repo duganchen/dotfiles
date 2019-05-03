@@ -74,6 +74,17 @@ let g:airline_powerline_fonts = 1
 
 let g:rainbow_active = 1
 
+function CheckSlackBuildInfo()
+	if filereadable(expand('%:p:r'). '.SlackBuild')
+		setlocal filetype=sh
+	endif
+endfunction
+
+augroup autocmds
+	autocmd!
+	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
+augroup END
+
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
