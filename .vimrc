@@ -27,6 +27,8 @@ call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('chriskempson/base16-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
+call minpac#add('junegunn/fzf')
+call minpac#add('junegunn/fzf.vim')
 call minpac#add('junegunn/vim-slash')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('lifepillar/vim-solarized8')
@@ -86,6 +88,13 @@ augroup autocmds
 	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
 	autocmd BufEnter,BufNew * silent! Glcd
 augroup END
+
+
+" :Files is FZF
+nnoremap \t :Files<cr>
+
+" You know, I've never found anything actually better than this.
+nnoremap \b :ls<cr>:b<space>
 
 " TMux compatibility
 set t_8f=[38;2;%lu;%lu;%lum
