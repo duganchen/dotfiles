@@ -84,6 +84,7 @@ endfunction
 augroup autocmds
 	autocmd!
 	autocmd BufEnter,BufNew *.info call CheckSlackBuildInfo()
+	autocmd BufEnter,BufNew * silent! Glcd
 augroup END
 
 " TMux compatibility
