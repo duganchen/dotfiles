@@ -29,10 +29,12 @@ end
 # OS X uses Gruvbox. 
 
 if test (uname) = Linux
+    # Agnoster theme
     agnoster powerline
 end
 
 if test (uname) = Darwin
+    # bobthefish theme
     set -g theme_powerline_fonts yes
     set -g theme_nerd_fonts yes
     set -g theme_color_scheme gruvbox
