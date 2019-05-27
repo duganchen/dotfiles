@@ -1,11 +1,13 @@
 # For FISH on Slackware with Plasma 5. The files in /etc/profile.d aren't
-# normally sourced if you're running sddm and FISH.
-export PATH=$PATH:/usr/games
-for file in /etc/profile.d/*.sh; do
-	if [ -x "$file" ]; then
-		. "$file"
-	fi
-done
+# normally sourced if you're running sddm and FISH. This causes Plasma 5
+# to boot to a black window.
+. /etc/profile
 
-export XDG_CURRENT_DESKTOP=kde
+# For OpenBox I set up the Qt themes in LxQt, then do this.
+export QT_STYLE_OVERRIDE=kvantum
+export QT_QPA_PLATFORMTHEME=lxqt
+export XDG_CURRENT_DESKTOP=LXQt
+
+# Needed to get the binary Calibre packages to work with the TV
+# I'm using as a monitor.
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
