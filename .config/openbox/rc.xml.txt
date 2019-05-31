@@ -11,9 +11,12 @@
     </keybind>
 
     <keybind key="W-S-e">
-		  <action name="Exit">
-		  	<prompt>yes</prompt>
-		  </action>
+      <action name="Execute">
+        <execute>ssh-agent -k</execute>
+      </action>
+      <action name="Exit">
+        <prompt>no</prompt>
+      </action>
     </keybind>
 
     <keybind key="W-S-r">

@@ -3,11 +3,5 @@
 # to boot to a black window.
 . /etc/profile
 
-# For OpenBox I set up the Qt themes in LxQt, then do this.
-export QT_STYLE_OVERRIDE=kvantum
-export QT_QPA_PLATFORMTHEME=lxqt
-export XDG_CURRENT_DESKTOP=LXQt
+export PATH=$PATH:$HOME/.local/bin
 
-# Needed to get the binary Calibre packages to work with the TV
-# I'm using as a monitor.
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
