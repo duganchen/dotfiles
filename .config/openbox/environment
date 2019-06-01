@@ -4,9 +4,7 @@
 . /etc/profile
 
 # For OpenBox I set up the Qt themes in LxQt, then do this.
-export QT_STYLE_OVERRIDE=kvantum
 export QT_QPA_PLATFORMTHEME=lxqt
-export XDG_CURRENT_DESKTOP=LXQt
 
 # Needed to get the binary Calibre packages to work with the TV
 # I'm using as a monitor.

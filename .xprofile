@@ -5,3 +5,9 @@
 
 export PATH=$PATH:$HOME/.local/bin
 
+export DOOMWADDIR="$HOME/Software/doomwads"
+export SDL_SOUNDFONTS="$HOME/.config/gzdoom/soundfonts/FatBoy-v0.786.sf2"
+
+export PAGER="less -R"
+export MANPAGER=most
+export EDITOR=vim
