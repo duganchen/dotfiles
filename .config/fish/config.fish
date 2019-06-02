@@ -46,3 +46,16 @@ if set -q DISPLAY
         or exec tmux
     end
 end
+
+# For st on Slackware.
+
+# https://github.com/fish-shell/fish-shell/issues/3425#issuecomment-251714285
+if string match -q "st-*" "$TERM"
+    set -e VTE_VERSION
+end
+
+
+# Slackware does not add ~/.local/bin to the PATH by default.
+if not contains ~/.local/bin $PATH
+    set PATH $PATH ~/.local/bin
+end
