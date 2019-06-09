@@ -1,6 +1,9 @@
-pkill ssh-agent
-eval $(ssh-agent)
-export SSH_ASKPASS=/usr/bin/lxqt-openssh-askpass
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+export SSH_ASKPASS=/usr/lib64/seahorse/seahorse-ssh-askpass
+
+# The credential helper for git I set up separately. Se:
+# https://www.linuxquestions.org/questions/slackware-14/tip-use-the-libsecret-git-credential-helper-on-current-4175654900/
 
 # For OpenBox I set up the Qt themes in LxQt, then do this.
 export QT_QPA_PLATFORMTHEME=lxqt
