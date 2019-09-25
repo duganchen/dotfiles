@@ -54,6 +54,7 @@ set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set grepprg=rg\ --vimgrep
 set hidden
+set linebreak
 set number
 set relativenumber
 set shell=bash
