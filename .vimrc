@@ -11,8 +11,6 @@ scriptencoding utf-8
 " * ctags (with Universal Ctags)
 " * cscope (with GNU Global)
 
-" Currently using Solarized with Powerline and Linux, and Gruvbox on OS X.
-
 if filereadable(expand('$VIMRUNTIME/defaults.vim'))
     unlet! g:skip_defaults_vim
     source $VIMRUNTIME/defaults.vim
@@ -23,6 +21,7 @@ call minpac#init()
 call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('ayu-theme/ayu-vim')
+call minpac#add('chriskempson/base16-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
 call minpac#add('junegunn/fzf')
@@ -34,8 +33,7 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('romainl/vim-qf')
-call minpac#add('sonph/onehalf', {'rtp': 'vim'})
-call minpac#add('srcery-colors/srcery-vim')
+call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-dispatch')
@@ -45,6 +43,7 @@ call minpac#add('tpope/vim-rhubarb')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
 
 if !isdirectory(expand('~/.cache/vim'))
     call mkdir(expand('~/.cache/vim'))
@@ -76,17 +75,17 @@ set background=dark
 if has('mac')
 	let ayucolor="dark"
 	colorscheme ayu
+elseif !has('gui_running')
+	colorscheme base16-bright
+	let g:airline_theme = 'base16_bright'
 
-else
-	colorscheme srcery
+	" For background redraw issues.
+	" https://superuser.com/a/588243
+	set t_ut=
+
+	" Transparent background.
+	highlight Normal guibg=NONE
 end
-
-" For background redraw issues.
-" https://superuser.com/a/588243
-set t_ut=
-
-" Uncomment for a transparent background.
-" highlight Normal guibg=NONE
 
 let g:airline_powerline_fonts = 1
 
