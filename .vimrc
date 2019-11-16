@@ -22,6 +22,7 @@ call minpac#init()
 
 call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('airblade/vim-gitgutter')
+call minpac#add('ayu-theme/ayu-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
 call minpac#add('junegunn/fzf')
@@ -72,7 +73,13 @@ set updatetime=100
 
 set background=dark
 
-colorscheme srcery
+if has('mac')
+	let ayucolor="dark"
+	colorscheme ayu
+
+else
+	colorscheme srcery
+end
 
 " For background redraw issues.
 " https://superuser.com/a/588243
