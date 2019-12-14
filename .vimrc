@@ -76,23 +76,9 @@ set updatetime=100
 
 set background=dark
 
-if has('mac')
-	let ayucolor="dark"
-	colorscheme ayu
-elseif !has('gui_running')
-	colorscheme base16-synth-midnight-dark
-	" For background redraw issues.
-	" https://superuser.com/a/588243
-	set t_ut=
-
-	" Transparent background.
-	highlight Normal guibg=NONE
-end
-
 let g:rainbow_active = 1
 
 let g:lightline = {
-	\ 'colorscheme': 'base16_synth_midnight_dark',
 	\ 'component': {
 	\   'lineinfo': ' %3l:%-2v',
 	\ },
@@ -113,6 +99,25 @@ function! LightlineFugitive()
 	endif
 	return ''
 endfunction
+
+if has('mac')
+	let ayucolor="dark"
+	colorscheme ayu
+	let g:lightline.colorscheme = 'ayu'
+elseif !has('gui_running')
+	colorscheme base16-synth-midnight-dark
+	" For background redraw issues.
+	" https://superuser.com/a/588243
+	set t_ut=
+
+	" Transparent background.
+	highlight Normal guibg=NONE
+
+	let g:lightline.colorscheme = 'base16_synth_midnight_dark'
+end
+
+
+let g:lightline.colorscheme = 'base16_synth_midnight_dark'
 
 augroup autocmds
 	autocmd!
