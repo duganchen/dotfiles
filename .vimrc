@@ -64,8 +64,9 @@ set shell=bash
 
 
 " TMux compatibility
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
+" Commented out because I don't currently use tmux.
+"set t_8f=[38;2;%lu;%lu;%lum
+"set t_8b=[48;2;%lu;%lu;%lum
 
 
 set termguicolors
@@ -86,9 +87,7 @@ let g:lightline = {
 	\   'readonly': 'LightlineReadonly',
 	\   'fugitive': 'LightlineFugitive'
 	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' }
-	\ }
+\ }
 function! LightlineReadonly()
 	return &readonly ? '' : ''
 endfunction
@@ -114,10 +113,11 @@ elseif !has('gui_running')
 	highlight Normal guibg=NONE
 
 	let g:lightline.colorscheme = 'base16_synth_midnight_dark'
+
+	" These don't look good in transparent iTerms for me.
+	let g:lightline.separator = { 'left': '', 'right': '' }
+	let g:lightline.subseparator = { 'left': '', 'right': '' }
 end
-
-
-let g:lightline.colorscheme = 'base16_synth_midnight_dark'
 
 augroup autocmds
 	autocmd!
