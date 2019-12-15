@@ -113,7 +113,7 @@ elseif !has('gui_running')
 	let g:lightline.subseparator = { 'left': '', 'right': '' }
 
 
-	if !empty($TMUX
+	if !empty($TMUX)
 		set t_8f=[38;2;%lu;%lu;%lum
 		set t_8b=[48;2;%lu;%lu;%lum
 	endif
