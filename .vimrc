@@ -63,12 +63,6 @@ set relativenumber
 set shell=bash
 
 
-" TMux compatibility
-" Commented out because I don't currently use tmux.
-"set t_8f=[38;2;%lu;%lu;%lum
-"set t_8b=[48;2;%lu;%lu;%lum
-
-
 set termguicolors
 
 set undodir=~/.cache/vim//
@@ -117,6 +111,12 @@ elseif !has('gui_running')
 	" These don't look good in transparent iTerms for me.
 	let g:lightline.separator = { 'left': '', 'right': '' }
 	let g:lightline.subseparator = { 'left': '', 'right': '' }
+
+
+	if !empty($TMUX
+		set t_8f=[38;2;%lu;%lu;%lum
+		set t_8b=[48;2;%lu;%lu;%lum
+	endif
 end
 
 augroup autocmds
