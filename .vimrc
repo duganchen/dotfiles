@@ -123,6 +123,7 @@ end
 augroup autocmds
 	autocmd!
 	autocmd BufEnter,BufNew * silent! Glcd
+	autocmd BufEnter,BufNew configure.ac setlocal filetype=m4
 augroup END
 
 
