@@ -44,6 +44,7 @@ call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-rhubarb')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tpope/vim-sleuth')
 
 if !isdirectory(expand('~/.cache/vim'))
     call mkdir(expand('~/.cache/vim'))
