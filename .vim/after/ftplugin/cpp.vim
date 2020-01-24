@@ -1,4 +1,4 @@
-setlocal makeprg=clang-check\ %
+setlocal makeprg=clang-tidy\ %
 
 " Well, they match..
 setlocal formatprg=clang-format
