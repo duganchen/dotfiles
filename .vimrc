@@ -20,12 +20,9 @@ call minpac#init()
 
 call minpac#add('ajh17/VimCompletesMe')
 call minpac#add('airblade/vim-gitgutter')
-call minpac#add('ayu-theme/ayu-vim')
-call minpac#add('chriskempson/base16-vim')
+call minpac#add('arcticicestudio/nord-vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('davidhalter/jedi-vim')
-call minpac#add('ekalinin/Dockerfile.vim')
-call minpac#add('itchyny/lightline.vim')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('junegunn/vim-slash')
@@ -36,8 +33,8 @@ call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('mike-hearn/base16-vim-lightline')
 call minpac#add('romainl/vim-qf')
-call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
+call minpac#add('vim-airline/vim-airline')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive')
@@ -56,15 +53,11 @@ set directory=~/.cache/vim//
 set grepprg=rg\ --vimgrep
 set hidden
 
-" Needed for Lightline
-set laststatus=2
-set noshowmode
-
 set linebreak
+set noshowmode
 set number
 set relativenumber
 set shell=bash
-
 
 set termguicolors
 
@@ -76,51 +69,28 @@ set background=dark
 
 let g:rainbow_active = 1
 
-let g:lightline = {
-	\ 'component': {
-	\   'lineinfo': ' %3l:%-2v',
-	\ },
-	\ 'component_function': {
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive'
-	\ },
-\ }
-function! LightlineReadonly()
-	return &readonly ? '' : ''
-endfunction
-function! LightlineFugitive()
-	if exists('*fugitive#head')
-		let branch = fugitive#head()
-		return branch !=# '' ? ' '.branch : ''
-	endif
-	return ''
-endfunction
+let g:airline_powerline_fonts = 1
 
-if has('mac')
-	let ayucolor="dark"
-	colorscheme ayu
-	let g:lightline.colorscheme = 'ayu'
-elseif !has('gui_running')
-	colorscheme base16-synth-midnight-dark
-	" For background redraw issues.
-	" https://superuser.com/a/588243
-	set t_ut=
+let g:nord_bold = 1
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+colorscheme nord
 
-	" Transparent background.
-	highlight Normal guibg=NONE
+" if !has('gui_running') && !has('mac')
+" 	" For background redraw issues.
+" 	" https://superuser.com/a/588243
+" 	set t_ut=
 
-	let g:lightline.colorscheme = 'base16_synth_midnight_dark'
-
-	" These don't look good in transparent iTerms for me.
-	let g:lightline.separator = { 'left': '', 'right': '' }
-	let g:lightline.subseparator = { 'left': '', 'right': '' }
+" 	" Transparent background.
+" 	highlight Normal guibg=NONE
+" end
 
 
-	if !empty($TMUX)
-		set t_8f=[38;2;%lu;%lu;%lum
-		set t_8b=[48;2;%lu;%lu;%lum
-	endif
-end
+" if !has('gui_running') && !has('mac') && !empty($TMUX)
+"     set t_8f=[38;2;%lu;%lu;%lum
+"     set t_8b=[48;2;%lu;%lu;%lum
+" end
 
 augroup autocmds
 	autocmd!
