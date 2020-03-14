@@ -59,3 +59,5 @@ end
 if not contains ~/.local/bin $PATH
     set PATH $PATH ~/.local/bin
 end
+
+set -x PYTHONCACHEPREFIX /home/dugan/.cache/cpython/
