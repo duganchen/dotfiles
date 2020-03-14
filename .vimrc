@@ -33,6 +33,7 @@ call minpac#add('luochen1990/rainbow')
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('mike-hearn/base16-vim-lightline')
 call minpac#add('romainl/vim-qf')
+call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('tpope/vim-commentary')
@@ -77,20 +78,19 @@ let g:nord_underline = 1
 let g:nord_italic_comments = 1
 colorscheme nord
 
-" if !has('gui_running') && !has('mac')
-" 	" For background redraw issues.
-" 	" https://superuser.com/a/588243
-" 	set t_ut=
+if !has('gui_running') && !has('mac')
+	" For background redraw issues.
+	" https://superuser.com/a/588243
+	" set t_ut=
 
-" 	" Transparent background.
-" 	highlight Normal guibg=NONE
-" end
+	" Transparent background.
+	" highlight Normal guibg=NONE
 
-
-" if !has('gui_running') && !has('mac') && !empty($TMUX)
-"     set t_8f=[38;2;%lu;%lu;%lum
-"     set t_8b=[48;2;%lu;%lu;%lum
-" end
+	if !empty($TMUX)
+		set t_8f=[38;2;%lu;%lu;%lum
+		set t_8b=[48;2;%lu;%lu;%lum
+	endif
+end
 
 augroup autocmds
 	autocmd!
