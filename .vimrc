@@ -90,6 +90,11 @@ if !has('gui_running') && !has('mac')
 		set t_8f=[38;2;%lu;%lu;%lum
 		set t_8b=[48;2;%lu;%lu;%lum
 	endif
+
+	" https://github.com/ryanoasis/vim-devicons/issues/266#issuecomment-599166010
+	if $TERM == 'xterm-kitty'
+	    set t_RV=
+	endif
 end
 
 augroup autocmds
