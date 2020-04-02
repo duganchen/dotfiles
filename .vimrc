@@ -49,6 +49,7 @@ if !isdirectory(expand('~/.cache/vim'))
     call mkdir(expand('~/.cache/vim'))
 endif
 
+set autoread
 set backupdir=~/.cache/vim//
 set directory=~/.cache/vim//
 set grepprg=rg\ --vimgrep
