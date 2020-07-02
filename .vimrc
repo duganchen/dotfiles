@@ -102,6 +102,7 @@ augroup autocmds
 	autocmd!
 	autocmd BufEnter,BufNew * silent! Glcd
 	autocmd BufEnter,BufNew configure.ac setlocal filetype=m4
+	autocmd BufEnter,BufNew *.qrc setlocal filetype=xml
 augroup END
 
 
