@@ -60,6 +60,7 @@ set noshowmode
 set number
 set relativenumber
 set shell=bash
+set smartindent
 
 set termguicolors
 
