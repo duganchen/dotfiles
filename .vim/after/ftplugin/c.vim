@@ -1,4 +1,5 @@
-if has('mac')
-	setlocal makeprg=/usr/local/opt/llvm/bin/clang-tidy\ %
-	setlocal formatprg=/usr/local/opt/llvm/bin/clang-format\ %
-end
+setlocal makeprg=clang-tidy\ %
+
+" Well, they match..
+setlocal formatprg=clang-format
+setlocal tabstop=2 shiftwidth=2 expandtab
