@@ -6,6 +6,7 @@
 * [lsd](https://github.com/Peltoche/lsd) ls replacement
 * [fzf](https://github.com/junegunn/fzf) (including to add Ctrl+R funtionality to FISH)
 * [starship](https://starship.rs/) prompt
+* [bat](https://github.com/sharkdp/bat) as a manpager (on Linux)
 
 **~/.config/fish/functions/ls.fish**
 
@@ -17,6 +18,12 @@
 
 `starship init fish | source`
 `fzf_key_bindings`
+
+
+
+`set -Ux MANPAGER "sh -c 'col -bx | bat --theme Nord -l man -p'"`
+
+`set -Ux MANROFFOPT '-c'`
 
 ## Terminal
 
