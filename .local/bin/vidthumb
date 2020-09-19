@@ -10,8 +10,10 @@ if [ -f "$index" ]; then
 	thumbnail="$(jq ". \"$movie\"" <"$index")"
 	if [[ "$thumbnail" == "null" ]]; then
 		thumbnail="$cache/$(uuidgen).jpg"
-    jq --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" < "$index"
+    json="$(jq --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" < "$index")"
+    echo "$json" > "$index"
 	fi
+  echo "$thumbnail"
 else
 	thumbnail="$cache/$(uuidgen).jpg"
 	echo "{\"$movie\": \"$thumbnail\"}" >"$index"
