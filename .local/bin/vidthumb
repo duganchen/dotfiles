@@ -1,20 +1,32 @@
 #!/usr/bin/env bash:
 
+# vidthumb /path/to/movie.ext
+# Outputs the path to movie.ext's thumbnail, which would be generated and cached if
+# necessary.
+
+# All data is stored in ~/.cache/vidthumb/.
+
 cache="$HOME/.cache/vidthumb"
 index="$HOME/.cache/vidthumb/index.json"
 movie="$(realpath "$1")"
+thumbnail=""
 
 mkdir -p "$cache"
 
 if [ -f "$index" ]; then
-	thumbnail="$(jq ". \"$movie\"" <"$index")"
+	thumbnail="$(jq -r ". \"$movie\"" <"$index")"
 	if [[ "$thumbnail" == "null" ]]; then
 		thumbnail="$cache/$(uuidgen).jpg"
-    json="$(jq --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" < "$index")"
-    echo "$json" > "$index"
+		json="$(jq -r --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" <"$index")"
+		echo "$json" >"$index"
 	fi
-  echo "$thumbnail"
 else
 	thumbnail="$cache/$(uuidgen).jpg"
 	echo "{\"$movie\": \"$thumbnail\"}" >"$index"
 fi
+
+if [ ! -f "$thumbnail" ]; then
+	ffmpegthumbnailer -i "$movie" -o "$thumbnail" -s 0
+fi
+
+echo "$thumbnail"
