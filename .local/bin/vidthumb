@@ -7,8 +7,12 @@ key="$(realpath "$1")"
 mkdir -p "$cache"
 
 if [ -f "$index" ]; then
-	jq ". \"$key\"" < "$index"
+	thumbnail="$(jq ". \"$key\"" <"$index")"
+	if [[ "$thumbnail" == "null" ]]; then
+		thumbnail="$cache/$(uuidgen).jpg"
+    jq --arg "$key" "$thumbnail" ". + {\"$key\": \"$thumbnail\"}" < "$index"
+	fi
 else
-  thumbnail="$cache/$(uuidgen).jpg"
-  echo "{\"$key\": \"$thumbnail\"}" > "$index"
+	thumbnail="$cache/$(uuidgen).jpg"
+	echo "{\"$key\": \"$thumbnail\"}" >"$index"
 fi
