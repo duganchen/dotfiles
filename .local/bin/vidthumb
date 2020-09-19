@@ -2,17 +2,17 @@
 
 cache="$HOME/.cache/vidthumb"
 index="$HOME/.cache/vidthumb/index.json"
-key="$(realpath "$1")"
+movie="$(realpath "$1")"
 
 mkdir -p "$cache"
 
 if [ -f "$index" ]; then
-	thumbnail="$(jq ". \"$key\"" <"$index")"
+	thumbnail="$(jq ". \"$movie\"" <"$index")"
 	if [[ "$thumbnail" == "null" ]]; then
 		thumbnail="$cache/$(uuidgen).jpg"
-    jq --arg "$key" "$thumbnail" ". + {\"$key\": \"$thumbnail\"}" < "$index"
+    jq --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" < "$index"
 	fi
 else
 	thumbnail="$cache/$(uuidgen).jpg"
-	echo "{\"$key\": \"$thumbnail\"}" >"$index"
+	echo "{\"$movie\": \"$thumbnail\"}" >"$index"
 fi
