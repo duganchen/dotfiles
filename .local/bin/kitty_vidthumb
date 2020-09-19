@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Use with Pistol to preview images in Kitty.
+
+# USE_PISTOL=1 NNN_PLUG="p:preview-tui" nnn
+
+# If you have trouble writing the thumbnail:
+# https://lists.rpmfusion.org/archives/list/rpmfusion-users@lists.rpmfusion.org/message/JQ3AQTNXYHFQCQYKNNV7HXZNJLAAA6F2/
+
+# If you're on FISH:
+# https://github.com/ranger/ranger/issues/1919
+
+FNAME="$(basename "$1")"
+IMAGE_CACHE_PATH="$(dirname "$1")/.thumbs"
+
+if [ ! -d "$IMAGE_CACHE_PATH" ]; then
+  mkdir "$IMAGE_CACHE_PATH"
+fi
+
+if [ ! -f "$IMAGE_CACHE_PATH/${FNAME}.jpg" ]; then
+  ffmpegthumbnailer -i "$1" -o "$IMAGE_CACHE_PATH/${FNAME}.jpg" -s 0
+fi
+
+kitty +kitten icat --silent --transfer-mode=stream --stdin=no "$IMAGE_CACHE_PATH/${FNAME}.jpg"
+
