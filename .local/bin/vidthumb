@@ -10,7 +10,7 @@ if ! [ -f "$1" ]; then
 	exit 1
 fi
 
-if [[ "$( file -L -b --mime-type "$1" )" != video/* ]]; then
+if [[ "$(file -L -b --mime-type "$1")" != video/* ]]; then
 	exit 1
 fi
 
@@ -34,7 +34,7 @@ else
 fi
 
 if [ ! -f "$thumbnail" ]; then
-	ffmpegthumbnailer -i "$movie" -o "$thumbnail" -s 0
+	ffmpegthumbnailer -i "$movie" -o "$thumbnail" -s 0 2>/dev/null
 fi
 
 echo "$thumbnail"
