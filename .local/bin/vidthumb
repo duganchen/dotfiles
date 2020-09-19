@@ -6,6 +6,14 @@
 
 # All data is stored in ~/.cache/vidthumb/.
 
+if ! [ -f "$1" ]; then
+	exit 1
+fi
+
+if [[ "$( file -b --mime-type "$1" )" != video/* ]]; then
+	exit 1
+fi
+
 cache="$HOME/.cache/vidthumb"
 index="$HOME/.cache/vidthumb/index.json"
 movie="$(realpath "$1")"
