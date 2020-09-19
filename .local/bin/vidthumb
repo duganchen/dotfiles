@@ -10,7 +10,7 @@ if ! [ -f "$1" ]; then
 	exit 1
 fi
 
-if [[ "$( file -b --mime-type "$1" )" != video/* ]]; then
+if [[ "$( file -L -b --mime-type "$1" )" != video/* ]]; then
 	exit 1
 fi
 
