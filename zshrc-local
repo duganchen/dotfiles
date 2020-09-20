@@ -27,7 +27,10 @@ if [[ $(uname) == "Darwin" ]]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 	# That's where I cloned it
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
+	export PATH=~/.local/bin:$PATH
 fi
+
+export PATH=$PATH:~/go/bin
 
 # As far as I know, this is the best documentation on setting up the Nord prompt:
 # https://www.reddit.com/r/nordtheme/comments/hdeunr/shell_prompt_theme/
