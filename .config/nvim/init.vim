@@ -43,6 +43,15 @@ augroup lsp
 autocmd BufWritePre *.cpp,*.lua,*.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
+set termguicolors
+let g:nord_italic = 1
+let g:nord_bold = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+colorscheme nord
+
+
+
 " For lightline
 set noshowmode
 
@@ -53,16 +62,28 @@ let g:lightline = {
 	\ },
 	\ 'component_function': {
 	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive'
+	\   'fugitive': 'LightlineFugitive',
+        \   'filetype': 'MyFiletype',
+        \   'fileformat': 'MyFileformat',
 	\ },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' }
 	\ }
 
 
+function! MyFiletype()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! MyFileformat()
+	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+<
+
 function! LightlineReadonly()
 	return &readonly ? '' : ''
 endfunction
+
 function! LightlineFugitive()
 	if exists('*FugitiveHead')
 		let branch = FugitiveHead()
@@ -70,12 +91,4 @@ function! LightlineFugitive()
 	endif
 	return ''
 endfunction
-
-set termguicolors
-let g:nord_italic = 1
-let g:nord_bold = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
-colorscheme nord
-
 
