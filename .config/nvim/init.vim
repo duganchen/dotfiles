@@ -6,9 +6,16 @@ Plug 'nvim-lua/lsp-status.nvim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-slash'
+Plug 'tpope/vim-fugitive'
 call plug#end()
+
+" Don't mind if I steal a couple of lines from here:
+" https://www.reddit.com/r/neovim/comments/3oeko4/post_your_fzfvim_configurations/cvworyj
+nnoremap <silent> <leader>t :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 
 lua require "lsp"
 
