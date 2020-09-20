@@ -1,6 +1,7 @@
 # Fedora 32 stuff
 if [[ $(uname) == "Linux" ]]; then
-	# Needed on Fedora 32
+	# Fedora 32
+	#
 	export MANROFFOPT="-c"
 
 	# That's where I have the nnn prefix
@@ -12,11 +13,9 @@ if [[ $(uname) == "Linux" ]]; then
 	alias vim=vimx
 	alias ls='ls --color=auto --classify'
 
-	# That's where Fedora puts it.
 	source /usr/share/git-core/contrib/completion/git-prompt.sh
 
-	# That's where I cloned it
-	eval $(dircolors ~/Documents/nord-dircolors/src/dir_colors)
+	eval $(dircolors ~/.zsh/nord-dircolors/src/dir_colors)
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
@@ -25,7 +24,6 @@ if [[ $(uname) == "Darwin" ]]; then
 	source ~/.nvm/nvm.sh
 	alias ls='gls --color=auto --classify'
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-	# That's where I cloned it
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
 fi
 
