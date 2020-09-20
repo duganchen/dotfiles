@@ -21,7 +21,7 @@ source /usr/share/fzf/shell/key-bindings.zsh
 export PATH="$PATH:$HOME/.npm-global/bin"
 
 # That's where I have my dotfiles
-source ~/Documents/dotfiles/nnn_nord_colors_iterm.sh
+source ~/Documents/dotfiles/nnn_nord_theme.sh
 
 export NNN_FIFO=/tmp/nnn.fifo
 export USE_PISTOL=1
