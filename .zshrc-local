@@ -1,8 +1,12 @@
 # That's where Fedora puts it.
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 
-# That's where I've cloned it. This set up the prompt.
-source ~/Documents/igloo/snowblocks/zsh/lib/themes/igloo.zsh
+# As far as I know, this is the best documentation on setting up the Nord prompt:
+# https://www.reddit.com/r/nordtheme/comments/hdeunr/shell_prompt_theme/
+fpath=(~/Documents/igloo/snowblocks/zsh/lib/themes $fpath)
+autoload -Uz promptinit
+promptinit
+prompt igloo
 
 alias vim=vimx
 alias ls='ls --color=auto --classify'
