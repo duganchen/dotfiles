@@ -25,7 +25,10 @@ if [[ $(uname) == "Darwin" ]]; then
 	alias ls='gls --color=auto --classify'
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
+	export PATH=~/.local/bin:$PATH
 fi
+
+export PATH=$PATH:~/go/bin
 
 # As far as I know, this is the best documentation on setting up the Nord prompt:
 # https://www.reddit.com/r/nordtheme/comments/hdeunr/shell_prompt_theme/
@@ -60,3 +63,5 @@ export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export EDITOR=nvim

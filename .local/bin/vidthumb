@@ -39,17 +39,17 @@ mkdir -p "$cache"
 if [ -f "$index" ]; then
 	thumbnail="$(jq -r ". \"$movie\"" <"$index")"
 	if [[ "$thumbnail" == "null" ]]; then
-		thumbnail="$cache/$(uuidgen).jpg"
+		thumbnail="$(uuidgen).jpg"
 		json="$(jq -r --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" <"$index")"
 		echo "$json" >"$index"
 	fi
 else
-	thumbnail="$cache/$(uuidgen).jpg"
+	thumbnail="$(uuidgen).jpg"
 	echo "{\"$movie\": \"$thumbnail\"}" >"$index"
 fi
 
-if [ ! -f "$thumbnail" ]; then
-	ffmpegthumbnailer -i "$movie" -o "$thumbnail" -s 0 2>/dev/null
+if [ ! -f "$cache/$thumbnail" ]; then
+	ffmpegthumbnailer -i "$movie" -o "$cache/$thumbnail" -s 0 2>/dev/null
 fi
 
-echo "$thumbnail"
+echo "$cache/$thumbnail"
