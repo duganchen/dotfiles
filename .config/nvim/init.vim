@@ -38,7 +38,7 @@ return luaeval("require('lsp-status').status()")
 endfunction
 
 augroup lsp
-autocmd BufWritePre *.cpp,*.lua,*.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.cpp,*.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
 set termguicolors

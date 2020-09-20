@@ -1,7 +1,12 @@
+local vim = require('vim')
 local nvim_lsp = require('nvim_lsp')
 local completion = require('completion')
 local diagnostic = require('diagnostic')
 local lsp_status = require('lsp-status')
+
+lsp_status.register_progress()
+
+nvim_lsp.config.capabilities = vim.tbl_extend('keep', nvim_lsp.config.capabilities or {}, lsp_status.capabilities)
 
 local on_attach = function(client)
 	completion.on_attach()
