@@ -36,8 +36,6 @@ let g:diagnostic_virtual_text_prefix = ' '
 function! StatuslineLsp() abort
 return luaeval("require('lsp-status').status()")
 endfunction
-" set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-" set statusline+=%{StatuslineLsp()}
 
 augroup lsp
 autocmd BufWritePre *.cpp,*.lua,*.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
@@ -51,12 +49,14 @@ let g:nord_italic_comments = 1
 colorscheme nord
 
 
-
 " For lightline
 set noshowmode
 
 let g:lightline = {
 	\ 'colorscheme': 'nord',
+        \ 'active': {
+\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ], ['fugitive', 'lsp'] ]
+	\},
 	\ 'component': {
 	\   'lineinfo': ' %3l:%-2c',
 	\ },
@@ -65,6 +65,7 @@ let g:lightline = {
 	\   'fugitive': 'LightlineFugitive',
         \   'filetype': 'MyFiletype',
         \   'fileformat': 'MyFileformat',
+	\   'lsp': 'StatuslineLsp'
 	\ },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' }
