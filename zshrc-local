@@ -14,19 +14,30 @@ if [[ $(uname) == "Linux" ]]; then
 
 	# That's where Fedora puts it.
 	source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+	# That's where I cloned it
+	eval $(dircolors ~/Documents/nord-dircolors/src/dir_colors)
+fi
+
+if [[ $(uname) == "Darwin" ]]; then
+
+	source ~/.fzf.zsh
+	source ~/.nvm/nvm.sh
+	alias ls='gls --color=auto --classify'
+	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+	# That's where I cloned it
+	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
 fi
 
 # As far as I know, this is the best documentation on setting up the Nord prompt:
 # https://www.reddit.com/r/nordtheme/comments/hdeunr/shell_prompt_theme/
-fpath=(~/Documents/igloo/snowblocks/zsh/lib/themes $fpath)
+fpath=(~/.zsh/igloo/snowblocks/zsh/lib/themes $fpath)
 autoload -Uz promptinit
 promptinit
 prompt igloo
 
 alias l='exa --icons'
 
-# That's where I cloned it
-eval $(dircolors ~/Documents/nord-dircolors/src/dir_colors)
 
 # That's where I have my dotfiles
 source ~/Documents/dotfiles/nnn_nord_theme.sh
