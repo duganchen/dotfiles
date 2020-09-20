@@ -10,6 +10,8 @@ Plug 'junegunn/fzf'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " Don't mind if I steal a couple of lines from here:
@@ -41,10 +43,39 @@ augroup lsp
 autocmd BufWritePre *.cpp,*.lua,*.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
+" For lightline
+set noshowmode
+
+let g:lightline = {
+	\ 'colorscheme': 'nord',
+	\ 'component': {
+	\   'lineinfo': ' %3l:%-2c',
+	\ },
+	\ 'component_function': {
+	\   'readonly': 'LightlineReadonly',
+	\   'fugitive': 'LightlineFugitive'
+	\ },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' }
+	\ }
+
+
+function! LightlineReadonly()
+	return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+	if exists('*FugitiveHead')
+		let branch = FugitiveHead()
+		return branch !=# '' ? ''.branch : ''
+	endif
+	return ''
+endfunction
+
 set termguicolors
 let g:nord_italic = 1
 let g:nord_bold = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1
 colorscheme nord
+
 
