@@ -1,0 +1,37 @@
+# That's where Fedora puts it.
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+# That's where I've cloned it. This set up the prompt.
+source ~/Documents/igloo/snowblocks/zsh/lib/themes/igloo.zsh
+
+alias vim=vimx
+alias ls='ls --color=auto --classify'
+
+# That's where I cloned it
+eval $(dircolors ~/Documents/nord-dircolors/src/dir_colors)
+
+# That's where Fedora puts it
+source /usr/share/fzf/shell/key-bindings.zsh
+
+# That's where I have the nnn prefix
+export PATH="$PATH:$HOME/.npm-global/bin"
+
+# That's where I have my dotfiles
+source ~/Documents/dotfiles/nnn_nord_colors_iterm.sh
+
+export NNN_FIFO=/tmp/nnn.fifo
+export USE_PISTOL=1
+export NNN_PLUG="p:preview-tui"
+export BAT_THEME=Nord
+
+# These are literally what the Snowblock project set up.
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='
+--color bg:#2e3440,bg+:#4c566a,fg:#e5e9f0
+--color fg+:#eceff4,hl:#88c0d0,hl+:#81a1c1
+--color preview-bg:#2e3440,preview-fg:#e5e9f0
+--color border:#4c566a,gutter:#3b4252,header:#88c0d0
+--color info:#88c0d0,marker:#88c0d0,pointer:#81a1c1
+--color prompt:#88c0d0,spinner:#88c0d0'
+
