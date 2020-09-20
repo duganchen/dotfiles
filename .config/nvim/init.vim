@@ -53,23 +53,26 @@ colorscheme nord
 set noshowmode
 
 let g:lightline = {
-	\ 'colorscheme': 'nord',
-        \ 'active': {
-\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ], ['fugitive', 'lsp'] ]
+	\'colorscheme': 'nord',
+	\'active': {
+	\'left': [
+	\	['mode', 'paste'],
+	\	[ 'readonly', 'filename', 'modified'],
+	\	['fugitive', 'lsp']]
 	\},
 	\ 'component': {
-	\   'lineinfo': ' %3l:%-2c',
+	\ 	'lineinfo': ' %3l:%-2c',
 	\ },
 	\ 'component_function': {
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive',
-        \   'filetype': 'MyFiletype',
-        \   'fileformat': 'MyFileformat',
-	\   'lsp': 'StatuslineLsp'
-	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' }
-	\ }
+	\	'readonly': 'LightlineReadonly',
+	\	'fugitive': 'LightlineFugitive',
+	\	'filetype': 'MyFiletype',
+	\	'fileformat': 'MyFileformat',
+	\	'lsp': 'StatuslineLsp'
+	\},
+	\	'separator': { 'left': '', 'right': '' },
+	\	'subseparator': { 'left': '', 'right': '' }
+	\}
 
 
 function! MyFiletype()
@@ -79,7 +82,6 @@ endfunction
 function! MyFileformat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
-<
 
 function! LightlineReadonly()
 	return &readonly ? '' : ''
