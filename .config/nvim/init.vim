@@ -4,6 +4,10 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'justinmk/vim-dirvish'
+Plug 'junegunn/fzf.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'junegunn/vim-slash'
 call plug#end()
 
 lua require "lsp"
@@ -23,8 +27,8 @@ let g:diagnostic_virtual_text_prefix = ' '
 function! StatuslineLsp() abort
 return luaeval("require('lsp-status').status()")
 endfunction
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set statusline+=%{StatuslineLsp()}
+" set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" set statusline+=%{StatuslineLsp()}
 
 augroup lsp
 autocmd BufWritePre *.cpp,*.lua,*.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
