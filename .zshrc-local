@@ -1,5 +1,5 @@
 # Fedora 32 stuff
-if [[ $(uname -o) == "GNU/Linux" ]]; then
+if [[ $(uname) == "Linux" ]]; then
 	# Needed on Fedora 32
 	export MANROFFOPT="-c"
 
