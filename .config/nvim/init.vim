@@ -12,6 +12,8 @@ Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 " Don't mind if I steal a couple of lines from here:
