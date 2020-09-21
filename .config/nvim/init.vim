@@ -36,11 +36,14 @@ let g:diagnostic_virtual_text_prefix = ' '
 " From here 
 " https://www.reddit.com/r/neovim/comments/gu08zv/nvimlsp_statusline/fsgcam4
 function! StatuslineLsp() abort
-return luaeval("require('lsp-status').status()")
+	return luaeval("require('lsp-status').status()")
 endfunction
 
 augroup lsp
-autocmd BufWritePre *.cpp,*.vim,*.py lua vim.lsp.buf.formatting_sync(nil, 1000)
+	" The formatting capabilities of the Typescript server are better off
+	" not being used.
+	" https://github.com/theia-ide/typescript-language-server/issues/10
+	autocmd BufWritePre *.cpp,*.vim,*.py lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
 set termguicolors
