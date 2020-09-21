@@ -27,7 +27,7 @@ if [[ $(uname) == "Darwin" ]]; then
 	source ~/.nvm/nvm.sh
 	alias ls='gls --color=auto --classify'
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
-	export PATH=~/.local/bin:$PATH
+	export PATH=~/.local/bin:$PATH:$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
 
 alias vim=nvim
