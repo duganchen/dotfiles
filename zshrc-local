@@ -13,6 +13,12 @@ if [[ $(uname) == "Linux" ]]; then
 	alias ls='ls --color=auto --classify'
 
 	eval $(dircolors ~/.zsh/nord-dircolors/src/dir_colors)
+
+	# Taken from here:
+	# https://dev.to/oliverspryn/adding-git-completion-to-zsh-26id
+	zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+	fpath=(~/.zsh/fpath $fpath)
+	autoload -Uz compinit && compinit
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
