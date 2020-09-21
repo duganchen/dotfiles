@@ -10,7 +10,6 @@ if [[ $(uname) == "Linux" ]]; then
 	# That's where Fedora puts it
 	source /usr/share/fzf/shell/key-bindings.zsh
 
-	alias vim=vimx
 	alias ls='ls --color=auto --classify'
 
 	source /usr/share/git-core/contrib/completion/git-prompt.sh
@@ -27,6 +26,8 @@ if [[ $(uname) == "Darwin" ]]; then
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
 	export PATH=~/.local/bin:$PATH
 fi
+
+alias vim=nvim
 
 export PATH=$PATH:~/go/bin
 
