@@ -1,7 +1,7 @@
 # Fedora 32 stuff
 if [[ $(uname) == "Linux" ]]; then
 	# Fedora 32
-	#
+
 	export MANROFFOPT="-c"
 
 	# That's where I have the nnn prefix
@@ -12,8 +12,6 @@ if [[ $(uname) == "Linux" ]]; then
 
 	alias ls='ls --color=auto --classify'
 
-	source /usr/share/git-core/contrib/completion/git-prompt.sh
-
 	eval $(dircolors ~/.zsh/nord-dircolors/src/dir_colors)
 fi
 
@@ -22,7 +20,6 @@ if [[ $(uname) == "Darwin" ]]; then
 	source ~/.fzf.zsh
 	source ~/.nvm/nvm.sh
 	alias ls='gls --color=auto --classify'
-	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
 	export PATH=~/.local/bin:$PATH
 fi
@@ -31,15 +28,7 @@ alias vim=nvim
 
 export PATH=$PATH:~/go/bin
 
-# As far as I know, this is the best documentation on setting up the Nord prompt:
-# https://www.reddit.com/r/nordtheme/comments/hdeunr/shell_prompt_theme/
-fpath=(~/.zsh/igloo/snowblocks/zsh/lib/themes $fpath)
-autoload -Uz promptinit
-promptinit
-prompt igloo
-
 alias l='exa --icons'
-
 
 # That's where I have my dotfiles
 source ~/Documents/dotfiles/nnn_nord_theme.sh
@@ -62,7 +51,9 @@ export FZF_DEFAULT_OPTS='
 
 export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export EDITOR=nvim
+
+eval "$(starship init zsh)"
