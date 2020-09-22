@@ -43,7 +43,7 @@ augroup lsp
 	" The formatting capabilities of the Typescript server are better off
 	" not being used.
 	" https://github.com/theia-ide/typescript-language-server/issues/10
-	autocmd BufWritePre *.cpp,*.vim,*.py lua vim.lsp.buf.formatting_sync(nil, 1000)
+	autocmd BufWritePre *.cpp,*.vim,*.py,*.lua lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
 set termguicolors
