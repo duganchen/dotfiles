@@ -1,3 +1,4 @@
+
 # Fedora 32 stuff
 if [[ $(uname) == "Linux" ]]; then
 	# Fedora 32
@@ -13,12 +14,6 @@ if [[ $(uname) == "Linux" ]]; then
 	alias ls='ls --color=auto --classify'
 
 	eval $(dircolors ~/.zsh/nord-dircolors/src/dir_colors)
-
-	# Taken from here:
-	# https://dev.to/oliverspryn/adding-git-completion-to-zsh-26id
-	zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-	fpath=(~/.zsh/fpath $fpath)
-	autoload -Uz compinit && compinit
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
@@ -29,6 +24,18 @@ if [[ $(uname) == "Darwin" ]]; then
 	eval $(gdircolors ~/.zsh/nord-dircolors/src/dir_colors)
 	export PATH=~/.local/bin:$PATH:$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
+
+
+# BASH completion for ZSH are taken from here:
+# https://dev.to/oliverspryn/adding-git-completion-to-zsh-26id
+
+# ~/.zsh/fpath/git-completion.zsh exists
+# Both completion files are from here:
+# https://github.com/git/git/tree/master/contrib/completion
+
+zstyle ':completion:*:*:git:*' script ~/.local/share/bash-completion/git-completion.bash
+fpath=(~/.zsh/fpath $fpath)
+autoload -Uz compinit && compinit
 
 alias vim=nvim
 
