@@ -6,7 +6,7 @@ if [[ $(uname) == "Linux" ]]; then
 	export MANROFFOPT="-c"
 
 	# That's where I have the nnn prefix
-	export PATH="$PATH:$HOME/.npm-global/bin"
+	export PATH="$PATH:$HOME/.npm-global/bin:$HOME/.local/bin"
 
 	# That's where Fedora puts it
 	source /usr/share/fzf/shell/key-bindings.zsh
@@ -14,6 +14,8 @@ if [[ $(uname) == "Linux" ]]; then
 	alias ls='ls --color=auto --classify'
 
 	eval $(dircolors ~/.zsh/nord-dircolors/src/dir_colors)
+
+	export QT_QPA_PLATFORMTHEME=qt5ct
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
