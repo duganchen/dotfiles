@@ -3,7 +3,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/lsp-status.nvim'
-Plug 'arcticicestudio/nord-vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
@@ -14,6 +13,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'bluz71/vim-moonfly-colors'
 call plug#end()
 
 " Don't mind if I steal a couple of lines from here:
@@ -21,6 +22,7 @@ call plug#end()
 nnoremap <silent> <leader>t :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 
+lua require "treesitter"
 lua require "lsp"
 
 " For nvim-completion
@@ -33,6 +35,10 @@ set shortmess+=c
 let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_virtual_text_prefix = ' '
 
+" Treesitter
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 " From here 
 " https://www.reddit.com/r/neovim/comments/gu08zv/nvimlsp_statusline/fsgcam4
 function! StatuslineLsp() abort
@@ -43,22 +49,20 @@ augroup lsp
 	" The formatting capabilities of the Typescript server are better off
 	" not being used.
 	" https://github.com/theia-ide/typescript-language-server/issues/10
-	autocmd BufWritePre *.cpp,*.vim,*.py,*.lua lua vim.lsp.buf.formatting_sync(nil, 1000)
+	"
+	" Leaving this out while I figure out why it's not working
+	" autocmd BufWritePre *.cpp,*.vim,*.py,*.lua lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
 set termguicolors
-let g:nord_italic = 1
-let g:nord_bold = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
-colorscheme nord
-
+colorscheme moonfly
+highlight Normal guibg=NONE
 
 " For lightline
 set noshowmode
 
 let g:lightline = {
-	\'colorscheme': 'nord',
+	\'colorscheme': 'moonfly',
 	\'active': {
 	\'left': [
 	\	['mode', 'paste'],

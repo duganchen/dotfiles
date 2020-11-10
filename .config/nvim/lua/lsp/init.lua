@@ -11,10 +11,18 @@ local on_attach = function(client)
 	lsp_status.on_attach(client)
 end
 
+-- LspInstall sumneko_lua
 nvim_lsp.sumneko_lua.setup({on_attach=on_attach})
-nvim_lsp.clangd.setup({on_attach=on_attach})
+
+-- LspInstall vimls
 nvim_lsp.vimls.setup({on_attach=on_attach})
-nvim_lsp.pyls.setup({on_attach=on_attach})
-nvim_lsp.tsserver.setup({on_attach=on_attach})
 
+nvim_lsp.clangd.setup({on_attach=on_attach})
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    highlight = {
+        enable = true,              -- false will disable the whole extension
+	    disable = { "c", "rust" },  -- list of language that will be disabled
+	      },
+	      }
