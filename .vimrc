@@ -1,5 +1,9 @@
 scriptencoding utf-8
 
+if !isdirectory(expand('~/.cache/vim'))
+    call mkdir(expand('~/.cache/vim'))
+endif
+
 if filereadable(expand('$VIMRUNTIME/defaults.vim'))
     unlet! g:skip_defaults_vim
     source $VIMRUNTIME/defaults.vim
@@ -26,14 +30,26 @@ call plug#end()
 nnoremap <silent> <leader>t :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 
+set backupdir=~/.cache/vim//
+set directory=~/.cache/vim//
+set grepprg=rg\ --vimgrep
+set hidden
+set number
+set relativenumber
+set smartindent
+set undodir=~/.cache/vim//
+set undofile
+
 " For airline
 set noshowmode
 let g:airline_powerline_fonts = 1
 
 " The t_ut setting is needed for redraw issues in Linux.
+set background=dark
 set termguicolors
 colorscheme deus
 set t_ut=
+highlight NORMAL guibg=NONE
 
 " Install immediately:
 "
