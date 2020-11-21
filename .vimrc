@@ -44,15 +44,16 @@ set undofile
 set noshowmode
 let g:airline_powerline_fonts = 1
 
-" The t_ut setting is needed for redraw issues in Linux.
 set background=dark
 set termguicolors
 colorscheme deus
-set t_ut=
 highlight NORMAL guibg=NONE
+" Needed for redraw issues in both Linux an Mac (Kitty)
+set t_ut=
 
 " Install immediately:
 "
 " CocInstall coc-vimlsp
 " CocInstall coc-yaml
 " CocInstall coc-json
+" CocInstall coc-sh
