@@ -48,7 +48,7 @@ set background=dark
 set termguicolors
 colorscheme deus
 highlight NORMAL guibg=NONE
-" Needed for redraw issues in both Linux an Mac (Kitty)
+" Needed for redraw issues in both Linux and Mac (Kitty)
 set t_ut=
 
 " Install immediately:
