@@ -29,6 +29,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 set noshowmode
 let g:airline_powerline_fonts = 1
 
+" The t_ut setting is needed for redraw issues in Linux.
 set termguicolors
 colorscheme deus
 set t_ut=
