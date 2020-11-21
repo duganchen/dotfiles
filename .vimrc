@@ -6,6 +6,7 @@ if filereadable(expand('$VIMRUNTIME/defaults.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'ajmwagar/vim-deus'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim'
@@ -29,6 +30,8 @@ set noshowmode
 let g:airline_powerline_fonts = 1
 
 set termguicolors
+colorscheme deus
+set t_ut=
 
 " Install immediately:
 "
