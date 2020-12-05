@@ -67,6 +67,6 @@ export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export EDITOR=nvim
+export VISUAL='code --wait'
 
 eval "$(starship init zsh)"
