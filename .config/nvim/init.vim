@@ -12,10 +12,18 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'bluz71/vim-moonfly-colors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tpope/vim-sleuth'
+Plug 'sainnhe/sonokai'
 call plug#end()
+
+if !isdirectory(expand('~/.cache/vim'))
+    call mkdir(expand('~/.cache/vim'))
+endif
+set backupdir=~/.cache/vim//
+set directory=~/.cache/vim//
+set undodir=~/.cache/vim//
+set undofile
 
 " Don't mind if I steal a couple of lines from here:
 " https://www.reddit.com/r/neovim/comments/3oeko4/post_your_fzfvim_configurations/cvworyj
@@ -54,6 +62,7 @@ function! StatuslineLsp() abort
 	return luaeval("require('lsp-status').status()")
 endfunction
 
+" The default status line from vim's help, with plugins.
 set statusline=%f 
 set statusline+=\ %{WebDevIconsGetFileTypeSymbol()}
 set statusline+=\ %{WebDevIconsGetFileFormatSymbol()}    
@@ -63,7 +72,7 @@ set statusline+=\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
 
 
 set termguicolors
-" Please note that this needs a an opaque terminal set up with the moonfly
-" colorscheme.
-colorscheme moonfly
-highlight HighlightedyankRegion cterm=reverse gui=reverse
+let g:sonokai_style = 'atlantis'
+let g:sonokai_enable_italic = 1
+colorscheme sonokai
+
