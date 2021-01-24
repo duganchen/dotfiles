@@ -8,13 +8,13 @@ Plug 'junegunn/fzf'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'tpope/vim-sleuth'
 call plug#end()
 
 " Don't mind if I steal a couple of lines from here:
@@ -39,12 +39,6 @@ let g:diagnostic_virtual_text_prefix = ' '
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-" From here 
-" https://www.reddit.com/r/neovim/comments/gu08zv/nvimlsp_statusline/fsgcam4
-function! StatuslineLsp() abort
-	return luaeval("require('lsp-status').status()")
-endfunction
-
 augroup lsp
 	" The formatting capabilities of the Typescript server are better off
 	" not being used.
@@ -54,53 +48,25 @@ augroup lsp
 	" autocmd BufWritePre *.cpp,*.vim,*.py,*.lua lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
+" From here 
+" https://www.reddit.com/r/neovim/comments/gu08zv/nvimlsp_statusline/fsgcam4
+function! StatuslineLsp() abort
+	return luaeval("require('lsp-status').status()")
+endfunction
+
+" Mostly taken from here:
+" https://stackoverflow.com/a/8017431
+set statusline=%F%m%r%h%w\ 
+set statusline+=%{fugitive#statusline()}\    
+set statusline+=%{StatuslineLsp()}\    
+set statusline+=%{WebDevIconsGetFileTypeSymbol()}\    
+set statusline+=%{WebDevIconsGetFileFormatSymbol()}\    
+set statusline+=[%{strlen(&fenc)?&fenc:&enc}]
+set statusline+=\ [line\ %l\/%L]          
+
+
 set termguicolors
+" Please note that this needs a an opaque terminal set up with the moonfly
+" colorscheme.
 colorscheme moonfly
-highlight Normal guibg=NONE
-
-" For lightline
-set noshowmode
-
-let g:lightline = {
-	\'colorscheme': 'moonfly',
-	\'active': {
-	\'left': [
-	\	['mode', 'paste'],
-	\	[ 'readonly', 'filename', 'modified'],
-	\	['fugitive', 'lsp']]
-	\},
-	\ 'component': {
-	\ 	'lineinfo': ' %3l:%-2c',
-	\ },
-	\ 'component_function': {
-	\	'readonly': 'LightlineReadonly',
-	\	'fugitive': 'LightlineFugitive',
-	\	'filetype': 'MyFiletype',
-	\	'fileformat': 'MyFileformat',
-	\	'lsp': 'StatuslineLsp'
-	\},
-	\	'separator': { 'left': '', 'right': '' },
-	\	'subseparator': { 'left': '', 'right': '' }
-	\}
-
-
-function! MyFiletype()
-	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
-function! LightlineReadonly()
-	return &readonly ? '' : ''
-endfunction
-
-function! LightlineFugitive()
-	if exists('*FugitiveHead')
-		let branch = FugitiveHead()
-		return branch !=# '' ? ''.branch : ''
-	endif
-	return ''
-endfunction
-
+highlight HighlightedyankRegion cterm=reverse gui=reverse
