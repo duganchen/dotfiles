@@ -49,9 +49,11 @@ if [[ $(uname) == "Linux" ]]; then
 fi
 
 if [[ $(uname) == "Darwin" ]]; then
+    alias ls='gls --color=auto --classify'
 	source ~/.fzf.zsh
 	source ~/.nvm/nvm.sh
 	export PATH=~/.local/bin:$PATH:$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin:/usr/local/Cellar/llvm/11.0.0_1/bin
+    export PATH=$PATH:~/Software/nvim-osx64/bin
 fi
 
 zinit light zsh-users/zsh-autosuggestions
