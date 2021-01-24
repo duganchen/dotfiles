@@ -25,6 +25,9 @@ set directory=~/.cache/vim//
 set undodir=~/.cache/vim//
 set undofile
 
+set number relativenumber
+set grepprg=rg\ --vimgrep
+
 " Don't mind if I steal a couple of lines from here:
 " https://www.reddit.com/r/neovim/comments/3oeko4/post_your_fzfvim_configurations/cvworyj
 nnoremap <silent> <leader>t :Files<CR>
