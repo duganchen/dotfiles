@@ -1,4 +1,4 @@
-local nvim_lsp = require('nvim_lsp')
+local lspconfig = require('lspconfig')
 local completion = require('completion')
 local lsp_status = require('lsp-status')
 
@@ -10,12 +10,12 @@ local on_attach = function(client)
 end
 
 -- LspInstall sumneko_lua
-nvim_lsp.sumneko_lua.setup({on_attach=on_attach})
+lspconfig.sumneko_lua.setup({on_attach=on_attach})
 
 -- LspInstall vimls
-nvim_lsp.vimls.setup({on_attach=on_attach})
+lspconfig.vimls.setup({on_attach=on_attach})
 
-nvim_lsp.clangd.setup({on_attach=on_attach})
+lspconfig.clangd.setup({on_attach=on_attach})
 
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
