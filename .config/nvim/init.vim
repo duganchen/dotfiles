@@ -54,15 +54,12 @@ function! StatuslineLsp() abort
 	return luaeval("require('lsp-status').status()")
 endfunction
 
-" Mostly taken from here:
-" https://stackoverflow.com/a/8017431
-set statusline=%F%m%r%h%w\ 
-set statusline+=%{fugitive#statusline()}\    
-set statusline+=%{StatuslineLsp()}\    
-set statusline+=%{WebDevIconsGetFileTypeSymbol()}\    
-set statusline+=%{WebDevIconsGetFileFormatSymbol()}\    
-set statusline+=[%{strlen(&fenc)?&fenc:&enc}]
-set statusline+=\ [line\ %l\/%L]          
+set statusline=%f 
+set statusline+=\ %{WebDevIconsGetFileTypeSymbol()}
+set statusline+=\ %{WebDevIconsGetFileFormatSymbol()}    
+set statusline+=\ %{fugitive#statusline()}
+set statusline+=\ %{StatuslineLsp()}
+set statusline+=\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
 
 
 set termguicolors
