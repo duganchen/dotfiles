@@ -59,3 +59,5 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light romkatv/powerlevel10k
 zinit snippet https://github.com/sainnhe/sonokai/raw/master/zsh/.zsh-theme-sonokai-atlantis
 
+export CMAKE_GENERATOR=Ninja
+
