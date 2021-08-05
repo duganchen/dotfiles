@@ -4,8 +4,14 @@
 
 export CMAKE_GENERATOR=Ninja
 
+export VISUAL='code --wait'
+
 if [[ $(uname) == "Linux" ]]; then
     export MANPAGER=most
+fi
+
+if [[ $(uname) == "Darwin" ]]; then
+    export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
 
 # FINALLY managed to get something resembling FISH's awesome cd'ing...
@@ -20,7 +26,7 @@ zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 alias cd=cdr
 
-# Apart from ls, these are stolen from garuda. I'm getting used to them.
+# Apart from ls, these are stolen from Garuda. I'm getting used to them.
 
 alias cat='bat --style header --style rules --style snip --style changes --style header'
 alias hw='hwinfo --short'

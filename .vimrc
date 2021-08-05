@@ -12,6 +12,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'machakann/vim-highlightedyank'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'joshdick/onedark.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
@@ -39,9 +40,8 @@ set undodir=~/.cache/vim//
 set undofile
 
 set termguicolors
-let g:sonokai_style = 'atlantis'
-let g:sonokai_enable_italic = 1
-colorscheme sonokai
+let g:onedark_terminal_italics=1
+colorscheme onedark
 
 " The default status line from vim's help, with plugins.
 set statusline=%f 
