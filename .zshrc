@@ -80,7 +80,7 @@ fi
 # This is Autojump, using nothing but what already comes with ZSH. :)
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':completion:*:*:cdr:*:*' menu selection
+# zstyle ':completion:*:*:cdr:*:*' menu selection
 zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert always
 alias j=cdr
