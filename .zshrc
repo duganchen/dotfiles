@@ -1,4 +1,4 @@
-7# # Lines configured by zsh-newuser-install
+# # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -20,6 +20,7 @@ ZGEN_RESET_ON_CHANGE=${HOME}/.zshrc
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
+
     # Using this over https://github.com/lincheney/fzf-tab-completion
     # mainly because it's available as a plugin.
     # Running compinit before letting zgenom load it is necessary.
@@ -52,9 +53,17 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt share_history
 
+# FZF. Note that we use fzf-tab instead of loading
+# FZF's completion system.
+
 # Fedora
 if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
     source /usr/share/fzf/shell/key-bindings.zsh
+fi
+
+# OS X
+if [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
+    source /usr/local/opt/fzf/shell/key-bindings.zsh
 fi
 
 # From here:
@@ -94,11 +103,8 @@ alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 
 # Prompt. Uses https://starship.rs/
-if [[ $(uname) == "Darwin" ]]; then
-    # Path resolution seems to trigger a slow xcodebuild operation
-    # on OS X...
-    eval $(/usr/local/bin/starship init zsh)
-else
-    eval $(starship init zsh)
-fi
+# If this is taking a long time to start on OS X, then make sure you're using git from
+# Homebrew. See:
+# https://blog.smittytone.net/2021/05/21/how-to-fix-xcodebuild-macos-terminal-slow-downs/
+eval $(starship init zsh)
 
