@@ -1,4 +1,4 @@
-# # Lines configured by zsh-newuser-install
+7# # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -40,12 +40,13 @@ export CMAKE_GENERATOR=Ninja
 export VISUAL='code --wait'
 
 # These are stolen from oh-my-zsh. Now I can type 49<TAB> and get completions for all files with
-# 49 anywhere in their name. Combine this with autosuggestions and I know have what I liked best about
+# 49 anywhere in their name. Combine this with autosuggestions and I now have what I liked best about
 # FISH.
 setopt complete_in_word
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-# Some options from https://github.com/sfischer13/zsh-sensible/blob/master/sensible.zsh
+# Some options from
+# https://github.com/sfischer13/zsh-sensible/blob/master/sensible.zsh
 setopt append_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
