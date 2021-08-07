@@ -12,10 +12,6 @@ if [[ $(uname) == "Darwin" ]]; then
     export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
 
-
-zstyle ':autocomplete:*' recent-dirs cdr
-zstyle ':autocomplete:*' fzf-completion yes
-
 # Autojump
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
