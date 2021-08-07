@@ -25,6 +25,7 @@ if ! zgenom saved; then
     # Running compinit before letting zgenom load it is necessary.
     zgenom load Aloxaf/fzf-tab
 
+    zgenom load zsh-users/zsh-completions
     zgenom load zsh-users/zsh-autosuggestions
     zgenom load zsh-users/zsh-completions
     zgenom load zdharma/fast-syntax-highlighting
