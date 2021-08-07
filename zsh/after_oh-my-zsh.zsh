@@ -41,5 +41,13 @@ else
     eval $(starship init zsh)
 fi
 
+
 # I seem to recall FISH having something like this.
 setopt glob_complete
+
+# From here:
+# https://github.com/junegunn/fzf/issues/1460#issuecomment-635787473
+# Don't really use FZF when 
+export FZF_DEFAULT_COMMAND='fd --type f --color=never'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --color=never"
