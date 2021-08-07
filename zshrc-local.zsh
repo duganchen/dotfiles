@@ -1,6 +1,6 @@
 # Additional setup after what the plugin manager does. My setup is oh-my-zsh with no prompt
 # and
-# plugins=(git colored-man-pages fzf zsh-completions history-substring-search zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(git colored-man-pages fzf fzf-tab zsh-completions zsh-autosuggestions fzf-tab zsh-syntax-highlighting history-substring-search)
 
 autoload -U compinit && compinit
 
@@ -12,19 +12,17 @@ if [[ $(uname) == "Darwin" ]]; then
     export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
 
-# FINALLY managed to get something resembling FISH's awesome cd'ing...
 
-# AFAIK ZSH's completinword option already takes care of what I want from the following,
-# and Oh My ZSH sets it?
-# https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
-# zstyle ':completion:*' list-suffixeszstyle ':completion:*' expand prefix suffix
+zstyle ':autocomplete:*' recent-dirs cdr
+zstyle ':autocomplete:*' fzf-completion yes
 
+# Autojump
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':completion:*:*:cdr:*:*' menu selection
 zstyle ':chpwd:*' recent-dirs-default yes
-zstyle ':completion:*' recent-dirs-insert both
-alias cd=cdr
+zstyle ':completion:*' recent-dirs-insert always
+alias j=cdr
 
 # Apart from ls, these are stolen from Garuda. I'm getting used to them.
 alias cat='bat --style header --style rules --style snip --style changes --style header'
