@@ -2,8 +2,6 @@
 # and
 # plugins=(git colored-man-pages fzf fzf-tab zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 
-autoload -U compinit && compinit
-
 export CMAKE_GENERATOR=Ninja
 
 export VISUAL='code --wait'
@@ -41,8 +39,6 @@ else
     eval $(starship init zsh)
 fi
 
-
-# I seem to recall FISH having something like this.
 setopt glob_complete
 
 # From here:
