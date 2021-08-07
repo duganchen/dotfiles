@@ -16,7 +16,6 @@ compinit
 # https://github.com/jandamm/zgenom
 
 ZGEN_RESET_ON_CHANGE=${HOME}/.zshrc
-
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
@@ -54,7 +53,7 @@ setopt hist_ignore_space
 setopt share_history
 
 # FZF. Note that we use fzf-tab instead of loading
-# FZF's completion system.
+# FZF's completion system. Hence, we load only FZF's keybindings.
 
 # Fedora
 if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
