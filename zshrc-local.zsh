@@ -1,6 +1,6 @@
 # Additional setup after what the plugin manager does. My setup is oh-my-zsh with no prompt
 # and
-# plugins=(git colored-man-pages fzf fzf-tab zsh-completions zsh-autosuggestions fzf-tab zsh-syntax-highlighting history-substring-search)
+# plugins=(git colored-man-pages fzf fzf-tab zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 
 autoload -U compinit && compinit
 
