@@ -1,21 +1,10 @@
-# # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt autocd beep extendedglob nomatch notify
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/dugan/.zshrc'
+# This is meant to be sourced right after the section written by the wizard that runs the first time
+# you start Zsh. It sets extendedglob, runs compinit, etc.
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Only other thing: Set ZGEN_RESET_ON_CHANGE to be the path to this file before sourcing it.
 
-# My stuff...
-
+# Using this to manage plugins:
 # https://github.com/jandamm/zgenom
-
-ZGEN_RESET_ON_CHANGE=${HOME}/.zshrc
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
@@ -107,4 +96,3 @@ alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 # Homebrew. See:
 # https://blog.smittytone.net/2021/05/21/how-to-fix-xcodebuild-macos-terminal-slow-downs/
 eval $(starship init zsh)
-
