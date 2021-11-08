@@ -7,13 +7,23 @@
 # https://github.com/jandamm/zgenom
 source "${HOME}/.zgenom/zgenom.zsh"
 
+# Fedora
+if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
+    source /usr/share/fzf/shell/key-bindings.zsh
+fi
+
+# OS X
+if [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
+    source /usr/local/opt/fzf/shell/key-bindings.zsh
+    source /usr/local/opt/fzf/shell/completion.zsh
+fi
+
 if ! zgenom saved; then
     zgenom load lincheney/fzf-tab-completion zsh/fzf-zsh-completion.sh
-
     zgenom load zsh-users/zsh-completions
     zgenom load zsh-users/zsh-autosuggestions
     zgenom load zsh-users/zsh-completions
-    zgenom load zdharma/fast-syntax-highlighting
+    zgennom load zdharma-continuum/fast-syntax-highlighting
         
     zgenom save
 fi
@@ -37,19 +47,6 @@ setopt append_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt share_history
-
-# FZF. Note that we use fzf-tab instead of loading
-# FZF's completion system. Hence, we load only FZF's keybindings.
-
-# Fedora
-if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
-    source /usr/share/fzf/shell/key-bindings.zsh
-fi
-
-# OS X
-if [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
-    source /usr/local/opt/fzf/shell/key-bindings.zsh
-fi
 
 # From here:
 # https://github.com/junegunn/fzf/issues/1460#issuecomment-635787473
