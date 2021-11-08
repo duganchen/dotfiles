@@ -8,11 +8,7 @@
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
-
-    # Using this over https://github.com/lincheney/fzf-tab-completion
-    # mainly because it's available as a plugin.
-    # Running compinit before letting zgenom load it is necessary.
-    zgenom load Aloxaf/fzf-tab
+    zgenom load lincheney/fzf-tab-completion zsh/fzf-zsh-completion.sh
 
     zgenom load zsh-users/zsh-completions
     zgenom load zsh-users/zsh-autosuggestions
