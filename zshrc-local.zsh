@@ -71,6 +71,8 @@ alias lt='exa -aT --color=always --group-directories-first --icons'
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 
+export VISUAL='code --wait'
+
 # Prompt. Uses https://starship.rs/
 # If this is taking a long time to start on OS X, then make sure you're using git from
 # Homebrew. See:
