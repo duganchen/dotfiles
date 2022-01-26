@@ -18,10 +18,21 @@ if [[ "$filetype" =~ ^image ]]; then
 fi
 
 if [[ "$filetype" == "application/pdf" ]]; then
-    sips -s format png --out ~/.cache/pdf_preview.png "$file"
-    kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png
-    rm -f ~/.cache/pdf_preview.png
-    exit 1
+    system="$(uname -s)"
+
+    if [[  "$system" == "Darwin" ]]; then
+        sips -s format png --out ~/.cache/pdf_preview.png "$file"
+        kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png
+        rm -f ~/.cache/pdf_preview.png
+        exit 1
+    fi;
+
+    if [[  "$system" == "Linux" ]]; then
+        convert "$file"[0] ~/.cache/pdf_preview.png
+        kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png
+        rm -f ~/.cache/pdf_preview.png
+        exit 1
+    fi;
 fi
 
 if [[ "$filetype" =~ ^video ]]; then
