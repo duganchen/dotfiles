@@ -5,10 +5,22 @@ h=$3
 x=$4
 y=$5
 
+if [[ "${file##*.}" == "rm" ]]; then
+    kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$(vidthumb "$file")"
+    exit 1
+fi 
+
 filetype="$( file -Lb --mime-type "$file")"
 
 if [[ "$filetype" =~ ^image ]]; then
     kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file"
+    exit 1
+fi
+
+if [[ "$filetype" == "application/pdf" ]]; then
+    sips -s format png --out ~/.cache/pdf_preview.png "$file"
+    kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png
+    rm -f ~/.cache/pdf_preview.png
     exit 1
 fi
 
