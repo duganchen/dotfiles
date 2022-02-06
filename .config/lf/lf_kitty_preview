@@ -5,12 +5,21 @@ h=$3
 x=$4
 y=$5
 
-if [[ "${file##*.}" == "rm" ]]; then
+ext="${file##*.}"
+
+if [[ "$ext" == "rm" ]]; then
     kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$(vidthumb "$file")"
     exit 1
-fi 
+fi
 
-filetype="$( file -Lb --mime-type "$file")"
+if [[ "$ext" =~ ^[Mm][Dd] ]]; then
+    # This Glow
+    # https://youtu.be/EDNpK3iH7A0
+    glow -s dark "$file"
+    exit 1
+fi
+
+filetype="$(file -Lb --mime-type "$file")"
 
 if [[ "$filetype" =~ ^image ]]; then
     kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file"
@@ -20,19 +29,19 @@ fi
 if [[ "$filetype" == "application/pdf" ]]; then
     system="$(uname -s)"
 
-    if [[  "$system" == "Darwin" ]]; then
+    if [[ "$system" == "Darwin" ]]; then
         sips -s format png --out ~/.cache/pdf_preview.png "$file"
         kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png
         rm -f ~/.cache/pdf_preview.png
         exit 1
-    fi;
+    fi
 
-    if [[  "$system" == "Linux" ]]; then
+    if [[ "$system" == "Linux" ]]; then
         convert "$file"[0] ~/.cache/pdf_preview.png
         kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png
         rm -f ~/.cache/pdf_preview.png
         exit 1
-    fi;
+    fi
 fi
 
 if [[ "$filetype" =~ ^video ]]; then
