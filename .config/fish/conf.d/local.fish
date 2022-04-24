@@ -31,3 +31,6 @@ fzf_key_bindings
 # https://github.com/gokcehan/lf
 # https://github.com/duganchen/lf_config
 source ~/.config/lf/lf_env.fish
+
+# Yeah I cloned https://github.com/trapd00r/LS_COLORS/ here
+source ~/.config/LS_COLORS/lscolors.csh
