@@ -28,11 +28,10 @@ end
 
 fzf_key_bindings
 
+# FZF completion from this project: the rest of it is in the function definitons.
+# https://github.com/DevAtDawn/fish-fzf-tab/blob/main/fzf_tab.fish
+bind -M insert \et fuzzy_complete
+
 # https://github.com/gokcehan/lf
 # https://github.com/duganchen/lf_config
 source ~/.config/lf/lf_env.fish
-
-function ls
-    # https://github.com/Peltoche/lsd
-    lsd $argv
-end
