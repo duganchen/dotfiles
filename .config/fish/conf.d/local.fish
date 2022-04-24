@@ -31,8 +31,3 @@ fzf_key_bindings
 # https://github.com/gokcehan/lf
 # https://github.com/duganchen/lf_config
 source ~/.config/lf/lf_env.fish
-
-function ls
-    # https://github.com/Peltoche/lsd
-    lsd $argv
-end
