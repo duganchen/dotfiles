@@ -1,4 +1,4 @@
-audio/*; mpv %s; needsterminal
-video/*; mpv %s; needsterminal
-application/vnd.rn-realmedia; mpv %s; needsterminal
+audio/*; mpv %s
+video/*; mpv %s
+application/vnd.rn-realmedia; mpv %s
 text/html; lynx %s; needsterminal
