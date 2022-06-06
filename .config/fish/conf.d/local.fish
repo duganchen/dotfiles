@@ -7,10 +7,13 @@ end
 # https://github.com/ajeetdsouza/zoxide
 zoxide init fish | source
 
+# https://github.com/ajeetdsouza/zoxide/issues/328#issuecomment-1033741233
+set -Ux _ZO_FZF_OPTS '--bind=ctrl-z:ignore --exit-0 --height=40% --inline-info --no-sort --reverse --select-1 --preview=\'exa -la {2..}\''
+
 # https://starship.rs/
 starship init fish | source
 
-# https://code.visualstudio.co
+# https://code.visualstudio.com
 export EDITOR='code --wait'
 export VISUAL='code --wait'
 
