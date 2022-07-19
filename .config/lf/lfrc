@@ -1,3 +1,34 @@
 set previewer ~/.config/lf/lf_kitty_preview
 set cleaner ~/.config/lf/lf_kitty_clean
 set icons
+
+# FMZ (https://github.com/Naheel-Azawy/fmz) does this. So why not?
+map <delete> delete
+
+# Ranger does this. How would anything else be intuitive?
+map <enter> open
+
+cmd open $~/.config/lf/lf_open "$f"
+
+# The idea is to just send files to a running instance of VSCode. Like you would would
+# send stuff to a running neovim instance with neovim-remote.
+cmd edit ${{
+    IFS="`printf '\n\t'`"; code $fx
+}}
+map e :edit
+
+# Ideas from here:
+# https://github.com/gokcehan/lf/issues/540#issuecomment-751905808
+cmd z %lf -remote "send $id cd '$(zoxide query $1)'"
+
+cmd zi ${{
+    res="$(zoxide query -i "$1")"
+    lf -remote "send $id cd \"$res\""
+}}
+
+# Add some stuff from FMZ
+
+# https://github.com/mwh/dragon/releases
+cmd dnd ${{
+    echo "$fx" | xargs -d '\n' dragon -a -x
+}}
