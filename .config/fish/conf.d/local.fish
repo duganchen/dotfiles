@@ -1,4 +1,6 @@
-set PATH $PATH ~/.local/bin
+set PATH $PATH ~/.local/bin ~/go/bin
+
+set -x CGO_ENABLED 1
 
 if test -d /Applications
     set PATH $PATH /Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
