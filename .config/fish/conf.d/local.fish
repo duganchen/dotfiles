@@ -33,6 +33,11 @@ end
 
 fzf_key_bindings
 
+# https://github.com/catppuccin/bat
+set -x BAT_THEME Catppuccin-mocha
+
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+
 # https://github.com/gokcehan/lf
 # https://github.com/duganchen/lf_config
 source ~/.config/lf/lf_env.fish
