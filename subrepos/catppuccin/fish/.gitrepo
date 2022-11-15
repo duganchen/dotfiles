@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:catppuccin/fish.git
+	branch = main
+	commit = 0fd0c48a844636c6082f633cc4f2800abb4b6413
+	parent = be20a758aac6b7d9fe9e34cb2f01e8271599f7c2
+	method = merge
+	cmdver = 0.4.5
