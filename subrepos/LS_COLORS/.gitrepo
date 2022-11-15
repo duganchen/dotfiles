@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:trapd00r/LS_COLORS.git
+	branch = master
+	commit = e36eebfb3e1b39497c6038cdc70c75109b6434de
+	parent = 50ae72417ed163bd233532ec0574ffb5016f6a06
+	method = merge
+	cmdver = 0.4.5
