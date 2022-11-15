@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-icat "$( vidthumb "$1")"

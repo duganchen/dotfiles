@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-kitty +kitten icat --silent --transfer-mode=stream --stdin=no "$( vidthumb "$1")"
