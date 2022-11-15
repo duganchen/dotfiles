@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:catppuccin/kitty.git
+	branch = main
+	commit = 37a9bcac429cdd04c0ecb4041ce6c6e3d4b53f42
+	parent = f9bcebb7661dc3ab00a319dcfb64f45b1d45d22a
+	method = merge
+	cmdver = 0.4.5
