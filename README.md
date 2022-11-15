@@ -4,6 +4,10 @@ Install them with GNU stow:
 
     stow -t ~ cfg
 
+If you're using Linux, also do:
+
+    stow -t ~ linux
+
 And then do some post-install:
 
     bat cache --build
