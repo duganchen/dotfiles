@@ -57,6 +57,3 @@ In *~/.gitconfig*:
 
     [credential]
     helper = osxkeychain
-
-[credential]
-	helper = osxkeychain
