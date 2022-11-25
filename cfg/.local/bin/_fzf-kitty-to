@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# https://github.com/junegunn/fzf/issues/2481#issuecomment-839591602
+tail_app="tail"
+if [[ "$(uname)" == "Darwin" ]]; then
+    tail_app=gtail
+fi
+
+if [[ -f "$INFILE" ]]; then
+    $tail_app -f "$INFILE" | fzf "$@" >"$OUTPIPE"
+else
+    fzf "$@" >"$OUTPIPE"
+fi
