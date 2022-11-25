@@ -15,15 +15,3 @@ function lf
         end
     end
 end
-
-function r
-    if set -q argv[1]
-        if test -d $argv[1]
-            lf $argv[1]
-        else
-            lf (zoxide query $argv[1])
-        end
-    else
-        lf
-    end
-end
