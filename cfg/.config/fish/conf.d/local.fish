@@ -35,3 +35,5 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x BAT_THEME Catppuccin-mocha
 
 source ~/.config/lf/lf_env.fish
+
+set -x PATH $PATH ~/.local/bin
