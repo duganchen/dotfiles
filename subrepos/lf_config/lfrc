@@ -33,11 +33,10 @@ cmd dnd ${{
     echo "$fx" | xargs -d '\n' dragon -a -x
 }}
 
-
-# Rebind / to fuzzy-search, as Llama does.
-# https://github.com/antonmedv/llama
+# https://github.com/gokcehan/lf/wiki/Integrations#fzf
+# Slightly modified to behave the way llama (https://github.com/antonmedv/llama) does.
 cmd fzf_jump ${{
-    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    res="$(fd . -d 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/\"/\\\"/g')\"
     if [ -d "$res" ] ; then
         cmd="select"
     elif [ -f "$res" ] ; then
