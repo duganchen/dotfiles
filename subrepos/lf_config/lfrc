@@ -36,7 +36,7 @@ cmd dnd ${{
 cmd fzf_search ${{
     res="$(fd . -d 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
     if [ -d "$res" ] ; then
-        cmd="cd"
+        cmd="select"
     elif [ -f "$res" ] ; then
         cmd="select"
     else
