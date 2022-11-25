@@ -20,19 +20,3 @@ lf() {
         fi
     fi
 }
-
-# Stolen. We even keep the command name as "r":
-# https://github.com/fdw/ranger-zoxide
-# Note that it calls the command above.
-r() {
-    if [ "$1" != "" ]; then
-        if [ -d "$1" ]; then
-            lf "$1"
-        else
-            lf "$(zoxide query $1)"
-        fi
-    else
-        lf
-    fi
-    return $?
-}
