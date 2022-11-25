@@ -26,19 +26,17 @@ cmd zi ${{
     lf -remote "send $id cd \"$res\""
 }}
 
-# Add some stuff from FMZ
-
 # https://github.com/mwh/dragon/releases
 cmd dnd ${{
     echo "$fx" | xargs -d '\n' dragon -a -x
 }}
 
-# https://github.com/gokcehan/lf/wiki/Integrations#fzf
-# Slightly modified to behave the way llama (https://github.com/antonmedv/llama) does.
-cmd fzf_jump ${{
-    res="$(fd . -d 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/\"/\\\"/g')\"
+# Like Llama does
+# https://github.com/antonmedv/llama
+cmd fzf_search ${{
+    res="$(fd . -d 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
     if [ -d "$res" ] ; then
-        cmd="select"
+        cmd="cd"
     elif [ -f "$res" ] ; then
         cmd="select"
     else
@@ -46,4 +44,4 @@ cmd fzf_jump ${{
     fi
     lf -remote "send $id $cmd \"$res\""
 }}
-map / :fzf_jump
+map / :fzf_search
