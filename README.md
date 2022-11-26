@@ -58,6 +58,12 @@ In *~/.gitconfig*:
     [credential]
     helper = osxkeychain
 
+### Linux
+
+    # On Fedora, install git-credential-libsecret
+    [credential]
+    helper = libsecret
+
 ## VSCode
 
 Some of the extensions I use that are actually worth noting down are:
