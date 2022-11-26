@@ -57,3 +57,15 @@ In *~/.gitconfig*:
 
     [credential]
     helper = osxkeychain
+
+## VSCode
+
+Some of the extensions I use that are actually worth noting down are:
+
+* [Path Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete) with mappings set for "/", "~" and "$HOME"
+* [fish-ide](https://marketplace.visualstudio.com/items?itemName=lunaryorn.fish-ide)
+* [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
+* [shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format)
+* [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
+
+The two shell extensions are from [Microsoft's recommendations](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/).
