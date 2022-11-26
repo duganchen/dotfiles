@@ -1,5 +1,9 @@
 My personal dotfiles.
 
+Start by making sure the appropriate directories exist:
+
+mkdir -p ~/.config/{kitty,lf,fish}
+
 Install them with GNU stow:
 
     stow -t ~ cfg
@@ -60,7 +64,7 @@ In *~/.gitconfig*:
 
 ### Linux
 
-    # On Fedora, install git-credential-libsecret
+    # On Fedora, install git-cred
     [credential]
     helper = libsecret
 
