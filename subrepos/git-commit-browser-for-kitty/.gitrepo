@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/duganchen/git-commit-browser-for-kitty
+	branch = main
+	commit = 79c199f06400392866a79084f8803b785d667193
+	parent = 2cb40d3015921ee69684f9ad7df4399fd865fb63
+	method = merge
+	cmdver = 0.4.5

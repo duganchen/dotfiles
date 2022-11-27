@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Launch with this:
+# kitty @launch --cwd current git_show_diff HEAD
+
+DELTA_PAGER='less -R -+F' PATH=$PATH:/usr/local/bin git show "$@"
