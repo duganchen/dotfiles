@@ -1,0 +1,1 @@
+../../../../subrepos/onedark.fish/conf.d/onedark.fish
