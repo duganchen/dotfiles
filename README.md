@@ -12,12 +12,18 @@ If you're using Linux, also do:
 
     stow -t ~ linux
 
-And then do some post-install:
+And if you're using OS X:
+
+    stow -t ~ osx
+
+And then, on OS X, do some post-install:
 
     bat cache --build
     fish_config theme save "Catppuccin Mocha"
 
-I use kitty, fish, starship, catppuccin, mpv, NERD fonts (Jetbrains Mono), lsd and lf.
+I use kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, exa, etc.
+
+Color schemes are Catppuccin on OS X and OneDark (including a [GNOME theme](https://github.com/lonr/adwaita-one-dark)) on Fedora.
 
 ## Git and SSH
 
