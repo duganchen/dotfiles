@@ -1,0 +1,1 @@
+../../../subrepos/git-commit-browser-for-kitty/git-hash-hints.py

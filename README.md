@@ -70,7 +70,7 @@ In *~/.gitconfig*:
 
 ### Linux
 
-    # On Fedora, install git-cred
+    # On Fedora, install git-credential-libsecret
     [credential]
     helper = libsecret
 
