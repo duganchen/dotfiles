@@ -11,9 +11,11 @@ set -Ux _ZO_FZF_OPTS '--bind=ctrl-z:ignore --exit-0 --height=40% --inline-info -
 # https://starship.rs/
 starship init fish | source
 
+# https://micro-editor.github.io/
+set -x EDITOR micro
+
 # https://code.visualstudio.com
-export EDITOR='code --wait'
-export VISUAL='code --wait'
+set -x VISUAL='code --wait'
 
 # https://github.com/junegunn/fzf
 
