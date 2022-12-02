@@ -15,7 +15,7 @@ starship init fish | source
 set -x EDITOR micro
 
 # https://code.visualstudio.com
-set -x VISUAL='code --wait'
+set -x VISUAL 'code --wait'
 
 # https://github.com/junegunn/fzf
 
