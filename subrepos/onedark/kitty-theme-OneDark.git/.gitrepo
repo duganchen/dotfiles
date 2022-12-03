@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:GiuseppeCesarano/kitty-theme-OneDark.git
+	branch = master
+	commit = 97781aa8ea2a4c74ecf711d5456e25509876d6e2
+	parent = a2408432eb13256de080d20f7ab0c6c04670c399
+	method = merge
+	cmdver = 0.4.5
