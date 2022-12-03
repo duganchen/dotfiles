@@ -1,1 +1,1 @@
-../../../../subrepos/onedark.fish/conf.d/onedark.fish
+../../../../subrepos/onedark/onedark.fish.git/conf.d/onedark.fish
