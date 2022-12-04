@@ -22,19 +22,17 @@ set -x VISUAL 'code --wait'
 # Fedora
 if test -f /usr/share/fzf/shell/key-bindings.fish
     source /usr/share/fzf/shell/key-bindings.fish
+    fzf_key_bindings
 end
 
 # OS X
 if test -f /usr/local/opt/fzf/shell/key-bindings.fish
     source /usr/local/opt/fzf/shell/key-bindings.fish
+    fzf_key_bindings
 end
-
-fzf_key_bindings
 
 # https://github.com/catppuccin/bat
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-
-set -x BAT_THEME Catppuccin-mocha
 
 source ~/.config/lf/lf_env.fish
 

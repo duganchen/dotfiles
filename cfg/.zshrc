@@ -1,19 +1,3 @@
-# I was going to use https://github.com/mattmc3/zshrc.d
-# but ended up not bothering
-
-source ~/.zsh/lscolors.sh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
-source /usr/share/fzf/shell/key-bindings.zsh
-fi
-
-# I don't actually use ZOxide, but it seems to be the best of the cd-history things
-eval "$(zoxide init zsh)"
-
-eval "$(starship init zsh)"
-
 # Some ideas from here:
 # https://www.olets.dev/posts/zsh-config-productivity-plugins-for-mac-oss-default-shell/
 # History[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
@@ -47,3 +31,45 @@ zstyle ':completion:*' list-colors ''
 # list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 # Other
 setopt prompt_subst
+
+# And my stuff
+export EDITOR=micro
+export VISUAL='code --wait'
+
+# I was going to use https://github.com/mattmc3/zshrc.d
+# but ended up not bothering
+
+source ~/.zsh/lscolors.sh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
+source /usr/share/fzf/shell/key-bindings.zsh
+fi
+
+if [[ -f /usr/local/opt/fzf/shell/key-bindings.fish ]]; then
+source /usr/local/opt/fzf/shell/key-bindings.fish
+fi
+
+# I don't actually use ZOxide, but it seems to be the best of the cd-history things
+eval "$(zoxide init zsh)"
+
+eval "$(starship init zsh)"
+
+export PATH=$PATH:$HOME/.local/bin
+if [[ -d /Applications ]]; then
+export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
+fi
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# For ZSH, I'm not going to make any assumptions about colors, icons or
+# fonts. Note that unlike their FISH counterparts, these don't assume a NERD font.
+alias l='exa'
+alias la='exa --all'
+alias lt='exa --long --group-directories-first --sort size'
+alias tree='exa -T'
+
+if [[ "$(uname)" == "Darwin" ]]; then
+alias ls='gls --classify --color=auto'
+fi
