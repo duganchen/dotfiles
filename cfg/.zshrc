@@ -23,7 +23,7 @@ unsetopt menu_complete
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path 
+zstyle ':completion::complete:*' cache-path
 zstyle ':completion:*' list-colors ''
 
 # This doesn't work.
@@ -44,11 +44,11 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
-source /usr/share/fzf/shell/key-bindings.zsh
+    source /usr/share/fzf/shell/key-bindings.zsh
 fi
 
-if [[ -f /usr/local/opt/fzf/shell/key-bindings.fish ]]; then
-source /usr/local/opt/fzf/shell/key-bindings.fish
+if [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
+    source /usr/local/opt/fzf/shell/key-bindings.zsh
 fi
 
 # I don't actually use ZOxide, but it seems to be the best of the cd-history things
@@ -58,7 +58,7 @@ eval "$(starship init zsh)"
 
 export PATH=$PATH:$HOME/.local/bin
 if [[ -d /Applications ]]; then
-export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
+    export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -71,5 +71,5 @@ alias lt='exa --long --group-directories-first --sort size'
 alias tree='exa -T'
 
 if [[ "$(uname)" == "Darwin" ]]; then
-alias ls='gls --classify --color=auto'
+    alias ls='gls --classify --color=auto'
 fi
