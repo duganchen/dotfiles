@@ -51,6 +51,11 @@ if [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
     source /usr/local/opt/fzf/shell/key-bindings.zsh
 fi
 
+# Ubuntu
+if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+
 # I don't actually use ZOxide, but it seems to be the best of the cd-history things
 eval "$(zoxide init zsh)"
 
@@ -60,6 +65,7 @@ export PATH=$PATH:$HOME/.local/bin
 if [[ -d /Applications ]]; then
     export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
+# On Ubuntu you also want /usr/lib/cargo/bin in the PATH, for fd-find.
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
