@@ -65,10 +65,10 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # For ZSH, I'm not going to make any assumptions about colors, icons or
 # fonts. Note that unlike their FISH counterparts, these don't assume a NERD font.
-alias l='exa'
-alias la='exa --all'
-alias lt='exa --long --group-directories-first --sort size'
-alias tree='exa -T'
+alias l='exa --classify'
+alias la='exa --classify --all'
+alias lt='exa --classify --long --group-directories-first --sort size'
+alias tree='exa --classify -T'
 
 if [[ "$(uname)" == "Darwin" ]]; then
     alias ls='gls --classify --color=auto'
