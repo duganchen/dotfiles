@@ -65,7 +65,11 @@ export PATH=$PATH:$HOME/.local/bin
 if [[ -d /Applications ]]; then
     export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
 fi
-# On Ubuntu you also want /usr/lib/cargo/bin in the PATH, for fd-find.
+
+# For fd-find on Ubuntu
+if [ -d /usr/lib/cargo/bin ]; then
+    export PATH=$PATH:/usr/lib/cargo/bin
+fi
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
