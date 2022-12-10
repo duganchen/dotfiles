@@ -11,7 +11,8 @@ Put git_show_diff in your PATH.
 
 Put the following in kitty.conf:
 
-    map ctrl+shift+p>g kitten hints --customize-processing git-hash-hints.py
+    map ctrl+shift+p>h kitten hints --program @ --type regex --regex "\b([0-9a-f]{6}|[0-9a-f]{7}|[0-9a-f]{8}|[0-9a-f]{40})\b"
+    map ctrl+shift+p>g kitten hints --program "launch --cwd=current git_show_diff" --type regex --regex "\b([0-9a-f]{6}|[0-9a-f]{7}|[0-9a-f]{8}|[0-9a-f]{40})\b"
 
 Display the git log in the terminal:
 
@@ -27,4 +28,6 @@ Enter one of the numbers to see that commit:
 
 Press "q" to close the preview window.
 
-As of now, it's at the "works on my computer" (OS X, with [Delta](https://github.com/dandavison/delta) as the git pager) stage.
+Or press Ctrl+Shift+b and then h. Choose a hash, and it will be copied to the clipboard.
+
+As of now, it's at the "works on my computer" (OS X, with Delta as the git pager) stage.

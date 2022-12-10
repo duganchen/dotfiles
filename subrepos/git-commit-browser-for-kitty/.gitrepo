@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/duganchen/git-commit-browser-for-kitty
 	branch = main
-	commit = 79c199f06400392866a79084f8803b785d667193
-	parent = 2cb40d3015921ee69684f9ad7df4399fd865fb63
+	commit = d6920fe4ab0188ed2939a5318c78a015bd6ebef1
+	parent = 44933a9c46362df72aaa5cc5e9feeee59a3428f5
 	method = merge
 	cmdver = 0.4.5
