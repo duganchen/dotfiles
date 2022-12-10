@@ -17,19 +17,7 @@ set -x EDITOR micro
 # https://code.visualstudio.com
 set -x VISUAL 'code --wait'
 
-# https://github.com/junegunn/fzf
-
-# Fedora
-if test -f /usr/share/fzf/shell/key-bindings.fish
-    source /usr/share/fzf/shell/key-bindings.fish
-    fzf_key_bindings
-end
-
-# OS X
-if test -f /usr/local/opt/fzf/shell/key-bindings.fish
-    source /usr/local/opt/fzf/shell/key-bindings.fish
-    fzf_key_bindings
-end
+mcfly init fish | source
 
 # https://github.com/catppuccin/bat
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
