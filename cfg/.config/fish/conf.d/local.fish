@@ -21,7 +21,7 @@ mcfly init fish | source
 
 # https://github.com/catppuccin/bat
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+# Needed on Fedora
+set -x MANROFFOPT "-c"
 
 source ~/.config/lf/lf_env.fish
-
-set -x PATH $PATH ~/.local/bin
