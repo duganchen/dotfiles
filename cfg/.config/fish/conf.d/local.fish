@@ -1,6 +1,4 @@
-if test -d /Applications
-    set PATH $PATH /Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
-end
+# We don't set paths here. Use "set -U fish_user_paths" as needed.
 
 # https://github.com/ajeetdsouza/zoxide
 zoxide init fish | source
