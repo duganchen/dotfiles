@@ -10,8 +10,8 @@ map <enter> open
 
 cmd open $~/.config/lf/lf_open "$f"
 
-# The idea is to just send files to a running instance of VSCode. Future
-# versions will support sending all the selected files with $fx.
+# The idea is to just send selected files and/or directories to a running instance of VSCode.
+# The way you'd use neovim-remote to send files to a running instance of neovim.
 cmd edit ${{
     IFS="`printf '\n\t'`"; code $fx
 }}
@@ -31,7 +31,7 @@ cmd dnd ${{
     echo "$fx" | xargs -d '\n' dragon -a -x
 }}
 
-# Like Llama does
+# Remap "/" to act like it does in Llama.
 # https://github.com/antonmedv/llama
 cmd fzf_search ${{
     res="$(fd . -d 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"

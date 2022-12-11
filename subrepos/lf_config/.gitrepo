@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:duganchen/lf_config.git
 	branch = main
-	commit = 9ccc1f0ef59fddb8587f8f76e2c3b5db0444603c
-	parent = 7762c8a7938898b2c2b4282686eb3ea065a02321
+	commit = 3ede7964e66c8de7c3f9a562491a65dfe841d490
+	parent = 719c2ae38c96b7de592640b774319389a62b04c1
 	method = merge
 	cmdver = 0.4.5
