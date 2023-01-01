@@ -15,8 +15,6 @@ set -x EDITOR micro
 # https://code.visualstudio.com
 set -x VISUAL 'code --wait'
 
-mcfly init fish | source
-
 # https://github.com/catppuccin/bat
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # Needed on Fedora
