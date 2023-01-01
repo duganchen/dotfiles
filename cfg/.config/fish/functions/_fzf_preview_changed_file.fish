@@ -1,0 +1,1 @@
+../../../../subrepos/fzf.fish/functions/_fzf_preview_changed_file.fish
