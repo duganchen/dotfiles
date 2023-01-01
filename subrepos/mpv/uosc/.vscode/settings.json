@@ -1,0 +1,40 @@
+{
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"Lua.runtime.path": [
+		"?.lua",
+		"?/init.lua",
+		"scripts/?.lua"
+	],
+	"Lua.diagnostics.disable": [
+		"lowercase-global",
+		"redefined-local"
+	],
+	"Lua.diagnostics.globals": [
+		"mp"
+	],
+	"cSpell.words": [
+		"alac",
+		"apng",
+		"autoload",
+		"autorenew",
+		"bestaudio",
+		"bestvideo",
+		"Bopomofo",
+		"demux",
+		"doubleclick",
+		"gfps",
+		"hidpi",
+		"jfif",
+		"logicaldisk",
+		"outro",
+		"outros",
+		"rrggbb",
+		"rrggbbaa",
+		"samplerate",
+		"sponsorblock",
+		"thumbfast",
+		"ytdl",
+		"ZWNBSP"
+	]
+}
