@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:po5/thumbfast.git
+	branch = master
+	commit = 08d81035bb5020f4caa326e642341f2e8af00ffe
+	parent = 7d5534055e531c3cd9906fb0cc5ddff6420ca242
+	method = merge
+	cmdver = 0.4.5
