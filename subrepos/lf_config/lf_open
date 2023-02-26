@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ "$(file -Lb "$1")" == *"playlist"* ]]; then
+    mpv "$1"
+else
+    ft=$(file -Lb --mime-type "$1")
+
+    if [[ "$ft" =~ ^video/ ]]; then
+        mpv "$1"
+    elif [[ "$ft" =~ ^audio/ ]]; then
+        mpv "$1"
+    elif [[ "$ft" == application/vnd.rn-realmedia ]]; then
+        mpv "$1"
+    elif [[ "$ft" == text/html ]]; then
+        lynx "$1"
+    else
+        $OPENER "$1" > /dev/null 2>&1
+    fi
+fi
