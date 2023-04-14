@@ -1,1 +1,0 @@
-../../../../subrepos/mpv/mfcc64/mpv-scripts/visualizer.lua
