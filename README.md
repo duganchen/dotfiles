@@ -2,7 +2,7 @@ My personal dotfiles.
 
 Start by making sure the appropriate directories exist:
 
-mkdir -p ~/.config/{kitty,lf,fish}
+mkdir -p ~/.config/{bat/themes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},environment.d,mpv/{fonts,scripts}}
 
 Install them with GNU stow:
 
@@ -21,9 +21,7 @@ And then, on OS X, do some post-install:
     bat cache --build
     fish_config theme save "Catppuccin Mocha"
 
-I use kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, exa, etc.
-
-Color schemes are Catppuccin on OS X and OneDark (including a [GNOME theme](https://github.com/lonr/adwaita-one-dark)) on Fedora.
+I use Catppuccin, kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, exa, etc.
 
 ## Git and SSH
 
