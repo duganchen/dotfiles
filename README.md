@@ -2,7 +2,7 @@ My personal dotfiles.
 
 Start by making sure the appropriate directories exist:
 
-mkdir -p ~/.config/{bat/themes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},environment.d,mpv/{fonts,scripts}}
+mkdir -p ~/.config/{bat/themes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts}}
 
 Install them with GNU stow:
 
