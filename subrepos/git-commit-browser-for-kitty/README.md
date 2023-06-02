@@ -5,9 +5,7 @@
 This is a system for using [kitty](https://sw.kovidgoyal.net/kitty/) to browse
 git commits, gitk style.
 
-Put git-hash-hints.py in ~/.config/kitty
-
-Put git_show_diff in your PATH.
+sPut git_show_diff in your PATH.
 
 Put the following in kitty.conf:
 
