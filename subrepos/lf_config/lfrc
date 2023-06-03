@@ -19,7 +19,7 @@ map e :edit
 
 cmd copy_to_clipboard %{{
     if type pbcopy > /dev/null; then
-    printf '%s' "$fx" | pbcopy
+    printf '%s' "$f" | pbcopy
     fi
 }}
 map <c-c> :copy_to_clipboard
