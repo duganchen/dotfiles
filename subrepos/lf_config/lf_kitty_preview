@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+file=$1
+w=$2
+h=$3
+x=$4
+y=$5
+
+ext="${file##*.}"
+
+if [[ "$ext" == "epub" || "$ext" == "mobi" ]]; then
+    # https://github.com/wustho/epy
+    epy -d "$file"
+    exit 1
+fi
+
+if [[ "$ext" == "rm" ]]; then
+    kitty +kitten icat --silent --transfer-mode file --stdin no --place "${w}x${h}@${x}x${y}" "$(vidthumb "$file")" </dev/null >/dev/tty
+    exit 1
+fi
+
+if [[ "$ext" =~ ^[Mm][Dd] ]]; then
+    # This Glow
+    # https://youtu.be/EDNpK3iH7A0
+    glow -s dark "$file"
+    exit 1
+fi
+
+filetype="$(file -Lb --mime-type "$file")"
+
+if [[ "$filetype" =~ ^image ]]; then
+    kitty +kitten icat --silent --transfer-mode file --stdin no --place "${w}x${h}@${x}x${y}" "$file" </dev/null >/dev/tty
+    exit 1
+fi
+
+if [[ "$filetype" == "application/pdf" ]]; then
+    system="$(uname -s)"
+
+    if [[ "$system" == "Darwin" ]]; then
+        sips -s format png --out ~/.cache/pdf_preview.png "$file"
+        kitty +kitten icat --silent --transfer-mode file --stdin no --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png </dev/null >/dev/tty
+        rm -f ~/.cache/pdf_preview.png
+        exit 1
+    fi
+
+    if [[ "$system" == "Linux" ]]; then
+        convert "$file"[0] ~/.cache/pdf_preview.png
+        kitty +kitten icat --silent --transfer-mode file --stdin no --place "${w}x${h}@${x}x${y}" ~/.cache/pdf_preview.png </dev/null >/dev/tty
+        rm -f ~/.cache/pdf_preview.png
+        exit 1
+    fi
+fi
+
+if [[ "$filetype" =~ ^video ]]; then
+    # vidthumb is from here:
+    # https://raw.githubusercontent.com/duganchen/kitty-pistol-previewer/main/vidthumb
+    kitty +kitten icat --silent --transfer-mode file --stdin no --place "${w}x${h}@${x}x${y}" "$(vidthumb "$file")" </dev/null >/dev/tty
+    exit 1
+fi
+
+pistol "$file"

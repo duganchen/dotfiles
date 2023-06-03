@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:duganchen/lf_config.git
+	branch = main
+	commit = 064dc7f7c0f3a14f278ed5c463287fd751118b18
+	parent = 08dbc5679295f532dc0cb99525cc87105aaa9bef
+	method = merge
+	cmdver = 0.4.6
