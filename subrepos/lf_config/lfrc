@@ -18,8 +18,10 @@ cmd edit ${{
 map e :edit
 
 cmd copy_to_clipboard %{{
-    if type pbcopy > /dev/null; then
+    if type pbcopy > /dev/null 2>&1; then
     printf '%s' "$f" | pbcopy
+    elif type xsel > /dev/null 2>&1; then
+    printf '%s' "$f" | xsel -ib
     fi
 }}
 map <c-c> :copy_to_clipboard
