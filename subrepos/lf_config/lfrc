@@ -17,6 +17,13 @@ cmd edit ${{
 }}
 map e :edit
 
+cmd copy_to_clipboard ${{
+    if type pbcopy > /dev/null; then
+    printf '%s' "$fx" | pbcopy
+    fi
+}}
+map <c-c> :copy_to_clipboard
+
 # Ideas from here:
 # https://github.com/gokcehan/lf/issues/540#issuecomment-751905808
 cmd z %lf -remote "send $id cd '$(zoxide query $1)'"
