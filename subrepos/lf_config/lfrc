@@ -17,7 +17,7 @@ cmd edit ${{
 }}
 map e :edit
 
-cmd copy_to_clipboard ${{
+cmd copy_to_clipboard %{{
     if type pbcopy > /dev/null; then
     printf '%s' "$fx" | pbcopy
     fi
