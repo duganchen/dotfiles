@@ -17,3 +17,5 @@ zoxide init fish | source
 starship init fish | source
 
 source ~/.config/lf/lf_env.fish
+
+export NNN_FIFO=/tmp/nnn.fifo
