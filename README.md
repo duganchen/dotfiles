@@ -87,3 +87,18 @@ Some of the extensions I use that are actually worth noting down are:
 * [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
 
 The two shell extensions are from [Microsoft's recommendations](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/).
+
+## "Plugin Manager" Explanation
+
+There are a lot of "plugin managers" that just clone stuff from git. Here's my system, which uses [git-subrepo](https://github.com/ingydotnet/git-subrepo) and [Stow](https://www.gnu.org/software/stow/).
+
+Let's say I want to use zsh-autosuggestions.
+
+I would do the following:
+
+    git subrepo clone git@github.com:zsh-users/zsh-autosuggestions.git subrepos/zsh-autosuggestions
+    mkdir -p cfg/.zsh
+    cd cfg/.zsh
+    ln -s ../../subrepos/zsh-autosuggestions
+
+The next time I stow the cfg directory, the symbolic link to the zsh-autosuggestions repo gets installed to ~/.zsh/zsh-autosuggestions, where I want it.
