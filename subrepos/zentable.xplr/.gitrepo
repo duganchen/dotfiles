@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:sayanarijit/zentable.xplr.git
+	branch = main
+	commit = 4e3d3e5a16e2b9422d8f714018f0ed2dca90c195
+	parent = 6c926c4ad798f69fd47daa657330f3cc62436a49
+	method = merge
+	cmdver = 0.4.6
