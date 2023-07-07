@@ -9,6 +9,8 @@
 # Needed on Fedora
 # set -x MANROFFOPT "-c"
 
+# With https://github.com/sharkdp/vivid/
+# set -Ux LS_COLORS (vivid generate catppuccin-mocha)
 
 # https://github.com/ajeetdsouza/zoxide
 zoxide init fish | source
@@ -17,5 +19,3 @@ zoxide init fish | source
 starship init fish | source
 
 source ~/.config/lf/lf_env.fish
-
-export NNN_FIFO=/tmp/nnn.fifo
