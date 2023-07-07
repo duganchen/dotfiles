@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:dtomvan/extra-icons.xplr.git
+	branch = main
+	commit = 1f27b9a74c23b869fe64d12f3d8c2a1207ff8eb7
+	parent = 19c57bc0ec1b9fc34a0a79331524d956632b90e2
+	method = merge
+	cmdver = 0.4.6
