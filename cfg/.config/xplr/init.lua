@@ -13,4 +13,5 @@ require("extra-icons").setup()
 
 xplr.config.general.table.row.cols[2] = { format = "custom.icons_dtomvan_col_1" }
 
-xplr.config.general.start_fifo = "/tmp/nnn.fifo"
+-- Uncomment this when I'm ready
+-- xplr.config.general.start_fifo = "/tmp/nnn.fifo"
