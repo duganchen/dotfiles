@@ -338,10 +338,11 @@ config.key_tables = {
     { key = 'K', mods = 'SHIFT', action = act.AdjustPaneSize{ 'Up', 1 } },
 
     -- Move some of the navigation stuff here
+
     { key = '-', action = act.MoveTabRelative(-1)},
 
-    -- This doesn't work for me.
-    { key = '-', action = act.MoveTabRelative(1)},
+    -- This is actually the plus sign, but, well, this is what works for me. 
+    { key = '=', action = act.MoveTabRelative(1)},
     
     { key = 'LeftArrow', action = act.ActivatePaneDirection 'Left' },
     { key = 'RightArrow', action = act.ActivatePaneDirection 'Right' },
