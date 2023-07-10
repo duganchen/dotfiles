@@ -33,7 +33,7 @@ wezterm.on('update-status', function(window, pane)
   elseif name then
     window:set_right_status('TABLE: ' .. name)
   else
-    window:set_left_status('Ctrl + ... <p> PANE | <t> TAB | <n> RESIZE | <h> MOVE')
+    window:set_left_status('Ctrl + ... <p> PANE | <t> TAB | <n> RESIZE | <h> MOVE | <s> SEARCH')
     window:set_right_status('')
   end
 
@@ -100,8 +100,10 @@ config.keys = {
   -- { key = '@', mods = 'SHIFT|CTRL', action = act.ActivateTab(1) },
   { key = 'C', mods = 'CTRL', action = act.CopyTo 'Clipboard' },
   { key = 'C', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
-  { key = 'F', mods = 'CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
-  { key = 'F', mods = 'SHIFT|CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
+
+  -- { key = 'F', mods = 'CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
+  -- { key = 'F', mods = 'SHIFT|CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
+
   { key = 'K', mods = 'CTRL', action = act.ClearScrollback 'ScrollbackOnly' },
   { key = 'K', mods = 'SHIFT|CTRL', action = act.ClearScrollback 'ScrollbackOnly' },
   { key = 'L', mods = 'CTRL', action = act.ShowDebugOverlay },
@@ -205,6 +207,10 @@ config.keys = {
       prevent_fallback = true,
       one_shot = false
     },
+  },
+
+  {
+    key = 's', mods = 'CTRL', action = act.Search 'CurrentSelectionOrEmptyString'
   },
 }
 
