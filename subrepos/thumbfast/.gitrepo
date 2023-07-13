@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:po5/thumbfast.git
 	branch = master
-	commit = 08d81035bb5020f4caa326e642341f2e8af00ffe
-	parent = 7701b489227262e1f45b142e2b79128cae2903c6
+	commit = 4241c7daa444d3859b51b65a39d30e922adb87e9
+	parent = a22b41c2cc62edd1fc989d8e6c68cba282c383ed
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
