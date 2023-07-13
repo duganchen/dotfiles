@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:PatrickF1/fzf.fish.git
 	branch = main
-	commit = 175222b9bd79e589da55972b2cd6686b94c6325b
-	parent = b85ac474d31cf82d83d9a0e70e5a4fc638d712d8
+	commit = 9876f5f74aab7f58b0359341dc26bf4a0f2e9021
+	parent = 2e298142c32479e7bfa7cad80037e4885d95b12e
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6

@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/1967248/197308919-51d04602-2d5f-46aa-a
 
 ## Search commands
 
-Use `fzf.fish` to interactively find and insert file paths, git commit hashes, and other entities into your command line. <kbd>Tab</kbd> to select multiple entries. If you trigger a search while your cursor is on a word, that word will be used to seed the fzf query and will be replaced by your selection. All searches include a preview of the entity hovered over so you can seamlessly decide if it's what you're looking for.
+Use `fzf.fish` to interactively find and insert file paths, git commit hashes, and other entities into your command line. <kbd>Tab</kbd> to select multiple entries. If you trigger a search while your cursor is on a word, that word will be used to seed the fzf query and will be replaced by your selection. All searches include a preview of the entity hovered over to help you find what you're looking for.
 
 ### 📁 Search Directory
 
@@ -25,7 +25,7 @@ Use `fzf.fish` to interactively find and insert file paths, git commit hashes, a
 - **Key binding and mnemonic:** <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> (`F` for file)
 - **Preview window:** file with syntax highlighting, directory contents, or file type
 - **Remarks**
-  - appends `/` to directories selected so you can hit <kbd>ENTER</kbd> to [immediately cd into it][cd docs] if it is the only token on the command line
+  - directories are inserted with a trailing `/`, so if you select exactly one directory, you can immediately hit <kbd>ENTER</kbd> to [cd into it][cd docs]
   - if the current token is a directory with a trailing slash (e.g. `.config/<CURSOR>`), then that directory is searched instead
   - [ignores files that are also ignored by git](#fd-gi)
 
@@ -79,16 +79,18 @@ Use `fzf.fish` to interactively find and insert file paths, git commit hashes, a
 
 First, install a proper version of these CLI dependencies:
 
-| CLI      | Minimum version required | Description                                    |
-| -------- | ------------------------ | ---------------------------------------------- |
-| [fish][] | 3.2.0                    | a modern shell                                 |
-| [fzf][]  | 0.27.2                   | fuzzy finder that powers this plugin           |
-| [fd][]   | 8.3.0                    | faster and more colorful alternative to `find` |
-| [bat][]  | 0.16.0                   | smarter `cat` with syntax highlighting         |
+| CLI      | Minimum version required | Description                             |
+| -------- | ------------------------ | --------------------------------------- |
+| [fish][] | 3.4.0                    | a modern shell                          |
+| [fzf][]  | 0.27.2                   | fuzzy finder that powers this plugin    |
+| [fd][]   | 8.5.0                    | faster, colorized alternative to `find` |
+| [bat][]  | 0.16.0                   | smarter `cat` with syntax highlighting  |
 
-[fd][] and [bat][] only need to be installed if you will use [Search Directory][]. If your package manager [doesn't install them as `fd` and `bat`](https://github.com/PatrickF1/fzf.fish/wiki/Troubleshooting#search-directory-does-not-work) respectively, then you can symlink them to those names.
+[fd][] and [bat][] only need to be installed if you will use [Search Directory][].
 
-Next, install this plugin with [Fisher][].
+Next, because `fzf.fish` is incompatible with other fzf plugins, [check for and remove these two common alternatives](https://github.com/PatrickF1/fzf.fish/wiki/Uninstalling-other-fzf-plugins).
+
+Finally, install this plugin with [Fisher][].
 
 > `fzf.fish` can be installed manually or with other plugin managers but only Fisher is officially supported.
 
@@ -143,13 +145,13 @@ Find more ideas and implementation tips in the [Cookbook](https://github.com/Pat
 
 [Search Directory][], by default, calls `ls` to preview directories and `bat` to preview [regular files](https://stackoverflow.com/questions/6858452).
 
-To change the directory preview command (e.g. to use one of the many `ls` replacements such as `exa`), set `fzf_preview_dir_cmd` to the desired command:
+To use your own directory preview command (e.g. to use one of the many `ls` replacements such as `exa`), set it in `fzf_preview_dir_cmd`:
 
 ```fish
 set fzf_preview_dir_cmd exa --all --color=always
 ```
 
-And to change the file preview command (e.g. to `cat` to avoid having to install `bat`, or to add logic for previewing images), set `fzf_preview_file_cmd` to the desired command:
+And to use your own file preview command (e.g. to `cat` to avoid having to install `bat`, or to add logic for previewing images), set it in `fzf_preview_file_cmd`:
 
 ```fish
 set fzf_preview_file_cmd cat -n
@@ -159,13 +161,33 @@ Omit the target path for both variables as `fzf.fish` will itself [specify the a
 
 ### Change what files are listed in Search Directory
 
-To pass custom options to `fd` when it is executed to populate the list of files for [Search Directory][], set them in `fzf_fd_opts`. For example, to include hidden files but not `.git`:
+To pass custom options to `fd` when it is executed to populate the list of files for [Search Directory][], set them in `fzf_fd_opts`. For example, this includes hidden files but not `.git`:
 
 ```fish
 set fzf_fd_opts --hidden --exclude=.git
 ```
 
 <a id='fd-gi'></a>By default, `fd` hides files listed in `.gitignore`. You can disable this behavior by adding the `--no-ignore` flag to `fzf_fd_opts`.
+
+### Change the commit formatting used by Search Git Log
+
+[Search Git Log][] calls `git log --format` to format the list of commits. To use your own [commit log format](https://git-scm.com/docs/git-log#Documentation/git-log.txt-emnem), set it in `fzf_git_log_format`. For example, this shows the hash and subject for each commit:
+
+```fish
+set fzf_git_log_format "%H %s"
+```
+
+The format must be one line per commit and the hash must be the first field, or else Search Git Log will fail to determine which commits you selected.
+
+### Change the date time format used by Search History
+
+[Search History][] shows the date time each command was executed. To change how its formatted, set your [strftime format string](https://devhints.io/strftime) in `fzf_history_time_format`. For example, this shows the date time as DD-MM-YY:
+
+```fish
+set fzf_history_time_format %d-%m-%y
+```
+
+Do not to include the vertical box-drawing character `│` (not to be confused with the pipe character `|`) as it is relied on to delineate the date time from the command.
 
 ## Further reading
 
@@ -186,4 +208,6 @@ Find answers to these questions and more in the [project Wiki](https://github.co
 [fzf]: https://github.com/junegunn/fzf
 [latest release badge]: https://img.shields.io/github/v/release/patrickf1/fzf.fish
 [search directory]: #-search-directory
+[search git log]: #-search-git-log
+[search history]: #-search-history
 [var scope]: https://fishshell.com/docs/current/#variable-scope
