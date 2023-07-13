@@ -51,11 +51,12 @@ local osd_width, osd_height = 100, 100
 ---@return integer
 local function utf8_char_bytes(str, i)
 	local char_byte = str:byte(i)
-	if char_byte < 0xC0 then return 1
-	elseif char_byte < 0xE0 then return 2
-	elseif char_byte < 0xF0 then return 3
-	elseif char_byte < 0xF8 then return 4
-	else return 1 end
+	local max_bytes = #str - i + 1
+	if char_byte < 0xC0 then return math.min(max_bytes, 1)
+	elseif char_byte < 0xE0 then return math.min(max_bytes, 2)
+	elseif char_byte < 0xF0 then return math.min(max_bytes, 3)
+	elseif char_byte < 0xF8 then return math.min(max_bytes, 4)
+	else return math.min(max_bytes, 1) end
 end
 
 ---Creates an iterator for an utf-8 encoded string
@@ -251,8 +252,8 @@ do
 		local unicode = utf8_to_unicode(char, 1)
 		for _, block in ipairs(zero_width_blocks) do
 			if unicode >= block[1] and unicode <= block[2] then
-				char_widths[char] = {0, infinity}
-				return 0, infinity
+				char_widths[char] = {0, INFINITY}
+				return 0, INFINITY
 			end
 		end
 
@@ -302,7 +303,7 @@ end
 ---@return number, integer
 local function character_based_width(text, bold)
 	local max_width = 0
-	local min_px = infinity
+	local min_px = INFINITY
 	for line in tostring(text):gmatch("([^\n]*)\n?") do
 		local total_width = 0
 		for _, char in utf8_iter(line) do
@@ -326,10 +327,19 @@ local function whole_text_width(text, bold, italic)
 	return normalized_text_width(ass_escape(text), size * 0.9, bold, italic, horizontal)
 end
 
----Get scale factor calculated from font size, bold and italic
----@param opts {size: number; bold?: boolean; italic?: boolean}
-local function opts_scale_factor(opts)
-	return (opts.italic and 1.01 or 1) * opts.size
+---Scale normalized width to real width based on font size and italic
+---@param opts {size: number; italic?: boolean}
+---@return number, number
+local function opts_factor_offset(opts)
+	return opts.size, opts.italic and opts.size * 0.2 or 0
+end
+
+---Scale normalized width to real width based on font size and italic
+---@param opts {size: number; italic?: boolean}
+---@return number
+local function normalized_to_real(width, opts)
+	local factor, offset = opts_factor_offset(opts)
+	return factor * width + offset
 end
 
 do
@@ -350,11 +360,11 @@ do
 			---@type {[string|number]: {[1]: number, [2]: integer}}
 			local text_width = get_cache_stage(width_cache, bold)
 			local width_px = text_width[text]
-			if width_px and no_remeasure_required(width_px[2]) then return width_px[1] * opts_scale_factor(opts) end
+			if width_px and no_remeasure_required(width_px[2]) then return normalized_to_real(width_px[1], opts) end
 
 			local width, px = character_based_width(text, bold)
 			width_cache[bold][text] = {width, px}
-			return width * opts_scale_factor(opts)
+			return normalized_to_real(width, opts)
 		else
 			---@type {[string|number]: {[1]: number, [2]: integer}}
 			local text_width = get_cache_stage(get_cache_stage(width_cache, bold), italic)
@@ -368,6 +378,24 @@ do
 	end
 end
 
+do
+	---@type {[string]: string}
+	local cache = {}
+
+	---Get width of formatted timestamp as if all the digits were replaced with 0
+	---@param timestamp string
+	---@param opts {size: number; bold?: boolean; italic?: boolean}
+	---@return number
+	function timestamp_width(timestamp, opts)
+		local substitute = cache[#timestamp]
+		if not substitute then
+			substitute = timestamp:gsub('%d', '0')
+			cache[#timestamp] = substitute
+		end
+		return text_width(substitute, opts)
+	end
+end
+
 ---Wrap the text at the closest opportunity to target_line_length
 ---@param text string
 ---@param opts {size: number; bold?: boolean; italic?: boolean}
@@ -375,15 +403,15 @@ end
 ---@return string
 function wrap_text(text, opts, target_line_length)
 	local target_line_width = target_line_length * width_length_ratio * opts.size
-	local bold, scale_factor = opts.bold or false, opts_scale_factor(opts)
+	local bold, scale_factor, scale_offset = opts.bold or false, opts_factor_offset(opts)
 	local wrap_at_chars = {' ', '　', '-', '–'}
 	local remove_when_wrap = {' ', '　'}
 	local lines = {}
 	for text_line in text:gmatch("([^\n]*)\n?") do
-		local line_width = 0
+		local line_width = scale_offset
 		local line_start = 1
 		local before_end = nil
-		local before_width = 0
+		local before_width = scale_offset
 		local before_line_start = 0
 		local before_removed_width = 0
 		for char_start, char in utf8_iter(text_line) do
@@ -416,15 +444,14 @@ function wrap_text(text, opts, target_line_length)
 						(line_width_after_remove - target_line_width) then
 						lines[#lines + 1] = text_line:sub(line_start, before_end)
 						line_start = before_line_start
-						line_width = line_width - before_width - before_removed_width
+						line_width = line_width - before_width - before_removed_width + scale_offset
 					else
 						lines[#lines + 1] = text_line:sub(line_start, remove and char_start - 1 or char_end)
 						line_start = char_end + 1
-						line_width = remove and line_width - char_width or line_width
-						line_width = 0
+						line_width = scale_offset
 					end
 					before_end = line_start
-					before_width = 0
+					before_width = scale_offset
 				end
 			end
 		end

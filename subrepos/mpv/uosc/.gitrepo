@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:tomasklaen/uosc.git
 	branch = main
-	commit = e66c8fbf88ec788512b4c2adbef72560fb911dfd
-	parent = ffe23aefdf7f551cdb67250bbc5039b95e2bb077
+	commit = c8ad77a1a92d0667e1e66f11e84692cd03796ec8
+	parent = 957d06e0bd6919415d24278a831f714d23d2d12b
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
