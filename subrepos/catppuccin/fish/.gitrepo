@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:catppuccin/fish.git
 	branch = main
-	commit = 0fd0c48a844636c6082f633cc4f2800abb4b6413
-	parent = be20a758aac6b7d9fe9e34cb2f01e8271599f7c2
+	commit = 91e6d6721362be05a5c62e235ed8517d90c567c9
+	parent = 39e300556c9d74c9eae11289d86fe57ab545a23f
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
