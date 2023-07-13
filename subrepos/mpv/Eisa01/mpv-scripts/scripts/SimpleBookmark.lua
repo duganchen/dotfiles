@@ -1,8 +1,8 @@
--- Copyright (c) 2022, Eisa AlAwadhi
+-- Copyright (c) 2023, Eisa AlAwadhi
 -- License: BSD 2-Clause License
 -- Creator: Eisa AlAwadhi
 -- Project: SimpleBookmark
--- Version: 1.2.4
+-- Version: 1.3.1
 
 local o = {
 ---------------------------USER CUSTOMIZATION SETTINGS---------------------------
@@ -14,13 +14,15 @@ local o = {
 	--Filters description: "all" to display all the items. Or 'groups' to display the list filtered with items added to any group. Or 'keybinds' to display the list filtered with keybind slots. Or "recents" to display recently added items to log without duplicate. Or "distinct" to show recent saved entries for files in different paths. Or "fileonly" to display files saved without time. Or "timeonly" to display files that have time only. Or "keywords" to display files with matching keywords specified in the configuration. Or "playing" to show list of current playing file.
 	--Filters can also be stacked by using %+% or omitted by using %-%. e.g.: "groups%+%keybinds" shows only groups and keybinds, "all%-%groups%-%keybinds" shows all items without groups and without keybinds.
 	--Also defined groups can be called by using /:group%Group Name%
-	auto_run_list_idle = 'none',  --Auto run the list when opening mpv and there is no video / file loaded. 'none' for disabled. Or choose between available filters.
-	toggle_idlescreen = false, --hides OSC idle screen message when opening and closing menu (could cause unexpected behavior if multiple scripts are triggering osc-idlescreen off)
+	auto_run_list_idle = 'none',  --Auto run the list when opening mpv and there is no video / file loaded. none for disabled. Or choose between available filters.
+	load_item_on_startup = 0, --runs a saved entry when mpv starts based on its number. -1 for oldest entry, 1 for latest entry, or select the number to load a specific entry, 0 for disabled
+	toggle_idlescreen = true, --hides OSC idle screen message when opening and closing menu (could cause unexpected behavior if multiple scripts are triggering osc-idlescreen off)
 	resume_offset = -0.65, --change to 0 so item resumes from the exact position, or decrease the value so that it gives you a little preview before loading the resume point
 	osd_messages = true, --true is for displaying osd messages when actions occur. Change to false will disable all osd messages generated from this script
 	bookmark_loads_last_idle = true, --When attempting to bookmark, if there is no video / file loaded, it will instead jump to your last bookmarked item and resume it.
 	bookmark_fileonly_loads_last_idle = true, --When attempting to bookmark fileonly, if there is no video / file loaded, it will instead jump to your last bookmarked item without resuming.
 	mark_bookmark_as_chapter = false, --true is for marking the time as a chapter. false disables mark as chapter behavior.
+	preserve_video_settings = false, --(true/false). Preserve video settings when bookmarking items and loading bookmarks by writing mpv watch-later config
 	bookmark_save_keybind=[[
 	["ctrl+b", "ctrl+B"]
 	]], --Keybind that will be used to save the video and its time to log file
@@ -77,6 +79,7 @@ local o = {
 	["https?://", "magnet:", "rtmp:"]
 	]], --add above (after a comma) any protocol you want its title to be stored in the log file. This is valid only for (file_title_logging = 'protocols' or file_title_logging = 'all')
 	same_entry_limit = -1, --Limit saving entries with same path: -1 for unlimited, 0 will always update entries of same path, e.g. value of 3 will have the limit of 3 then it will start updating old values on the 4th entry.
+	overwrite_preserve_properties = true, --true is to preserve groups / slots or any other property when an entry is overwritten.
 
 	-----List Settings-----
 	loop_through_list = false, --true is for going up on the first item loops towards the last item and vise-versa. false disables this behavior.
@@ -117,7 +120,7 @@ local o = {
 	slice_name = false, --Change to true or false. Slices long names per the amount specified below
 	slice_name_amount = 55, --Amount for slicing long names (for path, name, and title) list_content_text variables
 	list_show_amount = 10, --Change maximum number to show items at once
-	list_content_text = '%number%. %name%%0_duration%%duration%%0_keybind%%keybind%%0_group%%group%%1_group%', --Text to be shown as header for the list
+	list_content_text = '%number%. %name%%0_duration%%duration%%0_keybind%%keybind%%0_group%%group%%1_group%\\h\\N\\N', --Text to be shown as header for the list
 		--list_content_text variables: %quickselect%, %number%, %name%, %title%, %path%, %duration%, %length%, %remaining%, %dt%, %dt_"format%"%
 		--Variables explanation: %quickselect%: keybind for quickselect. %number%: numbered sequence of the item position. %name%: shows the file name. %title%: shows file title. %path%: shows the filepath or url. %duration%: the reached playback time of item. %length%: the total time length of the file. %remaining% the remaining playback time of file. %dt%: the logged date and time.
 		--You can also use %dt_"format%"%" as per lua date formatting (https://www.lua.org/pil/22.1.html). It is specified after dt_ ..example: (%dt_%a% %dt_%b% %dt_%y%) for abbreviated day month year
@@ -139,7 +142,7 @@ local o = {
 	header_color = 'ffffaa', --Header color in BGR hexadecimal
 	header_scale = 55, --Header text size for the list
 	header_border = 0.8, --Black border size for the Header of list
-	header_text = '🔖 Bookmarks [%cursor%/%total%]%0_highlight%%highlight%%0_filter%%filter%%1_filter%%0_sort%%sort%%1_sort%%0_search%%search%%1_search%', --The formatting of the items when you open the list
+	header_text = '🔖 Bookmarks [%cursor%/%total%]%0_highlight%%highlight%%0_filter%%filter%%1_filter%%0_sort%%sort%%1_sort%%0_search%%search%%1_search%\\h\\N\\N', --The formatting of the items when you open the list
 		--header_text variables: %cursor%, %total%, %highlight%, %filter%, %search%, %duration%, %length%, %remaining%.
 		--Variables explanation: %cursor%: the number of cursor position. %total%: total amount in current list. %highlight%: total number of highlighted items.  %filter%: shows the filter name, %search%: shows the typed search. %duration%: the total reached playback time of all displayed items. %length%: the total time length of the file for all displayed items. %remaining% the remaining playback time of file for all the displayed items.
 	header_variables=[[
@@ -307,6 +310,7 @@ local protocols = {'https?:', 'magnet:', 'rtmps?:', 'smb:', 'ftps?:', 'sftp:'}
 local available_sorts = {'added-asc', 'added-desc', 'time-asc', 'time-desc', 'alphanum-asc', 'alphanum-desc'}
 local search_string = ''
 local search_active = false
+local loadTriggered = false --1.3.0# to identify if load is triggered atleast once for idle option
 local resume_selected = false
 local osd_log_contents = {}
 local list_start = 0
@@ -390,14 +394,14 @@ function format_time(seconds, sep, decimals, style)
 		sep = sep and sep or ":"
 		return string.format("%02d"..sep.."%02d"..sep..second_format, h, m, s)
 	elseif style == 'hms' or style == 'hms-full' then
-	  sep = sep ~= nil and sep or " "
-	  if style == 'hms-full' or h > 0 then
+		sep = sep ~= nil and sep or " "
+		if style == 'hms-full' or h > 0 then
 		return string.format("%dh"..sep.."%dm"..sep.."%." .. tostring(decimals) .. "fs", h, m, s)
-	  elseif m > 0 then
+		elseif m > 0 then
 		return string.format("%dm"..sep.."%." .. tostring(decimals) .. "fs", m, s)
-	  else
+		else
 		return string.format("%." .. tostring(decimals) .. "fs", s)
-	  end
+		end
 	elseif style == 'timestamp' then
 		return string.format("%." .. tostring(decimals) .. "f", seconds)
 	elseif style == 'timestamp-concise' then
@@ -507,6 +511,7 @@ function read_log(func)
 	local f = io.open(log_fullpath, "r")
 	if not f then return end
 	local contents = {}
+	local line_count = 0
 	for line in f:lines() do
 		table.insert(contents, (func(line)))
 	end
@@ -583,10 +588,14 @@ function parse_list_item(str, properties) --1.3#add ability to parse the content
 	
 	local list_filename, list_filepath, list_filetitle = get_local_names(properties["item"],'osd')--1.3# added osd property so it removes special characters for displaying list
 
-	if o.slice_name and p:len() > o.slice_name_amount then
-		list_filename = list_filename:sub(1, o.slice_name_amount) .. "..." --1.3# perhaps seperate the option for slicing filename / path
+	if o.slice_name and list_filepath:len() > o.slice_name_amount then --1.3.1# fix #86 since p doesn't exist anymore, and checks for specific filename / filepath / filetitle, so slicing is accurate.
 		list_filepath = list_filepath:sub(1, o.slice_name_amount) .. "..."
-		list_filetitle = list_filetitle:sub(1, o.slice_name_amount) .. "..."		
+	end
+	if o.slice_name and list_filename:len() > o.slice_name_amount then
+		list_filename = list_filename:sub(1, o.slice_name_amount) .. "..."
+	end
+	if o.slice_name and list_filetitle:len() > o.slice_name_amount then
+		list_filetitle = list_filetitle:sub(1, o.slice_name_amount) .. "..."
 	end
 
 	str = str:gsub("%%name%%", list_filename)
@@ -804,50 +813,50 @@ function search_log_contents(arr_contents)
 
 	local search_arr_contents = {}
 
-	for i = 1, #osd_log_contents do --1.3# removed specific search method as it doesn't seem useful anymore
+	for i = 1, #arr_contents do --1.3# removed specific search method as it doesn't seem useful anymore, --1.3.1# utilize arr_contents instead of osd_log_contents
 		if o.search_behavior == 'any' then
-			contents_string = osd_log_contents[i].found_datetime --1.3# seperated date and time for search
-			if parse_8601(osd_log_contents[i].found_datetime) then --1.3# an if statement to check if date could be parsed --1.3# allows for all type of dates to be searched thanks to the loop
+			contents_string = arr_contents[i].found_datetime --1.3# seperated date and time for search
+			if parse_8601(arr_contents[i].found_datetime) then --1.3# an if statement to check if date could be parsed --1.3# allows for all type of dates to be searched thanks to the loop
 				local os_date_tag= {'%a', '%A', '%b', '%B', '%c', '%d', '%H', '%I', '%M', '%m', '%p', '%S', '%w', '%x', '%X', '%Y', '%y'} --1.3# add all lua date time parameters
 				for j=1, #os_date_tag do --1.3# replace all lua parameters with date values that can be searched
-					contents_string = contents_string..os.date(os_date_tag[j], parse_8601(osd_log_contents[i].found_datetime))
+					contents_string = contents_string..os.date(os_date_tag[j], parse_8601(arr_contents[i].found_datetime))
 				end
 			end
-			contents_string = contents_string..(osd_log_contents[i].found_title or '')..(osd_log_contents[i].found_name or '')..osd_log_contents[i].found_path --1.3# added found_name since parsing is different now
-			if tonumber(osd_log_contents[i].found_time) > 0 then
-				contents_string = contents_string..format_time(osd_log_contents[i].found_time, o.list_duration_time_format[3], o.list_duration_time_format[2], o.list_duration_time_format[1])
+			contents_string = contents_string..(arr_contents[i].found_title or '')..(arr_contents[i].found_name or '')..arr_contents[i].found_path --1.3# added found_name since parsing is different now
+			if tonumber(arr_contents[i].found_time) > 0 then
+				contents_string = contents_string..format_time(arr_contents[i].found_time, o.list_duration_time_format[3], o.list_duration_time_format[2], o.list_duration_time_format[1])
 			end
-			if tonumber(osd_log_contents[i].found_length) > 0 then
-				contents_string = contents_string..format_time(osd_log_contents[i].found_length, o.list_length_time_format[3], o.list_length_time_format[2], o.list_length_time_format[1])
+			if tonumber(arr_contents[i].found_length) > 0 then
+				contents_string = contents_string..format_time(arr_contents[i].found_length, o.list_length_time_format[3], o.list_length_time_format[2], o.list_length_time_format[1])
 			end
-			if tonumber(osd_log_contents[i].found_remaining) > 0 then
-				contents_string = contents_string..format_time(osd_log_contents[i].found_remaining, o.list_remaining_time_format[3], o.list_remaining_time_format[2], o.list_remaining_time_format[1])
+			if tonumber(arr_contents[i].found_remaining) > 0 then
+				contents_string = contents_string..format_time(arr_contents[i].found_remaining, o.list_remaining_time_format[3], o.list_remaining_time_format[2], o.list_remaining_time_format[1])
 			end			
-			if osd_log_contents[i].found_slot then
-				contents_string = contents_string..get_slot_keybind(tonumber(osd_log_contents[i].found_slot))
+			if arr_contents[i].found_slot then
+				contents_string = contents_string..get_slot_keybind(tonumber(arr_contents[i].found_slot))
 			end
-			if osd_log_contents[i].found_group then
-				contents_string = contents_string..get_group_properties(tonumber(osd_log_contents[i].found_group)).name
+			if arr_contents[i].found_group then
+				contents_string = contents_string..get_group_properties(tonumber(arr_contents[i].found_group)).name
 			end
 		elseif o.search_behavior == 'any-notime' then
-			contents_string = osd_log_contents[i].found_datetime --1.3# seperated date and time for search
-			if parse_8601(osd_log_contents[i].found_datetime) then --1.3# an if statement to check if date could be parsed
+			contents_string = arr_contents[i].found_datetime --1.3# seperated date and time for search
+			if parse_8601(arr_contents[i].found_datetime) then --1.3# an if statement to check if date could be parsed
 				local os_date_tag= {'%a', '%A', '%b', '%B', '%c', '%d', '%H', '%I', '%M', '%m', '%p', '%S', '%w', '%x', '%X', '%Y', '%y'} --1.3# add all lua date time parameters
 				for j=1, #os_date_tag do --1.3# replace all lua parameters with values that can be searched
-					contents_string = contents_string..os.date(os_date_tag[j], parse_8601(osd_log_contents[i].found_datetime))
+					contents_string = contents_string..os.date(os_date_tag[j], parse_8601(arr_contents[i].found_datetime))
 				end
 			end
-			contents_string = contents_string..(osd_log_contents[i].found_title or '')..(osd_log_contents[i].found_name or '')..osd_log_contents[i].found_path --1.3# added found_name since parsing is different now
-			if osd_log_contents[i].found_slot then
-				contents_string = contents_string..get_slot_keybind(tonumber(osd_log_contents[i].found_slot))
+			contents_string = contents_string..(arr_contents[i].found_title or '')..(arr_contents[i].found_name or '')..arr_contents[i].found_path --1.3# added found_name since parsing is different now
+			if arr_contents[i].found_slot then
+				contents_string = contents_string..get_slot_keybind(tonumber(arr_contents[i].found_slot))
 			end
-			if osd_log_contents[i].found_group then
-				contents_string = contents_string..get_group_properties(tonumber(osd_log_contents[i].found_group)).name
+			if arr_contents[i].found_group then
+				contents_string = contents_string..get_group_properties(tonumber(arr_contents[i].found_group)).name
 			end
 		end
 		
 		if string.lower(contents_string):match(string.lower(search_query)) then
-			table.insert(search_arr_contents, osd_log_contents[i])
+			table.insert(search_arr_contents, arr_contents[i])
 		end
 	end
 
@@ -1111,11 +1120,10 @@ function draw_list(arr_contents)
 	local item_properties = {} --1.3# to hold all of the stuff that we extract from within this table, such as the osd_index, etc..
 	
 	if o.header_text ~= '' then
-		osd_msg = osd_msg .. osd_header .. parse_header(o.header_text)
-		osd_msg = osd_msg .. "\\h\\N\\N" .. osd_msg_end
+		osd_msg = osd_msg .. osd_header .. parse_header(o.header_text) .. osd_msg_end --1.3.0# made line break part of the config
 	end
 	
-	if search_active and not osd_log_contents[1] then
+	if search_active and not arr_contents[1] then --1.3.1# changed osd_log_contents to arr_contents
 		osd_msg = osd_msg .. 'No search results found' .. osd_msg_end
 	end
 	
@@ -1163,10 +1171,8 @@ function draw_list(arr_contents)
 		end
 
 		if o.list_content_text ~= '' then --1.3# use parse_list_item to make the list customizable
-			osd_msg = osd_msg..osd_color..parse_list_item(o.list_content_text, item_properties)
+			osd_msg = osd_msg..osd_color..parse_list_item(o.list_content_text, item_properties) .. osd_msg_end --1.3.0# made line break part of the config
 		end
-
-		osd_msg = osd_msg .. '\\h\\N\\N' .. osd_msg_end
 
 		if i == list_start + o.list_show_amount - 1 and not showall and not showrest then
 			osd_msg = osd_msg .. o.list_sliced_suffix
@@ -1435,7 +1441,8 @@ end
 function load(list_cursor, add_playlist, target_time)
 	if not osd_log_contents or not osd_log_contents[1] then return end
 	if not target_time then
-		seekTime = tonumber(osd_log_contents[#osd_log_contents - list_cursor + 1].found_time) + o.resume_offset
+		if not osd_log_contents[#osd_log_contents - list_cursor + 1] then return end --1.3.0# fixes crash when loading an entry that doesn't exist
+		seekTime = tonumber(osd_log_contents[#osd_log_contents - list_cursor + 1].found_time) + o.resume_offset 
 		if (seekTime < 0) then
 			seekTime = 0
 		end
@@ -1445,6 +1452,7 @@ function load(list_cursor, add_playlist, target_time)
 	if file_exists(osd_log_contents[#osd_log_contents - list_cursor + 1].found_path) or starts_protocol(protocols, osd_log_contents[#osd_log_contents - list_cursor + 1].found_path) then
 		local list_filename, list_filepath, list_filetitle = get_local_names(osd_log_contents[#osd_log_contents - list_cursor + 1]) --1.3# use the name that automatically falls back instead for osd printing or msg (solves the issue that causes concatinating found_name to crash because it sometimes doesn't exist due to parsing changes)
 		if not add_playlist then
+			if o.preserve_video_settings then mp.command("write-watch-later-config") end--1.3.1# option to preserve video settings by using write-watch-later-config when loading bookmark replaces current file #84
 			if filePath ~= osd_log_contents[#osd_log_contents - list_cursor + 1].found_path then
 				mp.commandv('loadfile', osd_log_contents[#osd_log_contents - list_cursor + 1].found_path)
 				resume_selected = true
@@ -1505,89 +1513,26 @@ function list_add_playlist(action)
 	end
 end
 
-function delete_log_entry_specific(target_index, target_path, target_time)
-	local trigger_delete = false
-	osd_log_contents = read_log_table()
-	if not osd_log_contents or not osd_log_contents[1] then return end
-	if target_index == 'last' then target_index = #osd_log_contents end
-	if not target_index then return end
-	
-	if target_index and target_path and target_time then
-		if osd_log_contents[target_index].found_path == target_path and tonumber(osd_log_contents[target_index].found_time) == target_time then
-			table.remove(osd_log_contents, target_index)
-			trigger_delete = true
-		end
-	elseif target_index and target_path and not target_time then
-		if osd_log_contents[target_index].found_path == target_path then
-			table.remove(osd_log_contents, target_index)
-			trigger_delete = true
-		end
-	elseif target_index and target_time and not target_path then
-		if tonumber(osd_log_contents[target_index].found_time) == target_time then
-			table.remove(osd_log_contents, target_index)
-			trigger_delete = true
-		end
-	elseif target_index and not target_path and not target_time then
-		table.remove(osd_log_contents, target_index)
-		trigger_delete = true
+function same_path_log_delete(target_path, entry_limit, arr_contents)
+	--1.2.5# seperate function for entry_limit
+	if not target_path then return msg.error('same_path_log_delete no target_path defined') end
+	if not arr_contents then --1.2.6# ability to pass array (usually automatically defining array here is fine, but just for performance sake when calling multiple functions that use the same array)
+		arr_contents = read_log_table()
+		if not arr_contents or not arr_contents[1] then return end
 	end
-	
-	if not trigger_delete then return end
-	local f = io.open(log_fullpath, "w+")
-	if osd_log_contents ~= nil and osd_log_contents[1] then
-		for i = 1, #osd_log_contents do
-			f:write(("%s\n"):format(osd_log_contents[i].found_line))
-		end
-	end
-	f:close()
-end
 
-function delete_log_entry(multiple, round, target_path, target_time, entry_limit)
-	if not target_path then target_path = filePath end
-	if not target_time then target_time = seekTime end
-	osd_log_contents = read_log_table()
-	if not osd_log_contents or not osd_log_contents[1] then return end
+	--1.2.7# return deleted_entries for o.overwrite_preserve_properties option
+	local deleted_entries = {}
 	local trigger_delete = false
-	
-	if not multiple then
-		for i = #osd_log_contents, 1, -1 do
-			if not round then
-				if osd_log_contents[i].found_path == target_path and tonumber(osd_log_contents[i].found_time) == target_time then
-					table.remove(osd_log_contents, i)
-					trigger_delete = true
-					break
-				end
-			else
-				if osd_log_contents[i].found_path == target_path and math.floor(tonumber(osd_log_contents[i].found_time)) == target_time then
-					table.remove(osd_log_contents, i)
-					trigger_delete = true
-					break
-				end
-			end
-		end
-	else
-		for i = #osd_log_contents, 1, -1 do
-			if not round then
-				if osd_log_contents[i].found_path == target_path and tonumber(osd_log_contents[i].found_time) == target_time then
-					table.remove(osd_log_contents, i)
-					trigger_delete = true
-				end
-			else
-				if osd_log_contents[i].found_path == target_path and math.floor(tonumber(osd_log_contents[i].found_time)) == target_time then
-					table.remove(osd_log_contents, i)
-					trigger_delete = true
-				end
-			end
-		end
-	end
-	
+
 	if entry_limit and entry_limit > -1 then
 		local entries_found = 0
-		for i = #osd_log_contents, 1, -1 do
-			if osd_log_contents[i].found_path == target_path and entries_found < entry_limit then
+		for i = #arr_contents, 1, -1 do
+			if arr_contents[i].found_path == target_path and entries_found < entry_limit then
 				entries_found = entries_found + 1
-			elseif osd_log_contents[i].found_path == target_path and entries_found >= entry_limit then
-				table.remove(osd_log_contents,i)
+			elseif arr_contents[i].found_path == target_path and entries_found >= entry_limit then
+				table.insert(deleted_entries, arr_contents[i]) --1.2.7# store entries that will be deleted in a new array
+				table.remove(arr_contents,i)
 				trigger_delete = true
 			end
 		end
@@ -1595,9 +1540,50 @@ function delete_log_entry(multiple, round, target_path, target_time, entry_limit
 	
 	if not trigger_delete then return end
 	local f = io.open(log_fullpath, "w+")
-	if osd_log_contents ~= nil and osd_log_contents[1] then
-		for i = 1, #osd_log_contents do
-			f:write(("%s\n"):format(osd_log_contents[i].found_line))
+	if arr_contents ~= nil and arr_contents[1] then
+		for i = 1, #arr_contents do
+			f:write(("%s\n"):format(arr_contents[i].found_line))
+		end
+	end
+	f:close()
+	return deleted_entries
+end
+
+
+function find_entry(round, target_path, target_time) --1.2.6# changed it to find_entry to have the sequence and any other additional property
+	--1.2.5# get the entry log sequence which is basically the id using path and time
+	if not target_path or not target_time then return msg.error('find_entry no target_path or target_time defined') end
+	local temp_log_contents = read_log_table()
+	if not temp_log_contents or not temp_log_contents[1] then return end
+	
+	for i = #temp_log_contents, 1, -1 do
+		if not round then
+			if temp_log_contents[i].found_path == target_path and tonumber(temp_log_contents[i].found_time) == target_time then
+				return temp_log_contents[i]
+			end
+		else
+			if temp_log_contents[i].found_path == target_path and math.floor(tonumber(temp_log_contents[i].found_time)) == target_time then
+				return temp_log_contents[i]
+			end
+		end
+	end
+end
+
+
+function delete_log_entry(target_sequence, arr_contents)
+	--1.2.5# new function to delete based on sequence which is (id)
+	if not target_sequence then return end --1.2.5# if no sequence found then just exit the function
+	if not arr_contents then  --1.2.5# ability to pass an array instead of looping through
+		arr_contents = read_log_table()
+		if not arr_contents or not arr_contents[1] then return end
+	end
+
+	table.remove(arr_contents, target_sequence)
+	
+	local f = io.open(log_fullpath, "w+")
+	if arr_contents ~= nil and arr_contents[1] then
+		for i = 1, #arr_contents do
+			f:write(("%s\n"):format(arr_contents[i].found_line))
 		end
 	end
 	f:close()
@@ -1635,16 +1621,17 @@ function delete_log_entry_highlighted()
 end
 
 function delete_selected()
-	filePath = osd_log_contents[#osd_log_contents - list_cursor + 1].found_path
-	fileTitle = osd_log_contents[#osd_log_contents - list_cursor + 1].found_name
-	seekTime = tonumber(osd_log_contents[#osd_log_contents - list_cursor + 1].found_time)
-	if not filePath and not seekTime then
+	--1.2.5# replace with new delete_log_entry that uses sequence id, and used local variables with or statement just in case
+	local list_sequence = osd_log_contents[#osd_log_contents - list_cursor + 1].found_sequence
+	local list_filepath = osd_log_contents[#osd_log_contents - list_cursor + 1].found_path or ""
+	local list_seektime = tonumber(osd_log_contents[#osd_log_contents - list_cursor + 1].found_time) or 0
+
+	if not list_sequence then
 		msg.info("Failed to delete")
 		return
 	end
-	delete_log_entry()
-	msg.info("Deleted \"" .. filePath .. "\" | " .. format_time(seekTime))
-	filePath, fileTitle, fileLength = get_file()
+	delete_log_entry(list_sequence)
+	msg.info("Deleted \"" .. list_filepath .. "\" | " .. format_time(list_seektime))
 end
 
 function list_delete(action)
@@ -2282,7 +2269,7 @@ end
 ---------End of LogManager---------
 
 --Modify Additional Log Parameters--
-function remove_all_additional_log_entry(index, log_text)
+function remove_all_additional_param_log_entry(index, log_text)
 	if not index or not log_text then return end
 	local temp_log_contents = read_log_table()
 	if not temp_log_contents or not temp_log_contents[1] then return end
@@ -2302,8 +2289,8 @@ function remove_all_additional_log_entry(index, log_text)
 	f:close()
 end
 
-function remove_additional_log_entry(index, target, log_text)
-	if not index or not target or not log_text then return msg.error('remove_additional_log_entry parameters not defined') end
+function remove_additional_param_log_entry(index, target, log_text)
+	if not index or not target or not log_text then return msg.error('remove_additional_param_log_entry parameters not defined') end
 	if not osd_log_contents or not osd_log_contents[1] then return end
 	local temp_log_contents = read_log_table()
 	if not temp_log_contents or not temp_log_contents[1] then return end
@@ -2325,8 +2312,8 @@ function remove_additional_log_entry(index, target, log_text)
 	f:close()
 end
 
-function add_additional_log_entry(index, target, log_text)
-	if not index or not target or not log_text then return msg.error('add_additional_log_entry parameters not defined') end
+function add_additional_param_log_entry(index, target, log_text)
+	if not index or not target or not log_text then return msg.error('add_additional_param_log_entry parameters not defined') end
 	if not osd_log_contents or not osd_log_contents[1] then return end
 	local temp_log_contents = read_log_table()
 	if not temp_log_contents or not temp_log_contents[1] then return end
@@ -2362,7 +2349,7 @@ function list_slot_remove(index, action)
 		if action ~= 'silent' then msg.info("Failed to remove") end
 		return
 	end
-	remove_all_additional_log_entry(index, log_keybind_text)
+	remove_all_additional_param_log_entry(index, log_keybind_text)
 	if action ~= 'silent' then msg.info('Removed Keybind: ' .. get_slot_keybind(index)) end
 end
 
@@ -2378,7 +2365,7 @@ function list_slot_remove_highlighted()
 				if osd_log_contents[#osd_log_contents+1-i].found_sequence == list_highlight_cursor[j][2].found_sequence then
 					slotIndex = tonumber(osd_log_contents[#osd_log_contents+1-i].found_slot)
 					if slotIndex then
-						remove_all_additional_log_entry(slotIndex, log_keybind_text)
+						remove_all_additional_param_log_entry(slotIndex, log_keybind_text)
 						msg.info('Removed Keybind: ' .. get_slot_keybind(slotIndex))
 					end
 				end
@@ -2402,11 +2389,11 @@ function list_slot_add(index)
 	
 	local slotIndex = osd_log_contents[#osd_log_contents - list_cursor + 1].found_slot
 	if slotIndex then
-		remove_additional_log_entry(slotIndex,#osd_log_contents-list_cursor+1, log_keybind_text)
+		remove_additional_param_log_entry(slotIndex,#osd_log_contents-list_cursor+1, log_keybind_text)
 	end
 	
 	list_slot_remove(index, 'silent')
-	add_additional_log_entry(index, #osd_log_contents-list_cursor+1, log_keybind_text)
+	add_additional_param_log_entry(index, #osd_log_contents-list_cursor+1, log_keybind_text)
 	msg.info('Added Keybind:\n' .. cursor_filetitle .. ' 🕒 ' .. format_time(cursor_seektime) .. ' ⌨ ' .. get_slot_keybind(index))
 end
 
@@ -2453,7 +2440,7 @@ function list_group_remove(action)
 		if action ~= 'silent' then msg.info("Failed to remove") end
 		return
 	end
-	remove_additional_log_entry(groupCursorIndex, #osd_log_contents-list_cursor+1, log_group_text)
+	remove_additional_param_log_entry(groupCursorIndex, #osd_log_contents-list_cursor+1, log_group_text)
 	if action ~= 'silent' then msg.info('Removed Group: ' .. get_group_properties(groupCursorIndex).name) end
 end
 
@@ -2469,7 +2456,7 @@ function list_group_remove_highlighted()
 				if osd_log_contents[#osd_log_contents+1-i].found_sequence == list_highlight_cursor[j][2].found_sequence then
 					groupIndex = tonumber(osd_log_contents[#osd_log_contents+1-i].found_group)
 					if groupIndex then
-						remove_additional_log_entry(groupIndex, #osd_log_contents+1-i, log_group_text)
+						remove_additional_param_log_entry(groupIndex, #osd_log_contents+1-i, log_group_text)
 						msg.info('Removed Group: ' .. get_group_properties(groupIndex).name)
 					end
 				end
@@ -2491,7 +2478,7 @@ function list_group_add(index)
 	end
 	
 	list_group_remove('silent')
-	add_additional_log_entry(index, #osd_log_contents-list_cursor+1, log_group_text)
+	add_additional_param_log_entry(index, #osd_log_contents-list_cursor+1, log_group_text)
 	msg.info('Added Group:\n' .. cursor_filename .. ' 🕒 ' .. format_time(cursor_seektime) .. ' 🖿 ' .. get_group_properties(index).name)
 end
 
@@ -2506,7 +2493,7 @@ function list_group_add_highlighted(index)
 		for j=1, #list_highlight_cursor do
 			if osd_log_contents[#osd_log_contents+1-i] then
 				if osd_log_contents[#osd_log_contents+1-i].found_sequence == list_highlight_cursor[j][2].found_sequence then
-					add_additional_log_entry(index, #osd_log_contents+1-i, log_group_text)
+					add_additional_param_log_entry(index, #osd_log_contents+1-i, log_group_text)
 					msg.info('Added Group: ' .. get_group_properties(index).name)
 				end
 			end
@@ -2600,9 +2587,12 @@ function mark_chapter()
 	mp.set_property_native("chapter-list", all_chapters)
 end
 
-function write_log(target_time, key_index, update_seekTime, entry_limit)
+function write_log(target_time, update_seekTime, entry_limit)
 	if not filePath then return end
+	if o.preserve_video_settings then mp.command("write-watch-later-config") end--1.3.1# option to preserve video settings by using write-watch-later-config when saving bookmark #84
+    
 	local prev_seekTime = seekTime
+	local deleted_entries = {} --1.2.7# add it above since we need to call it later for preserving properties
 
 	seekTime = (mp.get_property_number('time-pos') or 0)
 	if target_time then
@@ -2610,10 +2600,13 @@ function write_log(target_time, key_index, update_seekTime, entry_limit)
 	end
 	if seekTime < 0 then seekTime = 0 end
 	
-	delete_log_entry(false, true, filePath, math.floor(seekTime), entry_limit)
-	if key_index then
-		remove_all_additional_log_entry(key_index, log_keybind_text)
+	local found_entry = find_entry(true, filePath, math.floor(seekTime)) --1.2.5# finds entry_sequence using new function --1.2.6# updated to find_entry
+	--1.2.8# first delete_log_entry to correctly overwrite the data (having same_path_log_delete() function runs first will result in overwriting wrong entry)
+	if found_entry and found_entry['found_sequence'] ~= nil then --1.2.6# if the entry exists then proceed to delete it
+		delete_log_entry(found_entry['found_sequence']) --1.2.5# deletes log entry using new function that uses sequence to delete --1.2.8# removed calling the array earlier and automatically call inside function
 	end
+	deleted_entries = same_path_log_delete(filePath, entry_limit) --1.2.5# seperate function to delete any additional entries based on the same_entry_limit set by user --1.2.7# assign it to varible since function now returns status and an array of deleted_entries --1.2.8# removed calling the array earlier and automatically call inside function
+
 	local f = io.open(log_fullpath, "a+")--1.3# dont allow customization to date_format so it can be saved in a standard in which I can parse for search results, etc..
 	if o.file_title_logging == 'all' then
 		f:write(("[%s] \"%s\" | %s | %s | %s | "):format(os.date("%Y-%m-%dT%H:%M:%S"), fileTitle, filePath, log_length_text .. tostring(fileLength), log_time_text .. tostring(seekTime)))
@@ -2624,11 +2617,48 @@ function write_log(target_time, key_index, update_seekTime, entry_limit)
 	else
 		f:write(("[%s] %s | %s | %s | "):format(os.date("%Y-%m-%dT%H:%M:%S"), filePath, log_length_text .. tostring(fileLength), log_time_text .. tostring(seekTime)))
 	end
-	if key_index then
-		f:write(' | ' .. log_keybind_text .. key_index)
-	end
+
 	f:write('\n')
 	f:close()
+
+	
+	--1.2.6# restore properties if o.overwrite_preserve_properties is enabled
+	if found_entry and o.overwrite_preserve_properties then
+		local temp_log_contents = read_log_table() --1.2.6# loop through table with the new additions
+		if not temp_log_contents or not temp_log_contents[1] then return end
+		--1.2.6# when a slot or group was found previously, then add it
+		if found_entry['found_slot'] then
+			remove_all_additional_param_log_entry(found_entry['found_slot'], log_keybind_text) --1.2.9# replaced list_slot_remove with remove_all_.. function to avoid possible errors since list_slot_remove has a check for list_drawn
+			add_additional_param_log_entry(found_entry['found_slot'], #temp_log_contents, log_keybind_text)
+		end
+		if found_entry['found_group'] then
+			add_additional_param_log_entry(found_entry['found_group'], #temp_log_contents, log_group_text)
+		end
+	end
+
+	--1.2.7# if an exact match is not found, and there are multiple deleted entries because of same_path_log_delete then add the latest deleted property to the newly added entry
+	if not found_entry and deleted_entries ~= nil and deleted_entries[1] and o.overwrite_preserve_properties then
+		local temp_log_contents = read_log_table() --1.2.6# loop through table with the new additions
+		if not temp_log_contents or not temp_log_contents[1] then return end
+		--1.2.7# loop through all deleted entries and get the first found slot and group then append it to the latest entry and then break loop
+		local break_table = false
+		for i = 1, #deleted_entries do
+			if deleted_entries[i] then
+				if deleted_entries[i].found_slot then
+					remove_all_additional_param_log_entry(deleted_entries[i].found_slot, log_keybind_text) --1.2.9# replaced list_slot_remove with remove_all_.. function to avoid possible errors since list_slot_remove has a check for list_drawn
+					add_additional_param_log_entry(deleted_entries[i].found_slot, #temp_log_contents, log_keybind_text)
+					break_table = true --1.2.7# break the table after addition is added since no need to continue looking for more
+				end
+				if deleted_entries[i].found_group then
+					add_additional_param_log_entry(deleted_entries[i].found_group, #temp_log_contents, log_group_text)
+					break_table = true --1.2.7# break the table after addition is added since no need to continue looking for more
+				end
+				if break_table then --1.2.7# if it found a slot and group or just slot or just a group then break the table
+					break
+				end
+			end
+		end
+	end
 	
 	if not update_seekTime then
 		seekTime = prev_seekTime
@@ -2658,6 +2688,7 @@ function add_load_slot(key_index)
 			if slot_taken then
 				if file_exists(list_filepath) or starts_protocol(protocols, list_filepath) then
 					if list_filepath ~= current_filePath then
+						if o.preserve_video_settings then mp.command("write-watch-later-config") end--1.3.1# option to preserve video settings by using write-watch-later-config when loading bookmark replaces current file #84
 						mp.commandv('loadfile', list_filepath)
 						if o.keybinds_auto_resume then
 							resume_selected = true
@@ -2691,9 +2722,19 @@ function add_load_slot(key_index)
 				if o.keybinds_empty_auto_create then
 					if filePath ~= nil then
 						if o.keybinds_empty_fileonly then
-							write_log(0, key_index)
+							write_log(0) --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code
+							get_osd_log_contents() --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code -- also used get_osd instead of local because add_additional_param uses osd_log inside its function perhaps this should be changed
+							local current_slot = tonumber(osd_log_contents[#osd_log_contents].found_slot) --1.2.9# gets the slot of the current item
+							remove_all_additional_param_log_entry(current_slot, log_keybind_text) --1.2.9# removes all the slots of the current item
+							remove_all_additional_param_log_entry(key_index, log_keybind_text) --1.2.9# removes all the slots that are going to be added based on passed index
+							add_additional_param_log_entry(key_index, #osd_log_contents, log_keybind_text) --1.2.9# adds the slot of the passed index
 						else
-							write_log(false, key_index)
+							write_log(false) --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code
+							get_osd_log_contents() --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code
+							local current_slot = tonumber(osd_log_contents[#osd_log_contents].found_slot) --1.2.9# gets the slot of the current item
+							remove_all_additional_param_log_entry(current_slot, log_keybind_text) --1.2.9# removes all the slots of the current item
+							remove_all_additional_param_log_entry(key_index, log_keybind_text) --1.2.9# removes all the slots that are going to be added based on passed index
+							add_additional_param_log_entry(key_index, #osd_log_contents, log_keybind_text) --1.2.9# adds the slot of the passed index
 						end
 						if o.osd_messages == true then
 							mp.osd_message('Bookmarked & Added Keybind:\n' .. fileTitle .. ' 🕒 ' .. format_time(mp.get_property_number('time-pos'), o.osd_time_format[3], o.osd_time_format[2], o.osd_time_format[1]) .. ' ⌨ ' .. get_slot_keybind(key_index))
@@ -2729,13 +2770,25 @@ function quicksave_slot(key_index)
 	else
 		if filePath ~= nil then
 			if o.keybinds_quicksave_fileonly then
-				write_log(0, key_index)
+				write_log(0) --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code -- also used get_osd instead of local because add_additional_param uses osd_log inside its function perhaps this should be changed
+				get_osd_log_contents() --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code
+				local current_slot = tonumber(osd_log_contents[#osd_log_contents].found_slot) --1.2.9# gets the slot of the current item
+				remove_all_additional_param_log_entry(current_slot, log_keybind_text) --1.2.9# removes all the slots of the current item
+				remove_all_additional_param_log_entry(key_index, log_keybind_text) --1.2.9# removes all the slots that are going to be added based on passed index
+				add_additional_param_log_entry(key_index, #osd_log_contents, log_keybind_text) --1.2.9# adds the slot of the passed index
+
 				if o.osd_messages == true then
 					mp.osd_message('Bookmarked Fileonly & Added Keybind:\n' .. fileTitle .. ' ⌨ ' .. get_slot_keybind(key_index))
 				end
 				msg.info('Bookmarked the below & added keybind:\n' .. fileTitle .. ' ⌨ ' .. get_slot_keybind(key_index))
 			else
-				write_log(false, key_index, true)
+				write_log(false, true) --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code
+				get_osd_log_contents() --1.2.9# reflect removal of key_index in write_log function, fixes bug and cleaner code
+				local current_slot = tonumber(osd_log_contents[#osd_log_contents].found_slot) --1.2.9# gets the slot of the current item
+				remove_all_additional_param_log_entry(current_slot, log_keybind_text) --1.2.9# removes all the slots of the current item
+				remove_all_additional_param_log_entry(key_index, log_keybind_text) --1.2.9# removes all the slots that are going to be added based on passed index
+				add_additional_param_log_entry(key_index, #osd_log_contents, log_keybind_text) --1.2.9# adds the slot of the passed index
+				
 				if o.osd_messages == true then
 					mp.osd_message('Bookmarked & Added Keybind:\n' .. fileTitle .. ' 🕒 ' .. format_time(seekTime, o.osd_time_format[3], o.osd_time_format[2], o.osd_time_format[1]) .. ' ⌨ ' .. get_slot_keybind(key_index))
 				end
@@ -2752,7 +2805,7 @@ end
 
 function bookmark_save()
 	if filePath ~= nil then
-		write_log(false, false, true, o.same_entry_limit)
+		write_log(false, true, o.same_entry_limit) --1.2.9# reflect removal of key_index in write_log function
 		if list_drawn then
 			get_osd_log_contents()
 			select(0)
@@ -2774,7 +2827,7 @@ end
 
 function bookmark_fileonly_save()
 	if filePath ~= nil then
-		write_log(0, false, false, o.same_entry_limit)
+		write_log(0, false, o.same_entry_limit) --1.2.9# reflect removal of key_index in write_log function
 		if list_drawn then
 			get_osd_log_contents()
 			select(0)
@@ -2797,6 +2850,7 @@ end
 mp.register_event('file-loaded', function()
 	list_close_and_trash_collection()
 	filePath, fileTitle, fileLength = get_file()
+	loadTriggered = true --1.1.5# for resume and resume-notime startup behavior (so that it only triggers if started as idle and only once)
 	if (resume_selected == true and seekTime ~= nil) then
 		mp.commandv('seek', seekTime, 'absolute', 'exact')
 		resume_selected = false
@@ -2805,8 +2859,22 @@ mp.register_event('file-loaded', function()
 end)
 
 mp.observe_property("idle-active", "bool", function(_, v)
+	if v then --1.3.0# if idle is triggered
+		filePath, fileTitle, fileLength = nil --1.3.0# set it back to nil if idle is triggered for better trash collection. issue #69
+	end
+
 	if v and o.auto_run_list_idle ~= 'none' then
 		display_list(o.auto_run_list_idle, nil, 'hide-osd')
+	end
+	
+	if v and type(o.load_item_on_startup) == "number" and not loadTriggered then --1.3.0# option to immediately load an entry based on number
+		if o.load_item_on_startup == 0 then return end --1.3.0# if the entry loaded is 0 then exit this, this is automatically handled in load also but it is better to exit here since there will be a loop below this
+		
+		osd_log_contents = read_log_table() --1.3.0# get the item list to use load function
+		if not osd_log_contents or not osd_log_contents[1] then return end
+
+		if o.load_item_on_startup == -1 then o.load_item_on_startup = #osd_log_contents end --1.3.0# specify -1 as last entry
+		load(o.load_item_on_startup)
 	end
 end)
 

@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eisa01/mpv-scripts.git
 	branch = master
-	commit = 3901fa4a778808a38395aab284c072d837d932d1
-	parent = 908a71e373cd5b0429b0f374a14110969c71b674
+	commit = b37e229172a389dd2a424e8d6ff10b883194b268
+	parent = 03c8e28139937ee581a0bd6a77126c03dd819e89
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
