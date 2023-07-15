@@ -41,6 +41,8 @@ end)
 
 local act = wezterm.action
 
+config.disable_default_key_bindings = true
+
 config.keys = {
   -- { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
   -- { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },

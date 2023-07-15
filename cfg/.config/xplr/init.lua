@@ -15,7 +15,7 @@ xplr.config.general.table.row.cols[2] = { format = "custom.icons_dtomvan_col_1" 
 -- Limit the columns to path and size.
 
 xplr.config.general.table.header.cols = {
-  { format = " index",            style = {} },
+  { format = "index",            style = {} },
   { format = "╭─── path", style = {} },
   -- { format = "perm",              style = {} },
   { format = "size",              style = {} },
