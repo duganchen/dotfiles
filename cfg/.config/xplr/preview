@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 while read -r selection; do
+    echo "$selection"
     clear
 
     ext="${selection##*.}"
@@ -14,7 +15,7 @@ while read -r selection; do
         # This Glow
         # https://youtu.be/EDNpK3iH7A0
         glow -s dark "$selection"
-        exit 1
+        continue
     fi
 
     filetype="$(file -Lb --mime-type "$selection")"
