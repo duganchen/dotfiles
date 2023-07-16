@@ -53,7 +53,11 @@ xplr.config.general.table.col_widths = {
   -- { Percentage = 20 },
 }
 
+function get_fifo()
+  if os.getenv("TERM_PROGRAM") == "WezTerm" then
+    return "/tmp/nnn.fifo"
+  end
+  return nil
+end
 
-
--- Uncomment this when I'm ready
--- xplr.config.general.start_fifo = "/tmp/nnn.fifo"
+xplr.config.general.start_fifo = get_fifo()
