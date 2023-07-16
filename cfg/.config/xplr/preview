@@ -10,6 +10,13 @@ while read -r selection; do
         continue
     fi
 
+    if [[ "$ext" =~ ^[Mm][Dd] ]]; then
+        # This Glow
+        # https://youtu.be/EDNpK3iH7A0
+        glow -s dark "$selection"
+        exit 1
+    fi
+
     filetype="$(file -Lb --mime-type "$selection")"
 
     if [[ "$filetype" =~ ^image ]]; then
@@ -22,6 +29,24 @@ while read -r selection; do
         # https://raw.githubusercontent.com/duganchen/kitty-pistol-previewer/main/vidthumb
         wezterm imgcat "$(vidthumb "$selection")"
         continue
+    fi
+
+    if [[ "$filetype" == "application/pdf" ]]; then
+        system="$(uname -s)"
+
+        if [[ "$system" == "Darwin" ]]; then
+            sips -s format png --out ~/.cache/pdf_preview.png "$selection"
+            wezterm imgcat ~/.cache/pdf_preview.png
+            rm -f ~/.cache/pdf_preview.png
+            continue
+        fi
+
+        if [[ "$system" == "Linux" ]]; then
+            convert "$selection"[0] ~/.cache/pdf_preview.png
+            wezterm imgcat ~/.cache/pdf_preview.png
+            rm -f ~/.cache/pdf_preview.png
+            continue
+        fi
     fi
 
     pistol "$selection"
