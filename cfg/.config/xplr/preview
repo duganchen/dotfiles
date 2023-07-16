@@ -11,13 +11,6 @@ while read -r selection; do
         continue
     fi
 
-    if [[ "$ext" =~ ^[Mm][Dd] ]]; then
-        # This Glow
-        # https://youtu.be/EDNpK3iH7A0
-        glow -s dark "$selection"
-        continue
-    fi
-
     filetype="$(file -Lb --mime-type "$selection")"
 
     if [[ "$filetype" =~ ^image ]]; then
