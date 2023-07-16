@@ -3,5 +3,26 @@
 while read -r selection; do
     clear
 
+    ext="${selection##*.}"
+
+    if [[ "$ext" == "rm" ]]; then
+        wezterm imgcat "$(vidthumb "$selection")"
+        continue
+    fi
+
+    filetype="$(file -Lb --mime-type "$selection")"
+
+    if [[ "$filetype" =~ ^image ]]; then
+        wezterm imgcat "$selection"
+        continue
+    fi
+
+    if [[ "$filetype" =~ ^video ]]; then
+        # vidthumb is from here:
+        # https://raw.githubusercontent.com/duganchen/kitty-pistol-previewer/main/vidthumb
+        wezterm imgcat "$(vidthumb "$selection")"
+        continue
+    fi
+
     pistol "$selection"
-done < /tmp/nnn.fifo
+done </tmp/nnn.fifo
