@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while read -r selection; do
+    clear
+
+    pistol "$selection"
+done < /tmp/nnn.fifo

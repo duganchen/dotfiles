@@ -1,5 +1,5 @@
 function xplr
-    set --local pane_id (wezterm cli split-pane --right --percent 33 -- cat /tmp/nnn.fifo)
+    set --local pane_id (wezterm cli split-pane --right --percent 33 -- ~/.config/xplr/preview)
     wezterm cli activate-pane
     cd (command xplr --print-pwd-as-result $argv)
 
