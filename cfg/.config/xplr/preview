@@ -4,6 +4,14 @@ while read -r selection; do
     echo "$selection"
     clear
 
+    lines=$(tput lines)
+    cols=$(tput cols)
+
+    if [ -d "$selection" ]; then
+    exa -a -G --group-directories-first --colour=always "$selection" | head -n "$lines"
+    continue
+    fi
+
     ext="${selection##*.}"
 
     if [[ "$ext" == "rm" ]]; then

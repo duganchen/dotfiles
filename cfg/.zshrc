@@ -83,3 +83,5 @@ alias tree='exa --classify -T'
 if [[ "$(uname)" == "Darwin" ]]; then
     alias ls='gls --classify --color=auto'
 fi
+
+source /home/dugan/.config/broot/launcher/bash/br
