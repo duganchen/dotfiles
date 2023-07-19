@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/duganchen/dirmarks
+	branch = main
+	commit = 0581176fda464cc3fa017807e38ff63d2c34b9ac
+	parent = 56cecab60dc8ca7542ffd32ce4aaf57679e2b9f5
+	method = merge
+	cmdver = 0.4.6
