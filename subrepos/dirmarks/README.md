@@ -1,6 +1,6 @@
 # dirmark
 
-This is (to be) a directory bookmarker. I wrote it to integrate into xplr.
+This is a directory bookmarker. I wrote it to integrate into xplr.
 
 Usage:
 
