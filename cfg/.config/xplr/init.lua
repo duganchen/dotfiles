@@ -56,3 +56,38 @@ xplr.config.general.table.col_widths = {
 xplr.config.general.start_fifo = os.getenv("NNN_FIFO")
 
 xplr.config.general.initial_layout = "no_help_no_selection"
+
+xplr.fn.custom.stat_pane = {}
+xplr.fn.custom.stat_pane.render = function(ctx)
+
+  local body = xplr.fn.builtin.fmt_general_table_row_cols_2(ctx.app.focused_node)
+  .. " "
+  ..
+  xplr.fn.builtin.fmt_general_table_row_cols_3(ctx.app.focused_node)
+  .. " "
+  .. xplr.fn.builtin.fmt_general_table_row_cols_4(ctx.app.focused_node)
+
+
+  return { CustomParagraph = { ui = { title = nil }, body = body} }
+end
+
+local stat_pane = { Dynamic = "custom.stat_pane.render" }
+
+xplr.config.layouts.builtin.no_help_no_selection = {
+  Vertical = {
+    config = {
+      constraints = {
+        { Length = 3 },
+        { Min = 1 },
+        { Length = 3 },
+        { Length = 3 },
+      },
+    },
+    splits = {
+      "SortAndFilter",
+      "Table",
+      stat_pane,
+      "InputAndLogs",
+    },
+  },
+}
