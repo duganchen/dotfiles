@@ -91,3 +91,42 @@ xplr.config.layouts.builtin.no_help_no_selection = {
     },
   },
 }
+
+xplr.config.modes.custom.bookmarks = {
+  name = "bookmarks",
+  layout = "HelpMenu",
+  key_bindings = {
+    on_key = {
+      s = {
+        help = "search",
+        messages = {
+          {
+            BashExec = [===[
+              PTH="${XPLR_FOCUS_PATH:?}"
+              PTH_ESC=$(/usr/bin/printf %q "$PTH")
+              "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC added to bookmarks"
+              if [ -d "$PTH_ESC" ]; then
+                "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC added to bookmarks"
+              else
+                "$XPLR" -m 'LogError: %q' "Not a directory"
+              fi
+            ]===]
+          },
+          "PopMode",
+        },
+      },
+    },
+    default = {
+      messages = {
+        "PopMode",
+      },
+    },
+  },
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
+  help = "bookmarks mode",
+  messages = {
+    { SwitchModeCustom = "bookmarks" },
+  },
+}
