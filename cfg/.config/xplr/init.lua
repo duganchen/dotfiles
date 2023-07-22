@@ -126,6 +126,17 @@ xplr.config.modes.custom.bookmarks = {
           "PopMode",
         },
       },
+      l = {
+        help = "clear",
+        messages = {
+          {
+            BashExec = [===[
+              "$XPLR" -m 'LogSuccess: %q' "Listing bookmarks in a pager"
+            ]===]
+          },
+          "PopMode",
+        },
+      },
     },
     default = {
       messages = {
