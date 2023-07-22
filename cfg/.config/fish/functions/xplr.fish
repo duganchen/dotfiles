@@ -3,7 +3,7 @@ function xplr
     set -x NNN_FIFO "$tmp/nnn.fifo"
     mkfifo $NNN_FIFO
 
-    command wezterm cli split-pane --right --percent 33 -- ~/.config/xplr/preview $NNN_FIFO $tmp/current_node.fifo
+    command wezterm cli split-pane --right --percent 50 -- ~/.config/xplr/preview $NNN_FIFO $tmp/current_node.fifo
 
     command wezterm cli activate-pane
 
