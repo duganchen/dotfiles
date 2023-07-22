@@ -137,6 +137,17 @@ xplr.config.modes.custom.bookmarks = {
           "PopMode",
         },
       },
+      d = {
+        help = "delete",
+        messages = {
+          {
+            BashExec = [===[
+              "$XPLR" -m 'LogSuccess: %q' "Removing focused path from bookmarks"
+            ]===]
+          },
+          "PopMode",
+        },
+      },
     },
     default = {
       messages = {
