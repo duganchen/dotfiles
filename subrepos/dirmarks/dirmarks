@@ -10,36 +10,41 @@ import os
 import pathlib
 import sys
 
+
 def main():
-    parser = argparse.ArgumentParser(
-                        prog='dirmark',
-                        description='directory bookmarker')
+    parser = argparse.ArgumentParser(prog="dirmark", description="directory bookmarker")
     subparsers = parser.add_subparsers(required=True)
-    add_parser = subparsers.add_parser('add')
+    add_parser = subparsers.add_parser("add")
     add_parser.set_defaults(func=add_bookmark)
-    add_parser.add_argument('directory', type=existing_dir)
-    add_parser.add_argument('bookmarks', type=pathlib.Path)
+    add_parser.add_argument("directory", type=existing_dir)
+    add_parser.add_argument("bookmarks", type=pathlib.Path)
 
-    delete_parser = subparsers.add_parser('delete')
+    delete_parser = subparsers.add_parser("delete")
     delete_parser.set_defaults(func=delete_bookmark)
-    delete_parser.add_argument('directory')
-    delete_parser.add_argument('bookmarks', type=pathlib.Path)
+    delete_parser.add_argument("directory")
+    delete_parser.add_argument("bookmarks", type=pathlib.Path)
 
-    list_parser = subparsers.add_parser('list')
+    clear_parser = subparsers.add_parser("clear")
+    clear_parser.set_defaults(func=clear_bookmarks)
+    clear_parser.add_argument("bookmarks", type=pathlib.Path)
+
+    list_parser = subparsers.add_parser("list")
     list_parser.set_defaults(func=list_bookmarks)
-    list_parser.add_argument('current_dir', type=existing_dir)
-    list_parser.add_argument('bookmarks', type=argparse.FileType("r"))
-    listall_parser = subparsers.add_parser('listall')
+    list_parser.add_argument("current_dir", type=existing_dir)
+    list_parser.add_argument("bookmarks", type=argparse.FileType("r"))
+    listall_parser = subparsers.add_parser("listall")
     listall_parser.set_defaults(func=listall_bookmarks)
-    listall_parser.add_argument('bookmarks', type=argparse.FileType("r"))
+    listall_parser.add_argument("bookmarks", type=argparse.FileType("r"))
 
     args = parser.parse_args()
     args.func(args)
+
 
 def existing_dir(directory: str) -> str:
     if not os.path.isdir(directory):
         raise argparse.ArgumentTypeError()
     return directory
+
 
 def add_bookmark(args):
     # This is the format.
@@ -59,6 +64,7 @@ def add_bookmark(args):
     with open(args.bookmarks, "w") as f:
         json.dump(bm, f, indent=4)
 
+
 def delete_bookmark(args):
     bm = {"bookmarks": []}
     if args.bookmarks.is_file():
@@ -70,12 +76,19 @@ def delete_bookmark(args):
     with open(args.bookmarks, "w") as f:
         json.dump(bm, f, indent=4)
 
+
+def clear_bookmarks(args):
+    with open(args.bookmarks, "w") as f:
+        json.dump({"bookmarks": []}, f, indent=4)
+
+
 # This is meant to be piped into FZF
 def list_bookmarks(args):
     bookmarks = json.load(args.bookmarks)
     for bookmark in bookmarks["bookmarks"]:
         if bookmark != args.current_dir:
             print(bookmark)
+
 
 # This is meant to be seen directly by the user.
 def listall_bookmarks(args):
@@ -84,5 +97,5 @@ def listall_bookmarks(args):
         print(bookmark)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
