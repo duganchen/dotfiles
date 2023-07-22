@@ -115,6 +115,17 @@ xplr.config.modes.custom.bookmarks = {
           "PopMode",
         },
       },
+      c = {
+        help = "clear",
+        messages = {
+          {
+            BashExec = [===[
+              "$XPLR" -m 'LogSuccess: %q' "All bookmarks removed"
+            ]===]
+          },
+          "PopMode",
+        },
+      },
     },
     default = {
       messages = {
