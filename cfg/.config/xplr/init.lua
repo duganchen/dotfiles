@@ -148,6 +148,18 @@ xplr.config.modes.custom.bookmarks = {
           "PopMode",
         },
       },
+
+      j = {
+        help = "jump to temp bookmark",
+        messages = {
+          {
+            BashExec = [===[
+              "$XPLR" -m 'LogSuccess: %q' "Jumping to temp bookmark"
+            ]===]
+          },
+          "PopMode",
+        },
+      }
     },
     default = {
       messages = {
@@ -157,19 +169,30 @@ xplr.config.modes.custom.bookmarks = {
   },
 }
 
-xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
+xplr.config.modes.builtin.default.key_bindings.on_key["b"] = {
   help = "bookmarks mode",
   messages = {
     { SwitchModeCustom = "bookmarks" },
   },
 }
 
-xplr.config.modes.builtin.default.key_bindings.on_key["ctrl-j"] = {
-  help = "jump to temp bookmark",
+xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
+  help = "Add permanent bookmark",
   messages = {
     {
       BashExec = [===[
-        "$XPLR" -m 'LogSuccess: %q' "Jumping to temp bookmark"
+        "$XPLR" -m 'LogSuccess: %q' "Adding permanent bookmark"
+      ]===]
+    }
+  },
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["'"] = {
+  help = "Jump to permanent bookmark",
+  messages = {
+    {
+      BashExec = [===[
+        "$XPLR" -m 'LogSuccess: %q' "Jumping to permanent bookmark"
       ]===]
     }
   },
