@@ -163,3 +163,14 @@ xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
     { SwitchModeCustom = "bookmarks" },
   },
 }
+
+xplr.config.modes.builtin.default.key_bindings.on_key["ctrl-j"] = {
+  help = "jump to temp bookmark",
+  messages = {
+    {
+      BashExec = [===[
+        "$XPLR" -m 'LogSuccess: %q' "Jumping to temp bookmark"
+      ]===]
+    }
+  },
+}
