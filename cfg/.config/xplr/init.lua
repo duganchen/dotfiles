@@ -98,7 +98,7 @@ xplr.config.modes.custom.bookmarks = {
   key_bindings = {
     on_key = {
       s = {
-        help = "Save the focused ndoe as a temporary bookmark",
+        help = "Save the focused node as a temporary bookmark",
         messages = {
           {
             BashExec = [===[
@@ -154,7 +154,7 @@ xplr.config.modes.custom.bookmarks = {
             BashExec = [===[
               PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
               if [ -d "$PTH" ]; then
-                dirmark add "$PTH"
+                dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
               fi
             ]===]
@@ -183,7 +183,9 @@ xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
   messages = {
     {
       BashExec = [===[
-        "$XPLR" -m 'LogSuccess: %q' "Adding permanent bookmark"
+        PTH="$(pwd)"
+        dirmarks add "$PTH" ~/.dirmarks.json
+        "$XPLR" -m 'LogSuccess: %q' "$PTH added to ~/.dirmarks.json"
       ]===]
     }
   },
@@ -194,7 +196,11 @@ xplr.config.modes.builtin.default.key_bindings.on_key["'"] = {
   messages = {
     {
       BashExec = [===[
-        "$XPLR" -m 'LogSuccess: %q' "Jumping to permanent bookmark"
+        PTH="$(dirmarks list $(pwd) ~/.dirmarks.json | fzf --no-sort --select-1 --exit-0)"
+        if [ -d "$PTH" ]; then
+          dirmark add "$PTH" ~/.dirmarks.json
+          "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+        fi
       ]===]
     }
   },
