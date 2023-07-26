@@ -128,7 +128,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              "$XPLR" -m 'LogSuccess: %q' "Listing bookmarks in a pager"
+              dirmarks listall "$XPLR_SESSION_PATH/bookmarks.json" | less -+F
             ]===]
           },
           "PopMode",
@@ -139,7 +139,10 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              "$XPLR" -m 'LogSuccess: %q' "Removing focused path from bookmarks"
+              PTH="$(pwd)"
+              PTH_ESC=$(/usr/bin/printf %q "$PTH")
+              dirmarks delete "$PTH_ESC" "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC deleted from $XPLR_SESSION_PATH/bookmarks.json"
             ]===]
           },
           "PopMode",
