@@ -92,116 +92,175 @@ xplr.config.layouts.builtin.no_help_no_selection = {
   },
 }
 
-xplr.config.modes.custom.bookmarks = {
-  name = "bookmarks",
+-- Make sorting work with the layout.
+-- Add layout="HelpMenu" and the PopModes
+
+xplr.config.modes.builtin.sort = {
+  name = "sort",
   layout = "HelpMenu",
   key_bindings = {
     on_key = {
-      s = {
-        help = "Save the focused node as a temporary bookmark",
+      ["!"] = {
+        help = "reverse sorters",
         messages = {
-          {
-            BashExec = [===[
-              PTH="$(pwd)"
-              dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
-              "$XPLR" -m 'LogSuccess: %q' "$PTH added to $XPLR_SESSION_PATH/bookmarks.json"
-            ]===]
-          },
+          "ReverseNodeSorters",
+          "ExplorePwdAsync",
           "PopMode",
         },
       },
-      c = {
-        help = "Clears away all temporary bookmarks",
+      ["E"] = {
+        help = "by canonical extension reverse",
         messages = {
-          {
-            BashExec = [===[
-              dirmarks clear "$XPLR_SESSION_PATH/bookmarks.json"
-              "$XPLR" -m 'LogSuccess: %q' "All bookmarks removed"
-            ]===]
-          },
+          { AddNodeSorter = { sorter = "ByCanonicalExtension", reverse = true } },
+          "ExplorePwdAsync",
           "PopMode",
         },
       },
-      l = {
-        help = "list",
+      ["M"] = {
+        help = "by canonical mime essence reverse",
         messages = {
-          {
-            BashExec = [===[
-              dirmarks listall "$XPLR_SESSION_PATH/bookmarks.json" | less -+F
-            ]===]
-          },
+          { AddNodeSorter = { sorter = "ByCanonicalMimeEssence", reverse = true } },
+          "ExplorePwdAsync",
           "PopMode",
         },
       },
-      d = {
-        help = "Delete focused node from bookmarks",
+      ["N"] = {
+        help = "by node type reverse",
         messages = {
-          {
-            BashExec = [===[
-              PTH="$(pwd)"
-              dirmarks delete "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
-              "$XPLR" -m 'LogSuccess: %q' "$PTH deleted from $XPLR_SESSION_PATH/bookmarks.json"
-            ]===]
-          },
+          { AddNodeSorter = { sorter = "ByCanonicalIsDir", reverse = true } },
+          { AddNodeSorter = { sorter = "ByCanonicalIsFile", reverse = true } },
+          { AddNodeSorter = { sorter = "ByIsSymlink", reverse = true } },
+          "ExplorePwdAsync",
           "PopMode",
         },
       },
-
-      j = {
-        help = "jump to temp bookmark",
+      ["R"] = {
+        help = "by relative path reverse",
         messages = {
-          {
-            BashExec = [===[
-              PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
-              if [ -d "$PTH" ]; then
-                dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
-                "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
-              fi
-            ]===]
-          },
+          { AddNodeSorter = { sorter = "ByIRelativePath", reverse = true } },
+          "ExplorePwdAsync",
           "PopMode",
         },
-      }
+      },
+      ["S"] = {
+        help = "by size reverse",
+        messages = {
+          { AddNodeSorter = { sorter = "BySize", reverse = true } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["backspace"] = {
+        help = "remove last sorter",
+        messages = {
+          "RemoveLastNodeSorter",
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["ctrl-r"] = {
+        help = "reset sorters",
+        messages = {
+          "ResetNodeSorters",
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["ctrl-u"] = {
+        help = "clear sorters",
+        messages = {
+          "ClearNodeSorters",
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["e"] = {
+        help = "by canonical extension",
+        messages = {
+          { AddNodeSorter = { sorter = "ByCanonicalExtension", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["enter"] = {
+        help = "submit",
+        messages = {
+          "PopModeKeepingInputBuffer",
+          "PopMode",
+        },
+      },
+      ["esc"] = {
+        messages = {
+          "PopModeKeepingInputBuffer",
+          "PopMode",
+        },
+      },
+      ["m"] = {
+        help = "by canonical mime essence",
+        messages = {
+          { AddNodeSorter = { sorter = "ByCanonicalMimeEssence", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["n"] = {
+        help = "by node type",
+        messages = {
+          { AddNodeSorter = { sorter = "ByCanonicalIsDir", reverse = false } },
+          { AddNodeSorter = { sorter = "ByCanonicalIsFile", reverse = false } },
+          { AddNodeSorter = { sorter = "ByIsSymlink", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["r"] = {
+        help = "by relative path",
+        messages = {
+          { AddNodeSorter = { sorter = "ByIRelativePath", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["s"] = {
+        help = "by size",
+        messages = {
+          { AddNodeSorter = { sorter = "BySize", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["c"] = {
+        help = "by created",
+        messages = {
+          { AddNodeSorter = { sorter = "ByCreated", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["C"] = {
+        help = "by created reverse",
+        messages = {
+          { AddNodeSorter = { sorter = "ByCreated", reverse = true } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["l"] = {
+        help = "by last modified",
+        messages = {
+          { AddNodeSorter = { sorter = "ByLastModified", reverse = false } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
+      ["L"] = {
+        help = "by last modified reverse",
+        messages = {
+          { AddNodeSorter = { sorter = "ByLastModified", reverse = true } },
+          "ExplorePwdAsync",
+          "PopMode",
+        },
+      },
     },
-    default = {
-      messages = {
-        "PopMode",
-      },
-    },
-  },
-}
-
-xplr.config.modes.builtin.default.key_bindings.on_key["b"] = {
-  help = "bookmarks mode",
-  messages = {
-    { SwitchModeCustom = "bookmarks" },
-  },
-}
-
-xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
-  help = "Add permanent bookmark",
-  messages = {
-    {
-      BashExec = [===[
-        PTH="$(pwd)"
-        dirmarks add "$PTH" ~/.dirmarks.json
-        "$XPLR" -m 'LogSuccess: %q' "$PTH added to ~/.dirmarks.json"
-      ]===]
-    }
-  },
-}
-
-xplr.config.modes.builtin.default.key_bindings.on_key["'"] = {
-  help = "Jump to permanent bookmark",
-  messages = {
-    {
-      BashExec = [===[
-        PTH="$(dirmarks list $(pwd) ~/.dirmarks.json | fzf --no-sort --select-1 --exit-0)"
-        if [ -d "$PTH" ]; then
-          dirmark add "$PTH" ~/.dirmarks.json
-          "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
-        fi
-      ]===]
-    }
   },
 }
