@@ -98,25 +98,21 @@ xplr.config.modes.custom.bookmarks = {
   key_bindings = {
     on_key = {
       s = {
-        help = "search",
+        help = "Save the focused ndoe as a temporary bookmark",
         messages = {
           {
             BashExec = [===[
-              PTH="${XPLR_FOCUS_PATH:?}"
+              PTH="$(pwd)"
               PTH_ESC=$(/usr/bin/printf %q "$PTH")
-              "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC added to bookmarks"
-              if [ -d "$PTH_ESC" ]; then
-                "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC added to bookmarks"
-              else
-                "$XPLR" -m 'LogError: %q' "Not a directory"
-              fi
+              dirmarks add "$PTH_ESC" "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC added to $XPLR_SESSION_PATH/bookmarks.json"
             ]===]
           },
           "PopMode",
         },
       },
       c = {
-        help = "clear",
+        help = "Clears away all temporary bookmarks",
         messages = {
           {
             BashExec = [===[
@@ -127,7 +123,7 @@ xplr.config.modes.custom.bookmarks = {
         },
       },
       l = {
-        help = "clear",
+        help = "list",
         messages = {
           {
             BashExec = [===[
@@ -138,7 +134,7 @@ xplr.config.modes.custom.bookmarks = {
         },
       },
       d = {
-        help = "delete",
+        help = "Delete focused node from bookmarks",
         messages = {
           {
             BashExec = [===[
