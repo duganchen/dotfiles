@@ -154,7 +154,6 @@ xplr.config.modes.custom.bookmarks = {
             BashExec = [===[
               PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
               if [ -d "$PTH" ]; then
-                dirmark add "$(pwd)"
                 dirmark add "$PTH"
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
               fi
