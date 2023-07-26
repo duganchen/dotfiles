@@ -31,19 +31,23 @@ def main():
     list_parser = subparsers.add_parser("list")
     list_parser.set_defaults(func=list_bookmarks)
     list_parser.add_argument("current_dir", type=existing_dir)
-    list_parser.add_argument("bookmarks", type=argparse.FileType("r"))
+    list_parser.add_argument("bookmarks", type=pathlib.Path)
+
     listall_parser = subparsers.add_parser("listall")
     listall_parser.set_defaults(func=listall_bookmarks)
-    listall_parser.add_argument("bookmarks", type=argparse.FileType("r"))
+    listall_parser.add_argument("bookmarks", type=pathlib.Path)
 
     args = parser.parse_args()
     args.func(args)
 
+# Note that most of these just do nothing if the specified bookmarks file
+# does not exist. This is a deliberate choice, and correct for what I'm integrating
+# this with.
 
 def existing_dir(directory: str) -> str:
     if not os.path.isdir(directory):
         raise argparse.ArgumentTypeError()
-    return directory
+    return str(pathlib.Path(directory).resolve())
 
 
 def add_bookmark(args):
@@ -84,17 +88,21 @@ def clear_bookmarks(args):
 
 # This is meant to be piped into FZF
 def list_bookmarks(args):
-    bookmarks = json.load(args.bookmarks)
-    for bookmark in bookmarks["bookmarks"]:
-        if bookmark != args.current_dir:
-            print(bookmark)
+    if (os.path.isfile(args.bookmarks)):
+        with open(args.bookmarks) as f:
+            bookmarks = json.load(f)
+            for bookmark in bookmarks["bookmarks"]:
+                if bookmark != args.current_dir:
+                    print(bookmark)
 
 
 # This is meant to be seen directly by the user.
 def listall_bookmarks(args):
-    bookmarks = json.load(args.bookmarks)
-    for bookmark in bookmarks["bookmarks"]:
-        print(bookmark)
+    if args.bookmarks.is_file():
+        with open(args.bookmarks) as f:
+            bookmarks = json.load(f)
+            for bookmark in bookmarks["bookmarks"]:
+                print(bookmark)
 
 
 if __name__ == "__main__":
