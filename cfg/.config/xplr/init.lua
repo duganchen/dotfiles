@@ -103,9 +103,8 @@ xplr.config.modes.custom.bookmarks = {
           {
             BashExec = [===[
               PTH="$(pwd)"
-              PTH_ESC=$(/usr/bin/printf %q "$PTH")
-              dirmarks add "$PTH_ESC" "$XPLR_SESSION_PATH/bookmarks.json"
-              "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC added to $XPLR_SESSION_PATH/bookmarks.json"
+              dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "$PTH added to $XPLR_SESSION_PATH/bookmarks.json"
             ]===]
           },
           "PopMode",
@@ -140,9 +139,8 @@ xplr.config.modes.custom.bookmarks = {
           {
             BashExec = [===[
               PTH="$(pwd)"
-              PTH_ESC=$(/usr/bin/printf %q "$PTH")
-              dirmarks delete "$PTH_ESC" "$XPLR_SESSION_PATH/bookmarks.json"
-              "$XPLR" -m 'LogSuccess: %q' "$PTH_ESC deleted from $XPLR_SESSION_PATH/bookmarks.json"
+              dirmarks delete "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "$PTH deleted from $XPLR_SESSION_PATH/bookmarks.json"
             ]===]
           },
           "PopMode",
@@ -154,7 +152,12 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              "$XPLR" -m 'LogSuccess: %q' "Jumping to temp bookmark"
+              PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
+              if [ -d "$PTH" ]; then
+                dirmark add "$(pwd)"
+                dirmark add "$PTH"
+                "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+              fi
             ]===]
           },
           "PopMode",
