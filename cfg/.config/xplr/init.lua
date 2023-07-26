@@ -268,3 +268,118 @@ xplr.config.modes.builtin.sort = {
     },
   },
 }
+
+-- Bookmarking with https://github.com/duganchen/dirmarks
+xplr.config.modes.custom.bookmarks = {
+  name = "bookmarks",
+  layout = "HelpMenu",
+  key_bindings = {
+    on_key = {
+      s = {
+        help = "Save the focused node as a temporary bookmark",
+        messages = {
+          {
+            BashExec = [===[
+              PTH="$(pwd)"
+              dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "$PTH added to $XPLR_SESSION_PATH/bookmarks.json"
+            ]===]
+          },
+          "PopMode",
+        },
+      },
+      c = {
+        help = "Clears away all temporary bookmarks",
+        messages = {
+          {
+            BashExec = [===[
+              dirmarks clear "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "All bookmarks removed"
+            ]===]
+          },
+          "PopMode",
+        },
+      },
+      l = {
+        help = "list",
+        messages = {
+          {
+            BashExec = [===[
+              dirmarks listall "$XPLR_SESSION_PATH/bookmarks.json" | less -+F
+            ]===]
+          },
+          "PopMode",
+        },
+      },
+      d = {
+        help = "Delete focused node from bookmarks",
+        messages = {
+          {
+            BashExec = [===[
+              PTH="$(pwd)"
+              dirmarks delete "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
+              "$XPLR" -m 'LogSuccess: %q' "$PTH deleted from $XPLR_SESSION_PATH/bookmarks.json"
+            ]===]
+          },
+          "PopMode",
+        },
+      },
+
+      j = {
+        help = "jump to temp bookmark",
+        messages = {
+          {
+            BashExec = [===[
+              PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
+              if [ -d "$PTH" ]; then
+                dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
+                "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+              fi
+            ]===]
+          },
+          "PopMode",
+        },
+      }
+    },
+    default = {
+      messages = {
+        "PopMode",
+      },
+    },
+  },
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["b"] = {
+  help = "bookmarks mode",
+  messages = {
+    { SwitchModeCustom = "bookmarks" },
+  },
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
+  help = "Add permanent bookmark",
+  messages = {
+    {
+      BashExec = [===[
+        PTH="$(pwd)"
+        dirmarks add "$PTH" ~/.dirmarks.json
+        "$XPLR" -m 'LogSuccess: %q' "$PTH added to ~/.dirmarks.json"
+      ]===]
+    }
+  },
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["'"] = {
+  help = "Jump to permanent bookmark",
+  messages = {
+    {
+      BashExec = [===[
+        PTH="$(dirmarks list $(pwd) ~/.dirmarks.json | fzf --no-sort --select-1 --exit-0)"
+        if [ -d "$PTH" ]; then
+          dirmark add "$PTH" ~/.dirmarks.json
+          "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+        fi
+      ]===]
+    }
+  },
+}
