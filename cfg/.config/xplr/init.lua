@@ -116,6 +116,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              dirmarks clear "$XPLR_SESSION_PATH/bookmarks.json"
               "$XPLR" -m 'LogSuccess: %q' "All bookmarks removed"
             ]===]
           },
