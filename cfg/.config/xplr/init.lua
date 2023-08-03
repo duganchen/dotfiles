@@ -64,13 +64,15 @@ xplr.config.general.start_fifo = os.getenv("NNN_FIFO")
 xplr.fn.custom.stat_pane = {}
 xplr.fn.custom.stat_pane.render = function(ctx)
 
-  local body = xplr.fn.builtin.fmt_general_table_row_cols_2(ctx.app.focused_node)
-  .. " "
-  ..
-  xplr.fn.builtin.fmt_general_table_row_cols_3(ctx.app.focused_node)
-  .. " "
-  .. xplr.fn.builtin.fmt_general_table_row_cols_4(ctx.app.focused_node)
-
+  local body = ""
+  if ctx.app.focused_node then
+    body = xplr.fn.builtin.fmt_general_table_row_cols_2(ctx.app.focused_node)
+    .. " "
+    ..
+    xplr.fn.builtin.fmt_general_table_row_cols_3(ctx.app.focused_node)
+    .. " "
+    .. xplr.fn.builtin.fmt_general_table_row_cols_4(ctx.app.focused_node)
+  end
 
   return { CustomParagraph = { ui = { title = nil }, body = body} }
 end
