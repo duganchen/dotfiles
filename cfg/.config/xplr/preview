@@ -2,7 +2,12 @@
 
 if [ -p "$1" ]; then
     while read -r selection; do
+
         clear
+
+        if [[ "$selection" == "" ]]; then
+            continue
+        fi
 
         lines=$(tput lines)
         if [ -d "$selection" ]; then
