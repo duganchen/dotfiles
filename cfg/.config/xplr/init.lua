@@ -327,6 +327,8 @@ xplr.config.modes.custom.bookmarks = {
         },
       },
 
+      --- Use "bs" to save a bookmark, go to another directory, and repeatedly use "bj"
+      -- to jump between them. This is what I'm using to get what I actually want from Miller columns.
       j = {
         help = "jump to temp bookmark",
         messages = {
@@ -334,7 +336,7 @@ xplr.config.modes.custom.bookmarks = {
             BashExec = [===[
               PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
               if [ -d "$PTH" ]; then
-                dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
+                dirmarks add "$(pwd)" "$XPLR_SESSION_PATH/bookmarks.json"
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
               fi
             ]===]
