@@ -37,6 +37,16 @@ def main():
     listall_parser.set_defaults(func=listall_bookmarks)
     listall_parser.add_argument("bookmarks", type=pathlib.Path)
 
+    previous_parser = subparsers.add_parser("previous")
+    previous_parser.set_defaults(func=previous_bookmark)
+    previous_parser.add_argument("current_dir", type=existing_dir)
+    previous_parser.add_argument("bookmarks", type=pathlib.Path)
+
+    previous_parser = subparsers.add_parser("next")
+    previous_parser.set_defaults(func=next_bookmark)
+    previous_parser.add_argument("current_dir", type=existing_dir)
+    previous_parser.add_argument("bookmarks", type=pathlib.Path)
+
     args = parser.parse_args()
     args.func(args)
 
@@ -104,6 +114,21 @@ def listall_bookmarks(args):
             for bookmark in bookmarks["bookmarks"]:
                 print(bookmark)
 
+def previous_bookmark(args):
+    if args.bookmarks.is_file():
+        with open(args.bookmarks) as f:
+            bookmarks = json.load(f)["bookmarks"]
+            for i, bookmark in enumerate(bookmarks):
+                if args.current_dir == bookmark:
+                    print(bookmarks[(i - 1) % len(bookmarks)])
+
+def next_bookmark(args):
+    if args.bookmarks.is_file():
+        with open(args.bookmarks) as f:
+            bookmarks = json.load(f)["bookmarks"]
+            for i, bookmark in enumerate(bookmarks):
+                if args.current_dir == bookmark:
+                    print(bookmarks[(i + 1) % len(bookmarks)])
 
 if __name__ == "__main__":
     main()
