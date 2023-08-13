@@ -343,6 +343,34 @@ xplr.config.modes.custom.bookmarks = {
           },
           "PopMode",
         },
+      },
+      p = {
+        help = "jump to previous bookmark",
+        messages = {
+          {
+            BashExec = [===[
+              PTH="$(dirmarks previous $(pwd) $XPLR_SESSION_PATH/bookmarks.json"
+              if [ -d "$PTH" ]; then
+                "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+              fi
+            ]===]
+          },
+          "PopMode",
+        },
+      },
+      n = {
+        help = "jump to next bookmark",
+        messages = {
+          {
+            BashExec = [===[
+              PTH="$(dirmarks next $(pwd) $XPLR_SESSION_PATH/bookmarks.json"
+              if [ -d "$PTH" ]; then
+                "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+              fi
+            ]===]
+          },
+          "PopMode",
+        },
       }
     },
     default = {
