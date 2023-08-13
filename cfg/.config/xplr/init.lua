@@ -282,6 +282,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               PTH="$(pwd)"
               dirmarks add "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
               "$XPLR" -m 'LogSuccess: %q' "$PTH added to $XPLR_SESSION_PATH/bookmarks.json"
@@ -295,6 +298,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               dirmarks clear "$XPLR_SESSION_PATH/bookmarks.json"
               "$XPLR" -m 'LogSuccess: %q' "All bookmarks removed"
             ]===]
@@ -307,6 +313,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               dirmarks listall "$XPLR_SESSION_PATH/bookmarks.json" | less -+F
             ]===]
           },
@@ -318,6 +327,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               PTH="$(pwd)"
               dirmarks delete "$PTH" "$XPLR_SESSION_PATH/bookmarks.json"
               "$XPLR" -m 'LogSuccess: %q' "$PTH deleted from $XPLR_SESSION_PATH/bookmarks.json"
@@ -334,6 +346,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --tac --no-sort --select-1 --exit-0)"
               if [ -d "$PTH" ]; then
                 dirmarks add "$(pwd)" "$XPLR_SESSION_PATH/bookmarks.json"
@@ -349,6 +364,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               PTH="$(dirmarks previous $(pwd) $XPLR_SESSION_PATH/bookmarks.json"
               if [ -d "$PTH" ]; then
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
@@ -363,6 +381,9 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
+              if [ ! -d "$XPLR_SESSION_PATH/bookmarks.json"]; then
+                dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
+              fi
               PTH="$(dirmarks next $(pwd) $XPLR_SESSION_PATH/bookmarks.json"
               if [ -d "$PTH" ]; then
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
