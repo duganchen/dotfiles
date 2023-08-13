@@ -15,6 +15,10 @@ def main():
     parser = argparse.ArgumentParser(prog="dirmark", description="directory bookmarker")
     subparsers = parser.add_subparsers(required=True)
 
+    init_parser = subparsers.add_parser("init")
+    init_parser.add_argument("bookmarks")
+    init_parser.set_defaults(func=init)
+
     add_parser = subparsers.add_parser("add")
     add_parser.set_defaults(func=add_bookmark)
     add_parser.add_argument("directory", type=resolved_dir)
@@ -51,13 +55,6 @@ def main():
     args = parser.parse_args()
     args.func(args)
 
-# Note that most of these just do nothing if the specified bookmarks file
-# does not exist. This is a deliberate choice, and correct for what I'm integrating
-# this with.
-
-# These return strs. If they returned pathlib.Paths, then the conversions would be more
-# complicated.
-
 def existing_file(file_path: str) -> str:
     path = pathlib.Path(file_path)
     if not path.is_file():
@@ -68,9 +65,14 @@ def resolved_dir(dir_path: str) -> str:
     # The client checks if the path actually exists. The resolving is for data consistency.
     return str(pathlib.Path(dir_path).resolve())
 
+def init(args):
+    # The client is expected to call this is the bookmarks file does not exist.
+    with open(args.bookmarks, "w+") as f:
+        # This is the format.
+        json.dump({"bookmarks": []}, f, indent=4)
+
 def add_bookmark(args):
 
-    # This is the format.
     new_bookmarks = {"bookmarks": []}
 
     with open(args.bookmarks) as f:
