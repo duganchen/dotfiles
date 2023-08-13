@@ -14,38 +14,39 @@ import sys
 def main():
     parser = argparse.ArgumentParser(prog="dirmark", description="directory bookmarker")
     subparsers = parser.add_subparsers(required=True)
+
     add_parser = subparsers.add_parser("add")
     add_parser.set_defaults(func=add_bookmark)
-    add_parser.add_argument("directory", type=existing_dir)
-    add_parser.add_argument("bookmarks", type=pathlib.Path)
+    add_parser.add_argument("directory", type=resolved_dir)
+    add_parser.add_argument("bookmarks", type=existing_file)
 
     delete_parser = subparsers.add_parser("delete")
     delete_parser.set_defaults(func=delete_bookmark)
-    delete_parser.add_argument("directory")
-    delete_parser.add_argument("bookmarks", type=pathlib.Path)
+    delete_parser.add_argument("directory", type=resolved_dir)
+    delete_parser.add_argument("bookmarks", type=existing_file)
 
     clear_parser = subparsers.add_parser("clear")
     clear_parser.set_defaults(func=clear_bookmarks)
-    clear_parser.add_argument("bookmarks", type=pathlib.Path)
+    clear_parser.add_argument("bookmarks", type=existing_file)
 
     list_parser = subparsers.add_parser("list")
     list_parser.set_defaults(func=list_bookmarks)
-    list_parser.add_argument("current_dir", type=existing_dir)
-    list_parser.add_argument("bookmarks", type=pathlib.Path)
+    list_parser.add_argument("current_dir", type=resolved_dir)
+    list_parser.add_argument("bookmarks", type=existing_file)
 
     listall_parser = subparsers.add_parser("listall")
     listall_parser.set_defaults(func=listall_bookmarks)
-    listall_parser.add_argument("bookmarks", type=pathlib.Path)
+    listall_parser.add_argument("bookmarks", type=existing_file)
 
     previous_parser = subparsers.add_parser("previous")
     previous_parser.set_defaults(func=previous_bookmark)
-    previous_parser.add_argument("current_dir", type=existing_dir)
-    previous_parser.add_argument("bookmarks", type=pathlib.Path)
+    previous_parser.add_argument("current_dir", type=resolved_dir)
+    previous_parser.add_argument("bookmarks", type=existing_file)
 
     previous_parser = subparsers.add_parser("next")
     previous_parser.set_defaults(func=next_bookmark)
-    previous_parser.add_argument("current_dir", type=existing_dir)
-    previous_parser.add_argument("bookmarks", type=pathlib.Path)
+    previous_parser.add_argument("current_dir", type=resolved_dir)
+    previous_parser.add_argument("bookmarks", type=existing_file)
 
     args = parser.parse_args()
     args.func(args)
@@ -54,38 +55,45 @@ def main():
 # does not exist. This is a deliberate choice, and correct for what I'm integrating
 # this with.
 
-def existing_dir(directory: str) -> str:
-    if not os.path.isdir(directory):
-        raise argparse.ArgumentTypeError()
-    return str(pathlib.Path(directory).resolve())
+# These return strs. If they returned pathlib.Paths, then the conversions would be more
+# complicated.
 
+def existing_file(file_path: str) -> str:
+    path = pathlib.Path(file_path)
+    if not path.is_file():
+        raise argparse.ArgumentTypeError(f"{path} is not an existing file")
+    return path
+
+def resolved_dir(dir_path: str) -> str:
+    # The client checks if the path actually exists. The resolving is for data consistency.
+    return str(pathlib.Path(dir_path).resolve())
 
 def add_bookmark(args):
-    # This is the format.
-    bm = {"bookmarks": []}
-    if args.bookmarks.is_file():
-        with open(args.bookmarks) as f:
-            bm = json.load(f)
 
-    bookmarks = [args.directory]
+    # This is the format.
+    new_bookmarks = {"bookmarks": []}
+
+    with open(args.bookmarks) as f:
+        bm = json.load(f)
 
     for bookmark in bm["bookmarks"]:
         if os.path.isdir(bookmark) and bookmark != args.directory:
-            bookmarks.append(bookmark)
+            new_bookmarks["bookmarks"].append(bookmark)
 
-    bm["bookmarks"] = bookmarks
+    # New bookmarks get appended to the list. That gets previous and next to work.
+    # When we pipe into FZF, we use the --tac and --no-sort options to get recently added dirs to show first.
+    if os.path.isdir(args.directory):
+        new_bookmarks["bookmarks"].append(args.directory)
 
     with open(args.bookmarks, "w") as f:
-        json.dump(bm, f, indent=4)
+        json.dump(new_bookmarks, f, indent=4)
 
 
 def delete_bookmark(args):
-    bm = {"bookmarks": []}
-    if args.bookmarks.is_file():
-        with open(args.bookmarks) as f:
-            bm = json.load(f)
-
-    bm["bookmarks"] = [x for x in bm["bookmarks"] if x != args.directory]
+    with open(args.bookmarks) as f:
+        bm = json.load(f)
+ 
+    bm["bookmarks"] = [x for x in bm["bookmarks"] if x != args.directory and os.path.isdir(x)]
 
     with open(args.bookmarks, "w") as f:
         json.dump(bm, f, indent=4)
@@ -97,38 +105,54 @@ def clear_bookmarks(args):
 
 
 # This is meant to be piped into FZF
+# As mentioned, add the --tac and --no-sort options.
 def list_bookmarks(args):
-    if (os.path.isfile(args.bookmarks)):
-        with open(args.bookmarks) as f:
-            bookmarks = json.load(f)
-            for bookmark in bookmarks["bookmarks"]:
-                if bookmark != args.current_dir:
-                    print(bookmark)
-
+    with open(args.bookmarks) as f:
+        bookmarks = json.load(f)
+        bookmarks["bookmarks"] = [x for x in bookmarks["bookmarks"] if os.path.isdir(x)]
+        for bookmark in bookmarks["bookmarks"]:
+            if bookmark != args.current_dir:
+                print(bookmark)
+    with open(args.bookmarks, "w") as f:
+        json.dump(bookmarks, f, indent=4)
 
 # This is meant to be seen directly by the user.
+# No current_dir argument.
 def listall_bookmarks(args):
-    if args.bookmarks.is_file():
-        with open(args.bookmarks) as f:
-            bookmarks = json.load(f)
-            for bookmark in bookmarks["bookmarks"]:
-                print(bookmark)
+    with open(args.bookmarks) as f:
+        bookmarks = json.load(f)
+        bookmarks["bookmarks"] = [x for x in bookmarks["bookmarks"] if os.path.isdir(x)]
+        for bookmark in bookmarks["bookmarks"]:
+            print(bookmark)
+
+    with open(args.bookmarks, "w") as f:
+        json.dump(bookmarks, f, indent=4)
 
 def previous_bookmark(args):
-    if args.bookmarks.is_file():
-        with open(args.bookmarks) as f:
-            bookmarks = json.load(f)["bookmarks"]
-            for i, bookmark in enumerate(bookmarks):
-                if args.current_dir == bookmark:
-                    print(bookmarks[(i - 1) % len(bookmarks)])
+    bookmarks = {"bookmarks": []}
+    with open(args.bookmarks) as f:
+        bookmarks = json.load(f)
+
+    bookmarks["bookmarks"] = [x for x in bookmarks["bookmarks"] if os.path.isdir(x)]
+
+    for i, bookmark in enumerate(bookmarks["bookmarks"]):
+        if str(args.current_dir) == bookmark:
+            print(bookmarks["bookmarks"][(i - 1) % len(bookmarks["bookmarks"])])
+            return
+    print(args.current_dir)
 
 def next_bookmark(args):
-    if args.bookmarks.is_file():
-        with open(args.bookmarks) as f:
-            bookmarks = json.load(f)["bookmarks"]
-            for i, bookmark in enumerate(bookmarks):
-                if args.current_dir == bookmark:
-                    print(bookmarks[(i + 1) % len(bookmarks)])
+    bookmarks = {"bookmarks": []}
+    with open(args.bookmarks) as f:
+        bookmarks = json.load(f)
+
+    bookmarks["bookmarks"] = [x for x in bookmarks["bookmarks"] if os.path.isdir(x)]
+
+    for i, bookmark in enumerate(bookmarks["bookmarks"]):
+        if str(args.current_dir) == bookmark:
+            print(bookmarks["bookmarks"][(i + 1) % len(bookmarks["bookmarks"])])
+            return
+    print(args.current_dir)
 
 if __name__ == "__main__":
     main()

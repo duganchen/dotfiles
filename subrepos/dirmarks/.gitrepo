@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/duganchen/dirmarks
 	branch = main
-	commit = e50b80e06214b8145e4d480445852ed9e4706a3e
+	commit = e2ac21ecf7c201933f17a7ebb03a7e5d7001e7af
 	parent = c5a3f4d5ab20bfe8c1ebe853ac9bd4a42d675f9c
 	method = merge
 	cmdver = 0.4.6
