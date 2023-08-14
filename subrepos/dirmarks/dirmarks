@@ -10,6 +10,8 @@ import os
 import pathlib
 import sys
 
+# FZF expects its choices in top-down order, and that's the ordering that
+# dirmarks outputs.
 
 def main():
     parser = argparse.ArgumentParser(prog="dirmark", description="directory bookmarker")
@@ -73,7 +75,12 @@ def init(args):
 
 def add_bookmark(args):
 
-    new_bookmarks = {"bookmarks": []}
+    if not os.path.isdir(args.directory):
+        # With the wrappers I have on top of this, this
+        # honestly never happens.
+        return
+
+    new_bookmarks = {"bookmarks": [args.directory]}
 
     with open(args.bookmarks) as f:
         bm = json.load(f)
@@ -82,10 +89,6 @@ def add_bookmark(args):
         if os.path.isdir(bookmark) and bookmark != args.directory:
             new_bookmarks["bookmarks"].append(bookmark)
 
-    # New bookmarks get appended to the list. That gets previous and next to work.
-    # When we pipe into FZF, we use the --tac and --no-sort options to get recently added dirs to show first.
-    if os.path.isdir(args.directory):
-        new_bookmarks["bookmarks"].append(args.directory)
 
     with open(args.bookmarks, "w") as f:
         json.dump(new_bookmarks, f, indent=4)
@@ -107,7 +110,7 @@ def clear_bookmarks(args):
 
 
 # This is meant to be piped into FZF
-# As mentioned, add the --tac and --no-sort options.
+# As mentioned, add the --no-sort option.
 def list_bookmarks(args):
     with open(args.bookmarks) as f:
         bookmarks = json.load(f)
@@ -139,7 +142,7 @@ def previous_bookmark(args):
 
     for i, bookmark in enumerate(bookmarks["bookmarks"]):
         if str(args.current_dir) == bookmark:
-            print(bookmarks["bookmarks"][(i - 1) % len(bookmarks["bookmarks"])])
+            print(bookmarks["bookmarks"][(i + 1) % len(bookmarks["bookmarks"])])
             return
     print(args.current_dir)
 
@@ -152,7 +155,7 @@ def next_bookmark(args):
 
     for i, bookmark in enumerate(bookmarks["bookmarks"]):
         if str(args.current_dir) == bookmark:
-            print(bookmarks["bookmarks"][(i + 1) % len(bookmarks["bookmarks"])])
+            print(bookmarks["bookmarks"][(i - 1) % len(bookmarks["bookmarks"])])
             return
     print(args.current_dir)
 
