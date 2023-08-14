@@ -282,7 +282,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
               PTH="$(pwd)"
@@ -298,7 +298,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               else
                 dirmarks clear "$XPLR_SESSION_PATH/bookmarks.json"
@@ -314,7 +314,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
               dirmarks listall "$XPLR_SESSION_PATH/bookmarks.json" | less -+F
@@ -328,7 +328,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
               PTH="$(pwd)"
@@ -340,19 +340,21 @@ xplr.config.modes.custom.bookmarks = {
         },
       },
 
-      --- Use "bs" to save a bookmark, go to another directory, and repeatedly use "bj"
-      -- to jump between them. This is what I'm using to get what I actually want from Miller columns.
+      -- This is just a jump, with the last directory bookmarked at the top of the list.
+      -- If you want to jump back and forth between two directories, then bookmark both
+      -- and use previous and next.
+      -- If you want a bookmark moved to the front of the list, then jump to it and
+      -- re-add it.
       j = {
         help = "jump to temp bookmark",
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
               PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --tac --no-sort --select-1 --exit-0)"
               if [ -d "$PTH" ]; then
-                dirmarks add "$(pwd)" "$XPLR_SESSION_PATH/bookmarks.json"
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
               fi
             ]===]
@@ -365,7 +367,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
               cd "$(dirmarks previous $(pwd) $XPLR_SESSION_PATH/bookmarks.json)"
@@ -379,7 +381,7 @@ xplr.config.modes.custom.bookmarks = {
         messages = {
           {
             BashExec = [===[
-              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json"]; then
+              if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
               cd "$(dirmarks next $(pwd) $XPLR_SESSION_PATH/bookmarks.json)"
