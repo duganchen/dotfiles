@@ -1,6 +1,8 @@
 function j
-    # The adds are to make it easy to jump to the last directory you jumped to. I like that.
+    # Previous versions would add "$result" before the cd.
     # Just pressing "j" repeatedly will jump you between two directories.
+    # For now, I'm going to let jp and jn fill that role, and require
+    # the act of adding a bookmark to be explicit.
 
     if ! test -f ~/.dirmarks.json
         dirmarks init ~/.dirmarks.json
@@ -8,13 +10,11 @@ function j
     end
 
     if count $argv > /dev/null
-        if set --local result (command dirmarks list (pwd) ~/.dirmarks.json | command fzf --tac --no-sort --select-1 --exit-0 --query $argv)
-            dirmarks add $result ~/.dirmarks.json
+        if set --local result (command dirmarks list (pwd) ~/.dirmarks.json | command fzf --no-sort --select-1 --exit-0 --query $argv)
             cd $result
         end
     else
-        if set --local result (command dirmarks list (pwd) ~/.dirmarks.json | command fzf --tac --no-sort --select-1 --exit-0)
-            dirmarks add $result ~/.dirmarks.json
+        if set --local result (command dirmarks list (pwd) ~/.dirmarks.json | command fzf --no-sort --select-1 --exit-0)
             cd $result
         end
     end

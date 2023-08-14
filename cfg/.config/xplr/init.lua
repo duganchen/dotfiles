@@ -353,7 +353,7 @@ xplr.config.modes.custom.bookmarks = {
               if ! [ -f "$XPLR_SESSION_PATH/bookmarks.json" ]; then
                 dirmarks init "$XPLR_SESSION_PATH/bookmarks.json"
               fi
-              PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --tac --no-sort --select-1 --exit-0)"
+              PTH="$(dirmarks list $(pwd) $XPLR_SESSION_PATH/bookmarks.json | fzf --no-sort --select-1 --exit-0)"
               if [ -d "$PTH" ]; then
                 "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
               fi
