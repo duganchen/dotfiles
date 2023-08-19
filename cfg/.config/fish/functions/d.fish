@@ -1,6 +1,6 @@
-function lma
+function d
 if ! test -f ~/.dirmarks.json
     dirmarks init ~/.dirmarks.json
 end
-dirmarks listall ~/.dirmarks.json
+dirmarks delete (pwd) ~/.dirmarks.json
 end
