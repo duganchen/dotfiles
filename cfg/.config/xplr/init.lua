@@ -433,3 +433,16 @@ xplr.config.modes.builtin.default.key_bindings.on_key["'"] = {
     }
   },
 }
+
+xplr.config.modes.builtin.default.key_bindings.on_key["e"] = {
+  help = "Edit in vscode",
+  messages = {
+    {
+      BashExec = [===[
+        if [ -e "${XPLR_FOCUS_PATH}" ]; then
+          code "${XPLR_FOCUS_PATH}"
+        fi
+      ]===]
+    }
+  },
+}
