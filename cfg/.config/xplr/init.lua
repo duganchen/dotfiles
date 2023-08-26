@@ -12,8 +12,15 @@ require("extra-icons").setup()
 local csw = require("context-switch")
 csw.setup({key="c"})
 
-xplr.fn.custom.render_context_num = function(_)
-  return '  ' .. tostring(csw.get_current_context_num())
+xplr.fn.custom.render_context_num = function(ctx)
+  return {
+    CustomParagraph = {
+      ui = {
+        title = {format = "Ctx"}
+      },
+      body = '  ' .. tostring(csw.get_current_context_num())
+    }
+  }
 end
 
 xplr.config.general.table.row.cols[2] = { format = "custom.icons_dtomvan_col_1" }
@@ -105,11 +112,11 @@ xplr.config.layouts.builtin.default = {
           config = {
             constraints = {
               { Min = 8 },
-              {Min = 1}
+              { Min = 1 }
             },
           },
           splits = {
-            { CustomContent = { title = "Ctx", body = {DynamicParagraph  = { render = "custom.render_context_num" }}}},
+            { Dynamic = "custom.render_context_num" },
             "InputAndLogs",
           }
         },
