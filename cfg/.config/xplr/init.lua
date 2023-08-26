@@ -93,7 +93,19 @@ xplr.config.layouts.builtin.default = {
       "SortAndFilter",
       "Table",
       stat_pane,
-      "InputAndLogs",
+      -- "InputAndLogs",
+      {
+        Horizontal = {
+          config = {
+            constraints = {
+              {Min = 1}
+            },
+          },
+          splits = {
+            "InputAndLogs",
+          }
+        },
+      }
     },
   },
 }
