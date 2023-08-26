@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:igorepst/context-switch.xplr.git
+	branch = main
+	commit = 23e7a007db0d7fb5af55ccb4d6d936d8df19c06c
+	parent = 443a3b02cf9b04b91ba8d18adbe253bafabe68c2
+	method = merge
+	cmdver = 0.4.6
