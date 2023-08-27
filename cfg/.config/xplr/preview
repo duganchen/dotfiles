@@ -22,6 +22,13 @@ if [ -p "$1" ]; then
             continue
         fi
 
+        if [[ "$ext" == "md" ]]; then
+            # https://github.com/swsnr/mdcat
+            # I couldn't get glow to work.
+            mdcat "$selection" --ansi | head -n $(( "$lines" - 3 ))
+            continue
+        fi
+
         filetype="$(file -Lb --mime-type "$selection")"
 
         if [[ "$filetype" =~ ^image ]]; then
