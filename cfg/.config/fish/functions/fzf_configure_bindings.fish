@@ -1,1 +1,0 @@
-../../../../subrepos/fzf.fish/functions/fzf_configure_bindings.fish

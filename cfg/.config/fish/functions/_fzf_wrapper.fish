@@ -1,1 +1,0 @@
-../../../../subrepos/fzf.fish/functions/_fzf_wrapper.fish
