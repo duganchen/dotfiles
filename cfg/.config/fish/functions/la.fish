@@ -1,3 +1,3 @@
-function la --wraps=ls --wraps='exa --icons --all' --description 'alias la=exa --icons --all'
-  exa --icons --all $argv; 
+function la --wraps=ls --wraps='eza --icons --all' --description 'alias la=eza --icons --all'
+  eza --icons --all $argv; 
 end
