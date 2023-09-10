@@ -25,7 +25,7 @@ And then, on OS X, do some post-install:
     bat cache --build
     fish_config theme save "Catppuccin Mocha"
 
-I use Catppuccin, kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, exa, etc.
+I use Catppuccin, kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, eza (which used to be called exa), etc.
 
 ## Git and SSH
 
