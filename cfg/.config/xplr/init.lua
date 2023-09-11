@@ -34,7 +34,7 @@ end
 
 -- Add the context window to the left of the logs.
 
-local contextAndLayout = {
+local contextAndLogs = {
     Horizontal = {
         config = {
             constraints = {{
@@ -50,13 +50,13 @@ local contextAndLayout = {
 }
 
 local t = xplr.config.layouts.builtin.default.Horizontal.splits[1].Vertical.splits
-t[#t] = contextAndLayout
+t[#t] = contextAndLogs
 t = xplr.config.layouts.builtin.no_help.Horizontal.splits[1].Vertical.splits
-t[#t] = contextAndLayout
+t[#t] = contextAndLogs
 t = xplr.config.layouts.builtin.no_selection.Horizontal.splits[1].Vertical.splits
-t[#t] = contextAndLayout
+t[#t] = contextAndLogs
 t = xplr.config.layouts.builtin.no_help_no_selection.Vertical.splits
-t[#t] = contextAndLayout
+t[#t] = contextAndLogs
 
 -- Make sort modal. This is needed to get them to work properly without an onscreen help pane.
 xplr.config.modes.builtin.sort.layout = "HelpMenu"
