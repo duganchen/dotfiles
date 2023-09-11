@@ -49,11 +49,14 @@ local contextAndLayout = {
     }
 }
 
--- Notice that it's index 4 because we inserted the stats pane.
-xplr.config.layouts.builtin.default.Horizontal.splits[1].Vertical.splits[4] = contextAndLayout
-xplr.config.layouts.builtin.no_help.Horizontal.splits[1].Vertical.splits[4] = contextAndLayout
-xplr.config.layouts.builtin.no_selection.Horizontal.splits[1].Vertical.splits[4] = contextAndLayout
-xplr.config.layouts.builtin.no_help_no_selection.Vertical.splits[4] = contextAndLayout
+local t = xplr.config.layouts.builtin.default.Horizontal.splits[1].Vertical.splits
+t[#t] = contextAndLayout
+t = xplr.config.layouts.builtin.no_help.Horizontal.splits[1].Vertical.splits
+t[#t] = contextAndLayout
+t = xplr.config.layouts.builtin.no_selection.Horizontal.splits[1].Vertical.splits
+t[#t] = contextAndLayout
+t = xplr.config.layouts.builtin.no_help_no_selection.Vertical.splits
+t[#t] = contextAndLayout
 
 -- Make sort modal. This is needed to get them to work properly without an onscreen help pane.
 xplr.config.modes.builtin.sort.layout = "HelpMenu"
