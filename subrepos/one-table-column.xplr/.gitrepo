@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:duganchen/one-table-column.xplr.git
+	branch = main
+	commit = 320235c881b22971e987206a448f2cc99cd39178
+	parent = 7aaf2a84db143857adab663f38c233de48b1a87d
+	method = merge
+	cmdver = 0.4.6
