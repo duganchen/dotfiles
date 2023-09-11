@@ -11,7 +11,7 @@ if [ -p "$1" ]; then
 
         lines=$(tput lines)
         if [ -d "$selection" ]; then
-            exa -a -G --group-directories-first --colour=always "$selection" | head -n "$lines"
+            eza -a -G --group-directories-first --colour=always "$selection" | head -n "$lines"
             continue
         fi
 
@@ -25,7 +25,7 @@ if [ -p "$1" ]; then
         if [[ "$ext" == "md" ]]; then
             # https://github.com/swsnr/mdcat
             # I couldn't get glow to work.
-            mdcat "$selection" --ansi | head -n $(( "$lines" - 3 ))
+            mdcat "$selection" --ansi | head -n $(("$lines" - 3))
             continue
         fi
 
