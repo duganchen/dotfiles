@@ -60,3 +60,43 @@ xplr.config.modes.builtin.sort.layout = "HelpMenu"
 for _, v in pairs(xplr.config.modes.builtin.sort.key_bindings.on_key) do
     table.insert(v.messages, "PopMode")
 end
+
+-- And some keybindings I find useful.
+
+-- Directory bookmarks. With this:
+-- https://github.com/duganchen/dirmarks
+
+xplr.config.modes.builtin.default.key_bindings.on_key["m"] = {
+    help = "Add permanent bookmark",
+    messages = {{
+        BashExec = [===[
+          PTH="$(pwd)"
+          dirmarks add "$PTH" ~/.dirmarks.json
+          "$XPLR" -m 'LogSuccess: %q' "$PTH added to ~/.dirmarks.json"
+        ]===]
+    }}
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["'"] = {
+    help = "Jump to permanent bookmark",
+    messages = {{
+        BashExec = [===[
+          PTH="$(dirmarks list $(pwd) ~/.dirmarks.json | fzf --no-sort --select-1 --exit-0)"
+          if [ -d "$PTH" ]; then
+            dirmark add "$PTH" ~/.dirmarks.json
+            "$XPLR" -m 'ChangeDirectory: %q' "$PTH"
+          fi
+        ]===]
+    }}
+}
+
+xplr.config.modes.builtin.default.key_bindings.on_key["e"] = {
+    help = "Edit in vscode",
+    messages = {{
+        BashExec = [===[
+          if [ -e "${XPLR_FOCUS_PATH}" ]; then
+            code "${XPLR_FOCUS_PATH}"
+          fi
+        ]===]
+    }}
+}
