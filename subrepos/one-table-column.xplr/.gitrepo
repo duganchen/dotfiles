@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:duganchen/one-table-column.xplr.git
 	branch = main
-	commit = 9efc7de5ae087e72755e6e37fabd3e6d26cd34de
-	parent = af7939f78f76bb7ff6d13dfd062a9c7227222e7d
+	commit = 31de628f698fbc3c1dd9f8c82a064ff5b25b22c0
+	parent = f75ccaed19bf0a4cee4640023aa269b5d4b84038
 	method = merge
 	cmdver = 0.4.6
