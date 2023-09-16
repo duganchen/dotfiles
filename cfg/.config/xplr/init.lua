@@ -5,10 +5,12 @@ package.path = home .. "/.config/xplr/plugins/?/init.lua;" .. home .. "/.config/
 
 require("icons").setup()
 require("extra-icons").setup()
-require("one-table-column").setup()
+require("one-table-column").setup({
+    index = true
+})
 
 -- Gets extra-icons to work.
-xplr.config.general.table.row.cols[1].format = "custom.icons_dtomvan_col_1"
+xplr.config.general.table.row.cols[2].format = "custom.icons_dtomvan_col_1"
 
 -- The default key conflicts with my WezTerm setup. We change it to "c".
 local csw = require("context-switch")
