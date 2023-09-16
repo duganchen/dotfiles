@@ -1,28 +1,43 @@
 local xplr = xplr
 
 local function setup(args)
+    args = args or {}
+    args.index = args.index or false
 
-    -- Don't need the column headers anymore.
-    xplr.config.general.table.header.cols = {}
-    xplr.config.general.table.header.height = 0
+    table.remove(xplr.config.general.table.row.cols, 3)
+    table.remove(xplr.config.general.table.row.cols, 3)
+    table.remove(xplr.config.general.table.row.cols, 3)
 
-    -- Which means we don't need the tree.
-    xplr.config.general.table.tree = {
-        { format = "", style = {} },
-        { format = "", style = {} },
-        { format = "", style = {} },
-      }
-      
-    -- We only need the path column.
-    xplr.config.general.table.row.cols = {{
-        format = "builtin.fmt_general_table_row_cols_1",
-        style = {}
-    }}
+    if args.index then
 
-    -- It now takes up the entire table
-    xplr.config.general.table.col_widths = {{
-        Percentage = 100
-    }}
+        xplr.config.general.table.col_widths = {{
+            Percentage = 10
+        }, {
+            Percentage = 90
+        }}
+    else
+        -- Don't need the column headers anymore.
+        xplr.config.general.table.header.cols = {}
+        xplr.config.general.table.header.height = 0
+
+        -- Which means we don't need the tree.
+        xplr.config.general.table.tree = {{
+            format = "",
+            style = {}
+        }, {
+            format = "",
+            style = {}
+        }, {
+            format = "",
+            style = {}
+        }}
+
+        -- Get rid of the index column
+        table.remove(xplr.config.general.table.row.cols, 1)
+        xplr.config.general.table.col_widths = {{
+            Percentage = 100
+        }}
+    end
 
     -- Move information that used to be in the other columns to a separate "layout"
     local function render(ctx)

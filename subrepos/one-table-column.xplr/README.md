@@ -29,6 +29,12 @@
   require("one-table-column").setup()
   ```
 
+- Or, if you want the index.column:
+
+  ```lua
+  require("one-table-column").setup({ index = true })
+  ```
+
 ## Features
 
 This plugin gives you a single-column table. Each row now contains only the file path, and the information that used to be in the columns is now in a status area underneath.
