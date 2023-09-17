@@ -9,6 +9,34 @@ require("one-table-column").setup({
     index = true
 })
 
+require("find").setup {
+    mode = "default",
+    key = "F",
+    templates = {
+        ["find all"] = {
+            key = "a",
+            find_command = "fd",
+            find_args = "-s ",
+            cursor_position = 8
+        },
+        ["find files"] = {
+            key = "f",
+            find_command = "fd",
+            find_args = "-s -t f ",
+            cursor_position = 8
+        },
+        ["find directories"] = {
+            key = "d",
+            find_command = "fd",
+            find_args = "s  -t d ",
+            cursor_position = 8
+        }
+    },
+    refresh_screen_key = "ctrl-r"
+}
+
+xplr.config.modes.custom.find.layout = "HelpMenu"
+
 -- Gets extra-icons to work.
 xplr.config.general.table.row.cols[2].format = "custom.icons_dtomvan_col_1"
 
