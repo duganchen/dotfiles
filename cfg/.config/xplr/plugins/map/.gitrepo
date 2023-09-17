@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:sayanarijit/map.xplr.git
+	branch = main
+	commit = 9e7d59ebd89ec4353a6bbfe596de19243c2da3eb
+	parent = a8834c51edca90820c03c598d220dbef729abd11
+	method = merge
+	cmdver = 0.4.6
