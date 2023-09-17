@@ -11,7 +11,7 @@ require("one-table-column").setup({
 
 local map = require("map")
 map.placeholders["{cwd}"] = function(node, meta)
-    return xplr.util.shell_execute("pwd").stdout
+    return xplr.util.shell_quote(string.gsub(xplr.util.shell_execute("pwd").stdout, "\n", ""))
 end
 map.setup()
 
