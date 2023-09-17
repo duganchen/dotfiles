@@ -9,6 +9,12 @@ require("one-table-column").setup({
     index = true
 })
 
+local map = require("map")
+map.placeholders["{cwd}"] = function(node, meta)
+    return xplr.util.shell_execute("pwd").stdout
+end
+map.setup()
+
 require("find").setup {
     mode = "default",
     key = "F",
