@@ -1,11 +1,13 @@
 function xplr
-    set --local tmp (mktemp -d)
-    set -x NNN_FIFO "$tmp/nnn.fifo"
-    mkfifo $NNN_FIFO
+    if set -q WEZTERM_EXECUTABLE
+        set --local tmp (mktemp -d)
+        set -x NNN_FIFO "$tmp/nnn.fifo"
+        mkfifo $NNN_FIFO
 
-    command wezterm cli split-pane --right --percent 50 -- ~/.config/xplr/preview $NNN_FIFO $tmp/current_node.fifo
+        command wezterm cli split-pane --right --percent 50 -- ~/.config/xplr/preview $NNN_FIFO $tmp/current_node.fifo
 
-    command wezterm cli activate-pane
+        command wezterm cli activate-pane
+    end
 
     set --local dir (command xplr --print-pwd-as-result $argv)
     if test -n "$dir"
