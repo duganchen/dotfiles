@@ -23,9 +23,14 @@ And if you're using OS X:
 And then, on OS X, do some post-install:
 
     bat cache --build
-    fish_config theme save "Catppuccin Mocha"
 
 I use Catppuccin, kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, eza (which used to be called exa), etc.
+
+## FISH
+
+Install [fisher](https://github.com/jorgebucaran/fisher), and use it to install the [Catppuccin Mocha](https://github.com/catppuccin/fish) theme and the [tide](https://github.com/IlanCosman/tide) shell.
+
+Run the init_fish.fish script.
 
 ## Git and SSH
 
