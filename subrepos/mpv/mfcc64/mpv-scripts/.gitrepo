@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:mfcc64/mpv-scripts.git
 	branch = master
-	commit = f9c6c520c40d3f4b25e5792e49a6d87930257faf
-	parent = 5e1a9ee084143f52dad47b8809233d71af416998
+	commit = b4246984ba6dc6820adef5c8bbf793af85c9ab8e
+	parent = 826cfa0136bb80d563fbb53b46c4bae8ecd833c5
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
