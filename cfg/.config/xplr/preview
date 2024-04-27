@@ -18,13 +18,7 @@ if [ -p "$1" ]; then
         ext="${selection##*.}"
 
         if [[ "$ext" == "rm" ]]; then
-
-            if [[ "$(uname -s)" == "Darwin" ]]; then
-                wezterm imgcat "$(vidthumb "$selection")"
-            else
-                flatpak run org.wezfurlong.wezterm imgcat "$(vidthumb "$selection")"
-            fi
-
+            wezterm imgcat "$(vidthumb "$selection")"
             continue
         fi
 
@@ -38,26 +32,14 @@ if [ -p "$1" ]; then
         filetype="$(file -Lb --mime-type "$selection")"
 
         if [[ "$filetype" =~ ^image ]]; then
-
-            if [[ "$(uname -s)" == "Darwin" ]]; then
-                wezterm imgcat "$selection"
-            else
-                flatpak run org.wezfurlong.wezterm imgcat "$selection"
-            fi
-
+            wezterm imgcat "$selection"
             continue
         fi
 
         if [[ "$filetype" =~ ^video ]]; then
             # vidthumb is from here:
             # https://raw.githubusercontent.com/duganchen/kitty-pistol-previewer/main/vidthumb
-
-            if [[ "$(uname -s)" == "Darwin" ]]; then
-                wezterm imgcat "$(vidthumb "$selection")"
-            else
-                flatpak run org.wezfurlong.wezterm imgcat "$(vidthumb "$selection")"
-            fi
-
+            wezterm imgcat "$(vidthumb "$selection")"
             continue
         fi
 
