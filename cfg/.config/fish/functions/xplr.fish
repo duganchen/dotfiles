@@ -1,5 +1,5 @@
 function xplr
-    if set -q WEZTERM_EXECUTABLE
+    if set -q WEZTERM_PANE
         set --local tmp (mktemp -d)
         set -x NNN_FIFO "$tmp/nnn.fifo"
         mkfifo $NNN_FIFO
