@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:zsh-users/zsh-autosuggestions.git
 	branch = master
-	commit = a411ef3e0992d4839f0732ebeb9823024afaaaa8
-	parent = fdc49bee81103f6cdd0c63444614f0261f7c376d
+	commit = c3d4e576c9c86eac62884bd47c01f6faed043fc5
+	parent = 7c2bf28798108d458de8a297f4aefb373b9ec0bc
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
