@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:catppuccin/bat.git
 	branch = main
-	commit = ba4d16880d63e656acced2b7d4e034e4a93f74b1
-	parent = ab3ca670b6419ce64691ef7748796eb6319dfeb6
+	commit = d714cc1d358ea51bfc02550dabab693f70cccea0
+	parent = aa7887321e29085be98928cc205c857efc49e884
 	method = merge
-	cmdver = 0.4.5
+	cmdver = 0.4.6
