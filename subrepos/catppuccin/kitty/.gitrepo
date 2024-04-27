@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:catppuccin/kitty.git
 	branch = main
-	commit = 4820b3ef3f4968cf3084b2239ce7d1e99ea04dda
-	parent = 04a7c478e10ed0346c1ba60b8e9afa93c2c6de91
+	commit = d7d61716a83cd135344cbb353af9d197c5d7cec1
+	parent = b078f7a571e759178ccad0648e7fdf7447cdc373
 	method = merge
 	cmdver = 0.4.6
