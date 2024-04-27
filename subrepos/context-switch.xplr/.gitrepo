@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:igorepst/context-switch.xplr.git
 	branch = main
-	commit = 23e7a007db0d7fb5af55ccb4d6d936d8df19c06c
-	parent = 443a3b02cf9b04b91ba8d18adbe253bafabe68c2
+	commit = 85ac284b33144540741f48a5a42d3366d00acae9
+	parent = aacd8b16b0d94bfeba13d0ca524ab07a19835f17
 	method = merge
 	cmdver = 0.4.6
