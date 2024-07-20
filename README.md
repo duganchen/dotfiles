@@ -113,7 +113,7 @@ The next time I stow the cfg directory, the symbolic link to the zsh-autosuggest
 On my setup (AMD GPU, OLED TV), I only need the following to get games working with HDR:
 
     DXVK_HDR=1 # Actually what's needed
-     # Experimenting with this
+    PROTON_ENABLE_AMD_AGS=1 # Experimenting with this
 
 I set them in Steam on a game-by-game basis:
 
