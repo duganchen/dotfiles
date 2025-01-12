@@ -2,7 +2,7 @@ My personal dotfiles.
 
 Start by making sure the appropriate directories exist:
 
-    mkdir -p ~/.config/{bat/themes,micro/colorschemes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts},xplr/plugins,~/.local/share/mc/skins/mc}
+    mkdir -p ~/.config/{bat/themes,micro/colorschemes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts},xplr/plugins,~/.local/share/mc/skins}
 
 And, on Linux:
 
