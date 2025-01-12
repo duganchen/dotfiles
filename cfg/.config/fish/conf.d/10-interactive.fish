@@ -8,4 +8,8 @@ if status is-interactive
     abbr --add l eza --icons --group-directories-first
     abbr --add lla eza --icons --all --long --group-directories-first
     abbr --add ll eza --icons --long --group-directories-first
+
+    source ~/apps/git-subrepo/.fish.rc
+
+    fish_add_path ~/.local/bin
 end
