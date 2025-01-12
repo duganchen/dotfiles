@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:Eisa01/mpv-scripts.git
+	branch = master
+	commit = 48d68283cea47ff8e904decc9003b3abc3e2123e
+	parent = 0f13def3c18af269f392ba71c39288c8fad52cfd
+	method = merge
+	cmdver = 0.4.9
