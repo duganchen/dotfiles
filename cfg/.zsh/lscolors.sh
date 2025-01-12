@@ -1,1 +1,0 @@
-../../subrepos/LS_COLORS/lscolors.sh

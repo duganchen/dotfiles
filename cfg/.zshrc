@@ -1,87 +1,38 @@
-# Some ideas from here:
-# https://www.olets.dev/posts/zsh-config-productivity-plugins-for-mac-oss-default-shell/
-# History[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=10000
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt inc_append_history
-setopt share_history
-# Changing directories
-setopt auto_cd
-setopt auto_pushd
-unsetopt pushd_ignore_dups
-setopt pushdminus
-# Completion
-setopt auto_menu
-setopt always_to_end
-setopt complete_in_word
-unsetopt flow_control
-unsetopt menu_complete
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path
-zstyle ':completion:*' list-colors ''
+fpath=(~/.zsh/site-functions $fpath)
 
-# This doesn't work.
-# zstyle ':completion:*:*:kill:*:processes'
-# list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-# Other
-setopt prompt_subst
-
-# And my stuff
-export EDITOR=micro
-export VISUAL='code --wait'
-
-# I was going to use https://github.com/mattmc3/zshrc.d
-# but ended up not bothering
-
-source ~/.zsh/lscolors.sh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
-    source /usr/share/fzf/shell/key-bindings.zsh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
-    source /usr/local/opt/fzf/shell/key-bindings.zsh
-fi
+source ~/.antidote/antidote.zsh
+antidote load
 
-# Ubuntu
-if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# I don't actually use ZOxide, but it seems to be the best of the cd-history things
 eval "$(zoxide init zsh)"
 
-eval "$(starship init zsh)"
+path+=(~/.local/bin)
 
-export PATH=$PATH:$HOME/.local/bin
-if [[ -d /Applications ]]; then
-    export PATH=$PATH:/Applications/Visual\ Studio\ Code\ 2.app/Contents/Resources/app/bin
-fi
+export LS_COLORS="$(vivid generate catppuccin-macchiato)"
 
-# For fd-find on Ubuntu
-if [ -d /usr/lib/cargo/bin ]; then
-    export PATH=$PATH:/usr/lib/cargo/bin
-fi
+alias l='eza --icons'
+alias la='eza --icons --all'
+alias ll= 'eza --icons --long'
+alias lla='eza --icons --all --long'
+alias lt='eza --icons --long --group-directories-first --sort size'
 
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-# For ZSH, I'm not going to make any assumptions about colors, icons or
-# fonts. Note that unlike their FISH counterparts, these don't assume a NERD font.
-alias l='exa --classify'
-alias la='exa --classify --all'
-alias lt='exa --classify --long --group-directories-first --sort size'
-alias tree='exa --classify -T'
-
-if [[ "$(uname)" == "Darwin" ]]; then
-    alias ls='gls --classify --color=auto'
-fi
+# https://wiki.archlinux.org/title/Color_output_in_console#Using_less
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANROFFOPT="-P -c"
 
 source /home/dugan/.config/broot/launcher/bash/br
+
+source ~/apps/git-subrepo/.rc
+
+
+# This still seems to be the best (or rather least annoying) history search
+source <(fzf --zsh)
