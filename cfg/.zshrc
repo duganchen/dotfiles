@@ -36,3 +36,8 @@ source ~/apps/git-subrepo/.rc
 
 # This still seems to be the best (or rather least annoying) history search
 source <(fzf --zsh)
+
+export BAT_THEME="Catppuccin Macchiato"
+export EDITOR=micro
+export MICRO_TRUECOLOR=1
+export VISUAL='code --wait'
