@@ -9,7 +9,9 @@ if status is-interactive
     abbr --add lla eza --icons --all --long --group-directories-first
     abbr --add ll eza --icons --long --group-directories-first
 
-    source ~/apps/git-subrepo/.fish.rc
+    if test -f ~/apps/git-subrepo/.fish.rc
+        source ~/apps/git-subrepo/.fish.rc
+    end
 
     fish_add_path ~/.local/bin
 end

@@ -31,7 +31,9 @@ export MANROFFOPT="-P -c"
 
 source /home/dugan/.config/broot/launcher/bash/br
 
-source ~/apps/git-subrepo/.rc
+if [[ -f ~/apps/git-subrepo/.rc ]]; then
+  source ~/apps/git-subrepo/.rc
+fi
 
 
 # This still seems to be the best (or rather least annoying) history search
