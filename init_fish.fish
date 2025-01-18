@@ -6,6 +6,7 @@ set -Ux EDITOR micro
 set -Ux VISUAL 'code --wait'
 #  https://gist.github.com/supermarin/6dca255da372c3f9eb26?permalink_comment_id=4773414#gistcomment-4773414
 set -Ux MANPAGER 'less -R --use-color -Dd+r -Du+b'
+set -Ux MANROFFOPT '-P -c'
 # This is from here, but with the bg removed to preserve transparency:
 # https://github.com/catppuccin/fzf
 set -Ux FZF_DEFAULT_OPTS "\
