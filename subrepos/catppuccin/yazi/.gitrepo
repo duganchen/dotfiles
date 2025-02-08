@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:catppuccin/yazi.git
+	branch = main
+	commit = 5d3a1eecc304524e995fe5b936b8e25f014953e8
+	parent = 45770bc5d35cd8efa14aa692f5c2555c6b350f98
+	method = merge
+	cmdver = 0.4.9
