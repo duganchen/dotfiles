@@ -29,7 +29,7 @@ alias lt='eza --icons --long --group-directories-first --sort size'
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"
 
-source /home/dugan/.config/broot/launcher/bash/br
+source ~/.config/broot/launcher/bash/br
 
 if [[ -f ~/apps/git-subrepo/.rc ]]; then
   source ~/apps/git-subrepo/.rc
