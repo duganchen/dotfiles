@@ -21,7 +21,7 @@ export LS_COLORS="$(vivid generate catppuccin-macchiato)"
 
 alias l='eza --icons'
 alias la='eza --icons --all'
-alias ll= 'eza --icons --long'
+alias ll='eza --icons --long'
 alias lla='eza --icons --all --long'
 alias lt='eza --icons --long --group-directories-first --sort size'
 
