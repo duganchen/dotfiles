@@ -20,7 +20,7 @@ I use Catppuccin, kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd
 
 ## FISH
 
-Install [fisher](https://github.com/jorgebucaran/fisher), and use it to install the [Catppuccin Mocha](https://github.com/catppuccin/fish) theme and the [tide](https://github.com/IlanCosman/tide) shell.
+Install [fisher](https://github.com/jorgebucaran/fisher), and use it to install the [Catppuccin Macchiato](https://github.com/catppuccin/fish) theme and the [tide](https://github.com/IlanCosman/tide) shell.
 
 Run the init_fish.fish script.
 

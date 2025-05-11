@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 # With https://github.com/sharkdp/vivid/
-set -Ux LS_COLORS (vivid generate catppuccin-mocha)
+set -Ux LS_COLORS (vivid generate catppuccin-macchiato)
 set -Ux EDITOR micro
 set -Ux VISUAL 'code --wait'
 #  https://gist.github.com/supermarin/6dca255da372c3f9eb26?permalink_comment_id=4773414#gistcomment-4773414
