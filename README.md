@@ -67,6 +67,7 @@ Some of the extensions I use that are actually worth noting down are:
 * [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
 * [shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format)
 * [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
+* [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 
 The two shell extensions are from [Microsoft's recommendations](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/).
 
