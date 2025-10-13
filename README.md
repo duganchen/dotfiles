@@ -62,6 +62,7 @@ Here's what I have in ~/.gitconfig for both platforms:
 
 Some of the extensions I use that are actually worth noting down are:
 
+* [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons) (I'm surprised this isn't installed by default)
 * [Path Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete) with mappings set for "/", "~" and "$HOME"
 * [fish-ide](https://marketplace.visualstudio.com/items?itemName=lunaryorn.fish-ide)
 * [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
@@ -85,3 +86,16 @@ I would do the following:
     ln -s ../../subrepos/zsh-autosuggestions
 
 The next time I stow the cfg directory, the symbolic link to the zsh-autosuggestions repo gets installed to ~/.zsh/zsh-autosuggestions, where I want it.
+
+## Links
+
+### CachyOS
+* https://github.com/CachyOS/cachyos-fish-config
+* https://github.com/CachyOS/cachyos-zsh-config
+
+### Garuda
+* https://gitlab.com/moiseslodeiro/garuda-zsh-config
+* https://gitlab.com/garuda-linux/pkgbuilds/-/tree/main/garuda-fish-config?ref_type=heads
+
+### Ultramarine
+* https://github.com/Ultramarine-Linux/packages/tree/um42/ultramarine/shell-config
