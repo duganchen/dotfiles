@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:eza-community/eza-themes.git
+	branch = main
+	commit = c03051f67e84110fbae91ab7cbc377b3460f035c
+	parent = c2228b4837178b49e8681b8701f4cbf71aa74349
+	method = merge
+	cmdver = 0.4.9
