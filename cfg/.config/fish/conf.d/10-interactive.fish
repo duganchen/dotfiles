@@ -15,4 +15,6 @@ if status is-interactive
     set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
     fastfetch
+
+    starship init fish | source
 end
