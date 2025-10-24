@@ -1,13 +1,12 @@
--- Copyright (c) 2023, Eisa AlAwadhi
+-- Copyright (c) 2025, Eisa AlAwadhi
 -- License: BSD 2-Clause License
 -- Creator: Eisa AlAwadhi
 -- Project: SmartSkip
--- Version: 1.2
--- Date: 23-09-2023
+-- Version: 1.3.4
+-- Date: 14-May-2025
 
 -- Related forked projects:
 --  https://github.com/detuur/mpv-scripts/blob/master/skiptosilence.lua
---  https://raw.githubusercontent.com/mpv-player/mpv/master/TOOLS/lua/autoload.lua
 --  https://github.com/mar04/chapters_for_mpv
 --  https://github.com/po5/chapterskip/blob/master/chapterskip.lua
 
@@ -17,7 +16,7 @@ local o = {
 	silence_duration = 0.65,
 	ignore_silence_duration=5,
 	min_skip_duration = 0,
-	max_skip_duration = 130,
+	max_skip_duration = 180,
 	keybind_twice_cancel_skip = true,
 	silence_skip_to_end = "playlist-next",
 	add_chapter_on_skip = true,
@@ -41,30 +40,20 @@ local o = {
 	autoskip_countdown_bulk = false,
 	autoskip_countdown_graceful = false,
     skip_once = false,
-	categories=[[ [ ["internal-chapters", "prologue>Prologue/^Intro; opening>^OP/ OP$/^Opening; ending>^ED/ ED$/^Ending; preview>Preview$"], ["external-chapters", "idx->0/2"] ] ]],
+	categories=[[ [ ["internal-chapters", "prologue>Prologue/^Intro; opening>^OP/ OP$/^Opening; ending>^ED/ ED$/^Ending/Credits Start; preview>PV/ PV$/^Preview/Preview Start"], ["external-chapters", "idx->0/2"] ] ]],
 	skip=[[ [ ["internal-chapters", "toggle;toggle_idx;opening;ending;preview"], ["external-chapters", "toggle;toggle_idx"] ] ]],
-	-----Autoload Settings-----
-	autoload_playlist = true,
-    autoload_max_entries = 5000,
-	autoload_max_dir_stack = 20,
-    ignore_hidden = true,
-    same_type = false,
-	directory_mode = "auto",
-    images = true,
-    videos = true,
-    audio = true,
-    additional_image_exts = "",
-    additional_video_exts = "",
-    additional_audio_exts = "",
+	invert_autoskip_exclusion = false,
+	autoskip_exclusion=[[
+	[""]
+	]],
 	-----OSD Messages Settings-----
 	osd_duration = 2500,
-	seek_osd = "osd-msg-bar",
+	silence_skip_osd = "osd-msg-bar",
 	chapter_osd = "osd-msg-bar",
 	autoskip_osd = "osd-msg-bar",
 	playlist_osd = true,
 	osd_msg = true,
 	-----Keybind Settings-----
-	toggle_autoload_keybind=[[ [""] ]],
 	toggle_autoskip_keybind=[[ ["ctrl+."] ]],
 	toggle_category_autoskip_keybind=[[ ["alt+."] ]],
 	cancel_autoskip_countdown_keybind=[[ ["esc", "n"] ]],
@@ -79,23 +68,14 @@ local o = {
 	smart_next_keybind=[[ [">"] ]],
 	smart_prev_keybind=[[ ["<"] ]],
 	silence_skip_keybind=[[ ["?"] ]],
+    cancel_silence_skip_keybind=[[ ["esc"] ]],
 }
 
 local mp = require 'mp'
 local msg = require 'mp.msg'
 local utils = require 'mp.utils'
 local options = require 'mp.options'
-options.read_options(o, nil, function(list)
-    split_option_exts(list.additional_video_exts, list.additional_audio_exts, list.additional_image_exts)
-    if list.videos or list.additional_video_exts or
-        list.audio or list.additional_audio_exts or
-        list.images or list.additional_image_exts then
-        create_extensions()
-    end
-    if list.directory_mode then
-        validate_directory_mode()
-    end
-end)
+options.read_options(o)
 
 if o.add_chapter_on_skip ~= false and o.add_chapter_on_skip ~= true then o.add_chapter_on_skip = utils.parse_json(o.add_chapter_on_skip) end
 if o.modified_chapters_autosave ~= false and o.modified_chapters_autosave ~= true then o.modified_chapters_autosave = utils.parse_json(o.modified_chapters_autosave) end
@@ -104,7 +84,7 @@ if utils.parse_json(o.skip) ~= nil then o.skip = utils.parse_json(o.skip) end
 if utils.parse_json(o.categories) ~= nil then o.categories = utils.parse_json(o.categories) end
 if o.skip_once ~= false and o.skip_once ~= true then o.skip_once = utils.parse_json(o.skip_once) end
 
-if o.global_chapters_path:match('/:dir%%mpvconf%%') then --1.2# add variables for specifying path via user-config
+if o.global_chapters_path:match('/:dir%%mpvconf%%') then
 	o.global_chapters_path = o.global_chapters_path:gsub('/:dir%%mpvconf%%', mp.find_config_file('.'))
 elseif o.global_chapters_path:match('/:dir%%script%%') then
 	o.global_chapters_path = o.global_chapters_path:gsub('/:dir%%script%%', debug.getinfo(1).source:match('@?(.*/)'))
@@ -113,7 +93,6 @@ elseif o.global_chapters_path:match('/:var%%(.*)%%') then
 	o.global_chapters_path = o.global_chapters_path:gsub('/:var%%(.*)%%', os.getenv(os_variable))
 end
 
-o.toggle_autoload_keybind = utils.parse_json(o.toggle_autoload_keybind)
 o.toggle_autoskip_keybind = utils.parse_json(o.toggle_autoskip_keybind)
 o.cancel_autoskip_countdown_keybind = utils.parse_json(o.cancel_autoskip_countdown_keybind)
 o.proceed_autoskip_countdown_keybind = utils.parse_json(o.proceed_autoskip_countdown_keybind)
@@ -128,9 +107,13 @@ o.chapter_next_keybind = utils.parse_json(o.chapter_next_keybind)
 o.smart_prev_keybind = utils.parse_json(o.smart_prev_keybind)
 o.smart_next_keybind = utils.parse_json(o.smart_next_keybind)
 o.silence_skip_keybind = utils.parse_json(o.silence_skip_keybind)
+o.cancel_silence_skip_keybind = utils.parse_json(o.cancel_silence_skip_keybind)
+o.autoskip_exclusion = utils.parse_json(o.autoskip_exclusion) --1.3.4# option autoskip_exclusion parsing
 
 package.path = mp.command_native({"expand-path", "~~/script-modules/?.lua;"}) .. package.path
 local user_input_module, input = pcall(require, "user-input-module")
+
+mp.set_property('user-data/smartskip/silence-skip', 'no')
 
 if o.osd_duration == -1 then o.osd_duration = (mp.get_property_number('osd-duration') or 1000) end
 local speed_state = 1
@@ -149,7 +132,7 @@ local file_length = 0
 local keep_open_state = "yes"
 if mp.get_property("config") ~= "no" then keep_open_state = mp.get_property("keep-open") end
 local osd_duration_default = (mp.get_property_number('osd-duration') or 1000)
-local autoload_playlist = o.autoload_playlist
+local geometry_default = mp.get_property_native("geometry")
 local autoskip_chapter = o.autoskip_chapter
 local playlist_osd = false
 local autoskip_playlist_osd = false
@@ -159,14 +142,13 @@ local g_opt_skip_once = false
 o.autoskip_countdown = math.floor(o.autoskip_countdown)
 local g_autoskip_countdown = o.autoskip_countdown
 local g_autoskip_countdown_flag = false
+local g_protocols = {'https?:', 'magnet:', 'rtmps?:', 'smb:', 'ftps?:', 'sftp:'} --1.3.4# default global protocols needed to check for protocols / website exclusion
+local g_filepath = '' --1.3.4# define initial global variable for filepath
+local g_autoskip_disabled = false --1.3.4# set global variable for autoskip disabled to be used for autoskip exclusion_check function
 local categories = {
 	toggle = "",
 	toggle_idx = "",
 }
-local autoskip_osd = o.autoskip_osd
-if o.autoskip_osd == 'osd-msg-bar' then autoskip_osd = 'osd-bar' end
-if o.autoskip_osd == 'osd-msg' then autoskip_osd = 'no-osd' end
-
 
 -- utility functions --
 function has_value(tab, val, array2d)
@@ -194,11 +176,38 @@ function esc_string(str)
 	return str:gsub("([%p])", "%%%1")
 end
 
-function prompt_msg(text, duration)
+function esc_lua_pattern(str) --1.3.4# helper function to escape pattern needed for exclusion_check function
+    return str:gsub("([%^%$%(%)%%%.%[%]%+%-%?])", "%%%1")
+end
+
+function starts_protocol(tab, val) --1.3.4# helper function to check if file is protocol needed for exclusion_check function
+	for index, value in ipairs(tab) do
+		if (val:find(value) == 1) then
+			return true
+		end
+	end
+	return false
+end
+
+function prompt_msg(text, duration, osd)
 	if not text then return end
-	if not duration then duration = o.osd_duration end
-    if o.osd_msg then mp.commandv("show-text", text, duration) end
 	msg.info(text)
+
+	if not o.osd_msg then return end
+	if osd == "no-osd" or osd == "osd-bar" then return end
+	
+	if not duration then duration = o.osd_duration end
+	mp.commandv("show-text", text, duration) 
+end
+
+function prompt_progress(osd, duration)
+	if not o.osd_msg or not osd then return end
+	if osd == "no-osd" then return end
+
+	if not duration then duration = o.osd_duration end
+	mp.set_property("osd-duration", o.osd_duration)
+	mp.commandv(osd, "show-progress")
+	mp.add_timeout(0.07, function () mp.set_property('osd-duration', osd_duration_default) end)
 end
 
 function bind_keys(keys, name, func, opts)
@@ -231,6 +240,62 @@ function unbind_keys(keys, name)
 	end
 end
 
+function exclusion_check()
+	if g_filepath == "" then return false end
+	if o.autoskip_exclusion == nil then msg.warn('ignoring autoskip_exclusion option due to an inappropriate value') return false end
+	if not o.autoskip_exclusion[1] or #o.autoskip_exclusion == 1 and o.autoskip_exclusion[1] == "" then return false end
+
+	local invertable_return = {true, false}
+	local exclusion_msg = 'Auto-Skip disabled because of exclusion'
+	if o.invert_autoskip_exclusion then 
+		invertable_return = {false, true} 
+		exclusion_msg = 'Auto-Skip enabled because of inclusion'
+	end
+
+	if has_value(o.autoskip_exclusion, g_filepath, nil) then
+		msg.info(exclusion_msg)
+		return invertable_return[1]
+	elseif not starts_protocol(g_protocols, g_filepath) then
+		if has_value(o.autoskip_exclusion, g_filepath:match('^(.-)([^\\/]-)%.([^\\/%.]-)%.?$'), nil) or 
+		has_value(o.autoskip_exclusion, g_filepath:match('^(.-)([^\\/]-)%.([^\\/%.]-)%.?$'):gsub('\\$', ''), nil) then
+			msg.info(exclusion_msg)
+			return invertable_return[1]
+		elseif has_value(o.autoskip_exclusion, g_filepath:match('%.([^%.]+)$'), nil) or
+		has_value(o.autoskip_exclusion, "."..g_filepath:match('%.([^%.]+)$'), nil) then
+			msg.info(exclusion_msg)
+			return invertable_return[1]
+		else
+			for i=1, #o.autoskip_exclusion do
+				local esc_autoskip_exclusion = esc_lua_pattern(o.autoskip_exclusion[i])
+				if string.lower(g_filepath):match(string.lower(esc_autoskip_exclusion)) and o.autoskip_exclusion[i]:sub(-2) == '\\*' and string.lower(o.autoskip_exclusion[i]:sub(1, -2)) ~= string.lower(g_filepath):match("(.*[\\/])") then
+					msg.info(exclusion_msg)
+					return invertable_return[1]
+				end
+			end
+		end
+	elseif starts_protocol(g_protocols, g_filepath) then
+		if has_value(o.autoskip_exclusion, g_filepath:match('(.-)(:)'), nil) or
+		has_value(o.autoskip_exclusion, g_filepath:match('(.-:)'), nil) or
+		has_value(o.autoskip_exclusion, g_filepath:match('(.-:/?/?)'), nil) then
+			msg.info(exclusion_msg)
+			return invertable_return[1]
+		elseif g_filepath:find('https?://') == 1 then
+			local difchk_1, difchk_2 = g_filepath:match("(https?://)w?w?w?%.?([%w%.%:]*)")
+			local different_check_temp = difchk_1..difchk_2
+			local different_checks = {different_check_temp, g_filepath:match("https?://w?w?w?%.?([%w%.%:]*)"), g_filepath:match("https?://([%w%.%:]*)"), g_filepath:match("(https?://[%w%.%:]*)") }
+			for i = 1, #different_checks do
+				if different_checks[i] and has_value(o.autoskip_exclusion, different_checks[i], nil)
+				or different_checks[i]..'/' and has_value(o.autoskip_exclusion, different_checks[i]..'/', nil) then
+					msg.info(exclusion_msg)
+					return invertable_return[1]
+				end
+			end
+		end
+	end
+	
+	return invertable_return[2]
+end
+
 -- skip-silence utility functions --
 function restoreProp(timepos,pause)
 	if not timepos then timepos = mp.get_property_number("time-pos") end
@@ -246,6 +311,8 @@ function restoreProp(timepos,pause)
 	mp.set_property_number("time-pos", timepos)
 	mp.set_property("sub-visibility", sub_state)
 	mp.set_property("secondary-sub-visibility", secondary_sub_state)
+    unbind_keys(o.cancel_silence_skip_keybind, 'cancel-silence-skip')
+    mp.set_property('user-data/smartskip/silence-skip', 'no')
 	timer:kill()
 	skip_flag = false
 end
@@ -257,12 +324,12 @@ function handleMinMaxDuration(timepos)
 		skip_duration = timepos - initial_skip_time
 		if o.min_skip_duration > 0 and skip_duration <= o.min_skip_duration then
 			restoreProp(initial_skip_time)
-			prompt_msg('Skipping Cancelled\nSilence less than minimum')
+			prompt_msg('Skipping Cancelled\nSilence less than minimum', o.osd_duration, o.silence_skip_osd)
 			return true
 		end
 		if o.max_skip_duration > 0 and skip_duration >= o.max_skip_duration then
 			restoreProp(initial_skip_time)
-			prompt_msg('Skipping Cancelled\nSilence is more than configured maximum')
+			prompt_msg('Skipping Cancelled\nSilence is more than configured maximum', o.osd_duration, o.silence_skip_osd)
 			return true
 		end
 		return false
@@ -281,15 +348,15 @@ function eofHandler(name, val)
 		if o.silence_skip_to_end == 'playlist-next' then
 			restoreProp((mp.get_property_native('duration') or 0))
 			if mp.get_property_native('playlist-playing-pos')+1 == mp.get_property_native('playlist-count') then
-				prompt_msg('Skipped to end at ' .. mp.get_property_osd('duration'))
+				prompt_msg('Skipped to end at ' .. mp.get_property_osd('duration'), o.osd_duration, o.silence_skip_osd)
 			else
 				mp.commandv("playlist-next")
 			end
 		elseif o.silence_skip_to_end == 'cancel' then	
-			prompt_msg('Skipping Cancelled\nSilence not detected')
+			prompt_msg('Skipping Cancelled\nSilence not detected', o.osd_duration, o.silence_skip_osd)
 			restoreProp(initial_skip_time)
 		elseif o.silence_skip_to_end == 'pause' then
-			prompt_msg('Skipped to end at ' .. mp.get_property_osd('duration'))
+			prompt_msg('Skipped to end at ' .. mp.get_property_osd('duration'), o.osd_duration, o.silence_skip_osd)
 			restoreProp((mp.get_property_native('duration') or 0), true)
 		end
 	end
@@ -344,10 +411,7 @@ function smartPrev()
 
 	if chapter-1 < 0 and timepos > 1 and chapters_count == 0 then
 		mp.commandv('seek', 0, 'absolute', 'exact')
-		
-		mp.set_property('osd-duration', o.osd_duration)
-		mp.commandv(o.seek_osd, "show-progress")
-		mp.add_timeout(0.07, function () mp.set_property('osd-duration', osd_duration_default) end)
+		prompt_progress(o.chapter_osd, o.osd_duration)
 	elseif chapter-1 < 0 and timepos < 1 then
         mp.command('playlist_prev')
     elseif chapter-1 <= chapters_count then
@@ -367,10 +431,7 @@ function chapterSeek(direction)
 
     if chapter+direction < 0 and timepos > 1 and chapters_count == 0 then
 		mp.commandv('seek', 0, 'absolute', 'exact')
-		
-		mp.set_property('osd-duration', o.osd_duration)
-		mp.commandv(o.seek_osd, "show-progress")
-		mp.add_timeout(0.07, function () mp.set_property('osd-duration', osd_duration_default) end)
+		prompt_progress(o.chapter_osd, o.osd_duration)
 	elseif chapter+direction < 0 and timepos < 1 then
 	    mp.command('playlist_prev')
     elseif chapter+direction >= chapters_count then
@@ -384,36 +445,43 @@ end
 
 -- silence skip main code --
 function silenceSkip(action)
-	if skip_flag then if o.keybind_twice_cancel_skip then restoreProp(initial_skip_time) end return end
+    bind_keys(o.cancel_silence_skip_keybind, "cancel-silence-skip", function() restoreProp(initial_skip_time) return end)
+    if skip_flag then if o.keybind_twice_cancel_skip then restoreProp(initial_skip_time) end return end
 	initial_skip_time = (mp.get_property_native("time-pos") or 0)
-	if math.floor(initial_skip_time) == math.floor(mp.get_property_native('duration') or 0) then return end	
+	if math.floor(initial_skip_time) == math.floor(mp.get_property_native('duration') or 0) then return end
+    mp.set_property('user-data/smartskip/silence-skip', 'yes')
+	kill_chapterskip_countdown()
+
 	local width = mp.get_property_native("osd-width")
 	local height = mp.get_property_native("osd-height")
-	mp.set_property_native("geometry", ("%dx%d"):format(width, height))
-	mp.commandv(o.seek_osd, "show-progress")
+    local window_maximized = mp.get_property_native("window-maximized")
+
+	window_state = mp.get_property("force-window")
+	vid_state = mp.get_property("vid")
+	sub_state = mp.get_property("sub-visibility")
+	secondary_sub_state = mp.get_property("secondary-sub-visibility")
+	pause_state = mp.get_property_native("pause")
+	speed_state = mp.get_property_native("speed")
+	
+    if not window_maximized then mp.set_property_native("geometry", ("%dx%d"):format(width, height)) end
+	
+	if o.silence_skip_osd ~= 'no-osd' then mp.commandv(o.silence_skip_osd, "show-progress") end
 	
 	mp.command(
 		"no-osd af add @skiptosilence:lavfi=[silencedetect=noise=" ..
 		o.silence_audio_level .. "dB:d=" .. o.silence_duration .. "]"
 	)
-	
+
 	mp.observe_property("af-metadata/skiptosilence", "string", foundSilence)
-	
-	sub_state = mp.get_property("sub-visibility")
 	mp.set_property("sub-visibility", "no")
-	secondary_sub_state = mp.get_property("secondary-sub-visibility")
 	mp.set_property("secondary-sub-visibility", "no")
-	window_state = mp.get_property("force-window")
 	mp.set_property("force-window", "yes")
-	vid_state = mp.get_property("vid")
 	mp.set_property("vid", "no")
 	mute_state = mp.get_property_native("mute")
     if o.force_mute_on_skip then
         mp.set_property_bool("mute", true)
     end
-	pause_state = mp.get_property_native("pause")
 	mp.set_property_bool("pause", false)
-	speed_state = mp.get_property_native("speed")
 	mp.set_property("speed", 100)
 	setKeepOpenState()
 	skip_flag = true
@@ -421,7 +489,7 @@ function silenceSkip(action)
 	timer = mp.add_periodic_timer(0.5, function()
 		local video_time = (mp.get_property_native("time-pos") or 0)
 		handleMinMaxDuration(video_time)
-		if skip_flag then mp.commandv(o.seek_osd, "show-progress") end
+		if skip_flag and o.silence_skip_osd ~= 'no-osd' then mp.commandv(o.silence_skip_osd, "show-progress") end
 	end)
 end
 
@@ -439,7 +507,7 @@ function foundSilence(name, value)
 	
 	restoreProp(timecode)
 
-	mp.add_timeout(0.05, function() prompt_msg('Skipped to silence 🕒 ' .. mp.get_property_osd("time-pos")) end)
+	mp.add_timeout(0.05, function() prompt_msg('Skipped to silence 🕒 ' .. mp.get_property_osd("time-pos"), o.osd_duration, o.silence_skip_osd) end)
 	if o.add_chapter_on_skip == true or has_value(o.add_chapter_on_skip, chapter_state) then
 		mp.add_timeout(0.05, add_chapter)
 	end
@@ -908,287 +976,6 @@ function bake_chapters()
     end
 end
 
---modified fork of autoload script--
-function toggle_autoload()
-	if autoload_playlist == true then
-		prompt_msg('○ Auto-Load Disabled')
-		autoload_playlist = false
-	elseif autoload_playlist == false then 
-		prompt_msg('● Auto-Load Enabled')
-		autoload_playlist = true
-	end
-	if autoload_playlist then find_and_add_entries() end
-end
-
-function Set (t)
-    local set = {}
-    for _, v in pairs(t) do set[v] = true end
-    return set
-end
-
-function SetUnion (a,b)
-    for k in pairs(b) do a[k] = true end
-    return a
-end
-
-function Split (s)
-    local set = {}
-    for v in string.gmatch(s, '([^,]+)') do set[v] = true end
-    return set
-end
-
-EXTENSIONS_VIDEO = Set {
-    '3g2', '3gp', 'avi', 'flv', 'm2ts', 'm4v', 'mj2', 'mkv', 'mov',
-    'mp4', 'mpeg', 'mpg', 'ogv', 'rmvb', 'webm', 'wmv', 'y4m'
-}
-
-EXTENSIONS_AUDIO = Set {
-    'aiff', 'ape', 'au', 'flac', 'm4a', 'mka', 'mp3', 'oga', 'ogg',
-    'ogm', 'opus', 'wav', 'wma'
-}
-
-EXTENSIONS_IMAGES = Set {
-    'avif', 'bmp', 'gif', 'j2k', 'jp2', 'jpeg', 'jpg', 'jxl', 'png',
-    'svg', 'tga', 'tif', 'tiff', 'webp'
-}
-
-function split_option_exts(video, audio, image)
-    if video then o.additional_video_exts = Split(o.additional_video_exts) end
-    if audio then o.additional_audio_exts = Split(o.additional_audio_exts) end
-    if image then o.additional_image_exts = Split(o.additional_image_exts) end
-end
-split_option_exts(true, true, true)
-
-function create_extensions()
-    EXTENSIONS = {}
-    if o.videos then SetUnion(SetUnion(EXTENSIONS, EXTENSIONS_VIDEO), o.additional_video_exts) end
-    if o.audio then SetUnion(SetUnion(EXTENSIONS, EXTENSIONS_AUDIO), o.additional_audio_exts) end
-    if o.images then SetUnion(SetUnion(EXTENSIONS, EXTENSIONS_IMAGES), o.additional_image_exts) end
-end
-create_extensions()
-
-function validate_directory_mode()
-    if o.directory_mode ~= "recursive" and o.directory_mode ~= "lazy" and o.directory_mode ~= "ignore" then
-        o.directory_mode = nil
-    end
-end
-validate_directory_mode()
-
-function add_files(files)
-    local oldcount = mp.get_property_number("playlist-count", 1)
-    for i = 1, #files do
-        mp.commandv("loadfile", files[i][1], "append")
-        mp.commandv("playlist-move", oldcount + i - 1, files[i][2])
-    end
-end
-
-function get_extension(path)
-    match = string.match(path, "%.([^%.]+)$" )
-    if match == nil then
-        return "nomatch"
-    else
-        return match
-    end
-end
-
-table.filter = function(t, iter)
-    for i = #t, 1, -1 do
-        if not iter(t[i]) then
-            table.remove(t, i)
-        end
-    end
-end
-
-table.append = function(t1, t2)
-    local t1_size = #t1
-    for i = 1, #t2 do
-        t1[t1_size + i] = t2[i]
-    end
-end
-
--- alphanum sorting for humans in Lua
--- http://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
-
-function alphanumsort(filenames)
-    local function padnum(n, d)
-        return #d > 0 and ("%03d%s%.12f"):format(#n, n, tonumber(d) / (10 ^ #d))
-            or ("%03d%s"):format(#n, n)
-    end
-
-    local tuples = {}
-    for i, f in ipairs(filenames) do
-        tuples[i] = {f:lower():gsub("0*(%d+)%.?(%d*)", padnum), f}
-    end
-    table.sort(tuples, function(a, b)
-        return a[1] == b[1] and #b[2] < #a[2] or a[1] < b[1]
-    end)
-    for i, tuple in ipairs(tuples) do filenames[i] = tuple[2] end
-    return filenames
-end
-
-local autoloaded = nil
-local added_entries = {}
-local autoloaded_dir = nil
-
-function scan_dir(path, current_file, dir_mode, separator, dir_depth, total_files, extensions)
-    if dir_depth == o.autoload_max_dir_stack then
-        return
-    end
-    msg.trace("scanning: " .. path)
-    local files = utils.readdir(path, "files") or {}
-    local dirs = dir_mode ~= "ignore" and utils.readdir(path, "dirs") or {}
-    local prefix = path == "." and "" or path
-    table.filter(files, function (v)
-        -- The current file could be a hidden file, ignoring it doesn't load other
-        -- files from the current directory.
-        if (o.ignore_hidden and not (prefix .. v == current_file) and string.match(v, "^%.")) then
-            return false
-        end
-        local ext = get_extension(v)
-        if ext == nil then
-            return false
-        end
-        return extensions[string.lower(ext)]
-    end)
-    table.filter(dirs, function(d)
-        return not ((o.ignore_hidden and string.match(d, "^%.")))
-    end)
-    alphanumsort(files)
-    alphanumsort(dirs)
-
-    for i, file in ipairs(files) do
-        files[i] = prefix .. file
-    end
-
-    table.append(total_files, files)
-    if dir_mode == "recursive" then
-        for _, dir in ipairs(dirs) do
-            scan_dir(prefix .. dir .. separator, current_file, dir_mode,
-                     separator, dir_depth + 1, total_files, extensions)
-        end
-    else
-        for i, dir in ipairs(dirs) do
-            dirs[i] = prefix .. dir
-        end
-        table.append(total_files, dirs)
-    end
-end
-
-function find_and_add_entries()
-    local path = mp.get_property("path", "")
-    local dir, filename = utils.split_path(path)
-    msg.trace(("dir: %s, filename: %s"):format(dir, filename))
-    if not autoload_playlist then
-        msg.verbose("stopping: autoload_playlist is disabled")
-        return
-    elseif #dir == 0 then
-        msg.verbose("stopping: not a local path")
-        return
-    end
-
-    local pl_count = mp.get_property_number("playlist-count", 1)
-    this_ext = get_extension(filename)
-    -- check if this is a manually made playlist
-    if (pl_count > 1 and autoloaded == nil) or
-       (pl_count == 1 and EXTENSIONS[string.lower(this_ext)] == nil) then
-        msg.verbose("stopping: manually made playlist")
-        return
-    else
-        if pl_count == 1 then
-            autoloaded = true
-            autoloaded_dir = dir
-            added_entries = {}
-        end
-    end
-
-    local extensions = {}
-    if o.same_type then
-        if EXTENSIONS_VIDEO[string.lower(this_ext)] ~= nil then
-            extensions = EXTENSIONS_VIDEO
-        elseif EXTENSIONS_AUDIO[string.lower(this_ext)] ~= nil then
-            extensions = EXTENSIONS_AUDIO
-        else
-            extensions = EXTENSIONS_IMAGES
-        end
-    else
-        extensions = EXTENSIONS
-    end
-
-    local pl = mp.get_property_native("playlist", {})
-    local pl_current = mp.get_property_number("playlist-pos-1", 1)
-    msg.trace(("playlist-pos-1: %s, playlist: %s"):format(pl_current,
-        utils.to_string(pl)))
-
-    local files = {}
-    do
-        local dir_mode = o.directory_mode or mp.get_property("directory-mode", "lazy")
-        local separator = mp.get_property_native("platform") == "windows" and "\\" or "/"
-        scan_dir(autoloaded_dir, path, dir_mode, separator, 0, files, extensions)
-    end
-
-    if next(files) == nil then
-        msg.verbose("no other files or directories in directory")
-        return
-    end
-
-    -- Find the current pl entry (dir+"/"+filename) in the sorted dir list
-    local current
-    for i = 1, #files do
-        if files[i] == path then
-            current = i
-            break
-        end
-    end
-    if current == nil then
-        return
-    end
-    msg.trace("current file position in files: "..current)
-
-    -- treat already existing playlist entries, independent of how they got added
-    -- as if they got added by autoload
-    for _, entry in ipairs(pl) do
-        added_entries[entry.filename] = true
-    end
-
-    local append = {[-1] = {}, [1] = {}}
-    for direction = -1, 1, 2 do -- 2 iterations, with direction = -1 and +1
-        for i = 1, o.autoload_max_entries do
-            local pos = current + i * direction
-            local file = files[pos]
-            if file == nil or file[1] == "." then
-                break
-            end
-
-            -- skip files that are/were already in the playlist
-            if not added_entries[file] then
-                if direction == -1 then
-                    msg.info("Prepending " .. file)
-                    table.insert(append[-1], 1, {file, pl_current + i * direction + 1})
-                else
-                    msg.info("Adding " .. file)
-                    if pl_count > 1 then
-                        table.insert(append[1], {file, pl_current + i * direction - 1})
-                    else
-                        mp.commandv("loadfile", file, "append")
-                    end
-                end
-            end
-            added_entries[file] = true
-        end
-        if pl_count == 1 and direction == -1 and #append[-1] > 0 then
-            for i = 1, #append[-1] do
-                mp.commandv("loadfile", append[-1][i][1], "append")
-            end
-            mp.commandv("playlist-move", 0, current)
-        end
-    end
-
-    if pl_count > 1 then
-        add_files(append[1])
-        add_files(append[-1])
-    end
-end
-
 --modified fork of chapterskip.lua--
 
 function matches(i, title)
@@ -1257,7 +1044,7 @@ function prep_chapterskip_var()
     end
 end
 
-function start_chapterskip_countdown(text, duration)
+function start_chapterskip_countdown(text, duration, osd)
 	g_autoskip_countdown_flag = true
     g_autoskip_countdown = g_autoskip_countdown - 1
 	
@@ -1266,13 +1053,13 @@ function start_chapterskip_countdown(text, duration)
 	if (g_autoskip_countdown < 0) then kill_chapterskip_countdown(); mp.osd_message('',0) return end
 	
 	text = text:gsub("%%countdown%%", g_autoskip_countdown)
-	prompt_msg(text, 2000)
+	prompt_msg(text, duration, osd)
 end
 
 function kill_chapterskip_countdown(action)
 	if not g_autoskip_countdown_flag then return end
-	if action == 'osd' and o.autoskip_osd ~= 'no-osd' then
-		prompt_msg('○ Auto-Skip Cancelled')
+	if action == 'osd' then
+		prompt_msg('○ Auto-Skip Cancelled', o.osd_duration, o.autoskip_osd)
 	end
 	if g_autoskip_timer ~= nil then
 		g_autoskip_timer:kill()
@@ -1284,8 +1071,11 @@ function kill_chapterskip_countdown(action)
 end
 
 function chapterskip(_, current, countdown)
+	if g_autoskip_disabled then return end --1.3.4# do not autoskip if g_autoskip_disabled is in disabled state
+    if skip_flag then return end
 	if chapter_state == 'no-chapters' then return end
     if not autoskip_chapter then return end
+	if not current then return end
 	if g_autoskip_countdown_flag then kill_chapterskip_countdown('osd') end
 	if not countdown then countdown = o.autoskip_countdown end
 
@@ -1311,24 +1101,20 @@ function chapterskip(_, current, countdown)
 				consecutive_i = consecutive_i+1
             end
         elseif skip and countdown <= 0 then
-			mp.set_property('osd-duration', o.osd_duration)
-			mp.commandv(autoskip_osd, "show-progress")
-			mp.add_timeout(0.07, function () mp.set_property('osd-duration', osd_duration_default) end)
+			if o.autoskip_osd == 'osd-bar' or o.autoskip_osd == 'osd-msg-bar' then prompt_progress('osd-bar', o.osd_duration) end
 			
-			if o.autoskip_osd == 'osd-msg-bar' or o.autoskip_osd == 'osd-msg' then
-				if consecutive_i > 1 then
-					local autoskip_osd_string = ''
-					for j=consecutive_i, 1, -1  do
-						local chapter_title = ''
-						if chapters[i-j] then chapter_title = chapters[i-j].title end
-						autoskip_osd_string=(autoskip_osd_string..'\n  ➤ Chapter ('..i-j..') '..chapter_title)
-					end
-					prompt_msg('● Auto-Skip'..autoskip_osd_string)
-				else
-					prompt_msg('➤ Auto-Skip: Chapter '.. mp.command_native({'expand-text', '${chapter}'}))
+			if consecutive_i > 1 then
+				local autoskip_osd_string = ''
+				for j=consecutive_i, 1, -1  do
+					local chapter_title = ''
+					if chapters[i-j] then chapter_title = chapters[i-j].title end
+					autoskip_osd_string=(autoskip_osd_string..'\n  ➤ Chapter ('..i-j..') '..chapter_title)
 				end
+				prompt_msg('● Auto-Skip'..autoskip_osd_string, o.osd_duration, o.autoskip_osd)
+			else
+				prompt_msg('➤ Auto-Skip: Chapter '.. mp.command_native({'expand-text', '${chapter}'}), o.osd_duration, o.autoskip_osd)
 			end
-			mp.set_property("time-pos", chapters[i].time)
+			mp.commandv('no-osd', 'set', 'chapter', i-1)
             skipped[skip] = true
             return
         elseif skip and countdown > 0 then
@@ -1338,47 +1124,45 @@ function chapterskip(_, current, countdown)
 			local autoskip_osd_string = ''
 			local autoskip_graceful_osd = ''
 			if o.autoskip_countdown_graceful then autoskip_graceful_osd = 'Press Keybind to:\n' end
-			if o.autoskip_osd == 'osd-msg-bar' or o.autoskip_osd == 'osd-msg' then
+			
+			if consecutive_i > 1 and o.autoskip_countdown_bulk then
+				local autoskip_osd_string = ''
+				for j=consecutive_i, 1, -1  do
+					local chapter_title = ''
+					if chapters[i-j] then chapter_title = chapters[i-j].title end
+					autoskip_osd_string=(autoskip_osd_string..'\n  ▷ Chapter ('..i-j..') '..chapter_title)
+				end
+				prompt_msg(autoskip_graceful_osd..'○ Auto-Skip'..' in "'..o.autoskip_countdown..'"'..autoskip_osd_string, 2000, o.autoskip_osd)
+				g_autoskip_timer = mp.add_periodic_timer(1, function () 
+					start_chapterskip_countdown(autoskip_graceful_osd..'○ Auto-Skip'..' in "%countdown%"'..autoskip_osd_string, 2000, o.autoskip_osd)
+				end)
+			else
+				prompt_msg(autoskip_graceful_osd..'▷ Auto-Skip in "'..o.autoskip_countdown..'": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000, o.autoskip_osd)
+				g_autoskip_timer = mp.add_periodic_timer(1, function () 
+					start_chapterskip_countdown(autoskip_graceful_osd..'▷ Auto-Skip in "%countdown%": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000, o.autoskip_osd)
+				end)
+			end
+
+			function proceed_autoskip(force)
+				if not g_autoskip_countdown_flag then kill_chapterskip_countdown() return end
+				if g_autoskip_countdown > 1 and not force then return end
+				
+				if o.autoskip_osd == 'osd-bar' or o.autoskip_osd == 'osd-msg-bar' then prompt_progress('osd-bar', o.osd_duration) end
+
 				if consecutive_i > 1 and o.autoskip_countdown_bulk then
 					local autoskip_osd_string = ''
 					for j=consecutive_i, 1, -1  do
 						local chapter_title = ''
 						if chapters[i-j] then chapter_title = chapters[i-j].title end
-						autoskip_osd_string=(autoskip_osd_string..'\n  ▷ Chapter ('..i-j..') '..chapter_title)
+						autoskip_osd_string=(autoskip_osd_string..'\n  ➤ Chapter ('..i-j..') '..chapter_title)
 					end
-					prompt_msg(autoskip_graceful_osd..'○ Auto-Skip'..' in "'..o.autoskip_countdown..'"'..autoskip_osd_string, 2000)
-					g_autoskip_timer = mp.add_periodic_timer(1, function () 
-						start_chapterskip_countdown(autoskip_graceful_osd..'○ Auto-Skip'..' in "%countdown%"'..autoskip_osd_string, 2000)
-					end)
+					prompt_msg('● Auto-Skip'..autoskip_osd_string, o.osd_duration, o.autoskip_osd)
 				else
-					prompt_msg(autoskip_graceful_osd..'▷ Auto-Skip in "'..o.autoskip_countdown..'": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000)
-					g_autoskip_timer = mp.add_periodic_timer(1, function () 
-						start_chapterskip_countdown(autoskip_graceful_osd..'▷ Auto-Skip in "%countdown%": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000)
-					end)
+					prompt_msg('➤ Auto-Skip: Chapter '.. mp.command_native({'expand-text', '${chapter}'}), o.osd_duration, o.autoskip_osd)
 				end
-			end
-			function proceed_autoskip(force)
-				if not g_autoskip_countdown_flag then kill_chapterskip_countdown() return end
-				if g_autoskip_countdown > 1 and not force then return end
-				
-				mp.set_property('osd-duration', o.osd_duration)
-				mp.commandv(autoskip_osd, "show-progress")
-				mp.add_timeout(0.07, function () mp.set_property('osd-duration', osd_duration_default) end)
-				if o.autoskip_osd == 'osd-msg-bar' or o.autoskip_osd == 'osd-msg' then
-					if consecutive_i > 1 and o.autoskip_countdown_bulk then
-						local autoskip_osd_string = ''
-						for j=consecutive_i, 1, -1  do
-							local chapter_title = ''
-							if chapters[i-j] then chapter_title = chapters[i-j].title end
-							autoskip_osd_string=(autoskip_osd_string..'\n  ➤ Chapter ('..i-j..') '..chapter_title)
-						end
-						prompt_msg('● Auto-Skip'..autoskip_osd_string)
-					else
-						prompt_msg('➤ Auto-Skip: Chapter '.. mp.command_native({'expand-text', '${chapter}'}))
-					end
-				end
+
 				if consecutive_i > 1 and o.autoskip_countdown_bulk then
-					mp.set_property("time-pos", chapters[i].time)
+					mp.commandv('no-osd', 'set', 'chapter', i-1)
 				else
 					mp.commandv('no-osd', 'add', 'chapter', 1)
 				end
@@ -1396,40 +1180,36 @@ function chapterskip(_, current, countdown)
             return mp.set_property("time-pos", mp.get_property_native("duration"))
         end
         mp.commandv("playlist-next")
-		if o.autoskip_osd ~= 'no-osd' then autoskip_playlist_osd = true end
+		if o.autoskip_osd ~= 'no-osd' or o.autoskip_osd ~= 'osd-bar' then autoskip_playlist_osd = true end
     elseif skip and countdown > 0 then
 		g_autoskip_countdown_flag = true
 		bind_keys(o.cancel_autoskip_countdown_keybind, "cancel-autoskip-countdown", function() kill_chapterskip_countdown('osd') return end)
-		
-		if o.autoskip_osd == 'osd-msg-bar' or o.autoskip_osd == 'osd-msg' then 
-			local autoskip_graceful_osd = ''
-			if o.autoskip_countdown_graceful then autoskip_graceful_osd = 'Press Keybind to:\n' end
-			if consecutive_i > 1 and o.autoskip_countdown_bulk then
-				local i = (mp.get_property_number('chapters')+1 or 0)
-				local autoskip_osd_string = ''
-				for j=consecutive_i, 1, -1  do
-					local chapter_title = ''
-					if chapters[i-j] then chapter_title = chapters[i-j].title end
-					autoskip_osd_string=(autoskip_osd_string..'\n  ▷ Chapter ('..i-j..') '..chapter_title)
-				end
-				prompt_msg(autoskip_graceful_osd..'○ Auto-Skip'..' in "'..o.autoskip_countdown..'"'..autoskip_osd_string, 2000)
-				g_autoskip_timer = mp.add_periodic_timer(1, function ()
-					start_chapterskip_countdown(autoskip_graceful_osd..'○ Auto-Skip'..' in "%countdown%"'..autoskip_osd_string, 2000)
-				end)
-			else
-				prompt_msg(autoskip_graceful_osd..'▷ Auto-Skip in "'..o.autoskip_countdown..'": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000)
-				g_autoskip_timer = mp.add_periodic_timer(1, function () 
-					start_chapterskip_countdown(autoskip_graceful_osd..'▷ Auto-Skip in "%countdown%": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000)
-				end)
+		local autoskip_graceful_osd = ''
+		if o.autoskip_countdown_graceful then autoskip_graceful_osd = 'Press Keybind to:\n' end
+		if consecutive_i > 1 and o.autoskip_countdown_bulk then
+			local i = (mp.get_property_number('chapters')+1 or 0)
+			local autoskip_osd_string = ''
+			for j=consecutive_i, 1, -1  do
+				local chapter_title = ''
+				if chapters[i-j] then chapter_title = chapters[i-j].title end
+				autoskip_osd_string=(autoskip_osd_string..'\n  ▷ Chapter ('..i-j..') '..chapter_title)
 			end
+			prompt_msg(autoskip_graceful_osd..'○ Auto-Skip'..' in "'..o.autoskip_countdown..'"'..autoskip_osd_string, 2000, o.autoskip_osd)
+			g_autoskip_timer = mp.add_periodic_timer(1, function ()
+				start_chapterskip_countdown(autoskip_graceful_osd..'○ Auto-Skip'..' in "%countdown%"'..autoskip_osd_string, 2000, o.autoskip_osd)
+			end)
+		else
+			prompt_msg(autoskip_graceful_osd..'▷ Auto-Skip in "'..o.autoskip_countdown..'": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000, o.autoskip_osd)
+			g_autoskip_timer = mp.add_periodic_timer(1, function () 
+				start_chapterskip_countdown(autoskip_graceful_osd..'▷ Auto-Skip in "%countdown%": Chapter '.. mp.command_native({'expand-text', '${chapter}'}), 2000, o.autoskip_osd)
+			end)
 		end
 		function proceed_autoskip(force)
 			if not g_autoskip_countdown_flag then return end
 			if g_autoskip_countdown > 1 and not force then return end
 
-			mp.set_property('osd-duration', o.osd_duration)
-			mp.commandv(autoskip_osd, "show-progress")
-			mp.add_timeout(0.07, function () mp.set_property('osd-duration', osd_duration_default) end)
+			if o.autoskip_osd == 'osd-bar' or o.autoskip_osd == 'osd-msg-bar' then prompt_progress('osd-bar', o.osd_duration) end
+
 			if consecutive_i > 1 and o.autoskip_countdown_bulk then
 				if mp.get_property_native("playlist-count") == mp.get_property_native("playlist-pos-1") then
 					return mp.set_property("time-pos", mp.get_property_native("duration"))
@@ -1448,7 +1228,7 @@ function chapterskip(_, current, countdown)
 					mp.commandv('no-osd', 'add', 'chapter', 1)
 				end
 			end
-			if o.autoskip_osd ~= 'no-osd' then autoskip_playlist_osd = true end
+			if o.autoskip_osd ~= 'no-osd' or o.autoskip_osd ~= 'osd-bar' then autoskip_playlist_osd = true end
 			kill_chapterskip_countdown()
 		end
 		bind_keys(o.proceed_autoskip_countdown_keybind, "proceed-autoskip-countdown", function() proceed_autoskip(true) return end)
@@ -1459,11 +1239,11 @@ end
 
 function toggle_autoskip()
 	if autoskip_chapter == true then
-		prompt_msg('○ Auto-Skip Disabled')
+		prompt_msg('○ Auto-Skip Disabled', o.osd_duration, o.autoskip_osd)
 		autoskip_chapter = false
 		if g_autoskip_countdown_flag then kill_chapterskip_countdown() end
 	elseif autoskip_chapter == false then
-		prompt_msg('● Auto-Skip Enabled')
+		prompt_msg('● Auto-Skip Enabled', o.osd_duration, o.autoskip_osd)
 		autoskip_chapter = true
 	end
 end
@@ -1515,20 +1295,20 @@ function toggle_category_autoskip()
 	end
 	if current_chapter > 0 and chapters[current_chapter].title and chapters[current_chapter].title ~= '' then
 		if found_i > 0 or string.match(categories.toggle, esc_string(chapter_title)) then
-			prompt_msg('○ Removed from Auto-Skip\n  ▷ Chapter: '..chapter_title)
+			prompt_msg('○ Removed from Auto-Skip\n  ▷ Chapter: '..chapter_title, o.osd_duration, o.autoskip_osd)
 			categories.toggle = categories.toggle:gsub(esc_string("^"..chapter_title.."/"), "")
 			if g_autoskip_countdown_flag then kill_chapterskip_countdown() end
 		else
-			prompt_msg('● Added to Auto-Skip\n  ➔ Chapter: '..chapter_title)
+			prompt_msg('● Added to Auto-Skip\n  ➔ Chapter: '..chapter_title, o.osd_duration, o.autoskip_osd)
 			categories.toggle = categories.toggle.."^"..chapter_title.."/"
 		end
 	else
 		if found_i > 0 or string.match(categories.toggle_idx, esc_string(chapter_title)) then
-			prompt_msg('○ Removed from Auto-Skip\n  ▷ Chapter: '..chapter_title)
+			prompt_msg('○ Removed from Auto-Skip\n  ▷ Chapter: '..chapter_title, o.osd_duration, o.autoskip_osd)
 			categories.toggle_idx = categories.toggle_idx:gsub(esc_string(chapter_title.."/"), "")
 			if g_autoskip_countdown_flag then kill_chapterskip_countdown() end
 		else
-			prompt_msg('● Added to Auto-Skip\n  ➔ Chapter: '..chapter_title)
+			prompt_msg('● Added to Auto-Skip\n  ➔ Chapter: '..chapter_title, o.osd_duration, o.autoskip_osd)
 			categories.toggle_idx = categories.toggle_idx..chapter_title.."/"
 		end
 	end
@@ -1536,19 +1316,21 @@ end
 
 -- HOOKS --------------------------------------------------------------------
 if user_input_module then mp.add_hook("on_unload", 50, function () input.cancel_user_input() end) end -- chapters.lua
-mp.register_event("start-file", find_and_add_entries) -- autoload.lua
 mp.observe_property("chapter", "number", chapterskip) -- chapterskip.lua
 
 -- smart skip events / properties / hooks --
 
 mp.register_event('file-loaded', function()
 	file_length = (mp.get_property_native('duration') or 0)
+	g_filepath = (mp.get_property('path') or '') --1.3.4# get filepath needed for exclusion_check function
+	if exclusion_check() then g_autoskip_disabled = true end --1.3.4# disable / enable autoskip based on exclusion_check
+
 	if o.playlist_osd and g_playlist_pos > 0 then playlist_osd = true end
 	if playlist_osd and not autoskip_playlist_osd then
 		prompt_msg('['..mp.command_native({'expand-text', '${playlist-pos-1}'})..'/'..mp.command_native({'expand-text', '${playlist-count}'})..'] '..mp.command_native({'expand-text', '${filename}'}))
 	end
 	if autoskip_playlist_osd then
-		prompt_msg('➤ Auto-Skip\n['..mp.command_native({'expand-text', '${playlist-pos-1}'})..'/'..mp.command_native({'expand-text', '${playlist-count}'})..'] '..mp.command_native({'expand-text', '${filename}'}))
+		prompt_msg('➤ Auto-Skip\n['..mp.command_native({'expand-text', '${playlist-pos-1}'})..'/'..mp.command_native({'expand-text', '${playlist-count}'})..'] '..mp.command_native({'expand-text', '${filename}'}), o.osd_duration, o.autoskip_osd)
 	end
 	playlist_osd = false
 	autoskip_playlist_osd = false
@@ -1571,6 +1353,7 @@ mp.observe_property('pause', 'bool', function(name, value)
 end)
 
 mp.add_hook('on_unload', 9, function()
+	if geometry_default == "" then mp.set_property("geometry","") end
 	if o.modified_chapters_autosave == true or has_value(o.modified_chapters_autosave, chapter_state) then write_chapters(false) end
 	mp.set_property("keep-open", keep_open_state)
 	chapter_state = 'no-chapters'
@@ -1586,7 +1369,6 @@ mp.observe_property('eof-reached', 'bool', eofHandler)
 
 -- BINDINGS --------------------------------------------------------------------
 
-bind_keys(o.toggle_autoload_keybind, 'toggle-autoload', toggle_autoload)
 bind_keys(o.toggle_autoskip_keybind, "toggle-autoskip", toggle_autoskip)
 bind_keys(o.toggle_category_autoskip_keybind, "toggle-category-autoskip", toggle_category_autoskip)
 bind_keys(o.add_chapter_keybind, "add-chapter", add_chapter)
