@@ -9,4 +9,10 @@ if status is-interactive
     end
 
     fish_add_path ~/.local/bin
+
+    set -x BAT_THEME 'Catppuccin Macchiato'
+    set -x MANROFFOPT "-c"
+    set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+
+    fastfetch
 end
