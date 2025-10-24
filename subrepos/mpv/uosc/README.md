@@ -35,6 +35,8 @@ Features:
 
 ## Install
 
+**uosc** requires mpv **0.33** and higher.
+
 1. These commands will install or update **uosc** and place a default `uosc.conf` file into `script-opts` if it doesn't exist already.
 
     ### Windows
@@ -138,6 +140,8 @@ These bindings are active when any **uosc** menu is open (main menu, playlist, l
 
 Each menu can also add its own shortcuts and bindings for special actions on items/menu, such as `del` to delete a playlist item, `ctrl+up/down/pgup/pgdwn/home/end` to move it around, etc. These are usually also exposed as item action buttons for you to find out about them that way.
 
+When menu search is active `del` will edit the string. If you want to trigger the current menu's action bound to `del` (such as delete item from playlist menu), use `shift+del`.
+
 Click on a faded parent menu to go back to it.
 
 ## Commands
@@ -219,6 +223,10 @@ Case for `(flash/decide)-pause-indicator`: mpv handles frame stepping forward by
 Toggles default menu. Read [Menu](#menu-1) section below to find out how to fill it up with items you want there.
 
 Note: there's also a `menu-blurred` command that opens a menu without pre-selecting the 1st item, suitable for commands triggered with a mouse, such as control bar buttons.
+
+#### `menu-prev`, `menu-next`, `menu-prev-page`, `menu-next-page`, `menu-start`, `menu-end`, `menu-activate`, `menu-back`
+
+Menu navigation bindings, if you want to use keys other than up, down, pgup, pgdown, home, end, enter, backspace.
 
 #### `subtitles`, `audio`, `video`
 
@@ -440,11 +448,9 @@ Define a separator between previous and next items by doing the same, but using 
 
 Example context menu:
 
-This is the default pre-configured menu if none is defined in your `input.conf`, but with added shortcuts. To both pause & move the window with left mouse button, so that you can have the menu on the right one, enable `click_threshold` in `uosc.conf` (see default `uosc.conf` for example/docs).
+This is the default pre-configured menu if none is defined in your `input.conf`, but with added shortcuts.
 
 ```
-menu        script-binding uosc/menu
-mbtn_right  script-binding uosc/menu
 s           script-binding uosc/subtitles          #! Subtitles
 a           script-binding uosc/audio              #! Audio tracks
 q           script-binding uosc/stream-quality     #! Stream quality
@@ -456,7 +462,7 @@ alt+>       script-binding uosc/delete-file-next   #! Navigation > Delete file &
 alt+<       script-binding uosc/delete-file-prev   #! Navigation > Delete file & Prev
 alt+esc     script-binding uosc/delete-file-quit   #! Navigation > Delete file & Quit
 o           script-binding uosc/open-file          #! Navigation > Open file
-#           set video-aspect-override "-1"         #! Utils > Aspect ratio > Default
+#           set video-aspect-override no           #! Utils > Aspect ratio > Default
 #           set video-aspect-override "16:9"       #! Utils > Aspect ratio > 16:9
 #           set video-aspect-override "4:3"        #! Utils > Aspect ratio > 4:3
 #           set video-aspect-override "2.35:1"     #! Utils > Aspect ratio > 2.35:1
@@ -467,7 +473,7 @@ alt+i       script-binding uosc/keybinds           #! Utils > Key bindings
 O           script-binding uosc/show-in-directory  #! Utils > Show in directory
 #           script-binding uosc/open-config-directory #! Utils > Open config directory
 #           script-binding uosc/update             #! Utils > Update uosc
-esc         quit #! Quit
+esc         quit                                   #! Quit
 ```
 
 To see all the commands you can bind keys or menu items to, refer to [mpv's list of input commands documentation](https://mpv.io/manual/master/#list-of-input-commands).
