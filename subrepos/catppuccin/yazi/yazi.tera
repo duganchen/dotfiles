@@ -10,7 +10,7 @@ whiskers:
 
 {%- set accent = flavor.colors[accent] -%}
 
-[manager]
+[mgr]
 cwd = { fg = "{{ teal.hex }}" }
 
 hovered         = { fg = "{{ base.hex }}", bg = "{{ accent.hex }}" }
@@ -24,10 +24,6 @@ marker_cut      = { fg = "{{ red.hex }}", bg = "{{ red.hex }}" }
 marker_marked   = { fg = "{{ teal.hex }}", bg = "{{ teal.hex }}" }
 marker_selected = { fg = "{{ accent.hex }}", bg = "{{ accent.hex }}" }
 
-tab_active   = { fg = "{{ base.hex }}", bg = "{{ text.hex }}" }
-tab_inactive = { fg = "{{ text.hex }}", bg = "{{ surface1.hex }}" }
-tab_width    = 1
-
 count_copied   = { fg = "{{ base.hex }}", bg = "{{ green.hex }}" }
 count_cut      = { fg = "{{ base.hex }}", bg = "{{ red.hex }}" }
 count_selected = { fg = "{{ base.hex }}", bg = "{{ accent.hex }}" }
@@ -36,6 +32,10 @@ border_symbol = "│"
 border_style  = { fg = "{{ overlay1.hex }}" }
 
 syntect_theme = "~/.config/yazi/Catppuccin-{{ flavor.identifier }}.tmTheme"
+
+[tabs]
+active   = { fg = "{{ base.hex }}", bg = "{{ text.hex }}", bold = true }
+inactive = { fg = "{{ text.hex }}", bg = "{{ surface1.hex }}" }
 
 [mode]
 normal_main = { fg = "{{ base.hex }}", bg = "{{ accent.hex }}", bold = true }
@@ -48,8 +48,8 @@ unset_main  = { fg = "{{ base.hex }}", bg = "{{ flamingo.hex }}", bold = true }
 unset_alt   = { fg = "{{ flamingo.hex }}", bg = "{{ surface0.hex }}"}
 
 [status]
-separator_open  = ""
-separator_close = ""
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
 
 progress_label  = { fg = "#ffffff", bold = true }
 progress_normal = { fg = "{{ blue.hex }}", bg = "{{ surface1.hex }}" }
@@ -80,7 +80,7 @@ list       = {}
 btn_yes    = { reversed = true }
 btn_no     = {}
 
-[completion]
+[cmp]
 border = { fg = "{{ accent.hex }}" }
 
 [tasks]
@@ -125,3 +125,9 @@ rules = [
 	{ name = "*", fg = "{{ text.hex }}" },
 	{ name = "*/", fg = "{{ accent.hex }}" }
 ]
+
+[spot]
+border = { fg = "{{ accent.hex }}" }
+title  = { fg = "{{ accent.hex }}" }
+tbl_cell = { fg = "{{ accent.hex }}", reversed = true }
+tbl_col = { bold = true }

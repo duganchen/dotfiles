@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:catppuccin/yazi.git
 	branch = main
-	commit = 5d3a1eecc304524e995fe5b936b8e25f014953e8
-	parent = 45770bc5d35cd8efa14aa692f5c2555c6b350f98
+	commit = 043ffae14e7f7fcc136636d5f2c617b5bc2f5e31
+	parent = b03158426a45635c9d50982b6b9f89536fe5f4a7
 	method = merge
 	cmdver = 0.4.9
