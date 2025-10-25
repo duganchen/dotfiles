@@ -13,6 +13,7 @@ if status is-interactive
     set -x BAT_THEME 'Catppuccin Macchiato'
     set -x MANROFFOPT "-c"
     set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+    set -v VISUAL 'code --wait'
 
     # https://github.com/catppuccin/fzf/blob/main/themes/catppuccin-fzf-macchiato.fish
     set -x FZF_DEFAULT_OPTS "\
