@@ -1,22 +1,15 @@
-My personal dotfiles.
+# My personal dotfiles.
 
 Start by making sure the appropriate directories exist:
 
     mkdir -p ~/.config/{bat/themes,eza,yazi,micro/colorschemes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts},xplr/plugins,~/.local/share/mc/skins}
 
-And, on Linux:
-
-    mkdir -p ~/.config/environment.d
-
 Install them with GNU stow:
 
     stow -t ~ cfg
 
-If you're using Linux, also do:
-
-    stow -t ~ linux
-
-I use Catppuccin, kitty, fish, starship, mpv, NERD symbols (Jetbrains Mono), lsd and lf, eza (which used to be called exa), etc.
+I use a GNOME desktop on Fedora. The terminal is a Catppuccin Macchiato Ghostty (which has OOTB support for
+NERD symbols) with fish, starship, mpv, yazi, etc, etc.
 
 ## FISH
 
