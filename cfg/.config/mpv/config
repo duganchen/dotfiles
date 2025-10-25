@@ -1,1 +1,2 @@
 vo=dmabuf-wayland
+video-sync=display-resample
