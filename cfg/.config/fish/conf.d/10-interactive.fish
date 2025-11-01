@@ -4,8 +4,8 @@ if status is-interactive
     fzf --fish | source
     zoxide init fish | source
 
-    if test -f ~/apps/git-subrepo/.fish.rc
-        source ~/apps/git-subrepo/.fish.rc
+    if test -f ~/.local/src/git-subrepo/.fish.rc
+        source ~/.local/src/git-subrepo/.fish.rc
     end
 
     fish_add_path ~/.local/bin
