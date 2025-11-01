@@ -1,2 +1,2 @@
-vo=dmabuf-wayland
+vo=gpu-next
 video-sync=display-resample
