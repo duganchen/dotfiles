@@ -113,7 +113,7 @@ zoom          1.0             # set display zoom
 # The 'standard' fonts.
 # Omit to use the builtin fonts, or specify a font family.
 
-monofont      IBM Plex Mono
+monofont      Atkinson Hyperlegible Mono
 monosize      17
 
 # https://www.fontsquirrel.com/fonts/literata-book
