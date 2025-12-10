@@ -116,7 +116,8 @@ zoom          1.0             # set display zoom
 monofont      IBM Plex Mono
 monosize      17
 
-propfont      Literata
+# https://www.fontsquirrel.com/fonts/literata-book
+propfont      Literata Book
 propsize      17
 
 wmarginx      20              # space around the window frame
