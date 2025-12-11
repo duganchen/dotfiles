@@ -113,11 +113,10 @@ zoom          1.0             # set display zoom
 # The 'standard' fonts.
 # Omit to use the builtin fonts, or specify a font family.
 
-monofont      Atkinson Hyperlegible Mono
+monofont      IBM Plex Mono
 monosize      17
 
-# https://www.fontsquirrel.com/fonts/literata-book
-propfont      Literata Book
+propfont      Bookerly
 propsize      17
 
 wmarginx      20              # space around the window frame
@@ -129,7 +128,7 @@ wbordery      0
 tmarginx      7               # internal margin of text windows
 tmarginy      7
 
-leading       26              # Also known as linespacing
+leading       27              # Also known as linespacing
 baseline      15              # Offset from top of line to baseline
 
 # Fonts for Text Buffer windows
