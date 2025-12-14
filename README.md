@@ -2,7 +2,7 @@
 
 Start by making sure the appropriate directories exist:
 
-    mkdir -p ~/.config/{bat/themes,eza,yazi,micro/colorschemes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts},xplr/plugins}
+    mkdir -p ~/.config/{bat/themes,eza,yazi,helix/themes,micro/colorschemes,kitty,lf/kitty-pistol-previewer,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts},nvim/lua/{config,plugins},xplr/plugins}
     mkdir -p ~/.local/share/mc/skins
     mkdir -p ~/.local/bin
 
