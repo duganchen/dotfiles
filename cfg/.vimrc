@@ -1,1 +1,3 @@
 set termguicolors
+colorscheme catppuccin_macchiato
+
