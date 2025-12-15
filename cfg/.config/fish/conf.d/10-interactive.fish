@@ -26,4 +26,8 @@ if status is-interactive
     fastfetch
 
     starship init fish | source
+
+    set -x RUNDOOMPRESETS ~/Documents/rundoom/rundoompresets.json
+	set -x DOSROOT ~/archives/dos
+    set -x NNN_SCOPE 1
 end

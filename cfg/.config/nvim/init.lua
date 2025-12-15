@@ -1,5 +1,5 @@
 require("config.lazy")
-require('lazy').setup({
+require('lazy').setup("plugins", {
   	'nvim-treesitter/nvim-treesitter',
   	lazy = false,
 	build = ':TSUpdate'
