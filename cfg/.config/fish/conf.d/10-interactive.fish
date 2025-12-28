@@ -4,4 +4,10 @@ if status is-interactive
 	starship init fish | source
 	zoxide init fish | source
 	fzf --fish | source
+
+	# Use bat for man pages
+	set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+	set -x MANROFFOPT "-c"
+
+	fastfetch
 end
