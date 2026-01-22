@@ -1,3 +1,2 @@
-vo=gpu-next
-video-sync=display-resample
+vo=gpu
 gpu-api=vulkan
