@@ -1,2 +1,2 @@
-vo=gpu
+vo=gpu-next
 gpu-api=vulkan
