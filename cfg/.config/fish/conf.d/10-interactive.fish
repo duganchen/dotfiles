@@ -2,7 +2,6 @@
 if status is-interactive
     set -x LS_COLORS (vivid generate catppuccin-macchiato)
     starship init fish | source
-    zoxide init fish | source
     fzf --fish | source
 
     # Use bat for man pages
