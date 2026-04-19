@@ -1,0 +1,7 @@
+[[language]]
+name = "python"
+language-servers = ["zuban"]
+
+[language-server.zuban]
+command = "zuban"
+args = ["server"]
