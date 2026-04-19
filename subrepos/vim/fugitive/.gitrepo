@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:tpope/vim-fugitive.git
+	branch = master
+	commit = 3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0
+	parent = 72d179f86a32b17640d1aa20d34ef54040a3f590
+	method = merge
+	cmdver = 0.4.9
