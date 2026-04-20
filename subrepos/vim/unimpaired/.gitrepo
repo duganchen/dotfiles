@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:tpope/vim-unimpaired.git
+	branch = master
+	commit = db65482581a28e4ccf355be297f1864a4e66985c
+	parent = 06f7a64d53a1e36a06c104923ac02840eb1fc6b6
+	method = merge
+	cmdver = 0.4.9
