@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:tpope/vim-repeat.git
+	branch = master
+	commit = 65846025c15494983dafe5e3b46c8f88ab2e9635
+	parent = 7160bf0b96efee435cb26cba9023b744048d6ff9
+	method = merge
+	cmdver = 0.4.9
