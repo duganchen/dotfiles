@@ -1,0 +1,1 @@
+../../../../subrepos/fish_dir_jumplist/fish/functions/j.fish
