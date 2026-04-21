@@ -1,9 +1,12 @@
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
-	{ src = 'https://github.com/neovim/nvim-lspconfig' },
-	{ src = 'https://github.com/arborist-ts/arborist.nvim' },
-	{ src = 'git@github.com:tpope/vim-surround.git' },
-	{ src = 'https://github.com/tpope/vim-unimpaired' },
-	{ src = 'git@github.com:tpope/vim-repeat.git' }
+	'https://github.com/neovim/nvim-lspconfig',
+	'https://github.com/arborist-ts/arborist.nvim',
+	'git@github.com:tpope/vim-surround.git',
+	'https://github.com/tpope/vim-unimpaired',
+	'git@github.com:tpope/vim-repeat.git',
+	'https://github.com/nvim-tree/nvim-web-devicons',
+	'git@github.com:nvim-lualine/lualine.nvim.git',
+
 }
 require('catppuccin').setup({ transparent_background = true })
 require('arborist').setup()
@@ -70,3 +73,5 @@ vim.lsp.config('lua_ls', {
 		Lua = {},
 	},
 })
+
+require('lualine').setup()
