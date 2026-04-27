@@ -1,12 +1,22 @@
 function jp
-if set -gq __dirjumplist
-    if set -gq __dirjumplist_idx
-        if test $__dirjumplist_idx -eq 1
-            set -g __dirjumplist_idx (count $__dirjumplist)
+    _jgc
+
+    if test -f ~/.fish_dir_jumplist.txt
+        set -l jumplist (cat ~/.fish_dir_jumplist.txt)
+        for i in (seq (count $jumplist))
+            if test $jumplist[$i] = $PWD
+                set found
+                break
+            end
+        end
+        if set -q found
+            if test $i -eq 1
+                cd $jumplist[(count $jumplist)]
+            else
+                cd $jumplist[(math $i - 1)]
+            end
         else
-            set -g __dirjumplist_idx (math $__dirjumplist_idx - 1)
+            cd $jumplist[(count $jumplist)]
         end
     end
-    cd $__dirjumplist[$__dirjumplist_idx]
-end
 end

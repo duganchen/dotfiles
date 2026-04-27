@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:duganchen/fish_dir_jumplist.git
 	branch = main
-	commit = b62af4018b5e497fb7999859004008a382c169cc
-	parent = 67d66e42da30cdea600cd3fa744b45b33c57f25d
+	commit = fc3f739669eff7e6a5527019f54d70dc2da48918
+	parent = 46dcd4ba7728a07c42bac7e84c4943a2e91c1e80
 	method = merge
 	cmdver = 0.4.9
