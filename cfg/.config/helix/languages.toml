@@ -1,9 +1,3 @@
 [[language]]
 name = "python"
-language-servers = ["zuban"]
-formatter = { command = "black", args = ["--quiet", "-"] }
 auto-format = true
-
-[language-server.zuban]
-command = "zuban"
-args = ["server"]
