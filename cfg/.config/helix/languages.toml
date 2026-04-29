@@ -58,18 +58,13 @@ name = "jsx"
 language-servers = ["biome"]
 auto-format = true
 
-[[language]]
-name = "json"
-language-servers = ["biome"]
-auto-format = true
-
 # I don't use GraphQL, but while I have it
 [[language]]
 name = "graphql"
 language-servers = ["biome"]
 auto-format = true
 
-# html and css are:
+# html, css and json are:
 # npm i -g vscode-langservers-extracted
 # everything works
 
