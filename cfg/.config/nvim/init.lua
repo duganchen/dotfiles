@@ -1,6 +1,5 @@
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	'https://github.com/neovim/nvim-lspconfig',
-	'https://github.com/arborist-ts/arborist.nvim',
 	'git@github.com:tpope/vim-surround.git',
 	'https://github.com/tpope/vim-unimpaired',
 	'git@github.com:tpope/vim-repeat.git',
@@ -9,7 +8,7 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 
 }
 require('catppuccin').setup({ transparent_background = true })
-require('arborist').setup()
+
 vim.cmd.colorscheme "catppuccin-macchiato"
 
 vim.o.autocomplete = true
@@ -32,8 +31,8 @@ vim.lsp.config('lua_ls', {
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
 			if
-			    path ~= vim.fn.stdpath('config')
-			    and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+					path ~= vim.fn.stdpath('config')
+					and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
 			then
 				return
 			end

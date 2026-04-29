@@ -1,3 +1,93 @@
+[language-server]
+biome = { command = "biome", args = ["lsp-proxy"] }
+
+# Install bash-language-server
+[[language]]
+name = "bash"
+formatter = { command = "shfmt" }
+auto-format = true
+
+# Install clangd
+[[language]]
+name = "c"
+file-types = ["c", "h"]
+formatter = { command = "clang-format" }
+auto-format = true
+
+[[language]]
+name = "cpp"
+file-types = ["cpp", "cc", "cxx", "hpp", "hcc", "hxx"]
+formatter = { command = "clang-format" }
+auto-format = true
+
+# Install ruff
 [[language]]
 name = "python"
+auto-format = true
+
+# Install neocmakelsp
+[[language]]
+name = "cmake"
+formatter = { command = "gersemi", args = ["-"] }
+auto-format = true
+
+[[language]]
+name = "toml"
+auto-format = true
+language-servers = ["tombi"]
+
+# FISH you just install fish-lsp and everything works
+
+[[language]]
+name = "javascript"
+language-servers = ["biome"]
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = ["biome"]
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = ["biome"]
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = ["biome"]
+auto-format = true
+
+[[language]]
+name = "json"
+language-servers = ["biome"]
+auto-format = true
+
+# I don't use GraphQL, but while I have it
+[[language]]
+name = "graphql"
+language-servers = ["biome"]
+auto-format = true
+
+# html and css are:
+# npm i -g vscode-langservers-extracted
+# everything works
+
+# golang is just gopls; everything works
+
+# install yaml-language-server
+[[language]]
+name = "yaml"
+auto-format = true
+
+# install marksman
+[[language]]
+name = "markdown"
+auto-format = true
+# So far I'm only using deno for this
+formatter = { command = "deno", args = ["fmt", "-", "--ext", "md"] }
+
+# Install Lua Language Server
+[[language]]
+name = "lua"
 auto-format = true
