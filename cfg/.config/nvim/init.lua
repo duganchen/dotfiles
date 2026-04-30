@@ -5,9 +5,12 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:tpope/vim-repeat.git',
 	'https://github.com/nvim-tree/nvim-web-devicons',
 	'git@github.com:nvim-lualine/lualine.nvim.git',
-
+	-- It's too early to care that this is "archived."
+	'git@github.com:nvim-treesitter/nvim-treesitter.git'
 }
 require('catppuccin').setup({ transparent_background = true })
+
+require('nvim-treesitter').install({'lua', 'bash'})
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
@@ -31,8 +34,8 @@ vim.lsp.config('lua_ls', {
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
 			if
-					path ~= vim.fn.stdpath('config')
-					and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+			    path ~= vim.fn.stdpath('config')
+			    and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
 			then
 				return
 			end
