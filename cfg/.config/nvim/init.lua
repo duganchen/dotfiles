@@ -20,6 +20,8 @@ vim.o.autocomplete = true
 -- https://www.reddit.com/r/neovim/comments/1pd6pg8/comment/ns4yopi/
 vim.o.complete = "o,.,w,b,u"
 vim.o.completeopt = "fuzzy,menuone,noselect,popup"
+vim.o.number = true
+vim.o.relativenumber = true
 
 vim.lsp.enable({ 'lua_ls', 'bashls', 'ruff' })
 
