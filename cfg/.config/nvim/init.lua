@@ -13,7 +13,9 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 }
 require('catppuccin').setup({ transparent_background = true })
 
-require('nvim-treesitter').install({ 'bash', 'lua', 'python' })
+require('nvim-treesitter').install({ 'bash', 'fish', 'lua', 'python' })
+
+vim.lsp.enable({ 'lua_ls', 'bashls', 'fish_lsp', 'ruff' })
 
 require('lualine').setup()
 
@@ -26,7 +28,6 @@ vim.o.completeopt = "fuzzy,menuone,noselect,popup"
 vim.o.number = true
 vim.o.relativenumber = true
 
-vim.lsp.enable({ 'lua_ls', 'bashls', 'ruff' })
 
 vim.lsp.config('lua_ls', {
 	on_init = function(client)
