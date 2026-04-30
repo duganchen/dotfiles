@@ -19,11 +19,6 @@ vim.o.autocomplete = true
 vim.o.complete = "o,.,w,b,u"
 vim.o.completeopt = "fuzzy,menuone,noselect,popup"
 
--- AI copy and paste
-vim.lsp.config['lua_ls'] = {
-	cmd = { 'lua-language-server' },
-	root_markers = { '.git', 'init.lua' },
-}
 vim.lsp.enable({ 'lua_ls', 'bashls' })
 
 -- Copy and paste from here
