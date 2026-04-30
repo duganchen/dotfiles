@@ -16,13 +16,19 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 }
 require('catppuccin').setup({ transparent_background = true })
 
-require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'fish', 'go', 'hjson', 'lua', 'markdown', 'python', 'toml',
+require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish', 'go', 'hjson', 'html', 'json', 'lua',
+	'markdown',
+	'python', 'toml',
 	'yaml' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
 
-vim.lsp.enable({ 'bashls', 'clangd', 'neocmake', 'fish_lsp', 'gopls', 'lua_ls', 'marksman', 'ruff', 'tombi', 'yamlls' })
+-- These generally follow the languages.toml file I've set up for Helix.
+vim.lsp.enable({ 'bashls', 'clangd', 'neocmake', 'cssls', 'fish_lsp', 'gopls', 'html', 'jsonls', 'lua_ls', 'marksman',
+	'ruff',
+	'tombi',
+	'yamlls' })
 
 require('lualine').setup()
 
