@@ -13,9 +13,9 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 }
 require('catppuccin').setup({ transparent_background = true })
 
-require('nvim-treesitter').install({ 'bash', 'fish', 'lua', 'python' })
+require('nvim-treesitter').install({ 'bash', 'fish', 'lua', 'markdown', 'python' })
 
-vim.lsp.enable({ 'bashls', 'fish_lsp', 'lua_ls', 'ruff' })
+vim.lsp.enable({ 'bashls', 'fish_lsp', 'lua_ls', 'marksman', 'ruff' })
 
 require('lualine').setup()
 
