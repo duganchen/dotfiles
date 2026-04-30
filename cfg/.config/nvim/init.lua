@@ -10,12 +10,14 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:nvim-telescope/telescope.nvim.git',
 	-- for neocmake
-	'git@github.com:L3MON4D3/LuaSnip.git'
+	'git@github.com:L3MON4D3/LuaSnip.git',
+	'git@github.com:hjson/vim-hjson.git'
 
 }
 require('catppuccin').setup({ transparent_background = true })
 
-require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'fish', 'lua', 'markdown', 'python', 'toml', 'yaml' })
+require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'fish', 'hjson', 'lua', 'markdown', 'python', 'toml',
+	'yaml' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
