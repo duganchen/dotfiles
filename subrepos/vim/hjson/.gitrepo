@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:hjson/vim-hjson.git
+	branch = master
+	commit = 265ec4fb0a7f815f21626d240c66e2ba598ea3ea
+	parent = e896531479dd8d7c05fb5853cd19e7dbbf380108
+	method = merge
+	cmdver = 0.4.9
