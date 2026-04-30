@@ -15,7 +15,7 @@ require('catppuccin').setup({ transparent_background = true })
 
 require('nvim-treesitter').install({ 'bash', 'fish', 'lua', 'python' })
 
-vim.lsp.enable({ 'lua_ls', 'bashls', 'fish_lsp', 'ruff' })
+vim.lsp.enable({ 'bashls', 'fish_lsp', 'lua_ls', 'ruff' })
 
 require('lualine').setup()
 
