@@ -9,13 +9,18 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- It's too early to care that this is "archived."
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:nvim-telescope/telescope.nvim.git',
+	-- for neocmake
+	'git@github.com:L3MON4D3/LuaSnip.git'
 
 }
 require('catppuccin').setup({ transparent_background = true })
 
-require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'fish', 'lua', 'markdown', 'python', 'toml', 'yaml' })
+require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'fish', 'lua', 'markdown', 'python', 'toml', 'yaml' })
 
-vim.lsp.enable({ 'bashls', 'clangd', 'fish_lsp', 'lua_ls', 'marksman', 'ruff', 'tombi', 'yamlls' })
+-- not using cmake-language-server because of this:
+-- https://github.com/regen100/cmake-language-server/issues/108
+
+vim.lsp.enable({ 'bashls', 'clangd', 'neocmake', 'fish_lsp', 'lua_ls', 'marksman', 'ruff', 'tombi', 'yamlls' })
 
 require('lualine').setup()
 
