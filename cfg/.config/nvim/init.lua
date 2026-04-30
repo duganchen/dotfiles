@@ -2,11 +2,14 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'https://github.com/neovim/nvim-lspconfig',
 	'git@github.com:tpope/vim-surround.git',
 	'https://github.com/tpope/vim-unimpaired',
+	'git@github.com:tpope/vim-sleuth.git',
 	'git@github.com:tpope/vim-repeat.git',
 	'https://github.com/nvim-tree/nvim-web-devicons',
 	'git@github.com:nvim-lualine/lualine.nvim.git',
 	-- It's too early to care that this is "archived."
-	'git@github.com:nvim-treesitter/nvim-treesitter.git'
+	'git@github.com:nvim-treesitter/nvim-treesitter.git',
+	'git@github.com:nvim-telescope/telescope.nvim.git',
+
 }
 require('catppuccin').setup({ transparent_background = true })
 
@@ -74,7 +77,7 @@ vim.lsp.config('lua_ls', {
 	},
 })
 
--- copy and paste from 
+-- copy and paste from
 -- https://dotfiles.substack.com/p/native-lsp-in-neovim-012
 vim.diagnostic.config({
 	severity_sort = true,
@@ -99,3 +102,19 @@ vim.diagnostic.config({
 	},
 })
 
+-- copy and paste from
+-- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+	callback = function(args)
+		-- 2
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 3
+			buffer = args.buf,
+			callback = function()
+				-- 4 + 5
+				vim.lsp.buf.format { async = false, id = args.data.client_id }
+			end,
+		})
+	end
+})
