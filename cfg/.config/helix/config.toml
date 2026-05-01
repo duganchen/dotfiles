@@ -8,3 +8,4 @@ line-number = "relative"
 # This *is* necessary on my setup.
 # Test with :get true-color
 true-color = true
+bufferline = "multiple"
