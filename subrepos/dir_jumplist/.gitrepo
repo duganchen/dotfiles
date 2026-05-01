@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:duganchen/dir_jumplist.git
+	branch = main
+	commit = fc3f739669eff7e6a5527019f54d70dc2da48918
+	parent = 2ea2ef13faa7f9689ed01b3393b6c73887b3d8a8
+	method = merge
+	cmdver = 0.4.9
