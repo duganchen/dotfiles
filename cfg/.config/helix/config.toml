@@ -1,4 +1,10 @@
 theme = "catppuccin_macchiato_transparent"
 
+# Some ideas may eventually come from:
+# https://tqwewe.com/blog/enhanced-helix-config/
+
 [editor]
 line-number = "relative"
+# This *is* necessary on my setup.
+# Test with :get true-color
+true-color = true

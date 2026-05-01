@@ -44,6 +44,16 @@ vim.o.complete = "o,.,w,b,u"
 vim.o.completeopt = "fuzzy,menuone,noselect,popup"
 vim.o.number = true
 vim.o.relativenumber = true
+vim.opt.smartindent = true
+vim.opt.autoindent = true
+
+-- This should use TreeSitter for folding?
+-- They're from this video:
+-- https://youtu.be/lljs_7xB7Ps?si=1ayi3G1osYr3Nq_k
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- start with folds open
+vim.opt.foldlevel = 99
 
 
 vim.lsp.config('lua_ls', {
