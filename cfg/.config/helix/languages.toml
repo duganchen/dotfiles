@@ -4,7 +4,6 @@ biome = { command = "biome", args = ["lsp-proxy"] }
 # Install bash-language-server
 [[language]]
 name = "bash"
-formatter = { command = "shfmt" }
 auto-format = true
 
 # Install clangd
