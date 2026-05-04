@@ -1,7 +1,7 @@
 function j
     _jgc
-    if test -f ~/.fish_dir_jumplist.txt
-        set -l jumplist (cat ~/.fish_dir_jumplist.txt)
+    if test -f ~/.dir_jumplist.txt
+        set -l jumplist (cat ~/.dir_jumplist.txt)
         if set -l index (contains -i $PWD $jumplist)
             set -e jumplist[$index]
         end

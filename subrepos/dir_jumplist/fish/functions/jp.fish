@@ -1,8 +1,8 @@
 function jp
     _jgc
 
-    if test -f ~/.fish_dir_jumplist.txt
-        set -l jumplist (cat ~/.fish_dir_jumplist.txt)
+    if test -f ~/.dir_jumplist.txt
+        set -l jumplist (cat ~/.dir_jumplist.txt)
         for i in (seq (count $jumplist))
             if test $jumplist[$i] = $PWD
                 set found
