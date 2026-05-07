@@ -11,7 +11,9 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-telescope/telescope.nvim.git',
 	-- for neocmake
 	'git@github.com:L3MON4D3/LuaSnip.git',
-	'git@github.com:hjson/vim-hjson.git'
+	'git@github.com:hjson/vim-hjson.git',
+	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
+
 
 }
 require('catppuccin').setup({ transparent_background = true })
