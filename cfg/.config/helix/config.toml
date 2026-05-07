@@ -9,3 +9,6 @@ line-number = "relative"
 # Test with :get true-color
 true-color = true
 bufferline = "multiple"
+# In the next version?
+# https://github.com/helix-editor/helix/pull/13530
+# rainbow-brackets = true
