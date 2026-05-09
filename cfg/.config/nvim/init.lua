@@ -8,13 +8,15 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-lualine/lualine.nvim.git',
 	-- It's too early to care that this is "archived."
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
+	'git@github.com:nvim-lua/plenary.nvim.git',
 	'git@github.com:nvim-telescope/telescope.nvim.git',
+	-- I'm still figuring out the build step. I just run "make" from here:
+	-- ~/.local/share/nvim/site/pack/core/opt/telescope-fzf-native.nvim
+	'git@github.com:nvim-telescope/telescope-fzf-native.nvim.git',
 	-- for neocmake
 	'git@github.com:L3MON4D3/LuaSnip.git',
 	'git@github.com:hjson/vim-hjson.git',
 	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
-
-
 }
 require('catppuccin').setup({ transparent_background = true })
 
@@ -23,6 +25,15 @@ require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish',
 	'markdown',
 	'python', 'toml',
 	'yaml' })
+
+require('telescope').setup({})
+require('telescope').load_extension('fzf')
+
+-- Let's go with the classic Command-T bindings
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'Telescope jump list entries' })
+vim.keymap.set('n', '<leader>t', builtin.find_files, { desc = 'Telescope find files' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
