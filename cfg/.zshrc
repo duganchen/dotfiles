@@ -97,12 +97,31 @@ function git_info() {
   echo "%F{$host_color}($branch)%f"
 }
 
-# Check for 256-color support
-if [[ "$TERM" == *256color* ]]; then
-  # Use ANSI 2 and terminal foreground with Fish-like path
-  PROMPT="%F{$user_color}%n%f@%F{$host_color}%m%f %F{$path_color}\$(fish_like_path)\$(git_info)%f %# "
+if whence -p zoxide > /dev/null ; then
+  eval "$(starship init zsh)"  
 else
-  # Fallback to ANSI 2 and terminal foreground with Fish-like path
-  PROMPT="%F{$user_color}%n%f@%F{$host_color}%m%f %F{$path_color}\$(fish_like_path)\$(git_info)%f %# "
+  # Fall back to ghostty's setup
+   
+  # Check for 256-color support
+  if [[ "$TERM" == *256color* ]]; then
+    # Use ANSI 2 and terminal foreground with Fish-like path
+    PROMPT="%F{$user_color}%n%f@%F{$host_color}%m%f %F{$path_color}\$(fish_like_path)\$(git_info)%f %# "
+  else
+    # Fallback to ANSI 2 and terminal foreground with Fish-like path
+    PROMPT="%F{$user_color}%n%f@%F{$host_color}%m%f %F{$path_color}\$(fish_like_path)\$(git_info)%f %# "
+  fi
 fi
 
+# My additions
+
+if whence -p zoxide > /dev/null ; then
+  eval "$(zoxide init zsh)"
+fi
+
+if whence -p fzf > /dev/null ; then
+  source <(fzf --zsh)
+fi
+
+if [ -f ~/.zsh/zshrc-local ]; then
+  . ~/.zsh/local.zsh
+fi
