@@ -34,3 +34,6 @@
 [submodule "subrepos/fast-syntax-highlighting"]
 	path = subrepos/fast-syntax-highlighting
 	url = git@github.com:zdharma-continuum/fast-syntax-highlighting.git
+[submodule "subrepos/git-commit-browser-for-kitty"]
+	path = subrepos/git-commit-browser-for-kitty
+	url = git@github.com:duganchen/git-commit-browser-for-kitty.git
