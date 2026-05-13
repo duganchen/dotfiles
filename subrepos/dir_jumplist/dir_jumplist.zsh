@@ -90,9 +90,9 @@ j() {
 		if [[ ${#jumplist} -gt 0 ]]; then
 			local d=""
 			if [[ "$1" != "" ]]; then
-				d=$(print -l $jumplist | fzf --scheme=path --select-1 --query=$argv[1])
+				d=$(print -l $jumplist | fzf --scheme=path --exact --select-1 --query=$argv[1])
 			else
-				d=$(print -l $jumplist | fzf --scheme=path --select-1)
+				d=$(print -l $jumplist | fzf --scheme=path --exact --select-1)
 			fi
 
 			if [[ -n "$d" && -d "$d" ]]; then

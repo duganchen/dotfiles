@@ -121,9 +121,9 @@ j() {
 		if [ ${#jumplist[@]} -gt 0 ]; then
 			local d
 			if [[ "$1" != "" ]]; then
-				d=$(printf "%s\n" "${jumplist[@]}" | fzf --scheme=path --select-1 --query="$1")
+				d=$(printf "%s\n" "${jumplist[@]}" | fzf --scheme=path --exact --select-1 --query="$1")
 			else
-				d=$(printf "%s\n" "${jumplist[@]}" | fzf --scheme=path --select-1 --query="$1")
+				d=$(printf "%s\n" "${jumplist[@]}" | fzf --scheme=path --exact --select-1 --query="$1")
 			fi
 			if [[ "$d" != "" && -d "$d" ]]; then
 				cd "$d" || return

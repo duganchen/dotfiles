@@ -14,8 +14,11 @@ The functions are:
   directory to jump to. Specifying foo will query for directories in the
   jumplist that match foo.
 
-The jumplist is stored in ~/.dir_jumplist.txt and you can edit or delete that
-file as needed.
+The jumplist is stored in ~/.dir_jumplist.txt, and you can rearrange or trim
+that file as needed.
+
+Copy the contents of fish/functions into ~/.config/fish/functions. Source the
+BASH and Zsh files.
 
 ## Workflow Notes
 
@@ -31,8 +34,8 @@ I'm not a fan of frecency-based directory changers (fasd) because they're not
 predictable.
 
 I don't really like directory changers that hook into the cd command (zoxide,
-autojump, etc), because presenting me with my entire cd history gives me too
-much noise to sort through.
+autojump, etc), because tracking my cd history gives me too much noise to sort
+through.
 
 I find directory-bookmarkers (bashmarks) too cumbersome and limited.
 
@@ -47,5 +50,5 @@ directories in the jumplist. And I want to be able to easily edit the jumplist
 
 ## Contributor's Guide
 
-I have fish-lsp and bash-language-server set to format-on-save. Please set up
+I use fish-lsp and bash-language-server set to format and lint. Please set up
 your editor or IDE similarly.
