@@ -55,3 +55,6 @@
 [submodule "subrepos/vim/fugitive"]
 	path = subrepos/vim/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
+[submodule "subrepos/vim/hjson"]
+	path = subrepos/vim/hjson
+	url = git@github.com:hjson/vim-hjson.git
