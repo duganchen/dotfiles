@@ -67,3 +67,6 @@
 [submodule "subrepos/vim/surround"]
 	path = subrepos/vim/surround
 	url = git@github.com:tpope/vim-surround.git
+[submodule "subrepos/vim/unimpaired"]
+	path = subrepos/vim/unimpaired
+	url = git@github.com:tpope/vim-unimpaired.git
