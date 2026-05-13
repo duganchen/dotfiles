@@ -49,3 +49,6 @@
 [submodule "subrepos/mpv/uosc"]
 	path = subrepos/mpv/uosc
 	url = git@github.com:tomasklaen/uosc.git
+[submodule "subrepos/one-table-column.xplr"]
+	path = subrepos/one-table-column.xplr
+	url = git@github.com:duganchen/one-table-column.xplr.git
