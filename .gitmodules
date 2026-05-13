@@ -25,3 +25,6 @@
 [submodule "subrepos/dirmarks"]
 	path = subrepos/dirmarks
 	url = git@github.com:duganchen/dirmarks.git
+[submodule "subrepos/extra-icons.xplr"]
+	path = subrepos/extra-icons.xplr
+	url = git@github.com:dtomvan/extra-icons.xplr.git
