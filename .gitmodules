@@ -52,3 +52,6 @@
 [submodule "subrepos/one-table-column.xplr"]
 	path = subrepos/one-table-column.xplr
 	url = git@github.com:duganchen/one-table-column.xplr.git
+[submodule "subrepos/vim/fugitive"]
+	path = subrepos/vim/fugitive
+	url = git@github.com:tpope/vim-fugitive.git
