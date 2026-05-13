@@ -16,3 +16,6 @@
 [submodule "subrepos/catppuccin/vim"]
 	path = subrepos/catppuccin/vim
 	url = git@github.com:catppuccin/vim.git
+[submodule "subrepos/context-switch.xplr"]
+	path = subrepos/context-switch.xplr
+	url = git@github.com:igorepst/context-switch.xplr.git
