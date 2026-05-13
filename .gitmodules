@@ -7,3 +7,9 @@
 [submodule "subrepos/catppuccin/mc"]
 	path = subrepos/catppuccin/mc
 	url = git@github.com:catppuccin/mc.git
+[submodule "subrepos/catppuccin/micro"]
+	path = subrepos/catppuccin/micro
+	url = git@github.com:catppuccin/micro.git
+[submodule "subrepos/catppuccin/tmux"]
+	path = subrepos/catppuccin/tmux
+	url = git@github.com:catppuccin/tmux.git
