@@ -125,7 +125,9 @@ j() {
 			else
 				d=$(printf "%s\n" "${jumplist[@]}" | fzf --scheme=path --select-1 --query="$1")
 			fi
-			cd "$d" || return
+			if [[ "$d" != "" && -d "$d" ]]; then
+				cd "$d" || return
+			fi
 		fi
 	fi
 }

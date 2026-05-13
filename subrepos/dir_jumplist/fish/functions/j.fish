@@ -6,14 +6,14 @@ function j
             set -e jumplist[$index]
         end
         if test (count $jumplist) -gt 0
-            set -l d
+            set -f d
             if set -q $argv[1]
-                set -l d (printf "%s\n" $jumplist | fzf --scheme=path --select-1 --query=$argv[1])
+                set -f d (printf "%s\n" $jumplist | fzf --scheme=path --select-1 --query=$argv[1])
             else
-                set -l d (printf "%s\n" $jumplist | fzf --scheme=path --select-1)
+                set -f d (printf "%s\n" $jumplist | fzf --scheme=path --select-1)
             end
 
-            if test -d $d
+            if test -n "$d" && test -d $d
                 cd $d
             end
         end

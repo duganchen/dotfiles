@@ -95,7 +95,7 @@ j() {
 				d=$(print -l $jumplist | fzf --scheme=path --select-1)
 			fi
 
-			if [[ -d "$d" ]]; then
+			if [[ -n "$d" && -d "$d" ]]; then
 				cd "$d"
 			fi 
 		fi
