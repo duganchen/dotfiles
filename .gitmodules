@@ -3,4 +3,7 @@
 	url = git@github.com:catppuccin/bat.git
 [submodule "subrepos/catppuccin/kitty"]
 	path = subrepos/catppuccin/kitty
-	url = https://github.com/catppuccin/kitty
+	url = git@github.com:catppuccin/kitty
+[submodule "subrepos/catppuccin/mc"]
+	path = subrepos/catppuccin/mc
+	url = git@github.com:catppuccin/mc.git
