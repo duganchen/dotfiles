@@ -13,3 +13,6 @@
 [submodule "subrepos/catppuccin/tmux"]
 	path = subrepos/catppuccin/tmux
 	url = git@github.com:catppuccin/tmux.git
+[submodule "subrepos/catppuccin/vim"]
+	path = subrepos/catppuccin/vim
+	url = git@github.com:catppuccin/vim.git
