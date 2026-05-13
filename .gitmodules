@@ -43,3 +43,6 @@
 [submodule "subrepos/mpv/mpv-scripts"]
 	path = subrepos/mpv/mpv-scripts
 	url = git@github.com:Eisa01/mpv-scripts.git
+[submodule "subrepos/mpv/thumbfast"]
+	path = subrepos/mpv/thumbfast
+	url = git@github.com:po5/thumbfast.git
