@@ -38,8 +38,8 @@ require('mini.bracketed').setup()
 
 -- Note that mini.basics has set the leader key to space
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
