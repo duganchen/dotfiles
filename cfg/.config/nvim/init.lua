@@ -19,6 +19,7 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-mini/mini.basics.git', -- sensible
 	'git@github.com:nvim-mini/mini.surround.git', -- surround
 	'git@github.com:nvim-mini/mini.bracketed.git', -- unimpaired
+
 	'git@github.com:nvim-mini/mini.ai.git',
 
 	-- For the file tree.
@@ -82,7 +83,6 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 	'yamlls' })
 
 require('lualine').setup()
-
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
