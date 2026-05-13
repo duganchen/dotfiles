@@ -58,3 +58,9 @@
 [submodule "subrepos/vim/hjson"]
 	path = subrepos/vim/hjson
 	url = git@github.com:hjson/vim-hjson.git
+[submodule "subrepos/vim/repeat"]
+	path = subrepos/vim/repeat
+	url = git@github.com:tpope/vim-repeat.git
+[submodule "subrepos/vim/sleuth"]
+	path = subrepos/vim/sleuth
+	url = git@github.com:tpope/vim-sleuth.git
