@@ -19,6 +19,11 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-mini/mini.basics.git', -- sensible
 	'git@github.com:nvim-mini/mini.surround.git', -- surround
 	'git@github.com:nvim-mini/mini.bracketed.git', -- unimpaired
+	'git@github.com:nvim-mini/mini.ai.git',
+
+	-- For the file tree.
+	-- https://www.reddit.com/r/neovim/comments/1r363ad/why_dont_you_use_a_file_explorer_nvimtree_neotree/
+	'git@github.com:/folke/snacks.nvim'
 
 }
 require('catppuccin').setup({ transparent_background = true })
@@ -35,6 +40,24 @@ require('telescope').load_extension('fzf')
 require('mini.basics').setup()
 require('mini.surround').setup()
 require('mini.bracketed').setup()
+require('mini.ai').setup()
+
+
+require('snacks').setup({
+	explorer = {
+		-- your explorer configuration comes here
+		-- or leave it empty to use the default settings
+		-- refer to the configuration section below
+	},
+	picker = {
+		sources = {
+			explorer = {
+				-- your explorer picker configuration comes here
+				-- or leave it empty to use the default settings
+			}
+		}
+	}
+})
 
 -- Note that mini.basics has set the leader key to space
 -- These are what Ctrl-T provided by default.
@@ -42,7 +65,10 @@ require('mini.bracketed').setup()
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'List Jump LIst entries' })
+vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'List Jump List entries' })
+-- And from Helix
+vim.keymap.set('n', '<leader>e', Snacks.explorer.open, { desc = 'open the explorer picker' })
+
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
@@ -56,6 +82,7 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 	'yamlls' })
 
 require('lualine').setup()
+
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
