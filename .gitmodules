@@ -19,3 +19,6 @@
 [submodule "subrepos/context-switch.xplr"]
 	path = subrepos/context-switch.xplr
 	url = git@github.com:igorepst/context-switch.xplr.git
+[submodule "subrepos/dir_jumplist"]
+	path = subrepos/dir_jumplist
+	url = git@github.com:duganchen/dir_jumplist.git
