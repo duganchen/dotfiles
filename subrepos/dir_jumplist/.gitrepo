@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:duganchen/dir_jumplist.git
 	branch = main
-	commit = b76a8bd33320e7265e665291de465f7a8f912ea2
-	parent = 04cb1eba1f048375198fbf301bbd361c71d62be6
+	commit = b14bf89cd49147ed52a75abac77e04cb3d0e4a03
+	parent = d769dd02730cfac2925b56761baf9075af90d231
 	method = merge
 	cmdver = 0.4.9
