@@ -73,3 +73,6 @@
 [submodule "subrepos/map.xplr"]
 	path = subrepos/map.xplr
 	url = https://github.com/sayanarijit/map.xplr
+[submodule "subrepos/find.xplr"]
+	path = subrepos/find.xplr
+	url = git@github.com:sayanarijit/find.xplr.git
