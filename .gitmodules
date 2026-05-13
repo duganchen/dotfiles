@@ -1,0 +1,3 @@
+[submodule "subrepos/catppuccin/bat"]
+	path = subrepos/catppuccin/bat
+	url = git@github.com:catppuccin/bat.git
