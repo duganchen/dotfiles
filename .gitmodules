@@ -37,3 +37,6 @@
 [submodule "subrepos/git-commit-browser-for-kitty"]
 	path = subrepos/git-commit-browser-for-kitty
 	url = git@github.com:duganchen/git-commit-browser-for-kitty.git
+[submodule "subrepos/icons.xplr"]
+	path = subrepos/icons.xplr
+	url = git@github.com:prncss-xyz/icons.xplr.git
