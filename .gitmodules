@@ -64,3 +64,6 @@
 [submodule "subrepos/vim/sleuth"]
 	path = subrepos/vim/sleuth
 	url = git@github.com:tpope/vim-sleuth.git
+[submodule "subrepos/vim/surround"]
+	path = subrepos/vim/surround
+	url = git@github.com:tpope/vim-surround.git
