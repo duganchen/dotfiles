@@ -1,9 +1,7 @@
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	'https://github.com/neovim/nvim-lspconfig',
-	'git@github.com:tpope/vim-surround.git',
-	'https://github.com/tpope/vim-unimpaired',
+	-- still want this Tim Pope plugin
 	'git@github.com:tpope/vim-sleuth.git',
-	'git@github.com:tpope/vim-repeat.git',
 	'https://github.com/nvim-tree/nvim-web-devicons',
 	'git@github.com:nvim-lualine/lualine.nvim.git',
 	-- It's too early to care that this is "archived."
@@ -16,7 +14,12 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- for neocmake
 	'git@github.com:L3MON4D3/LuaSnip.git',
 	'git@github.com:hjson/vim-hjson.git',
-	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
+	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
+	-- Let's replace the standard Tim Pope plugins
+	'git@github.com:nvim-mini/mini.basics.git', -- sensible
+	'git@github.com:nvim-mini/mini.surround.git', -- surround
+	'git@github.com:nvim-mini/mini.bracketed.git', -- unimpaired
+
 }
 require('catppuccin').setup({ transparent_background = true })
 
@@ -29,11 +32,14 @@ require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish',
 require('telescope').setup({})
 require('telescope').load_extension('fzf')
 
--- Let's go with the classic Command-T bindings
+require('mini.basics').setup()
+require('mini.surround').setup()
+require('mini.bracketed').setup()
+
+-- Note that mini.basics has set the leader key to space
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'Telescope jump list entries' })
-vim.keymap.set('n', '<leader>t', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
@@ -55,10 +61,6 @@ vim.o.autocomplete = true
 -- https://www.reddit.com/r/neovim/comments/1pd6pg8/comment/ns4yopi/
 vim.o.complete = "o,.,w,b,u"
 vim.o.completeopt = "fuzzy,menuone,noselect,popup"
-vim.o.number = true
-vim.o.relativenumber = true
-vim.opt.smartindent = true
-vim.opt.autoindent = true
 
 -- This should use TreeSitter for folding?
 -- They're from this video:
