@@ -46,3 +46,6 @@
 [submodule "subrepos/mpv/thumbfast"]
 	path = subrepos/mpv/thumbfast
 	url = git@github.com:po5/thumbfast.git
+[submodule "subrepos/mpv/uosc"]
+	path = subrepos/mpv/uosc
+	url = git@github.com:tomasklaen/uosc.git
