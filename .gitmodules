@@ -22,3 +22,6 @@
 [submodule "subrepos/dir_jumplist"]
 	path = subrepos/dir_jumplist
 	url = git@github.com:duganchen/dir_jumplist.git
+[submodule "subrepos/dirmarks"]
+	path = subrepos/dirmarks
+	url = git@github.com:duganchen/dirmarks.git
