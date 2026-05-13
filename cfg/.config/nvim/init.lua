@@ -37,9 +37,12 @@ require('mini.surround').setup()
 require('mini.bracketed').setup()
 
 -- Note that mini.basics has set the leader key to space
+-- These are what Ctrl-T provided by default.
+-- Keybindings match Helix.
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'List Jump LIst entries' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
