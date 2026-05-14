@@ -24,7 +24,9 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 
 	-- For the file tree.
 	-- https://www.reddit.com/r/neovim/comments/1r363ad/why_dont_you_use_a_file_explorer_nvimtree_neotree/
-	'git@github.com:/folke/snacks.nvim'
+	'git@github.com:/folke/snacks.nvim',
+
+	'git@github.com:mason-org/mason.nvim.git'
 
 }
 require('catppuccin').setup({ transparent_background = true })
@@ -43,6 +45,7 @@ require('mini.surround').setup()
 require('mini.bracketed').setup()
 require('mini.ai').setup()
 
+require('mason').setup()
 
 require('snacks').setup({
 	explorer = {
