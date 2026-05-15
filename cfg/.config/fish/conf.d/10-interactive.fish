@@ -26,5 +26,10 @@ if status is-interactive
 
     set -x BAT_THEME 'Catppuccin Macchiato'
 
+    # Install fnm and fish_add_path ~/.local/share/fnm
+    if command -v fnm
+        fnm env --use-on-cd --shell fish | source
+    end
+
     fastfetch
 end
