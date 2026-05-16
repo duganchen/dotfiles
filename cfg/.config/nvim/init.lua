@@ -1,3 +1,17 @@
+-- Reading https://neovim.io/doc/user/pack
+-- Anyway, ChatGPT wrote this, with instructions to put it before
+-- vim.pack.add.
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		if ev.data.spec.name == "telescope-fzf-native.nvim" then
+			vim.system({ "make" }, {
+				cwd = ev.data.path,
+			}):wait()
+		end
+	end,
+})
+
+
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	'https://github.com/neovim/nvim-lspconfig',
 	-- still want this Tim Pope plugin
@@ -8,8 +22,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:nvim-lua/plenary.nvim.git',
 	'git@github.com:nvim-telescope/telescope.nvim.git',
-	-- I'm still figuring out the build step. I just run "make" from here:
-	-- ~/.local/share/nvim/site/pack/core/opt/telescope-fzf-native.nvim
 	'git@github.com:nvim-telescope/telescope-fzf-native.nvim.git',
 	-- for neocmake
 	'git@github.com:L3MON4D3/LuaSnip.git',
@@ -48,23 +60,7 @@ require('mini.ai').setup()
 
 require('mason').setup()
 
--- require('which-key').setup()
-
-require('snacks').setup({
-	explorer = {
-		-- your explorer configuration comes here
-		-- or leave it empty to use the default settings
-		-- refer to the configuration section below
-	},
-	picker = {
-		sources = {
-			explorer = {
-				-- your explorer picker configuration comes here
-				-- or leave it empty to use the default settings
-			}
-		}
-	}
-})
+require('snacks').setup()
 
 -- Note that mini.basics has set the leader key to space
 -- These are what Ctrl-T provided by default.
