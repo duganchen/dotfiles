@@ -125,3 +125,5 @@ fi
 if [ -f ~/.zsh/zshrc-local ]; then
   . ~/.zsh/local.zsh
 fi
+
+source /home/dugan/.config/broot/launcher/bash/br
