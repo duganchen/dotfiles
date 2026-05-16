@@ -26,7 +26,8 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- https://www.reddit.com/r/neovim/comments/1r363ad/why_dont_you_use_a_file_explorer_nvimtree_neotree/
 	'git@github.com:/folke/snacks.nvim',
 
-	'git@github.com:mason-org/mason.nvim.git'
+	'git@github.com:mason-org/mason.nvim.git',
+	'git@github.com:folke/which-key.nvim.git'
 
 }
 require('catppuccin').setup({ transparent_background = true })
@@ -46,6 +47,8 @@ require('mini.bracketed').setup()
 require('mini.ai').setup()
 
 require('mason').setup()
+
+-- require('which-key').setup()
 
 require('snacks').setup({
 	explorer = {
@@ -72,7 +75,7 @@ vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find fi
 vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'List Jump List entries' })
 -- And from Helix
 vim.keymap.set('n', '<leader>e', Snacks.explorer.open, { desc = 'open the explorer picker' })
-
+vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Telescope live grep' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
