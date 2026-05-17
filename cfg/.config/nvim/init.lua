@@ -247,10 +247,11 @@ vim.keymap.set({ "x", "o" }, "if", function()
 end)
 
 -- class/type
-vim.keymap.set({ "x", "o" }, "at", function()
+-- Changing it from Helix's "t" because in vim, "t" is "tag"
+vim.keymap.set({ "x", "o" }, "aT", function()
 	require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
 end)
-vim.keymap.set({ "x", "o" }, "it", function()
+vim.keymap.set({ "x", "o" }, "iT", function()
 	require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
 end)
 
@@ -292,11 +293,11 @@ end)
 
 -- class/type
 
-vim.keymap.set({ "n", "x", "o" }, "]t", function()
+vim.keymap.set({ "n", "x", "o" }, "]T", function()
 	require("nvim-treesitter-textobjects.move").goto_next("@class.outer", "textobjects")
 end)
 
-vim.keymap.set({ "n", "x", "o" }, "[t", function()
+vim.keymap.set({ "n", "x", "o" }, "[T", function()
 	require("nvim-treesitter-textobjects.move").goto_previous("@class.outer", "textobjects")
 end)
 
