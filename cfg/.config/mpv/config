@@ -1,3 +1,4 @@
 vo=gpu
 gpu-api=vulkan
 profile=high-quality
+save-position-on-quit
