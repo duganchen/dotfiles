@@ -90,7 +90,16 @@ vim.cmd.colorscheme "catppuccin-macchiato"
 
 local cmp = require('blink.cmp')
 cmp.build():wait(60000)
-cmp.setup({ keymap = { preset = 'super-tab' } })
+-- This is fairly close to what Helix, VSCode, and other modern editors do
+-- https://github.com/saghen/blink.cmp/discussions/576#discussioncomment-13750907
+cmp.setup({
+	keymap = {
+		preset = 'enter',
+		["<Tab>"] = { "select_next", "fallback" },
+		["<S-Tab>"] = { "select_prev", "fallback" },
+	},
+	completion = { list = { selection = { preselect = false, auto_insert = true } } }
+})
 
 -- This should use TreeSitter for folding?
 -- They're from this video:
