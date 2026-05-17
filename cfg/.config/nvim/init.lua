@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 				cwd = ev.data.path,
 			}):wait()
 		end
-	end,
+	end
 })
 
 
@@ -37,7 +37,9 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 
 	'git@github.com:mason-org/mason.nvim.git',
 	'git@github.com:folke/which-key.nvim.git',
-	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git'
+	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git',
+	'git@github.com:saghen/blink.cmp.git',
+	'git@github.com:saghen/blink.lib.git'
 
 }
 require('catppuccin').setup({ transparent_background = true })
@@ -86,11 +88,9 @@ require('lualine').setup()
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
--- Remember: ctrl+n and ctrl+p
-vim.o.autocomplete = true
--- https://www.reddit.com/r/neovim/comments/1pd6pg8/comment/ns4yopi/
-vim.o.complete = "o,.,w,b,u"
-vim.o.completeopt = "fuzzy,menuone,noselect,popup"
+local cmp = require('blink.cmp')
+cmp.build():wait(60000)
+cmp.setup({ keymap = { preset = 'super-tab' } })
 
 -- This should use TreeSitter for folding?
 -- They're from this video:
