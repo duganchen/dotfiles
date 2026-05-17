@@ -30,16 +30,14 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- Let's replace the standard Tim Pope plugins
 	'git@github.com:nvim-mini/mini.basics.git', -- sensible
 	'git@github.com:nvim-mini/mini.surround.git', -- surround
-	'git@github.com:nvim-mini/mini.bracketed.git', -- unimpaired
-
-	'git@github.com:nvim-mini/mini.ai.git',
 
 	-- For the file tree.
 	-- https://www.reddit.com/r/neovim/comments/1r363ad/why_dont_you_use_a_file_explorer_nvimtree_neotree/
 	'git@github.com:/folke/snacks.nvim',
 
 	'git@github.com:mason-org/mason.nvim.git',
-	'git@github.com:folke/which-key.nvim.git'
+	'git@github.com:folke/which-key.nvim.git',
+	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git'
 
 }
 require('catppuccin').setup({ transparent_background = true })
@@ -50,13 +48,13 @@ require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish',
 	'python', 'toml',
 	'yaml' })
 
+require('nvim-treesitter-textobjects').setup()
+
 require('telescope').setup({})
 require('telescope').load_extension('fzf')
 
 require('mini.basics').setup()
 require('mini.surround').setup()
-require('mini.bracketed').setup()
-require('mini.ai').setup()
 
 require('mason').setup()
 
@@ -193,3 +191,118 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		})
 	end
 })
+
+-- This is an attempt to use nvim-treesitter-textobjects to replicate Helix's text objects
+
+require("nvim-treesitter-textobjects").setup {
+	select = {
+		-- Automatically jump forward to textobj, similar to targets.vim
+		lookahead = true,
+		-- You can choose the select mode (default is charwise 'v')
+		--
+		-- Can also be a function which gets passed a table with the keys
+		-- * query_string: eg '@function.inner'
+		-- * method: eg 'v' or 'o'
+		-- and should return the mode ('v', 'V', or '<c-v>') or a table
+		-- mapping query_strings to modes.
+		selection_modes = {
+			['@parameter.outer'] = 'v', -- charwise
+			['@function.outer'] = 'V', -- linewise
+			['@class.outer'] = '<c-v>', -- blockwise
+		},
+	},
+	-- If you set this to `true` (default is `false`) then any textobject is
+	-- extended to include preceding or succeeding whitespace. Succeeding
+	-- whitespace has priority in order to act similarly to eg the built-in
+	-- `ap`.
+	--
+	-- Can also be a function which gets passed a table with the keys
+	-- * query_string: eg '@function.inner'
+	-- * selection_mode: eg 'v'
+	-- and should return true of false
+	include_surrounding_whitespace = false,
+}
+
+-- keymaps
+-- You can use the capture groups defined in `textobjects.scm`
+
+-- function
+vim.keymap.set({ "x", "o" }, "af", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+end)
+vim.keymap.set({ "x", "o" }, "if", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+end)
+
+-- class/type
+vim.keymap.set({ "x", "o" }, "at", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+end)
+vim.keymap.set({ "x", "o" }, "it", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+end)
+
+-- parameter
+vim.keymap.set({ "x", "o" }, "aa", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@parameter.outer", "textobjects")
+end)
+vim.keymap.set({ "x", "o" }, "ia", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@parameter.inner", "textobjects")
+end)
+
+-- comment
+vim.keymap.set({ "x", "o" }, "ac", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@comment.outer", "textobjects")
+end)
+vim.keymap.set({ "x", "o" }, "ic", function()
+	require "nvim-treesitter-textobjects.select".select_textobject("@comment.inner", "textobjects")
+end)
+
+-- And movement now
+
+-- configuration
+require("nvim-treesitter-textobjects").setup {
+	move = {
+		-- whether to set jumps in the jumplist
+		set_jumps = true,
+	},
+}
+
+-- function
+
+vim.keymap.set({ "n", "x", "o" }, "]f", function()
+	require("nvim-treesitter-textobjects.move").goto_next("@function.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[f", function()
+	require("nvim-treesitter-textobjects.move").goto_previous("@function.outer", "textobjects")
+end)
+
+-- class/type
+
+vim.keymap.set({ "n", "x", "o" }, "]t", function()
+	require("nvim-treesitter-textobjects.move").goto_next("@class.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[t", function()
+	require("nvim-treesitter-textobjects.move").goto_previous("@class.outer", "textobjects")
+end)
+
+-- parameter/argument
+
+vim.keymap.set({ "n", "x", "o" }, "]a", function()
+	require("nvim-treesitter-textobjects.move").goto_next("@parameter.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[a", function()
+	require("nvim-treesitter-textobjects.move").goto_previous("@parameter.outer", "textobjects")
+end)
+
+-- comment
+vim.keymap.set({ "n", "x", "o" }, "]c", function()
+	require("nvim-treesitter-textobjects.move").goto_next("@comment.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[c", function()
+	require("nvim-treesitter-textobjects.move").goto_previous("@comment.outer", "textobjects")
+end)
