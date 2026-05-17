@@ -4,3 +4,4 @@ profile=high-quality
 save-position-on-quit
 hwdec=vaapi
 video-sync=display-resample
+gpu-context=waylandvk
