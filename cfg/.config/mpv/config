@@ -2,5 +2,5 @@ vo=gpu-next
 gpu-api=vulkan
 profile=high-quality
 save-position-on-quit
-hwdec=vaapi-copy
+hwdec=vaapi
 video-sync=display-resample
