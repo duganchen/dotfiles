@@ -30,13 +30,14 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- Let's replace the standard Tim Pope plugins
 	'git@github.com:nvim-mini/mini.basics.git', -- sensible
 	'git@github.com:nvim-mini/mini.surround.git', -- surround
+	'git@github.com:nvim-mini/mini.clue.git',
+	'git@github.com:nvim-mini/mini.pairs.git',
 
 	-- For the file tree.
 	-- https://www.reddit.com/r/neovim/comments/1r363ad/why_dont_you_use_a_file_explorer_nvimtree_neotree/
 	'git@github.com:/folke/snacks.nvim',
 
 	'git@github.com:mason-org/mason.nvim.git',
-	'git@github.com:folke/which-key.nvim.git',
 	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git',
 	'git@github.com:saghen/blink.cmp.git',
 	'git@github.com:saghen/blink.lib.git'
@@ -57,6 +58,8 @@ require('telescope').load_extension('fzf')
 
 require('mini.basics').setup()
 require('mini.surround').setup()
+require('mini.pairs').setup()
+-- mini.clue is set up below
 
 require('mason').setup()
 
@@ -111,6 +114,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- start with folds open
 vim.opt.foldlevel = 99
+vim.opt.clipboard = "unnamedplus"
 
 
 vim.lsp.config('lua_ls', {
@@ -319,3 +323,48 @@ end)
 vim.keymap.set({ "n", "x", "o" }, "[c", function()
 	require("nvim-treesitter-textobjects.move").goto_previous("@comment.outer", "textobjects")
 end)
+
+-- mini.clue from the README
+local miniclue = require('mini.clue')
+miniclue.setup({
+  triggers = {
+    -- Leader triggers
+    { mode = { 'n', 'x' }, keys = '<Leader>' },
+
+    -- `[` and `]` keys
+    { mode = 'n', keys = '[' },
+    { mode = 'n', keys = ']' },
+
+    -- Built-in completion
+    { mode = 'i', keys = '<C-x>' },
+
+    -- `g` key
+    { mode = { 'n', 'x' }, keys = 'g' },
+
+    -- Marks
+    { mode = { 'n', 'x' }, keys = "'" },
+    { mode = { 'n', 'x' }, keys = '`' },
+
+    -- Registers
+    { mode = { 'n', 'x' }, keys = '"' },
+    { mode = { 'i', 'c' }, keys = '<C-r>' },
+
+    -- Window commands
+    { mode = 'n', keys = '<C-w>' },
+
+    -- `z` key
+    { mode = { 'n', 'x' }, keys = 'z' },
+  },
+
+  clues = {
+    -- Enhance this by adding descriptions for <Leader> mapping groups
+    miniclue.gen_clues.square_brackets(),
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
+  },
+})
+
