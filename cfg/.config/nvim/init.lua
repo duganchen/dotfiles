@@ -87,6 +87,8 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 	'tombi',
 	'yamlls' })
 
+vim.lsp.codelens.enable(true)
+
 require('lualine').setup()
 
 vim.cmd.colorscheme "catppuccin-macchiato"
