@@ -1,9 +1,2 @@
-vo=gpu-next
-gpu-api=vulkan
 profile=high-quality
 save-position-on-quit
-hwdec=vaapi
-video-sync=display-resample
-gpu-context=waylandvk
-scale=ewa_lanczossharp
-cscale=ewa_lanczossharp
