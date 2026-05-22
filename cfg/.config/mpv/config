@@ -1,2 +1,4 @@
 profile=high-quality
 save-position-on-quit
+interpolation=yes
+video-sync=display-resample
