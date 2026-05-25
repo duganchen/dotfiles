@@ -1,3 +1,8 @@
+-- Note: To clean out unused packages, do:
+-- :lua vim.pack.update(nil, { offline = true })
+-- "gra" on (not active) packages
+-- https://www.reddit.com/r/neovim/comments/1r92p2y/comment/o69dr8l/
+
 -- Reading https://neovim.io/doc/user/pack
 -- Anyway, ChatGPT wrote this, with instructions to put it before
 -- vim.pack.add.
@@ -11,7 +16,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end
 })
 
-
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	'https://github.com/neovim/nvim-lspconfig',
 	-- still want this Tim Pope plugin
@@ -21,8 +25,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- It's too early to care that this is "archived."
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:nvim-lua/plenary.nvim.git',
-	'git@github.com:nvim-telescope/telescope.nvim.git',
-	'git@github.com:nvim-telescope/telescope-fzf-native.nvim.git',
 	-- for neocmake
 	'git@github.com:L3MON4D3/LuaSnip.git',
 	'git@github.com:hjson/vim-hjson.git',
@@ -31,23 +33,23 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-mini/mini.basics.git', -- sensible
 	'git@github.com:nvim-mini/mini.surround.git', -- surround
 	'git@github.com:nvim-mini/mini.clue.git',
-	'git@github.com:nvim-mini/mini.pairs.git',
-
-	-- For the file tree.
-	-- https://www.reddit.com/r/neovim/comments/1r363ad/why_dont_you_use_a_file_explorer_nvimtree_neotree/
-	'git@github.com:/folke/snacks.nvim',
+	'git@github.com:nvim-mini/mini.files.git',
+	'git@github.com:nvim-mini/mini.icons.git',
+	'git@github.com:nvim-mini/mini.ai.git',
+	'git@github.com:nvim-mini/mini.completion.git',
+	'git@github.com:nvim-mini/mini.pick.git',
+	'git@github.com:nvim-mini/mini.bracketed.git',
 
 	'git@github.com:mason-org/mason.nvim.git',
-	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git',
-	'git@github.com:saghen/blink.cmp.git',
-	'git@github.com:saghen/blink.lib.git',
 
-	-- Shall we use both?
+	-- Neither Kickstart nor LazyVim use fugitive, so
 	'git@github.com:lewis6991/gitsigns.nvim.git',
-	'git@github.com:tpope/vim-fugitive.git'
 
+	'git@github.com:j-hui/fidget.nvim.git'
 }
 require('catppuccin').setup({ transparent_background = true })
+
+require('fidget').setup()
 
 require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish', 'go', 'hjson', 'html', 'javascript',
 	'json', 'lua',
@@ -55,30 +57,37 @@ require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish',
 	'python', 'toml',
 	'yaml' })
 
-require('nvim-treesitter-textobjects').setup()
-
-require('telescope').setup({})
-require('telescope').load_extension('fzf')
-
+require('mini.ai').setup()
 require('mini.basics').setup()
 require('mini.surround').setup()
-require('mini.pairs').setup()
+require('mini.files').setup()
+require('mini.icons').setup()
+require('mini.completion').setup()
+require('mini.pick').setup()
+require('mini.bracketed').setup()
+
 -- mini.clue is set up below
 
 require('mason').setup()
 
-require('snacks').setup()
+-- these are from lazyvim
+require('gitsigns').setup({
+	signs = {
+		add = { text = '' },
+		change = { text = ' ' },
+		delete = { text = '' }
+
+	}
+})
 
 -- Note that mini.basics has set the leader key to space
--- These are what Ctrl-T provided by default.
--- Keybindings match Helix.
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>j', builtin.jumplist, { desc = 'List Jump List entries' })
--- And from Helix
-vim.keymap.set('n', '<leader>e', Snacks.explorer.open, { desc = 'open the explorer picker' })
-vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Telescope live grep' })
+-- Mostly using Kickstart's setup, which starts finders with "<space>" s.
+-- No jumplist though. Telescope has it, but AFAIK mini.pick doesn't
+vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = '[S]earch [B]uffers' })
+vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'open the explorer picker' })
+-- Or <leader>/
+vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = '[S]search by [G]rep' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
@@ -96,22 +105,6 @@ vim.lsp.codelens.enable(true)
 require('lualine').setup()
 
 vim.cmd.colorscheme "catppuccin-macchiato"
-
-local cmp = require('blink.cmp')
-cmp.build():wait(60000)
--- This is fairly close to what Helix, VSCode, and other modern editors do
--- https://github.com/saghen/blink.cmp/discussions/576#discussioncomment-13750907
-cmp.setup({
-	keymap = {
-		preset = 'enter',
-		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = { "select_prev", "fallback" },
-	},
-	completion = {
-		list = { selection = { preselect = false, auto_insert = true } },
-		documentation = { auto_show = true, auto_show_delay_ms = 500 }
-	}
-})
 
 -- This should use TreeSitter for folding?
 -- They're from this video:
@@ -168,7 +161,7 @@ vim.lsp.config('lua_ls', {
 		})
 	end,
 	settings = {
-		Lua = {},
+		Lua = { diagnostics = { globals = { 'MiniFiles', 'MiniPick' } } },
 	},
 })
 
@@ -213,122 +206,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		})
 	end
 })
-
--- This is an attempt to use nvim-treesitter-textobjects to replicate Helix's text objects
-
-require("nvim-treesitter-textobjects").setup {
-	select = {
-		-- Automatically jump forward to textobj, similar to targets.vim
-		lookahead = true,
-		-- You can choose the select mode (default is charwise 'v')
-		--
-		-- Can also be a function which gets passed a table with the keys
-		-- * query_string: eg '@function.inner'
-		-- * method: eg 'v' or 'o'
-		-- and should return the mode ('v', 'V', or '<c-v>') or a table
-		-- mapping query_strings to modes.
-		selection_modes = {
-			['@parameter.outer'] = 'v', -- charwise
-			['@function.outer'] = 'V', -- linewise
-			['@class.outer'] = '<c-v>', -- blockwise
-		},
-	},
-	-- If you set this to `true` (default is `false`) then any textobject is
-	-- extended to include preceding or succeeding whitespace. Succeeding
-	-- whitespace has priority in order to act similarly to eg the built-in
-	-- `ap`.
-	--
-	-- Can also be a function which gets passed a table with the keys
-	-- * query_string: eg '@function.inner'
-	-- * selection_mode: eg 'v'
-	-- and should return true of false
-	include_surrounding_whitespace = false,
-}
-
--- keymaps
--- You can use the capture groups defined in `textobjects.scm`
-
--- function
-vim.keymap.set({ "x", "o" }, "af", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
-end)
-vim.keymap.set({ "x", "o" }, "if", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
-end)
-
--- class/type
--- Changing it from Helix's "t" because in vim, "t" is "tag"
-vim.keymap.set({ "x", "o" }, "aT", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
-end)
-vim.keymap.set({ "x", "o" }, "iT", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
-end)
-
--- parameter
-vim.keymap.set({ "x", "o" }, "aa", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@parameter.outer", "textobjects")
-end)
-vim.keymap.set({ "x", "o" }, "ia", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@parameter.inner", "textobjects")
-end)
-
--- comment
-vim.keymap.set({ "x", "o" }, "ac", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@comment.outer", "textobjects")
-end)
-vim.keymap.set({ "x", "o" }, "ic", function()
-	require "nvim-treesitter-textobjects.select".select_textobject("@comment.inner", "textobjects")
-end)
-
--- And movement now
-
--- configuration
-require("nvim-treesitter-textobjects").setup {
-	move = {
-		-- whether to set jumps in the jumplist
-		set_jumps = true,
-	},
-}
-
--- function
-
-vim.keymap.set({ "n", "x", "o" }, "]f", function()
-	require("nvim-treesitter-textobjects.move").goto_next("@function.outer", "textobjects")
-end)
-
-vim.keymap.set({ "n", "x", "o" }, "[f", function()
-	require("nvim-treesitter-textobjects.move").goto_previous("@function.outer", "textobjects")
-end)
-
--- class/type
-
-vim.keymap.set({ "n", "x", "o" }, "]T", function()
-	require("nvim-treesitter-textobjects.move").goto_next("@class.outer", "textobjects")
-end)
-
-vim.keymap.set({ "n", "x", "o" }, "[T", function()
-	require("nvim-treesitter-textobjects.move").goto_previous("@class.outer", "textobjects")
-end)
-
--- parameter/argument
-
-vim.keymap.set({ "n", "x", "o" }, "]a", function()
-	require("nvim-treesitter-textobjects.move").goto_next("@parameter.outer", "textobjects")
-end)
-
-vim.keymap.set({ "n", "x", "o" }, "[a", function()
-	require("nvim-treesitter-textobjects.move").goto_previous("@parameter.outer", "textobjects")
-end)
-
--- comment
-vim.keymap.set({ "n", "x", "o" }, "]c", function()
-	require("nvim-treesitter-textobjects.move").goto_next("@comment.outer", "textobjects")
-end)
-
-vim.keymap.set({ "n", "x", "o" }, "[c", function()
-	require("nvim-treesitter-textobjects.move").goto_previous("@comment.outer", "textobjects")
-end)
 
 -- mini.clue from the README
 local miniclue = require('mini.clue')
