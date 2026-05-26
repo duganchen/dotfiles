@@ -45,7 +45,14 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- Neither Kickstart nor LazyVim use fugitive, so
 	'git@github.com:lewis6991/gitsigns.nvim.git',
 
-	'git@github.com:j-hui/fidget.nvim.git'
+	'git@github.com:j-hui/fidget.nvim.git',
+
+	'git@github.com:mfussenegger/nvim-dap.git',
+	'git@github.com:jay-babu/mason-nvim-dap.nvim.git',
+	'git@github.com:rcarriga/nvim-dap-ui.git',
+	'git@github.com:theHamsta/nvim-dap-virtual-text.git'
+
+
 }
 require('catppuccin').setup({ transparent_background = true })
 
@@ -66,9 +73,12 @@ require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.bracketed').setup()
 
+
 -- mini.clue is set up below
 
 require('mason').setup()
+require('mason-nvim-dap').setup()
+require('nvim-dap-virtual-text').setup()
 
 -- these are from lazyvim
 require('gitsigns').setup({
@@ -113,8 +123,6 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- start with folds open
 vim.opt.foldlevel = 99
-vim.opt.clipboard = "unnamedplus"
-
 
 vim.lsp.config('lua_ls', {
 	on_init = function(client)
@@ -237,6 +245,9 @@ miniclue.setup({
 
 		-- `z` key
 		{ mode = { 'n', 'x' }, keys = 'z' },
+
+		-- mini.basics. This wasn't in the copypasta?
+		{ mode = { 'n', 'x' }, keys = '\\' },
 	},
 
 	clues = {
