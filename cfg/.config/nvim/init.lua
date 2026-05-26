@@ -39,6 +39,7 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-mini/mini.completion.git',
 	'git@github.com:nvim-mini/mini.pick.git',
 	'git@github.com:nvim-mini/mini.bracketed.git',
+	{ src = 'git@github.com:nvim-mini/mini.extra.git', version = 'stable' },
 
 	'git@github.com:mason-org/mason.nvim.git',
 
@@ -72,6 +73,7 @@ require('mini.icons').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.bracketed').setup()
+require('mini.extra').setup()
 
 
 -- mini.clue is set up below
@@ -98,6 +100,20 @@ vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = '[S]earch [F]
 vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'open the explorer picker' })
 -- Or <leader>/
 vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = '[S]search by [G]rep' })
+-- from lazyvim
+function WorkspaceSymbolSearch()
+	MiniExtra.pickers.lsp({ scope = 'workspace_symbol' })
+end
+
+vim.keymap.set('n', '<leader>sS',
+	WorkspaceSymbolSearch, { desc = '[S]search [S]ymbols (workspace)' })
+
+function DocumentSymbolSearch()
+	MiniExtra.pickers.lsp({ scope = 'document_symbol' })
+end
+
+vim.keymap.set('n', '<leader>ss',
+	DocumentSymbolSearch, { desc = '[S]search [s]ymbols (document)' })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
@@ -169,7 +185,7 @@ vim.lsp.config('lua_ls', {
 		})
 	end,
 	settings = {
-		Lua = { diagnostics = { globals = { 'MiniFiles', 'MiniPick' } } },
+		Lua = { diagnostics = { globals = { 'MiniExtra', 'MiniFiles', 'MiniPick' } } },
 	},
 })
 
