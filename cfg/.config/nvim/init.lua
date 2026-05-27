@@ -27,23 +27,11 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:hjson/vim-hjson.git',
 	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
 	-- Let's replace the standard Tim Pope plugins
-	'git@github.com:nvim-mini/mini.basics.git', -- sensible
-	'git@github.com:nvim-mini/mini.surround.git', -- surround
-	'git@github.com:nvim-mini/mini.clue.git',
-	'git@github.com:nvim-mini/mini.icons.git',
-	'git@github.com:nvim-mini/mini.ai.git',
-	'git@github.com:nvim-mini/mini.completion.git',
-	'git@github.com:nvim-mini/mini.pick.git',
-	'git@github.com:nvim-mini/mini.bracketed.git',
-	{ src = 'git@github.com:nvim-mini/mini.extra.git', version = 'stable' },
-	{ src = 'git@github.com:nvim-mini/mini.icons.git', version = 'stable' },
-	{ src = 'git@github.com:nvim-mini/mini.misc.git',  version = 'stable' },
+	{ src = 'git@github.com:nvim-mini/mini.nvim.git', version = 'stable' },
 	'git@github.com:rafamadriz/friendly-snippets.git',
-	'git@github.com:nvim-mini/mini.snippets.git',
 
 	'git@github.com:mason-org/mason.nvim.git',
 
-	-- Neither Kickstart nor LazyVim use fugitive, so
 	'git@github.com:lewis6991/gitsigns.nvim.git',
 
 	'git@github.com:j-hui/fidget.nvim.git',
@@ -261,43 +249,48 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- mini.clue from the README
+-- Note that this currently differs quite a bit between stable and main
 local miniclue = require('mini.clue')
 miniclue.setup({
 	triggers = {
 		-- Leader triggers
-		{ mode = { 'n', 'x' }, keys = '<Leader>' },
-
-		-- `[` and `]` keys
-		{ mode = 'n',          keys = '[' },
-		{ mode = 'n',          keys = ']' },
+		{ mode = 'n', keys = '<Leader>' },
+		{ mode = 'x', keys = '<Leader>' },
 
 		-- Built-in completion
-		{ mode = 'i',          keys = '<C-x>' },
+		{ mode = 'i', keys = '<C-x>' },
 
 		-- `g` key
-		{ mode = { 'n', 'x' }, keys = 'g' },
+		{ mode = 'n', keys = 'g' },
+		{ mode = 'x', keys = 'g' },
 
 		-- Marks
-		{ mode = { 'n', 'x' }, keys = "'" },
-		{ mode = { 'n', 'x' }, keys = '`' },
+		{ mode = 'n', keys = "'" },
+		{ mode = 'n', keys = '`' },
+		{ mode = 'x', keys = "'" },
+		{ mode = 'x', keys = '`' },
 
 		-- Registers
-		{ mode = { 'n', 'x' }, keys = '"' },
-		{ mode = { 'i', 'c' }, keys = '<C-r>' },
+		{ mode = 'n', keys = '"' },
+		{ mode = 'x', keys = '"' },
+		{ mode = 'i', keys = '<C-r>' },
+		{ mode = 'c', keys = '<C-r>' },
 
 		-- Window commands
-		{ mode = 'n',          keys = '<C-w>' },
+		{ mode = 'n', keys = '<C-w>' },
 
 		-- `z` key
-		{ mode = { 'n', 'x' }, keys = 'z' },
+		{ mode = 'n', keys = 'z' },
+		{ mode = 'x', keys = 'z' },
 
-		-- mini.basics. This wasn't in the copypasta?
-		{ mode = { 'n', 'x' }, keys = '\\' },
+
+		-- `Miniclue backslash` key
+		{ mode = 'n', keys = '\\' },
+		{ mode = 'x', keys = '\\' },
 	},
 
 	clues = {
 		-- Enhance this by adding descriptions for <Leader> mapping groups
-		miniclue.gen_clues.square_brackets(),
 		miniclue.gen_clues.builtin_completion(),
 		miniclue.gen_clues.g(),
 		miniclue.gen_clues.marks(),
