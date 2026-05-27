@@ -20,7 +20,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'https://github.com/neovim/nvim-lspconfig',
 	-- still want this Tim Pope plugin
 	'git@github.com:tpope/vim-sleuth.git',
-	'git@github.com:nvim-lualine/lualine.nvim.git',
 	-- It's too early to care that this is "archived."
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:nvim-lua/plenary.nvim.git',
@@ -31,8 +30,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:rafamadriz/friendly-snippets.git',
 
 	'git@github.com:mason-org/mason.nvim.git',
-
-	'git@github.com:lewis6991/gitsigns.nvim.git',
 
 	'git@github.com:j-hui/fidget.nvim.git',
 
@@ -61,6 +58,10 @@ require('mini.pick').setup()
 require('mini.bracketed').setup()
 require('mini.extra').setup()
 require('mini.pairs').setup()
+require('mini.git').setup()
+require('mini.diff').setup()
+require('mini.notify').setup()
+require('mini.statusline').setup()
 require('mini.icons').setup()
 MiniIcons.mock_nvim_web_devicons()
 
@@ -88,16 +89,6 @@ require('mini.snippets').setup({
 require('mason').setup()
 require('mason-nvim-dap').setup()
 require('nvim-dap-virtual-text').setup()
-
--- these are from LazyVim
-require('gitsigns').setup({
-	signs = {
-		add = { text = '' },
-		change = { text = ' ' },
-		delete = { text = '' }
-
-	}
-})
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
@@ -143,8 +134,6 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 	'yamlls' })
 
 vim.lsp.codelens.enable(true)
-
-require('lualine').setup()
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
