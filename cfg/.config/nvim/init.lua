@@ -20,13 +20,10 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'https://github.com/neovim/nvim-lspconfig',
 	-- still want this Tim Pope plugin
 	'git@github.com:tpope/vim-sleuth.git',
-	'https://github.com/nvim-tree/nvim-web-devicons',
 	'git@github.com:nvim-lualine/lualine.nvim.git',
 	-- It's too early to care that this is "archived."
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:nvim-lua/plenary.nvim.git',
-	-- for neocmake
-	'git@github.com:L3MON4D3/LuaSnip.git',
 	'git@github.com:hjson/vim-hjson.git',
 	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
 	-- Let's replace the standard Tim Pope plugins
@@ -39,6 +36,10 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-mini/mini.pick.git',
 	'git@github.com:nvim-mini/mini.bracketed.git',
 	{ src = 'git@github.com:nvim-mini/mini.extra.git', version = 'stable' },
+	{ src = 'git@github.com:nvim-mini/mini.icons.git', version = 'stable' },
+	{ src = 'git@github.com:nvim-mini/mini.misc.git',  version = 'stable' },
+	'git@github.com:rafamadriz/friendly-snippets.git',
+	'git@github.com:nvim-mini/mini.snippets.git',
 
 	'git@github.com:mason-org/mason.nvim.git',
 
@@ -51,9 +52,8 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:jay-babu/mason-nvim-dap.nvim.git',
 	'git@github.com:rcarriga/nvim-dap-ui.git',
 	'git@github.com:theHamsta/nvim-dap-virtual-text.git'
-
-
 }
+
 require('catppuccin').setup({ transparent_background = true })
 
 require('fidget').setup()
@@ -72,7 +72,27 @@ require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.bracketed').setup()
 require('mini.extra').setup()
+require('mini.icons').setup()
+MiniIcons.mock_nvim_web_devicons()
 
+
+-- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
+require('mini.misc').setup()
+MiniMisc.setup_auto_root()
+
+
+-- Copy and paste from the mini.snippets README
+local gen_loader = require('mini.snippets').gen_loader
+require('mini.snippets').setup({
+	snippets = {
+		-- Load custom file with global snippets first (adjust for Windows)
+		gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+
+		-- Load snippets based on current language by reading files from
+		-- "snippets/" subdirectories from 'runtimepath' directories.
+		gen_loader.from_lang(),
+	},
+})
 
 -- mini.clue is set up below
 
@@ -194,7 +214,7 @@ vim.lsp.config('lua_ls', {
 		})
 	end,
 	settings = {
-		Lua = { diagnostics = { globals = { 'MiniExtra', 'MiniPick' } } },
+		Lua = { diagnostics = { globals = { 'MiniExtra', 'MiniMisc', 'MiniIcons', 'MiniPick' } } },
 	},
 })
 
