@@ -33,7 +33,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-mini/mini.basics.git', -- sensible
 	'git@github.com:nvim-mini/mini.surround.git', -- surround
 	'git@github.com:nvim-mini/mini.clue.git',
-	'git@github.com:nvim-mini/mini.files.git',
 	'git@github.com:nvim-mini/mini.icons.git',
 	'git@github.com:nvim-mini/mini.ai.git',
 	'git@github.com:nvim-mini/mini.completion.git',
@@ -68,7 +67,6 @@ require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish',
 require('mini.ai').setup()
 require('mini.basics').setup()
 require('mini.surround').setup()
-require('mini.files').setup()
 require('mini.icons').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
@@ -82,7 +80,7 @@ require('mason').setup()
 require('mason-nvim-dap').setup()
 require('nvim-dap-virtual-text').setup()
 
--- these are from lazyvim
+-- these are from LazyVim
 require('gitsigns').setup({
 	signs = {
 		add = { text = '' },
@@ -97,16 +95,17 @@ require('gitsigns').setup({
 -- No jumplist though. Telescope has it, but AFAIK mini.pick doesn't
 vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'open the explorer picker' })
+vim.keymap.set('n', '<leader>e', MiniExtra.pickers.explorer, { desc = 'open the explorer picker' })
 -- Or <leader>/
-vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = '[S]search by [G]rep' })
--- from lazyvim
+vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = '[S]earch by [G]rep' })
+
+-- from LazyVim
 function WorkspaceSymbolSearch()
-	MiniExtra.pickers.lsp({ scope = 'workspace_symbol' })
+	MiniExtra.pickers.lsp({ scope = 'workspace_symbol_live' })
 end
 
 vim.keymap.set('n', '<leader>sS',
-	WorkspaceSymbolSearch, { desc = '[S]search [S]ymbols (workspace)' })
+	WorkspaceSymbolSearch, { desc = '[S]earch [S]ymbols (workspace)' })
 
 function DocumentSymbolSearch()
 	MiniExtra.pickers.lsp({ scope = 'document_symbol' })
@@ -114,6 +113,14 @@ end
 
 vim.keymap.set('n', '<leader>ss',
 	DocumentSymbolSearch, { desc = '[S]search [s]ymbols (document)' })
+
+
+vim.keymap.set('n', '<leader>sm', MiniExtra.pickers.marks, { desc = '[S]earch [m]arks' })
+
+-- And you know you need this
+-- Works fine in C++. Not so good with init.lua.
+vim.keymap.set('n', '<leader>sd', MiniExtra.pickers.diagnostic, { desc = '[S]earch [d]iagnostics' })
+
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
@@ -139,6 +146,8 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- start with folds open
 vim.opt.foldlevel = 99
+-- The \r toggle still works. Just sets a different default.
+vim.o.relativenumber = true
 
 vim.lsp.config('lua_ls', {
 	on_init = function(client)
@@ -185,7 +194,7 @@ vim.lsp.config('lua_ls', {
 		})
 	end,
 	settings = {
-		Lua = { diagnostics = { globals = { 'MiniExtra', 'MiniFiles', 'MiniPick' } } },
+		Lua = { diagnostics = { globals = { 'MiniExtra', 'MiniPick' } } },
 	},
 })
 
