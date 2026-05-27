@@ -60,6 +60,7 @@ require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.bracketed').setup()
 require('mini.extra').setup()
+require('mini.pairs').setup()
 require('mini.icons').setup()
 MiniIcons.mock_nvim_web_devicons()
 
