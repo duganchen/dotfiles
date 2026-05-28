@@ -12,13 +12,11 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:nvim-lua/plenary.nvim.git',
 	'git@github.com:hjson/vim-hjson.git',
 	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
-	-- Let's replace the standard Tim Pope plugins
+	-- Yeah lets's just do all of these
 	{ src = 'git@github.com:nvim-mini/mini.nvim.git', version = 'stable' },
 	'git@github.com:rafamadriz/friendly-snippets.git',
 
 	'git@github.com:mason-org/mason.nvim.git',
-
-	'git@github.com:j-hui/fidget.nvim.git',
 
 	'git@github.com:mfussenegger/nvim-dap.git',
 	'git@github.com:jay-babu/mason-nvim-dap.nvim.git',
@@ -29,8 +27,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 }
 
 require('catppuccin').setup({ transparent_background = true })
-
-require('fidget').setup()
 
 require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish', 'go', 'hjson', 'html', 'javascript',
 	'json', 'lua',
@@ -47,12 +43,14 @@ require('mini.pick').setup()
 require('mini.bracketed').setup()
 require('mini.extra').setup()
 require('mini.pairs').setup()
-require('mini.git').setup()
-require('mini.diff').setup()
+
+-- I like Lualine and fugitive, actually, but whatever. Let's go with this kit.
 require('mini.notify').setup()
 require('mini.statusline').setup()
 require('mini.icons').setup()
 MiniIcons.mock_nvim_web_devicons()
+require('mini.git').setup()
+require('mini.diff').setup()
 
 
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
