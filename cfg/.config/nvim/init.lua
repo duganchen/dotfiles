@@ -3,19 +3,6 @@
 -- "gra" on (not active) packages
 -- https://www.reddit.com/r/neovim/comments/1r92p2y/comment/o69dr8l/
 
--- Reading https://neovim.io/doc/user/pack
--- Anyway, ChatGPT wrote this, with instructions to put it before
--- vim.pack.add.
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function(ev)
-		if ev.data.spec.name == "telescope-fzf-native.nvim" then
-			vim.system({ "make" }, {
-				cwd = ev.data.path,
-			}):wait()
-		end
-	end
-})
-
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	'https://github.com/neovim/nvim-lspconfig',
 	-- still want this Tim Pope plugin
