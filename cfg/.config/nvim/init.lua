@@ -23,7 +23,9 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:mfussenegger/nvim-dap.git',
 	'git@github.com:jay-babu/mason-nvim-dap.nvim.git',
 	'git@github.com:rcarriga/nvim-dap-ui.git',
-	'git@github.com:theHamsta/nvim-dap-virtual-text.git'
+	'git@github.com:theHamsta/nvim-dap-virtual-text.git',
+
+	'git@github.com:folke/lazydev.nvim.git'
 }
 
 require('catppuccin').setup({ transparent_background = true })
@@ -71,11 +73,13 @@ require('mini.snippets').setup({
 	},
 })
 
+require('lazydev').setup()
+
 -- mini.clue is set up below
 
 require('mason').setup()
 require('mason-nvim-dap').setup()
-require('nvim-dap-virtual-text').setup()
+require('nvim-dap-virtual-text').setup({})
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
@@ -133,55 +137,6 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 -- The \r toggle still works. Just sets a different default.
 vim.o.relativenumber = true
-
-vim.lsp.config('lua_ls', {
-	on_init = function(client)
-		if client.workspace_folders then
-			local path = client.workspace_folders[1].name
-			if
-			    path ~= vim.fn.stdpath('config')
-			    and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
-			then
-				return
-			end
-		end
-
-		client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most
-				-- likely LuaJIT in the case of Neovim)
-				version = 'LuaJIT',
-				-- Tell the language server how to find Lua modules same way as Neovim
-				-- (see `:h lua-module-load`)
-				path = {
-					'lua/?.lua',
-					'lua/?/init.lua',
-				},
-			},
-			-- Make the server aware of Neovim runtime files
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-					-- For LSP Settings Type Annotations: https://github.com/neovim/nvim-lspconfig#lsp-settings-type-annotations
-					vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
-					-- Depending on the usage, you might want to add additional paths
-					-- here.
-					-- '${3rd}/luv/library',
-					-- '${3rd}/busted/library',
-				},
-				-- Or pull in all of 'runtimepath'.
-				-- NOTE: this is a lot slower and will cause issues when working on
-				-- your own configuration.
-				-- See https://github.com/neovim/nvim-lspconfig/issues/3189
-				-- library = vim.api.nvim_get_runtime_file('', true),
-			},
-		})
-	end,
-	settings = {
-		Lua = { diagnostics = { globals = { 'MiniExtra', 'MiniMisc', 'MiniIcons', 'MiniPick' } } },
-	},
-})
 
 -- copy and paste from
 -- https://dotfiles.substack.com/p/native-lsp-in-neovim-012
