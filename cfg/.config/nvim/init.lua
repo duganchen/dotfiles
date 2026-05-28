@@ -120,7 +120,6 @@ vim.keymap.set('n', '<leader>ss',
 vim.keymap.set('n', '<leader>sm', MiniExtra.pickers.marks, { desc = '[S]earch [m]arks' })
 
 -- And you know you need this
--- Works fine in C++. Not so good with init.lua.
 vim.keymap.set('n', '<leader>sd', MiniExtra.pickers.diagnostic, { desc = '[S]earch [d]iagnostics' })
 
 
