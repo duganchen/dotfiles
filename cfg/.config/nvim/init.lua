@@ -120,7 +120,6 @@ do
 	})
 end
 
-require('mini.ai').setup()
 require('mini.basics').setup()
 require('mini.surround').setup()
 require('mini.completion').setup()
@@ -359,51 +358,51 @@ require('nvim-treesitter-textobjects').setup({ move = { set_jumps = true } })
 
 vim.keymap.set({ "n", "x", "o" }, "]f", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
-end)
+end, { desc = "Function forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]F", function()
 	require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
-end)
+end, { desc = "Fucntion forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[f", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
-end)
+end, { desc = "Function backward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "[F", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
-end)
+end, { desc = "Function backward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "]c", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
-end)
+end, { desc = "Class forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]C", function()
 	require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
-end)
+end, { desc = "Class forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[c", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
-end)
+end, { desc = "Class backward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "[C", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
-end)
+end, { desc = "Class backward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "]a", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@parameter.inner", "textobjects")
-end)
+end, { desc = "Parameter forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]A", function()
 	require("nvim-treesitter-textobjects.move").goto_next_end("@parameter.inner", "textobjects")
-end)
+end, { desc = "Parameter forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[a", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_start("@parameter.inner", "textobjects")
-end)
+end, { desc = "Parameter backward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "[A", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@parameter.inner", "textobjects")
-end)
+end, { desc = "Parameter backward end" })
 
 local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
@@ -421,3 +420,30 @@ vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = t
 vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+
+-- mini.ai too.
+-- This is yoinked from LazyVim
+-- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
+-- https://www.lazyvim.org/plugins/coding#miniai
+local ai = require('mini.ai')
+ai.setup({
+	custom_textobjects = {
+		n_lines = 500,
+		custom_textobjects = {
+			o = ai.gen_spec.treesitter({ -- code block
+				a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+				i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+			}),
+			f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+			c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+			t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+			d = { "%f[%d]%d+" },                                     -- digits
+			e = {                                                    -- Word with case
+				{ "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+				"^().*()$",
+			},
+			u = ai.gen_spec.function_call(),      -- u for "Usage"
+			U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+		},
+	}
+})
