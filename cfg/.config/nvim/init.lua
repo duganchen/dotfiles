@@ -9,7 +9,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:tpope/vim-sleuth.git',
 	-- It's too early to care that this is "archived."
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
-	'git@github.com:nvim-lua/plenary.nvim.git',
 	'git@github.com:hjson/vim-hjson.git',
 	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
 	-- Yeah lets's just do all of these
@@ -44,7 +43,7 @@ require('mini.bracketed').setup()
 require('mini.extra').setup()
 require('mini.pairs').setup()
 
--- I like Lualine and fugitive, actually, but whatever. Let's go with this kit.
+-- I like Lualine, fugitive, fidget, etc, but whatever. Let's go with this kit.
 require('mini.notify').setup()
 require('mini.statusline').setup()
 require('mini.icons').setup()
