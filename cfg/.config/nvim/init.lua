@@ -24,7 +24,10 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 
 	'git@github.com:folke/lazydev.nvim.git',
 
-	'git@github.com:stevearc/conform.nvim.git'
+	'git@github.com:stevearc/conform.nvim.git',
+
+	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git'
+
 }
 
 
@@ -122,7 +125,6 @@ require('mini.basics').setup()
 require('mini.surround').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
-require('mini.bracketed').setup()
 require('mini.extra').setup()
 require('mini.pairs').setup()
 
@@ -284,6 +286,13 @@ miniclue.setup({
 		-- `Miniclue backslash` key
 		{ mode = 'n', keys = '\\' },
 		{ mode = 'x', keys = '\\' },
+
+
+		-- And the bracketed movement keys
+		{ mode = 'n', keys = ']' },
+		{ mode = 'x', keys = ']' },
+		{ mode = 'n', keys = '[' },
+		{ mode = 'x', keys = '[' },
 	},
 
 	clues = {
@@ -333,3 +342,82 @@ do
 	vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end,
 		{ desc = '[F]ormat buffer' })
 end
+
+
+-- I do want mini.bracketed, but I also want textobject movements. Exact mappings are
+-- neovim's.
+-- https://www.lazyvim.org/plugins/treesitter#nvim-treesitter-textobjects
+
+require('mini.bracketed').setup({
+	-- f/F
+	file = { suffix = '' },
+	-- c/C	
+	comment = { suffix = '' }
+})
+
+require('nvim-treesitter-textobjects').setup({ move = { set_jumps = true } })
+
+vim.keymap.set({ "n", "x", "o" }, "]f", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "]F", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[f", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[F", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "]c", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "]C", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[c", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[C", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "]a", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@parameter.inner", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "]A", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@parameter.inner", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[a", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@parameter.inner", "textobjects")
+end)
+
+vim.keymap.set({ "n", "x", "o" }, "[A", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_end("@parameter.inner", "textobjects")
+end)
+
+local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
+
+-- Repeat movement with ; and ,
+-- ensure ; goes forward and , goes backward regardless of the last direction
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+
+-- vim way: ; goes to the direction you were moving.
+-- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+-- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
