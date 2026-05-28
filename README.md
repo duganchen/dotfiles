@@ -2,9 +2,9 @@
 
 Start by making sure the appropriate directories exist:
 
-    mkdir -p ~/.config/{bat/themes,environment.d,eza,yazi,helix/themes,micro/colorschemes,kitty,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts,script-opts},nvim/lua/{config,plugins},xplr/plugins,nvim,ghostty,tmux}
-    mkdir -p ~/.local/{bin,share/mc/skins}
-    mkdir -p ~/.vim/pack/vendor/start
+    mkdir -p
+    ~/.config/{bat/themes,environment.d,eza,yazi,helix/themes,micro/colorschemes,kitty,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts,script-opts},nvim/lua/{config,plugins},xplr/plugins,nvim,ghostty,tmux}
+    mkdir -p ~/.local/{bin,share/mc/skins} mkdir -p ~/.vim/pack/vendor/start
     mkdir -p ~/.zsh
 
 Install them with GNU stow:
@@ -19,6 +19,10 @@ etc.
 
     fish_config theme save catppuccin-macchiato --color-theme dark
 
+
+
+
+
 ## Git and SSH
 
 The options for these aren't really stowable. But here are my notes to
@@ -31,28 +35,14 @@ The rest of the git config is the standard boilerplate to integrate vscode and
 
 Here's what I have in ~/.gitconfig for both platforms:
 
-    [core]
-    editor = code --wait
-    pager = delta
-    [diff]
-    tool = vscode
-    colorMoved = default
-    [difftool "vscode"]
-    cmd = code --wait --diff $LOCAL $REMOTE
-    [merge]
-    tool = vscode
-    conflictstyle = diff3
-    [mergetool "vscode"]
-    cmd = code --wait $MERGED
-    [interactive]
-    diffFilter = delta --color-only
-    [delta]
-    navigate = true # use n and N to move between diff sections
-    light = false
+    [core] editor = code --wait pager = delta [diff] tool = vscode colorMoved
+    = default [difftool "vscode"] cmd = code --wait --diff $LOCAL $REMOTE
+    [merge] tool = vscode conflictstyle = diff3 [mergetool "vscode"] cmd = code
+    --wait $MERGED [interactive] diffFilter = delta --color-only [delta]
+    navigate = true # use n and N to move between diff sections light = false
 
-    # On Fedora, install git-credential-libsecret
-    [credential]
-    helper = libsecret
+    # On Fedora, install git-credential-libsecret [credential] helper
+    = libsecret
 
 ## VSCode
 
@@ -60,7 +50,8 @@ Some of the extensions I use that are actually worth noting down are:
 
 - [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
   (I'm surprised this isn't installed by default)
-- [Path Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete)
+- [Path
+  Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete)
   with mappings set for "/", "~" and "$HOME"
 - [fish-ide](https://marketplace.visualstudio.com/items?itemName=lunaryorn.fish-ide)
 - [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
@@ -68,26 +59,26 @@ Some of the extensions I use that are actually worth noting down are:
 - [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
 - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 
-The two shell extensions are from
-[Microsoft's recommendations](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/).
+The two shell extensions are from [Microsoft's
+recommendations](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/).
 
 ## "Plugin Manager" Explanation
 
 There are a lot of "plugin managers" that just clone stuff from git. Here's my
-system, which uses git submodules and [Stow](https://www.gnu.org/software/stow/).
+system, which uses git submodules and
+[Stow](https://www.gnu.org/software/stow/).
 
 Let's say I want to use zsh-autosuggestions.
 
 I would do the following:
 
-    git submodule add git@github.com:zsh-users/zsh-autosuggestions.git subrepos/zsh-autosuggestions
-    mkdir -p cfg/.zsh
-    cd cfg/.zsh
-    ln -s ../../subrepos/zsh-autosuggestions
+    git submodule add git@github.com:zsh-users/zsh-autosuggestions.git
+    subrepos/zsh-autosuggestions mkdir -p cfg/.zsh cd cfg/.zsh ln -s
+    ../../subrepos/zsh-autosuggestions
 
 The next time I stow the cfg directory, the symbolic link to the
-zsh-autosuggestions repo gets installed to ~/.zsh/zsh-autosuggestions, where I
-want it.
+zsh-autosuggestions repo gets installed to ~/.zsh/zsh-autosuggestions, where
+I want it.
 
 ## Links (for reference)
 
