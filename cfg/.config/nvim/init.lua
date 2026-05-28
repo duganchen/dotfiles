@@ -25,6 +25,23 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:folke/lazydev.nvim.git'
 }
 
+
+-- From Kickstart
+vim.api.nvim_create_autocmd('PackChanged', {
+	callback = function(ev)
+		local name = ev.data.spec.name
+		local kind = ev.data.kind
+		if kind ~= 'install' and kind ~= 'update' then return end
+
+
+		if name == 'nvim-treesitter' then
+			if not ev.data.active then vim.cmd.packadd 'nvim-treesitter' end
+			vim.cmd 'TSUpdate'
+			return
+		end
+	end,
+})
+
 require('catppuccin').setup({ transparent_background = true })
 
 require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish', 'go', 'hjson', 'html', 'javascript',
@@ -36,7 +53,6 @@ require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish',
 require('mini.ai').setup()
 require('mini.basics').setup()
 require('mini.surround').setup()
-require('mini.icons').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.bracketed').setup()
@@ -51,11 +67,9 @@ MiniIcons.mock_nvim_web_devicons()
 require('mini.git').setup()
 require('mini.diff').setup()
 
-
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require('mini.misc').setup()
 MiniMisc.setup_auto_root()
-
 
 -- Copy and paste from the mini.snippets README
 local gen_loader = require('mini.snippets').gen_loader
@@ -80,7 +94,7 @@ require('nvim-dap-virtual-text').setup({})
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
--- No jumplist though. Telescope has it, but AFAIK mini.pick doesn't
+-- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
 vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>e', MiniExtra.pickers.explorer, { desc = 'open the explorer picker' })
@@ -120,8 +134,6 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 	'ruff',
 	'tombi',
 	'yamlls' })
-
-vim.lsp.codelens.enable(true)
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
@@ -165,12 +177,9 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp", { clear = true }),
 	callback = function(args)
-		-- 2
 		vim.api.nvim_create_autocmd("BufWritePre", {
-			-- 3
 			buffer = args.buf,
 			callback = function()
-				-- 4 + 5
 				vim.lsp.buf.format { async = false, id = args.data.client_id }
 			end,
 		})
