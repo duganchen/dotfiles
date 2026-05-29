@@ -17,11 +17,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 
 	'git@github.com:mason-org/mason.nvim.git',
 
-	'git@github.com:mfussenegger/nvim-dap.git',
-	'git@github.com:jay-babu/mason-nvim-dap.nvim.git',
-	'git@github.com:rcarriga/nvim-dap-ui.git',
-	'git@github.com:theHamsta/nvim-dap-virtual-text.git',
-
 	'git@github.com:folke/lazydev.nvim.git',
 
 	'git@github.com:stevearc/conform.nvim.git',
@@ -158,8 +153,6 @@ require('lazydev').setup()
 -- mini.clue is set up below
 
 require('mason').setup()
-require('mason-nvim-dap').setup()
-require('nvim-dap-virtual-text').setup({})
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
