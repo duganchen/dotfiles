@@ -18,10 +18,7 @@ if status is-interactive
 
     if command -v nvim >/dev/null
         set -x EDITOR nvim
-    end
-
-    if command -v code >/dev/null
-        set -x VISUAL 'code --wait'
+        set -x VISUAL $EDITOR
     end
 
     set -x BAT_THEME 'Catppuccin Macchiato'
