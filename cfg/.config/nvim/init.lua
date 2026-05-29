@@ -309,6 +309,10 @@ miniclue.setup({
 do
 	-- [[ Formatting ]]
 	require('conform').setup {
+		formatters = {
+			par = { command = 'par' },
+			fmt = { command = 'fmt' }
+		},
 		notify_on_error = false,
 		format_on_save = function(bufnr)
 			-- You can specify filetypes to autoformat on save here:
@@ -316,6 +320,7 @@ do
 				lua = true,
 				python = true,
 				markdown = true,
+				text = true
 			}
 			if enabled_filetypes[vim.bo[bufnr].filetype] then
 				return { timeout_ms = 500 }
@@ -328,7 +333,8 @@ do
 		},
 		-- You can also specify external formatters in here.
 		formatters_by_ft = {
-			markdown = { 'prettier' }
+			markdown = { 'prettier' },
+			text = { 'par', 'fmt', stop_after_first = true }
 			-- rust = { 'rustfmt' },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
