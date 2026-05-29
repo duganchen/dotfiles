@@ -19,10 +19,6 @@ etc.
 
     fish_config theme save catppuccin-macchiato --color-theme dark
 
-
-
-
-
 ## Git and SSH
 
 The options for these aren't really stowable. But here are my notes to
