@@ -18,10 +18,6 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:folke/lazydev.nvim.git',
 	'git@github.com:stevearc/conform.nvim.git',
 	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git',
-
-	-- Lazyvim also has nice folding. Not sure how they achieved it.
-	'git@github.com:kevinhwang91/nvim-ufo.git',
-	'git@github.com:kevinhwang91/promise-async.git'
 }
 
 
@@ -201,30 +197,23 @@ vim.cmd.colorscheme "catppuccin-macchiato"
 -- -- The \r toggle still works. Just sets a different default.
 vim.o.relativenumber = true
 
--- UFO. Pretty much straight from README.
-vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldinner: ,foldclose:'
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
+-- https://www.reddit.com/r/neovim/comments/1jmqd7t/sorry_ufo_these_7_lines_replaced_you/
 vim.o.foldenable = true
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-local ufo = require('ufo')
-vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = "Open all folds" })
-vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = "Close all folds" })
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true
-}
-local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
-for _, ls in ipairs(language_servers) do
-	require('lspconfig')[ls].setup({
-		capabilities = capabilities
-		-- you can add other fields for setting up lsp server in this table
-	})
-end
-ufo.setup()
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.o.foldtext = ""
+vim.opt.foldcolumn = "1"
 
+-- https://www.lazyvim.org/configuration/general
+vim.opt.fillchars = {
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
+}
 
 -- More cargo-culting from Quickstart
 vim.g.have_nerd_font = true
