@@ -188,11 +188,8 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
--- This should use TreeSitter for folding?
--- They're from this video:
--- https://youtu.be/lljs_7xB7Ps?si=1ayi3G1osYr3Nq_k
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 -- start with folds open
 vim.opt.foldlevel = 99
 -- Still mastering this, but this makes it work more predictably to me
