@@ -337,6 +337,12 @@ do
 		{ desc = '[F]ormat buffer' })
 end
 
+-- Honestly, when I was late into setting all these up, I realized that the traditional way to deal
+-- with blocks like this was by closing folds.
+
+-- Some of this is from this video:
+-- These HIDDEN MOTIONS in Neovim will CHANGE how you work
+-- https://www.youtube.com/watch?v=FuYQ7M73bC0
 
 -- I do want mini.bracketed, but I also want textobject movements. Exact mappings are
 -- neovim's.
@@ -349,7 +355,13 @@ require('mini.bracketed').setup({
 	comment = { suffix = '' },
 	-- This will now be "block"
 	-- https://lazyvim-ambitious-devs.phillips.codes/course/chapter-7/#_language_features
-	oldfile = { suffix = '' }
+	oldfile = { suffix = '' },
+
+	-- 'i' is now conditional
+	indent = { suffix = '' },
+
+	-- 'l' now loop
+	location = { suffix = '' }
 })
 
 require('nvim-treesitter-textobjects').setup({ move = { set_jumps = true } })
@@ -405,6 +417,42 @@ vim.keymap.set({ "n", "x", "o" }, "[A", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@parameter.inner", "textobjects")
 end, { desc = "Parameter backward end" })
 
+-- Loop
+
+vim.keymap.set({ "n", "x", "o" }, "]l", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@loop.inner", "textobjects")
+end, { desc = "Loop forward start" })
+
+vim.keymap.set({ "n", "x", "o" }, "]L", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@loop.inner", "textobjects")
+end, { desc = "Loop forward end" })
+
+vim.keymap.set({ "n", "x", "o" }, "[l", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@loop.inner", "textobjects")
+end, { desc = "Loop backward start" })
+
+vim.keymap.set({ "n", "x", "o" }, "[L", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_end("@loop.inner", "textobjects")
+end, { desc = "Loop backward end" })
+
+-- Conditional
+
+vim.keymap.set({ "n", "x", "o" }, "]i", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@conditional.inner", "textobjects")
+end, { desc = "Conditional forward start" })
+
+vim.keymap.set({ "n", "x", "o" }, "]I", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@conditional.inner", "textobjects")
+end, { desc = "Conditional forward end" })
+
+vim.keymap.set({ "n", "x", "o" }, "[i", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@conditional.inner", "textobjects")
+end, { desc = "Conditional backward start" })
+
+vim.keymap.set({ "n", "x", "o" }, "[i", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_end("@conditional.inner", "textobjects")
+end, { desc = "Conditional backward end" })
+
 local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
 -- Repeat movement with ; and ,
@@ -444,5 +492,10 @@ require('mini.ai').setup({
 			a = '@parameter.outer',
 			i = '@parameter.inner',
 		}),
+
+		o = require('mini.ai').gen_spec.treesitter({
+			a = { '@conditional.outer', '@loop.outer' },
+			i = { '@conditional.inner', '@loop.inner' },
+		})
 	},
 })
