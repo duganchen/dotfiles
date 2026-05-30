@@ -195,6 +195,8 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- start with folds open
 vim.opt.foldlevel = 99
+-- Still mastering this, but this makes it work more predictably to me
+vim.opt.foldcolumn = "1"
 -- The \r toggle still works. Just sets a different default.
 vim.o.relativenumber = true
 
