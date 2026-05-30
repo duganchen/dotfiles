@@ -441,28 +441,16 @@ vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = t
 vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
 -- mini.ai too.
--- This is yoinked from LazyVim
+-- Inspired by neovim.
 -- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
 -- https://www.lazyvim.org/plugins/coding#miniai
-local ai = require('mini.ai')
-ai.setup({
+require('mini.ai').setup({
+	n_lines = 500,
+
 	custom_textobjects = {
-		n_lines = 500,
-		custom_textobjects = {
-			o = ai.gen_spec.treesitter({ -- code block
-				a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-				i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-			}),
-			f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
-			c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
-			t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
-			d = { "%f[%d]%d+" },                                     -- digits
-			e = {                                                    -- Word with case
-				{ "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
-				"^().*()$",
-			},
-			u = ai.gen_spec.function_call(),      -- u for "Usage"
-			U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
-		},
-	}
+		f = require('mini.ai').gen_spec.treesitter({
+			a = '@function.outer',
+			i = '@function.inner',
+		}),
+	},
 })
