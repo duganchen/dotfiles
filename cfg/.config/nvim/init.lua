@@ -337,121 +337,75 @@ do
 		{ desc = '[F]ormat buffer' })
 end
 
--- Honestly, when I was late into setting all these up, I realized that the traditional way to deal
--- with blocks like this was by closing folds.
-
--- Some of this is from this video:
--- These HIDDEN MOTIONS in Neovim will CHANGE how you work
--- https://www.youtube.com/watch?v=FuYQ7M73bC0
+-- Add function/class/parameter text objects and movement
 
 -- I do want mini.bracketed, but I also want textobject movements. Exact mappings are
 -- neovim's.
 -- https://www.lazyvim.org/plugins/treesitter#nvim-treesitter-textobjects
+
+-- I couldn't get conditional/loop/block text objects to work. Honestly, after setting all this up,
+-- I realized that the traditional way to deal with all of these was with folds.
 
 require('mini.bracketed').setup({
 	-- f/F is now function call
 	file = { suffix = '' },
 	-- c/C is now class
 	comment = { suffix = '' },
-	-- This will now be "block"
-	-- https://lazyvim-ambitious-devs.phillips.codes/course/chapter-7/#_language_features
-	oldfile = { suffix = '' },
-
-	-- 'i' is now conditional
-	indent = { suffix = '' },
-
-	-- 'l' now loop
-	location = { suffix = '' }
 })
 
 require('nvim-treesitter-textobjects').setup({ move = { set_jumps = true } })
 
+local ts_move = require("nvim-treesitter-textobjects.move")
 -- Function
 vim.keymap.set({ "n", "x", "o" }, "]f", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+	ts_move.goto_next_start("@function.outer", "textobjects")
 end, { desc = "Function forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]F", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+	ts_move.goto_next_end("@function.outer", "textobjects")
 end, { desc = "Fucntion forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[f", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+	ts_move.goto_previous_start("@function.outer", "textobjects")
 end, { desc = "Function backward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "[F", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+	ts_move.goto_previous_end("@function.outer", "textobjects")
 end, { desc = "Function backward end" })
 
 -- Class
 vim.keymap.set({ "n", "x", "o" }, "]c", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+	ts_move.goto_next_start("@class.outer", "textobjects")
 end, { desc = "Class forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]C", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+	ts_move.goto_next_end("@class.outer", "textobjects")
 end, { desc = "Class forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[c", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+	ts_move.goto_previous_start("@class.outer", "textobjects")
 end, { desc = "Class backward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "[C", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+	ts_move.goto_previous_end("@class.outer", "textobjects")
 end, { desc = "Class backward end" })
 
 -- Parameter
 vim.keymap.set({ "n", "x", "o" }, "]a", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@parameter.inner", "textobjects")
+	ts_move.goto_next_start("@parameter.inner", "textobjects")
 end, { desc = "Parameter forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]A", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@parameter.inner", "textobjects")
+	ts_move.goto_next_end("@parameter.inner", "textobjects")
 end, { desc = "Parameter forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[a", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("@parameter.inner", "textobjects")
+	ts_move.goto_previous_start("@parameter.inner", "textobjects")
 end, { desc = "Parameter backward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "[A", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_end("@parameter.inner", "textobjects")
+	ts_move.goto_previous_end("@parameter.inner", "textobjects")
 end, { desc = "Parameter backward end" })
-
--- Loop
-
-vim.keymap.set({ "n", "x", "o" }, "]l", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@loop.inner", "textobjects")
-end, { desc = "Loop forward start" })
-
-vim.keymap.set({ "n", "x", "o" }, "]L", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@loop.inner", "textobjects")
-end, { desc = "Loop forward end" })
-
-vim.keymap.set({ "n", "x", "o" }, "[l", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("@loop.inner", "textobjects")
-end, { desc = "Loop backward start" })
-
-vim.keymap.set({ "n", "x", "o" }, "[L", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_end("@loop.inner", "textobjects")
-end, { desc = "Loop backward end" })
-
--- Conditional
-
-vim.keymap.set({ "n", "x", "o" }, "]i", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@conditional.inner", "textobjects")
-end, { desc = "Conditional forward start" })
-
-vim.keymap.set({ "n", "x", "o" }, "]I", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@conditional.inner", "textobjects")
-end, { desc = "Conditional forward end" })
-
-vim.keymap.set({ "n", "x", "o" }, "[i", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("@conditional.inner", "textobjects")
-end, { desc = "Conditional backward start" })
-
-vim.keymap.set({ "n", "x", "o" }, "[i", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_end("@conditional.inner", "textobjects")
-end, { desc = "Conditional backward end" })
 
 local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
@@ -474,28 +428,24 @@ vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = t
 -- Inspired by Lazyvim
 -- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
 -- https://www.lazyvim.org/plugins/coding#miniai
-require('mini.ai').setup({
+local mini_ai = require('mini.ai')
+mini_ai.setup({
 	n_lines = 500,
 
 	custom_textobjects = {
-		f = require('mini.ai').gen_spec.treesitter({
+		f = mini_ai.gen_spec.treesitter({
 			a = '@function.outer',
 			i = '@function.inner',
 		}),
 
-		c = require('mini.ai').gen_spec.treesitter({
+		c = mini_ai.gen_spec.treesitter({
 			a = '@class.outer',
 			i = '@class.inner',
 		}),
 
-		a = require('mini.ai').gen_spec.treesitter({
+		a = mini_ai.gen_spec.treesitter({
 			a = '@parameter.outer',
 			i = '@parameter.inner',
 		}),
-
-		o = require('mini.ai').gen_spec.treesitter({
-			a = { '@conditional.outer', '@loop.outer' },
-			i = { '@conditional.inner', '@loop.inner' },
-		})
 	},
 })
