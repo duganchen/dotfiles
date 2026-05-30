@@ -308,7 +308,8 @@ do
 				lua = true,
 				python = true,
 				markdown = true,
-				text = true
+				text = true,
+				c = true
 			}
 			if enabled_filetypes[vim.bo[bufnr].filetype] then
 				return { timeout_ms = 500 }
@@ -404,25 +405,6 @@ vim.keymap.set({ "n", "x", "o" }, "[A", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@parameter.inner", "textobjects")
 end, { desc = "Parameter backward end" })
 
--- Block
-
-vim.keymap.set({ "n", "x", "o" }, "]o", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("block.outer", "textobjects")
-end, { desc = "Block forward start" })
-
-vim.keymap.set({ "n", "x", "o" }, "]O", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("block.outer", "textobjects")
-end, { desc = "Fucntion forward end" })
-
-vim.keymap.set({ "n", "x", "o" }, "[o", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("block.outer", "textobjects")
-end, { desc = "Block backward start" })
-
-vim.keymap.set({ "n", "x", "o" }, "[O", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_end("block.outer", "textobjects")
-end, { desc = "Block backward end" })
-
-
 local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
 -- Repeat movement with ; and ,
@@ -441,7 +423,7 @@ vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = t
 vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
 -- mini.ai too.
--- Inspired by neovim.
+-- Inspired by Lazyvim
 -- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
 -- https://www.lazyvim.org/plugins/coding#miniai
 require('mini.ai').setup({
@@ -451,6 +433,16 @@ require('mini.ai').setup({
 		f = require('mini.ai').gen_spec.treesitter({
 			a = '@function.outer',
 			i = '@function.inner',
+		}),
+
+		c = require('mini.ai').gen_spec.treesitter({
+			a = '@class.outer',
+			i = '@class.inner',
+		}),
+
+		a = require('mini.ai').gen_spec.treesitter({
+			a = '@parameter.outer',
+			i = '@parameter.inner',
 		}),
 	},
 })
