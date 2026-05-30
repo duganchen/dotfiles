@@ -14,15 +14,10 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- Yeah lets's just do all of these
 	{ src = 'git@github.com:nvim-mini/mini.nvim.git', version = 'stable' },
 	'git@github.com:rafamadriz/friendly-snippets.git',
-
 	'git@github.com:mason-org/mason.nvim.git',
-
 	'git@github.com:folke/lazydev.nvim.git',
-
 	'git@github.com:stevearc/conform.nvim.git',
-
 	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git'
-
 }
 
 
@@ -347,14 +342,18 @@ end
 -- https://www.lazyvim.org/plugins/treesitter#nvim-treesitter-textobjects
 
 require('mini.bracketed').setup({
-	-- f/F
+	-- f/F is now function call
 	file = { suffix = '' },
-	-- c/C	
-	comment = { suffix = '' }
+	-- c/C is now class
+	comment = { suffix = '' },
+	-- This will now be "block"
+	-- https://lazyvim-ambitious-devs.phillips.codes/course/chapter-7/#_language_features
+	oldfile = { suffix = '' }
 })
 
 require('nvim-treesitter-textobjects').setup({ move = { set_jumps = true } })
 
+-- Function
 vim.keymap.set({ "n", "x", "o" }, "]f", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
 end, { desc = "Function forward start" })
@@ -371,6 +370,7 @@ vim.keymap.set({ "n", "x", "o" }, "[F", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
 end, { desc = "Function backward end" })
 
+-- Class
 vim.keymap.set({ "n", "x", "o" }, "]c", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
 end, { desc = "Class forward start" })
@@ -387,6 +387,7 @@ vim.keymap.set({ "n", "x", "o" }, "[C", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
 end, { desc = "Class backward end" })
 
+-- Parameter
 vim.keymap.set({ "n", "x", "o" }, "]a", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@parameter.inner", "textobjects")
 end, { desc = "Parameter forward start" })
@@ -402,6 +403,25 @@ end, { desc = "Parameter backward start" })
 vim.keymap.set({ "n", "x", "o" }, "[A", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@parameter.inner", "textobjects")
 end, { desc = "Parameter backward end" })
+
+-- Block
+
+vim.keymap.set({ "n", "x", "o" }, "]o", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("block.outer", "textobjects")
+end, { desc = "Block forward start" })
+
+vim.keymap.set({ "n", "x", "o" }, "]O", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("block.outer", "textobjects")
+end, { desc = "Fucntion forward end" })
+
+vim.keymap.set({ "n", "x", "o" }, "[o", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("block.outer", "textobjects")
+end, { desc = "Block backward start" })
+
+vim.keymap.set({ "n", "x", "o" }, "[O", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_end("block.outer", "textobjects")
+end, { desc = "Block backward end" })
+
 
 local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
