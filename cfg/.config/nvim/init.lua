@@ -14,15 +14,23 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- Yeah lets's just do all of these
 	{ src = 'git@github.com:nvim-mini/mini.nvim.git', version = 'stable' },
 	'git@github.com:rafamadriz/friendly-snippets.git',
-
 	'git@github.com:mason-org/mason.nvim.git',
-
 	'git@github.com:folke/lazydev.nvim.git',
-
 	'git@github.com:stevearc/conform.nvim.git',
+	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git',
 
-	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git'
-
+	-- Git config:
+	-- https://gist.github.com/Pagliacii/8fcb4dc64937305c19df9bb3137e4cad
+	-- https://github.com/sindrets/diffview.nvim/issues/544
+	-- So:
+	-- [merge]
+	-- tool = diffview
+	-- [mergetool]
+	-- prompt = false
+	-- keepBackup = false
+	-- [mergetool "diffview"]
+	-- cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+	'git@github.com:sindrets/diffview.nvim.git'
 }
 
 
@@ -342,7 +350,7 @@ do
 end
 
 
--- I do want mini.bracketed, but I also want textobject movements. Exact mappings are
+-- I do want mini.bracketedaa, but I also want textobject movements. Exact mappings are
 -- neovim's.
 -- https://www.lazyvim.org/plugins/treesitter#nvim-treesitter-textobjects
 
