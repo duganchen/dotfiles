@@ -41,7 +41,7 @@ Here's what I have in ~/.gitconfig for both platforms:
     # On Fedora, install git-credential-libsecret
 
     [credential]
-    helper = libsecret
+        helper = libsecret
 
 ## "Plugin Manager" Explanation
 
