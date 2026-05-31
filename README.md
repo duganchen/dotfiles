@@ -24,39 +24,24 @@ etc.
 The options for these aren't really stowable. But here are my notes to
 copy-and-paste.
 
-For my credential helper, I use libsecret on Linux and keychain on OS X.
+For my credential helper, I use libsecret on Linux (and keychain when I used OS X).
 
-The rest of the git config is the standard boilerplate to integrate vscode and
-[delta](https://github.com/dandavison/delta).
+The rest of the git config is the standard boilerplate to integrate meld as the difftool
+and mergetool.
 
 Here's what I have in ~/.gitconfig for both platforms:
 
-    [core] editor = code --wait pager = delta [diff] tool = vscode colorMoved
-    = default [difftool "vscode"] cmd = code --wait --diff $LOCAL $REMOTE
-    [merge] tool = vscode conflictstyle = diff3 [mergetool "vscode"] cmd = code
-    --wait $MERGED [interactive] diffFilter = delta --color-only [delta]
-    navigate = true # use n and N to move between diff sections light = false
+    [diff]
+        tool = meld
+    [difftool]
+        prompt = false
+    [difftool "meld"]
+        cmd = meld "$LOCAL" "$REMOTE"
 
-    # On Fedora, install git-credential-libsecret [credential] helper
-    = libsecret
+    # On Fedora, install git-credential-libsecret
 
-## VSCode
-
-Some of the extensions I use that are actually worth noting down are:
-
-- [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
-  (I'm surprised this isn't installed by default)
-- [Path
-  Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete)
-  with mappings set for "/", "~" and "$HOME"
-- [fish-ide](https://marketplace.visualstudio.com/items?itemName=lunaryorn.fish-ide)
-- [fish-vscode](https://marketplace.visualstudio.com/items?itemName=skyapps.fish-vscode)
-- [shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format)
-- [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
-- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-
-The two shell extensions are from [Microsoft's
-recommendations](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/).
+    [credential]
+    helper = libsecret
 
 ## "Plugin Manager" Explanation
 
@@ -91,3 +76,7 @@ I want it.
 ### Ultramarine
 
 - https://github.com/Ultramarine-Linux/packages/tree/um42/ultramarine/shell-config
+
+### Shell Tooling Setup
+
+- [BASH Code Reviews](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/)
