@@ -120,6 +120,7 @@ MiniIcons.mock_nvim_web_devicons()
 require('mini.git').setup()
 require('mini.diff').setup()
 require('mini.cmdline').setup()
+require('mini.starter').setup()
 
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require('mini.misc').setup()
