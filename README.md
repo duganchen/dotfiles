@@ -2,8 +2,7 @@
 
 Start by making sure the appropriate directories exist:
 
-    mkdir -p
-    ~/.config/{bat/themes,environment.d,eza,yazi,helix/themes,micro/colorschemes,kitty,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts,script-opts},nvim/lua/{config,plugins},xplr/plugins,nvim,ghostty,tmux}
+    mkdir -p ~/.config/{bat/themes,environment.d,eza,yazi,helix/themes,micro/colorschemes,kitty,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts,script-opts},nvim/plugin,xplr/plugins,nvim,ghostty,tmux}
     mkdir -p ~/.local/{bin,share/mc/skins} mkdir -p ~/.vim/pack/vendor/start
     mkdir -p ~/.zsh
 
