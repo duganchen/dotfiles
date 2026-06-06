@@ -196,20 +196,12 @@ vim.lsp.enable({ 'bashls', 'clangd', 'eslint', 'neocmake', 'cssls', 'fish_lsp', 
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
--- -- start with folds open
--- vim.opt.foldlevel = 99
--- -- Still mastering this, but this makes it work more predictably to me
--- vim.opt.foldcolumn = "1"
--- -- The \r toggle still works. Just sets a different default.
 vim.o.relativenumber = true
 
 -- https://www.reddit.com/r/neovim/comments/1jmqd7t/sorry_ufo_these_7_lines_replaced_you/
 vim.o.foldenable = true
 vim.o.foldlevel = 99
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.o.foldmethod = 'indent'
 vim.o.foldtext = ""
 vim.opt.foldcolumn = "1"
 
