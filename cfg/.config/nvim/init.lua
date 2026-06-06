@@ -63,6 +63,7 @@ require('mini.starter').setup()
 require('mini.sessions').setup()
 require('mini.trailspace').setup()
 require('mini.visits').setup()
+require('mini.animate').setup()
 
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require('mini.misc').setup()
