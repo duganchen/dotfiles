@@ -321,11 +321,22 @@ do
 		format_on_save = function(bufnr)
 			-- You can specify filetypes to autoformat on save here:
 			local enabled_filetypes = {
+				c = true,
+				css = true,
+				cmake = true,
+				cpp = true,
+				fish = true,
+				go = true,
+				json = true,
+				html = true,
 				lua = true,
-				python = true,
 				markdown = true,
+				python = true,
+				sh = true,
 				text = true,
-				c = true
+				toml = true,
+				typescript = true,
+				yaml = true,
 			}
 			if enabled_filetypes[vim.bo[bufnr].filetype] then
 				return { timeout_ms = 500 }
