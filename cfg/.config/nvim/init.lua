@@ -84,9 +84,6 @@ require('mini.snippets').setup({
 })
 
 require('lazydev').setup()
-
--- mini.clue is set up below
-
 require('mason').setup()
 
 -- Note that mini.basics has set the leader key to space
@@ -152,32 +149,7 @@ vim.opt.fillchars = {
 	eob = " ",
 }
 
--- More cargo-culting from Quickstart
+-- More cargo-culting from Kickstart
 vim.g.have_nerd_font = true
 vim.loader.enable()
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
--- copy and paste from
--- https://dotfiles.substack.com/p/native-lsp-in-neovim-012
-vim.diagnostic.config({
-	severity_sort = true,
-	update_in_insert = false,
-	float = {
-		border = 'rounded',
-		source = 'if_many',
-	},
-	underline = true,
-	virtual_text = {
-		spacing = 2,
-		source = 'if_many',
-		prefix = '●',
-	},
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = 'E',
-			[vim.diagnostic.severity.WARN] = 'W',
-			[vim.diagnostic.severity.INFO] = 'I',
-			[vim.diagnostic.severity.HINT] = 'H',
-		},
-	},
-})
