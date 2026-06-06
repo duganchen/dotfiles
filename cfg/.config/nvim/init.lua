@@ -11,6 +11,8 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	-- still want this Tim Pope plugin
 	'git@github.com:tpope/vim-sleuth.git',
 	-- It's too early to care that this is "archived."
+	-- Anyway, eyes on this:
+	-- https://github.com/neovim/neovim/issues/39006
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
 	'git@github.com:hjson/vim-hjson.git',
 	'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
