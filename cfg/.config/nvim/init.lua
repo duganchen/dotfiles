@@ -3,6 +3,9 @@
 -- "gra" on (not active) packages
 -- https://www.reddit.com/r/neovim/comments/1r92p2y/comment/o69dr8l/
 
+-- This was a good package management primer
+-- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html
+
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	'https://github.com/neovim/nvim-lspconfig',
 	-- still want this Tim Pope plugin
