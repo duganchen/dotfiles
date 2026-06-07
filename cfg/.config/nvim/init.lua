@@ -50,7 +50,6 @@ require('mini.surround').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.extra').setup()
-require('mini.pairs').setup()
 
 -- I like Lualine, fugitive, fidget, etc, but whatever. Let's go with this kit.
 require('mini.notify').setup()
@@ -64,7 +63,6 @@ require('mini.starter').setup()
 require('mini.sessions').setup()
 require('mini.trailspace').setup()
 require('mini.visits').setup()
-require('mini.animate').setup()
 
 -- This works well. I'm also aware of this, but I don't feel like trying it right now:
 -- https://github.com/hakonharnes/img-clip.nvim
