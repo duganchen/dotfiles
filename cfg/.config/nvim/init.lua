@@ -23,6 +23,7 @@ vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin"
 	'git@github.com:folke/lazydev.nvim.git',
 	'git@github.com:stevearc/conform.nvim.git',
 	'git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git',
+	'git@github.com:3rd/image.nvim.git'
 }
 
 
@@ -64,6 +65,10 @@ require('mini.sessions').setup()
 require('mini.trailspace').setup()
 require('mini.visits').setup()
 require('mini.animate').setup()
+
+-- This works well. I'm also aware of this, but I don't feel like trying it right now:
+-- https://github.com/hakonharnes/img-clip.nvim
+require('image').setup()
 
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require('mini.misc').setup()
