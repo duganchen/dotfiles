@@ -43,7 +43,7 @@ require('conform').setup {
 		go = { 'gofmt' },
 		markdown = { 'prettier' },
 		python = { 'ruff format' },
-		sh = { 'shmt' },
+		sh = { 'shfmt' },
 		text = { 'par', 'fmt', stop_after_first = true },
 		yaml = { 'prettier' }
 		-- rust = { 'rustfmt' },
