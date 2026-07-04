@@ -1,6 +1,5 @@
 profile=high-quality
 save-position-on-quit
-hwdec=vaapi-copy
 
 # Use these as the new pp=lb:
 # mpv --vf=lavfi=[yadif=0:-1:0,tblend=all_mode=average]
