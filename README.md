@@ -24,30 +24,16 @@ The options for these aren't really stowable. But here are my notes to
 copy-and-paste.
 
 For my credential helper, I use libsecret on Linux (and keychain when I used OS X).
+This works on Fedora:
 
-The rest of the git config is the standard boilerplate to integrate meld as the difftool
-and mergetool.
-
-Here's what I have in ~/.gitconfig for both platforms:
-
-    [diff]
-        tool = meld
-    [difftool]
-        prompt = false
-    [difftool "meld"]
-        cmd = meld "$LOCAL" "$REMOTE"
-
-    # On Fedora, install git-credential-libsecret
-
-    [credential]
-        helper = libsecret
+    sudo dnf install git-credential-libsecret
+    git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
 
 ## "Plugin Manager" Explanation
 
 There are a lot of "plugin managers" that just clone stuff from git. Here's my
 system, which uses git submodules and
 [Stow](https://www.gnu.org/software/stow/).
-
 Let's say I want to use zsh-autosuggestions.
 
 I would do the following:
