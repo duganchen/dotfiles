@@ -23,11 +23,14 @@ etc.
 The options for these aren't really stowable. But here are my notes to
 copy-and-paste.
 
+Meld is my difftool and mergetool. Set it as your mergetool, and the difftool will be set up.
+
 For my credential helper, I use libsecret on Linux (and keychain when I used OS X).
-This works on Fedora:
+This works on Fedora (and note that the credential helper is an executable):
 
     sudo dnf install git-credential-libsecret
     git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
+    git config --global merge.tool meld
 
 ## "Plugin Manager" Explanation
 
