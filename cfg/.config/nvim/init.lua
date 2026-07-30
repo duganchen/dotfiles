@@ -7,7 +7,12 @@
 -- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html
 
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
-	'https://github.com/neovim/nvim-lspconfig',
+
+	-- The "rose-pine" and "duskfox" colorschemes work well with Ubuntu's purple terminal
+	{ src = 'git@github.com:rose-pine/neovim.git', name = 'rose-pine' },
+	'git@github.com:EdenEast/nightfox.nvim.git',
+
+	'git@github.com:neovim/nvim-lspconfig.git',
 	-- still want this Tim Pope plugin
 	'git@github.com:tpope/vim-sleuth.git',
 	'git@github.com:nvim-treesitter/nvim-treesitter.git',
@@ -69,6 +74,9 @@ require('image').setup()
 require('mini.misc').setup()
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
+
+require('rose-pine').setup({ styles = { transparency = true } })
+require('nightfox').setup({ options = { transparent = true } })
 
 -- Copy and paste from the mini.snippets README
 local gen_loader = require('mini.snippets').gen_loader
