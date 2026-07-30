@@ -26,7 +26,6 @@ require('conform').setup {
 			markdown = true,
 			python = true,
 			sh = true,
-			text = false,
 			toml = true,
 			typescript = true,
 			yaml = true,
@@ -60,11 +59,12 @@ require('conform').setup {
 	},
 }
 
+-- And now I need for legacy (as opposed to greenfield) code:
 
 -- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 -- https://github.com/stevearc/conform.nvim/issues/192
 
-vim.keymap.set('n', '<leader>cf',
+vim.keymap.set('n', '<leader>ctf',
 	function()
 		if vim.b.disable_autoformat then
 			vim.b.disable_autoformat = false
@@ -74,11 +74,11 @@ vim.keymap.set('n', '<leader>cf',
 			vim.notify 'Disabled autoformat for current buffer'
 		end
 	end,
-	{ desc = '[c]onform: buffer [f]format toggle' }
+	{ desc = '[c]onform: buffer [toggle] [f]format' }
 )
 
 
-vim.keymap.set('n', '<leader>cF',
+vim.keymap.set('n', '<leader>ctF',
 	function()
 		if vim.g.disable_autoformat then
 			vim.g.disable_autoformat = false
@@ -88,5 +88,21 @@ vim.keymap.set('n', '<leader>cF',
 			vim.notify 'Disabled autoformat globally'
 		end
 	end,
-	{ desc = '[c]onform: global [F]format toggle' }
+	{ desc = '[c]onform: global [t]oggle [F]format:' }
 )
+
+-- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#format-command
+-- A side effect of having space as the leader key is that you can't use it to invoke commands
+-- on visual selections. So the following is out:
+-- https://github.com/stevearc/conform.nvim/issues/40
+vim.api.nvim_create_user_command("Format", function(args)
+	local range = nil
+	if args.count ~= -1 then
+		local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+		range = {
+			start = { args.line1, 0 },
+			["end"] = { args.line2, end_line:len() },
+		}
+	end
+	require("conform").format({ async = true, lsp_format = "fallback", range = range })
+end, { range = true })
