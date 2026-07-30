@@ -7,6 +7,11 @@ require('conform').setup {
 	},
 	notify_on_error = false,
 	format_on_save = function(bufnr)
+		-- Disable with a global or buffer-local variable
+		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			return
+		end
+
 		-- You can specify filetypes to autoformat on save here:
 		local enabled_filetypes = {
 			c = true,
@@ -21,13 +26,13 @@ require('conform').setup {
 			markdown = true,
 			python = true,
 			sh = true,
-			text = true,
+			text = false,
 			toml = true,
 			typescript = true,
 			yaml = true,
 		}
 		if enabled_filetypes[vim.bo[bufnr].filetype] then
-			return { timeout_ms = 500 }
+			return { timeout_ms = 500, lsp_format = 'fallback' }
 		else
 			return nil
 		end
@@ -54,3 +59,34 @@ require('conform').setup {
 		-- javascript = { "prettierd", "prettier", stop_after_first = true },
 	},
 }
+
+
+-- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
+-- https://github.com/stevearc/conform.nvim/issues/192
+
+vim.keymap.set('n', '<leader>cf',
+	function()
+		if vim.b.disable_autoformat then
+			vim.b.disable_autoformat = false
+			vim.notify 'Enabled autoformat for current buffer'
+		else
+			vim.b.disable_autoformat = true
+			vim.notify 'Disabled autoformat for current buffer'
+		end
+	end,
+	{ desc = '[c]onform: buffer [f]format toggle' }
+)
+
+
+vim.keymap.set('n', '<leader>cF',
+	function()
+		if vim.g.disable_autoformat then
+			vim.g.disable_autoformat = false
+			vim.notify 'Enabled autoformat globally'
+		else
+			vim.g.disable_autoformat = true
+			vim.notify 'Disabled autoformat globally'
+		end
+	end,
+	{ desc = '[c]onform: global [F]format toggle' }
+)
