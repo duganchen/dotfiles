@@ -52,6 +52,7 @@ require('mini.surround').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.extra').setup()
+require('mini.hipatterns').setup()
 
 -- I like Lualine, fugitive, fidget, etc, but whatever. Let's go with this kit.
 require('mini.notify').setup()

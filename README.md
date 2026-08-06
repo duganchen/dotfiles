@@ -11,7 +11,7 @@ Install them with GNU stow:
     stow -t ~ cfg
 
 I use a GNOME desktop on Fedora. The terminal is a Catppuccin Macchiato Ghostty
-(which has OOTB support for NERD symbols) with fish, starship, mpv, yazi, fnm,
+(which has OOTB support for NERD symbols) with fish, hydro, mpv, yazi, fnm,
 etc.
 
 ## FISH

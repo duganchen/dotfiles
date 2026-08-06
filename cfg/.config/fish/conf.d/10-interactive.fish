@@ -4,10 +4,6 @@ if status is-interactive
         set -x LS_COLORS (vivid generate catppuccin-macchiato)
     end
 
-    if command -v starship >/dev/null
-        starship init fish | source
-    end
-
     if command -v fzf >/dev/null
         fzf --fish | source
     end
