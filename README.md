@@ -18,6 +18,10 @@ etc.
 
     fish_config theme save catppuccin-macchiato --color-theme dark
 
+I use [tide](https://github.com/plttn/tide) (note that it's a fork; as of this update, I use v7 on Fedora)
+and [catppuccin-tide](https://github.com/jocelynthode/catppuccin-tide) (the "catppuccin_tide macchiato lean"
+seems to actually need to go in config.fish; putting it in conf.d doesn't seem to work).
+
 ## Git and SSH
 
 The options for these aren't really stowable. But here are my notes to
