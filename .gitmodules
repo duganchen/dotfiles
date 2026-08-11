@@ -70,3 +70,12 @@
 [submodule "subrepos/find.xplr"]
 	path = subrepos/find.xplr
 	url = git@github.com:sayanarijit/find.xplr.git
+[submodule "subrepos/zsh/zsh-autosuggestions"]
+	path = subrepos/zsh/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule "subrepos/zsh/fzf-tab"]
+	path = subrepos/zsh/fzf-tab
+	url = git@github.com:Aloxaf/fzf-tab.git
+[submodule "subrepos/zsh/spaceship-prompt"]
+	path = subrepos/zsh/spaceship-prompt
+	url = git@github.com:spaceship-prompt/spaceship-prompt.git
