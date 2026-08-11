@@ -3,6 +3,8 @@
 # Zsh setup that's both worth using (with an appreciably better user experience
 # than BASH and performant (not appreciably slower than BASH).
 
+set -o emacs
+
 HISTFILE=~/.zsh_history      # Location of history file
 HISTSIZE=10000               # Number of lines kept in memory
 SAVEHIST=10000               # Number of lines saved to file
