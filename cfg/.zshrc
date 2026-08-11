@@ -1,7 +1,7 @@
 # This is intended for Ubuntu VMs and their default purple terminals. I've
 # found that under these conditions, it's actually very difficult to get a
 # Zsh setup that's both worth using (with an appreciably better user experience
-# than BASH and performant (not appreciably slower than BASH).
+# than BASH) and performant (not appreciably slower than BASH).
 
 set -o emacs
 
