@@ -34,7 +34,7 @@ if whence -p fzf > /dev/null ; then
   source <(fzf --zsh)
 fi
 
-if [ -f ~/.zsh/zshrc-local ]; then
+if [ -f ~/.zsh/local.zsh ]; then
   source ~/.zsh/local.zsh
 fi
 
