@@ -72,6 +72,10 @@ I want it.
 
 - https://github.com/Ultramarine-Linux/packages/tree/um42/ultramarine/shell-config
 
+### GhostBSD
+
+- https://github.com/ghostbsd/ghostbsd-zsh-settings
+
 ### Shell Tooling Setup
 
 - [BASH Code Reviews](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/)

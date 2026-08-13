@@ -41,3 +41,11 @@ fi
 if [ -f ~/.config/broot/launcher/bash/br ]; then
   source ~/.config/broot/launcher/bash/br
 fi
+
+# This is clearly the best syntax highlighting plugin
+# https://github.com/michel-kraemer/zsh-patina
+# https://www.reddit.com/r/commandline/comments/1s618ty/zshpatina_a_blazingly_fast_zsh_syntax_highlighter/
+if [ -x ~/.zsh/zsh-patina ]; then
+  eval "$(~/.zsh/zsh-patina activate)" 
+fi
+
