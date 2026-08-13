@@ -48,9 +48,10 @@ Let's say I want to use zsh-autosuggestions.
 
 I would do the following:
 
-    git submodule add git@github.com:zsh-users/zsh-autosuggestions.git
-    subrepos/zsh-autosuggestions mkdir -p cfg/.zsh cd cfg/.zsh ln -s
-    ../../subrepos/zsh-autosuggestions
+    git submodule add git@github.com:zsh-users/zsh-autosuggestions.git subrepos/zsh-autosuggestions
+    mkdir -p cfg/.zsh
+    cd cfg/.zsh
+    ln -s ../../subrepos/zsh-autosuggestions
 
 The next time I stow the cfg directory, the symbolic link to the
 zsh-autosuggestions repo gets installed to ~/.zsh/zsh-autosuggestions, where
