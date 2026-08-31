@@ -1,6 +1,8 @@
 vo=gpu-next
 profile=high-quality
 save-position-on-quit
+video-sync=display-resample
+interpolation
 
 # Blend deinterlacing options, since we no longer have -vf pp=lb
 # mpv --vf=lavfi=[yadif=0:-1:0,tblend=all_mode=average]
