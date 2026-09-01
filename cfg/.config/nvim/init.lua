@@ -62,7 +62,15 @@ MiniIcons.mock_nvim_web_devicons()
 require('mini.git').setup()
 require('mini.diff').setup()
 require('mini.cmdline').setup()
-require('mini.starter').setup()
+require('mini.sessions').setup()
+local starter = require('mini.starter')
+starter.setup({
+	items = {
+		starter.sections.pick(),
+		starter.sections.builtin_actions(),
+		starter.sections.sessions()
+	}
+})
 require('mini.sessions').setup()
 require('mini.trailspace').setup()
 require('mini.visits').setup()
