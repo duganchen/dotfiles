@@ -108,18 +108,22 @@ require('mini.snippets').setup({
 require('lazydev').setup()
 require('mason').setup()
 
-function MiniOpenRoot()
-	MiniFiles.open(vim.lsp.get_clients({ bufnr = 0 })[1].root_dir)
-end
+-- The following are intentionally the same as LazyVim:
+-- e, E (Explorers), e, E (find)
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
 -- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
 vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = '[S]earch [F]iles' })
--- vim.keymap.set('n', '<leader>e', MiniExtra.pickers.explorer, { desc = 'open the explorer picker' })
 vim.keymap.set('n', '<leader>E', MiniFiles.open, { desc = '[E]xplorer (cwd)' })
+
+function MiniOpenRoot()
+	MiniFiles.open(vim.lsp.get_clients({ bufnr = 0 })[1].root_dir)
+end
+
 vim.keymap.set('n', '<leader>e', MiniOpenRoot, { desc = '[e]xplorer (root dir)' })
+
 -- Or <leader>/
 vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = '[S]earch by [G]rep' })
 
@@ -181,3 +185,6 @@ vim.opt.fillchars = {
 vim.g.have_nerd_font = true
 vim.loader.enable()
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Adding some LazyVim stuff
+vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'LSP rename' })
