@@ -6,6 +6,10 @@
 -- This was a good package management primer
 -- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html
 
+-- Just ssh-add your public key to the ssh agent agent before updating packages. It's
+-- the best way I could find to deal with the askpass/"Allow Inhibiting Shortcuts"
+-- spam (one pair for each plugin, all at the same time!) on GNOME.
+
 vim.pack.add { { src = "git@github.com:catppuccin/nvim", name = "catppuccin" },
 
 	-- The "rose-pine" and "duskfox" colorschemes work well with Ubuntu's purple terminal
