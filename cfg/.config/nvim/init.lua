@@ -56,6 +56,7 @@ require('mini.surround').setup()
 require('mini.completion').setup()
 require('mini.pick').setup()
 require('mini.extra').setup()
+require('mini.files').setup()
 require('mini.hipatterns').setup()
 
 -- I like Lualine, fugitive, fidget, etc, but whatever. Let's go with this kit.
@@ -112,7 +113,8 @@ require('mason').setup()
 -- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
 vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>e', MiniExtra.pickers.explorer, { desc = 'open the explorer picker' })
+-- vim.keymap.set('n', '<leader>e', MiniExtra.pickers.explorer, { desc = 'open the explorer picker' })
+vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = 'open the explorer picker' })
 -- Or <leader>/
 vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = '[S]earch by [G]rep' })
 
