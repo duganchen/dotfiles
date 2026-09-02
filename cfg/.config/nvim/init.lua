@@ -6,7 +6,7 @@
 -- This was a good package management primer
 -- https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html
 
-vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+vim.pack.add { { src = "git@github.com:catppuccin/nvim", name = "catppuccin" },
 
 	-- The "rose-pine" and "duskfox" colorschemes work well with Ubuntu's purple terminal
 	{ src = 'git@github.com:rose-pine/neovim.git', name = 'rose-pine' },

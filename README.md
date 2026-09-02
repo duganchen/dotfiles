@@ -3,16 +3,16 @@
 Start by making sure the appropriate directories exist:
 
     mkdir -p ~/.config/{bat/themes,environment.d,eza,yazi,helix/themes,micro/colorschemes,kitty,fish/{completions,conf.d,functions,themes},mpv/{fonts,scripts,script-opts},nvim/plugin,xplr/plugins,ghostty,tmux}
-    mkdir -p ~/.local/{bin,share/mc/skins} mkdir -p ~/.vim/pack/vendor/start
+    mkdir -p ~/.local/{bin,share/mc/skins}
+    mkdir -p ~/.vim/pack/vendor/start
     mkdir -p ~/.zsh
 
 Install them with GNU stow:
 
     stow -t ~ cfg
 
-I use a GNOME desktop on Fedora. The terminal is a Catppuccin Macchiato Ghostty
-(which has OOTB support for NERD symbols) with fish, hydro, mpv, yazi, fnm,
-etc.
+I use a GNOME desktop on Fedora. The terminal is a Catppuccin Macchiato Ghostty (which has OOTB support for NERD
+symbols) with fish, hydro, mpv, yazi, fnm, etc.
 
 ## FISH
 
@@ -27,13 +27,12 @@ My "fisher list":
 
 ## Git and SSH
 
-The options for these aren't really stowable. But here are my notes to
-copy-and-paste.
+The options for these aren't really stowable. But here are my notes to copy-and-paste.
 
 Meld is my difftool and mergetool. Set it as your mergetool, and the difftool will be set up.
 
-For my credential helper, I use libsecret on Linux (and keychain when I used OS X).
-This works on Fedora (and note that the credential helper is an executable):
+For my credential helper, I use libsecret on Linux (and keychain when I used OS X). This works on Fedora (and note that
+the credential helper is an executable):
 
     sudo dnf install git-credential-libsecret
     git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
@@ -41,10 +40,8 @@ This works on Fedora (and note that the credential helper is an executable):
 
 ## "Plugin Manager" Explanation
 
-There are a lot of "plugin managers" that just clone stuff from git. Here's my
-system, which uses git submodules and
-[Stow](https://www.gnu.org/software/stow/).
-Let's say I want to use zsh-autosuggestions.
+There are a lot of "plugin managers" that just clone stuff from git. Here's my system, which uses git submodules and
+[Stow](https://www.gnu.org/software/stow/). Let's say I want to use zsh-autosuggestions.
 
 I would do the following:
 
@@ -53,9 +50,8 @@ I would do the following:
     cd cfg/.zsh
     ln -s ../../subrepos/zsh-autosuggestions
 
-The next time I stow the cfg directory, the symbolic link to the
-zsh-autosuggestions repo gets installed to ~/.zsh/zsh-autosuggestions, where
-I want it.
+The next time I stow the cfg directory, the symbolic link to the zsh-autosuggestions repo gets installed to
+~/.zsh/zsh-autosuggestions, where I want it.
 
 ## Links (for reference)
 
