@@ -52,6 +52,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 require('catppuccin').setup({ transparent_background = true })
 
 require('mini.ai').setup()
+-- Note: the old gx is now gX
 require('mini.operators').setup()
 require('mini.basics').setup()
 require('mini.surround').setup()
