@@ -78,7 +78,6 @@ starter.setup({
 		starter.sections.sessions()
 	}
 })
-require('mini.sessions').setup()
 require('mini.trailspace').setup()
 require('mini.visits').setup()
 
