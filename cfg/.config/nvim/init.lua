@@ -136,19 +136,35 @@ end
 
 vim.keymap.set("n", "<leader>e", MiniOpenRoot, { desc = "[e]xplorer (root dir)" })
 
+-- I don't see a way to get MiniPick.files to open from a specific directory (like the lsp root).
+-- So just open it from cwd.
 
--- vim.keymap.set("n", "<leader>sf", MiniPick.builtin.files, { desc = "[S]earch [F]iles" })
+-- https://github.com/nvim-mini/mini.nvim/issues/830
+
+require('mini.pick').setup()
+MiniPick.registry.files_fd = function()
+	local command = { 'fd', '--type=f', '--no-follow', '--color=never', '--hidden' }
+	local show_with_icons = function(buf_id, items, query)
+		return MiniPick.default_show(buf_id, items, query, { show_icons = true })
+	end
+	local source = { name = 'Files fd', show = show_with_icons }
+	return MiniPick.builtin.cli({ command = command }, { source = source })
+end
+
 vim.keymap.set("n", "<leader>ff", function()
-	MiniPick.builtin.files({ tool = 'fd' })
+	MiniPick.registry.files_fd()
 end, { desc = "[f]ind [f]iles (fd)" })
 
-vim.keymap.set("n", "<leader>ff", function()
-	MiniPick.builtin.files({ tool = { 'fd', '-H' } })
-end, { desc = "[f]ind [f]iles (fd)" })
 
+vim.keymap.set("n", "<leader>fg", function()
+	MiniPick.builtin.files({ tool = 'git' })
+end, { desc = "[f]ind files (git)" })
 
 -- Or <leader>/
-vim.keymap.set("n", "<leader>sg", MiniPick.builtin.grep_live, { desc = "[S]earch by [G]rep" })
+vim.keymap.set("n", "<leader>/", MiniPick.builtin.grep_live, { desc = "Live Grep" })
+
+-- In LazyVim this is a plugin named "trouble" or something like it.
+vim.keymap.set("n", "<leader>x", MiniExtra.pickers.diagnostic, { desc = "Search diagnostics" })
 
 -- from LazyVim
 function WorkspaceSymbolSearch()
@@ -165,8 +181,6 @@ vim.keymap.set("n", "<leader>ss", DocumentSymbolSearch, { desc = "[S]search [s]y
 
 vim.keymap.set("n", "<leader>sm", MiniExtra.pickers.marks, { desc = "[S]earch [m]arks" })
 
--- And you know you need this
-vim.keymap.set("n", "<leader>sd", MiniExtra.pickers.diagnostic, { desc = "[S]earch [d]iagnostics" })
 
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
