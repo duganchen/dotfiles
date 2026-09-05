@@ -123,18 +123,7 @@ require("mason").setup()
 -- These match LazyVim's bindings
 
 vim.keymap.set("n", "<leader>,", MiniPick.builtin.buffers, { desc = "[S]earch [B]uffers" })
-vim.keymap.set("n", "<leader>E", MiniFiles.open, { desc = "[E]xplorer (cwd)" })
-
-function LSPRoot()
-	-- From AI.
-	return vim.lsp.get_clients({ bufnr = 0 })[1].root_dir
-end
-
-function MiniOpenRoot()
-	MiniFiles.open(LSPRoot())
-end
-
-vim.keymap.set("n", "<leader>e", MiniOpenRoot, { desc = "[e]xplorer (root dir)" })
+vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 -- I don't see a way to get MiniPick.files to open from a specific directory (like the lsp root).
 -- So just open it from cwd.
