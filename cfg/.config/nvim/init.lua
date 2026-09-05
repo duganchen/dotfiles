@@ -55,8 +55,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 require("catppuccin").setup({ transparent_background = true })
 
 require("mini.ai").setup()
--- Note: the old gx is now gX
-require("mini.operators").setup()
 require("mini.basics").setup()
 require("mini.surround").setup()
 require("mini.completion").setup()
@@ -143,7 +141,6 @@ end
 vim.keymap.set("n", "<leader>ff", function()
 	MiniPick.registry.files_fd()
 end, { desc = "[f]ind [f]iles (fd)" })
-
 
 vim.keymap.set("n", "<leader>fg", function()
 	MiniPick.builtin.files({ tool = 'git' })
