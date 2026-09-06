@@ -76,8 +76,9 @@ local starter = require("mini.starter")
 starter.setup({
 	items = {
 		starter.sections.pick(),
-		starter.sections.builtin_actions(),
+		starter.sections.recent_files(),
 		starter.sections.sessions(),
+		starter.sections.builtin_actions()
 	},
 })
 require("mini.trailspace").setup()
