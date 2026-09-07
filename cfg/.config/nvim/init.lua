@@ -30,6 +30,10 @@ vim.pack.add({
 	"git@github.com:folke/lazydev.nvim.git",
 	"git@github.com:stevearc/conform.nvim.git",
 	"git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
+	-- This will eventually be able to go:
+	-- https://www.reddit.com/r/neovim/comments/1w4ie5n/markdown_images_in_neovim_013_no_plugin_needed/
+	-- https://www.reddit.com/r/neovim/comments/1w2rjor/vimuiimg_neovim_013s_new_api_for_images/
+	-- Of course, I'll need Kitty protocl support
 	"git@github.com:3rd/image.nvim.git",
 })
 
@@ -60,6 +64,8 @@ require("mini.surround").setup()
 require("mini.completion").setup()
 require("mini.pick").setup()
 require("mini.extra").setup()
+-- Think about replacing as of 0.13:
+-- https://www.reddit.com/r/neovim/comments/1uh24id/new_builtin_directory_viewer/
 require("mini.files").setup()
 require("mini.hipatterns").setup()
 
