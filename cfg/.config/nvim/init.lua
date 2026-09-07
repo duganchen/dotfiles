@@ -33,7 +33,8 @@ vim.pack.add({
 	-- This will eventually be able to go:
 	-- https://www.reddit.com/r/neovim/comments/1w4ie5n/markdown_images_in_neovim_013_no_plugin_needed/
 	-- https://www.reddit.com/r/neovim/comments/1w2rjor/vimuiimg_neovim_013s_new_api_for_images/
-	-- Of course, I'll need Kitty protocl support
+	-- Of course, I'll need Kitty protocol support
+	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
 
 	-- Need to properly check what mini's git plugins can do. For now, though, trying to do without this is just
