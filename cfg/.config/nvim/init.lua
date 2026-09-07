@@ -35,6 +35,10 @@ vim.pack.add({
 	-- https://www.reddit.com/r/neovim/comments/1w2rjor/vimuiimg_neovim_013s_new_api_for_images/
 	-- Of course, I'll need Kitty protocl support
 	"git@github.com:3rd/image.nvim.git",
+
+	-- Need to properly check what mini's git plugins can do. For now, though, trying to do without this is just
+	-- hurting myself.
+	"git@github.com:tpope/vim-fugitive.git"
 })
 
 -- From Kickstart
@@ -223,7 +227,7 @@ vim.g.have_nerd_font = true
 vim.loader.enable()
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- This is all I need, no?
 -- Symbol jumps are Ctrl-] and Ctrl-^
 -- Format (with conform) is gq
-vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP rename" })
+-- Toggling auto-format is added by conform.lua
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "LSP rename" })
