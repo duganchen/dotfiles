@@ -223,5 +223,7 @@ vim.g.have_nerd_font = true
 vim.loader.enable()
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- Adding some LazyVim stuff
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "LSP rename" })
+-- This is all I need, no?
+-- Symbol jumps are Ctrl-] and Ctrl-^
+-- Format (with conform) is gq
+vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "LSP rename" })
