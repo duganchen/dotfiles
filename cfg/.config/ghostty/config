@@ -1,5 +1,6 @@
 theme = Catppuccin Macchiato
 
+# I was going to give this up, and then I realized I'd customed 
 background-opacity = 0.9
 
 # The split-pane navigation keys conflict with GNOME's shortcuts:
@@ -9,13 +10,8 @@ keybind=ctrl+alt+arrow_left=unbind
 keybind=ctrl+alt+arrow_right=unbind
 keybind=ctrl+alt+arrow_up=unbind
 
-# So I'm using these, which will conflict with both i3's
-# https://i3wm.org/docs/refcard.html
-
-# Taking some inspiration from here:
-# https://github.com/smart-splits-nvim/backend-ghostty
-
-keybind = performable:alt+h=goto_split:left
-keybind = performable:alt+j=goto_split:down
-keybind = performable:alt+k=goto_split:up
-keybind = performable:alt+l=goto_split:right
+# So use Terminator's.
+keybind = performable:alt+arrow_left=goto_split:left
+keybind = performable:alt+arrow_down=goto_split:down
+keybind = performable:alt+arrow_up=goto_split:up
+keybind = performable:alt+arrow_right=goto_split:right
