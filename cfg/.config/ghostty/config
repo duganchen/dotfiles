@@ -1,5 +1,4 @@
 theme = Catppuccin Macchiato
-background-opacity = 0.9
 
 # The defaults conflict with GNOME.
 # So lift these from:
