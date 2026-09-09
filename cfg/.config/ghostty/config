@@ -1,7 +1,7 @@
-theme = Catppuccin Macchiato
+# I'm not using transparency for now, but for legacy reasons,
+# most of my applications are set up to support a transparent terminal.
 
-# I was going to give this up, and then I realized I'd customed 
-background-opacity = 0.9
+theme = Catppuccin Macchiato
 
 # The split-pane navigation keys conflict with GNOME's shortcuts:
 
