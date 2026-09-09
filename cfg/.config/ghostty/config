@@ -1,2 +1,16 @@
 theme = Catppuccin Macchiato
 background-opacity = 0.9
+
+# The defaults conflict with GNOME.
+# So lift these from:
+# https://github.com/smart-splits-nvim/backend-ghostty
+keybind = performable:ctrl+h=goto_split:left
+keybind = performable:ctrl+j=goto_split:down
+keybind = performable:ctrl+k=goto_split:up
+keybind = performable:ctrl+l=goto_split:right
+
+# Well, might as well do these too then.
+keybind = performable:alt+h=resize_split:left,30
+keybind = performable:alt+j=resize_split:down,30
+keybind = performable:alt+k=resize_split:up,30
+keybind = performable:alt+l=resize_split:right,30
