@@ -1,0 +1,6 @@
+# This is all I seem to actually need from:
+# https://github.com/io-PEAK/tig-catppuccin
+
+color cursor                            black       magenta
+color title-focus                       black       magenta
+color title-blur                        magenta     black
