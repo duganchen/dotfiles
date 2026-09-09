@@ -1,5 +1,7 @@
 theme = Catppuccin Macchiato
 
+background-opacity = 0.9
+
 # The split-pane navigation keys conflict with GNOME's shortcuts:
 
 keybind=ctrl+alt+arrow_down=unbind
