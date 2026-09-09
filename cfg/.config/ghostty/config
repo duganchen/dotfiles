@@ -1,15 +1,19 @@
 theme = Catppuccin Macchiato
 
-# The defaults conflict with GNOME.
-# So lift these from:
-# https://github.com/smart-splits-nvim/backend-ghostty
-keybind = performable:ctrl+h=goto_split:left
-keybind = performable:ctrl+j=goto_split:down
-keybind = performable:ctrl+k=goto_split:up
-keybind = performable:ctrl+l=goto_split:right
+# The split-pane navigation keys conflict with GNOME's shortcuts:
 
-# Well, might as well do these too then.
-keybind = performable:alt+h=resize_split:left,30
-keybind = performable:alt+j=resize_split:down,30
-keybind = performable:alt+k=resize_split:up,30
-keybind = performable:alt+l=resize_split:right,30
+keybind=ctrl+alt+arrow_down=unbind
+keybind=ctrl+alt+arrow_left=unbind
+keybind=ctrl+alt+arrow_right=unbind
+keybind=ctrl+alt+arrow_up=unbind
+
+# So I'm using these, which will conflict with both i3's
+# https://i3wm.org/docs/refcard.html
+
+# Taking some inspiration from here:
+# https://github.com/smart-splits-nvim/backend-ghostty
+
+keybind = performable:alt+h=goto_split:left
+keybind = performable:alt+j=goto_split:down
+keybind = performable:alt+k=goto_split:up
+keybind = performable:alt+l=goto_split:right
