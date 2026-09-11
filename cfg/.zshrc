@@ -54,4 +54,5 @@ if [ -x ~/.zsh/zsh-patina ]; then
   eval "$(~/.zsh/zsh-patina activate)" 
 fi
 
-
+export EDITOR=nvim
+export VISUAL=nvim
