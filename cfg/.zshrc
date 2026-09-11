@@ -1,6 +1,6 @@
 # This is intended for Ubuntu VMs and their default purple terminals. I've
 # found that under these conditions, it's actually very difficult to get a
-# Zsh setup that's both worth using (with an appreciably better user experience
+# Zsh setup that's both worth using (with an appreciably richer user experience
 # than BASH) and performant (not appreciably slower than BASH).
 
 set -o emacs
@@ -26,11 +26,11 @@ alias ls='ls --color=auto'
 
 # My additions
 
-if whence -p zoxide > /dev/null ; then
+if whence -p zoxide > /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
-if whence -p fzf > /dev/null ; then
+if whence -p fzf > /dev/null; then
   source <(fzf --zsh)
 fi
 
@@ -42,10 +42,16 @@ if [ -f ~/.config/broot/launcher/bash/br ]; then
   source ~/.config/broot/launcher/bash/br
 fi
 
+if whence -p tmux > /dev/null; then
+  # Stealing this from Omarchy
+  alias t='tmux attach || tmux new -s Work'
+fi
+
 # This is clearly the best syntax highlighting plugin
 # https://github.com/michel-kraemer/zsh-patina
 # https://www.reddit.com/r/commandline/comments/1s618ty/zshpatina_a_blazingly_fast_zsh_syntax_highlighter/
 if [ -x ~/.zsh/zsh-patina ]; then
   eval "$(~/.zsh/zsh-patina activate)" 
 fi
+
 

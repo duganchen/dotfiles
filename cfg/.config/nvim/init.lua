@@ -205,6 +205,7 @@ vim.lsp.enable({
 vim.cmd.colorscheme("catppuccin-macchiato")
 
 vim.o.relativenumber = true
+vim.o.ignorecase = false
 
 -- https://www.reddit.com/r/neovim/comments/1jmqd7t/sorry_ufo_these_7_lines_replaced_you/
 vim.o.foldenable = true
