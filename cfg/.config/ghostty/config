@@ -18,3 +18,5 @@ keybind = performable:alt+arrow_right=goto_split:right
 
 # Also from Terminator
 keybind = performable:ctrl+shift+a=new_split:auto
+# Resizing splits (ctrl+shift+cursor in Terminator) isn't bound because
+# it doesn't work well for me. Use the mouse.
