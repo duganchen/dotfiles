@@ -15,3 +15,6 @@ keybind = performable:alt+arrow_left=goto_split:left
 keybind = performable:alt+arrow_down=goto_split:down
 keybind = performable:alt+arrow_up=goto_split:up
 keybind = performable:alt+arrow_right=goto_split:right
+
+# Also from Terminator
+keybind = performable:ctrl+shift+a=new_split:auto
