@@ -12,7 +12,7 @@ Install them with GNU stow:
     stow -t ~ cfg
 
 I use a GNOME desktop on Fedora. The terminal is a Catppuccin Macchiato Ghostty (which has OOTB support for NERD
-symbols) with fish, hydro, mpv, yazi, fnm, etc.
+symbols) with fish, tide, mpv, yazi, fnm, etc.
 
 ## FISH
 
@@ -24,6 +24,8 @@ My "fisher list":
     jorgebucaran/autopair.fish
     plttn/tide@v7
     jocelynthode/catppuccin-tide
+
+Note that the Tide prompt is a [maintained fork](https://github.com/plttn/tide).
 
 ## Git and SSH
 
