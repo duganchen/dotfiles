@@ -75,6 +75,14 @@ The next time I stow the cfg directory, the symbolic link to the zsh-autosuggest
 
 - https://github.com/ghostbsd/ghostbsd-zsh-settings
 
+### Omarchy
+
+- https://github.com/omacom/omarchy
+
+### Kali
+
+- https://gitlab.com/kalilinux/packages/kali-defaults/-/blob/kali/master/etc/skel/.zshrc
+
 ### Shell Tooling Setup
 
 - [BASH Code Reviews](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/recipes/bash/)
