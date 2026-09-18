@@ -1,6 +1,9 @@
 # I'm not using transparency for now, but for legacy reasons,
 # most of my applications are set up to support a transparent terminal.
 
+# This doesn't seem to make a difference to Yazi, FWIW
+window-theme = dark
+
 theme = Catppuccin Macchiato
 
 # The split-pane navigation keys conflict with GNOME's shortcuts:

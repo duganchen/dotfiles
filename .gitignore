@@ -2,4 +2,8 @@
 *.swp
 .vim/bundle/
 !.vim/bundle/Vundle.vim
+cfg/.config/yazi/flavors
+cfg/.config/yazi/plugins
+cfg/.config/yazi/plugins
+cfg/.config/yazi/package.toml
 

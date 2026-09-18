@@ -1,4 +1,5 @@
-# Install with:
-# ya pkg add yazi-rs/flavors:catppuccin-macchiato
+# AFAICT, this is selected based on what mode GNOME is in.
+# Setting window-theme in ghostty makes no difference.
 [flavor]
 dark = "catppuccin-macchiato"
+light = "catppuccin-macchiato"
