@@ -214,6 +214,8 @@ vim.o.foldmethod = "indent"
 vim.o.foldtext = ""
 vim.opt.foldcolumn = "1"
 
+vim.opt.timeoutlen = 300
+
 -- https://www.lazyvim.org/configuration/general
 vim.opt.fillchars = {
 	foldopen = "",
