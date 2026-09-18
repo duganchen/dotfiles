@@ -198,6 +198,7 @@ vim.lsp.enable({
 	"lua_ls",
 	"marksman",
 	"ruff",
+	"rust_analyzer",
 	"tombi",
 	"yamlls",
 })

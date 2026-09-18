@@ -22,6 +22,7 @@ require('conform').setup {
 				lua = true,
 				markdown = true,
 				python = true,
+				rust = true,
 				sh = true,
 				toml = true,
 				typescript = true,
@@ -48,8 +49,8 @@ require('conform').setup {
 		python   = { 'ruff format' },
 		sh       = { 'shfmt' },
 		text     = { 'par', 'fmt', stop_after_first = true },
-		yaml     = { 'prettier' }
-		-- rust = { 'rustfmt' },
+		yaml     = { 'prettier' },
+		rust = { 'rustfmt' },
 		-- Conform can also run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		--
