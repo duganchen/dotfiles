@@ -235,7 +235,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Symbol jumps are Ctrl-] and Ctrl-^
 -- Format (with conform) is gq
 -- Toggling auto-format is added by conform.lua
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "LSP rename" })
+-- See also :h lsp-defaults
 
 vim.keymap.set("n", "<leader>ch", function()
 	-- This is from Google AI, although the source it gave was this:
