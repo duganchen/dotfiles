@@ -236,3 +236,9 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Format (with conform) is gq
 -- Toggling auto-format is added by conform.lua
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "LSP rename" })
+
+vim.keymap.set("n", "<leader>ch", function()
+	-- This is from Google AI, although the source it gave was this:
+	-- https://youtu.be/Qn6YkDk8FoI?si=56q19euSqHBE3FfG
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end, { desc = "Tottle inlay hints" })
