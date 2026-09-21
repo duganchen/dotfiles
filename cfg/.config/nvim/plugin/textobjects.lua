@@ -25,7 +25,7 @@ end, { desc = "Function forward start" })
 
 vim.keymap.set({ "n", "x", "o" }, "]F", function()
 	ts_move.goto_next_end("@function.outer", "textobjects")
-end, { desc = "Fucntion forward end" })
+end, { desc = "Function forward end" })
 
 vim.keymap.set({ "n", "x", "o" }, "[f", function()
 	ts_move.goto_previous_start("@function.outer", "textobjects")
