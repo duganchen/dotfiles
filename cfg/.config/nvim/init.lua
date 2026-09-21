@@ -142,7 +142,7 @@ vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 require('mini.pick').setup()
 MiniPick.registry.files_fd = function()
-	local command = { 'fd', '--type=f', '--follow', '--color=never', '--hidden' }
+	local command = { 'fd', '--type=f', '--color=never', '--hidden', '-E', '.git' }
 	local show_with_icons = function(buf_id, items, query)
 		return MiniPick.default_show(buf_id, items, query, { show_icons = true })
 	end
