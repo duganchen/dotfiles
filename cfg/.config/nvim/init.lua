@@ -123,24 +123,28 @@ require("mason").setup()
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
 -- Apart from that, this started from Helix's default list.
+-- My setup ensures that, for a specific example, pyrefly is used as the lsp
+-- and ruff is used as the formatter.
+local lsps = {
+	"bashls",
+	"clangd",
+	"eslint",
+	"neocmake",
+	"cssls",
+	"fish_lsp",
+	"gopls",
+	"html",
+	"jsonls",
+	"lua_ls",
+	"marksman",
+	"pyrefly",
+	"rust_analyzer",
+	"tombi",
+	"yamlls",
+}
 require("mason-lspconfig").setup({
-	ensure_installed = {
-		"bashls",
-		"clangd",
-		"eslint",
-		"neocmake",
-		"cssls",
-		"fish_lsp",
-		"gopls",
-		"html",
-		"jsonls",
-		"lua_ls",
-		"marksman",
-		"pyrefly",
-		"rust_analyzer",
-		"tombi",
-		"yamlls",
-	}
+	automatic_enable = lsps,
+	ensure_installed = lsps
 })
 
 -- Note that mini.basics has set the leader key to space
