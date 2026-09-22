@@ -37,10 +37,6 @@ vim.pack.add({
 	-- Of course, I'll need Kitty protocol support
 	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
-
-	-- Need to properly check what mini's git plugins can do. For now, though, trying to do without this is just
-	-- hurting myself.
-	"git@github.com:tpope/vim-fugitive.git"
 })
 
 -- From Kickstart
