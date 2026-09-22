@@ -234,11 +234,13 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Symbol jumps are Ctrl-] and Ctrl-^
 -- Format (with conform) is gq
 -- Toggling auto-format is added by conform.lua
--- See also :h lsp-defaults
+-- See also :h lsp-defaults. gra, grn, etc.
 
 vim.keymap.set("n", "<leader>ch", function()
 	-- This is from Google AI, although the source it gave was this:
 	-- https://youtu.be/Qn6YkDk8FoI?si=56q19euSqHBE3FfG
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 	-- Or "K" (shift-k) with the cursor over an identifier.
-end, { desc = "Toggle inlay hints" })
+end, { desc = "Toggle inlay [h]ints" })
+
+vim.keymap.set("n", "<leader>cg", MiniDiff.toggle_overlay, {desc = "Toggle [g]it overlay"})
