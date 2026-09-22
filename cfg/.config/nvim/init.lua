@@ -27,6 +27,7 @@ vim.pack.add({
 	{ src = "git@github.com:nvim-mini/mini.nvim.git", version = "stable" },
 	"git@github.com:rafamadriz/friendly-snippets.git",
 	"git@github.com:mason-org/mason.nvim.git",
+	"git@github.com:mason-org/mason-lspconfig.nvim.git",
 	"git@github.com:folke/lazydev.nvim.git",
 	"git@github.com:stevearc/conform.nvim.git",
 	"git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
@@ -122,6 +123,7 @@ require("mini.snippets").setup({
 
 require("lazydev").setup()
 require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- The following are intentionally the same as LazyVim:
 -- e, E (Explorers), e, E (find)
