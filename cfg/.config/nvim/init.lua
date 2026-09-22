@@ -11,12 +11,7 @@
 -- spam (one pair for each plugin, all at the same time!) on GNOME.
 
 vim.pack.add({
-	{ src = "git@github.com:catppuccin/nvim",      name = "catppuccin" },
-
-	-- The "rose-pine" and "duskfox" colorschemes work well with Ubuntu's purple terminal
-	{ src = "git@github.com:rose-pine/neovim.git", name = "rose-pine" },
-	"git@github.com:EdenEast/nightfox.nvim.git",
-
+	{ src = "git@github.com:catppuccin/nvim",         name = "catppuccin" },
 	"git@github.com:neovim/nvim-lspconfig.git",
 	-- still want this Tim Pope plugin
 	"git@github.com:tpope/vim-sleuth.git",
@@ -38,6 +33,10 @@ vim.pack.add({
 	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
 })
+
+-- These work well with Ubuntu's default purple terminal:
+-- https://github.com/rose-pine/neovim
+-- https://github.com/edeneast/nightfox.nvim
 
 -- From Kickstart
 vim.api.nvim_create_autocmd("PackChanged", {
@@ -100,9 +99,6 @@ require("image").setup()
 require("mini.misc").setup()
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
-
-require("rose-pine").setup({ styles = { transparency = true } })
-require("nightfox").setup({ options = { transparent = true } })
 
 -- Copy and paste from the mini.snippets README
 local gen_loader = require("mini.snippets").gen_loader
@@ -236,4 +232,4 @@ vim.keymap.set("n", "<leader>ch", function()
 	-- Or "K" (shift-k) with the cursor over an identifier.
 end, { desc = "Toggle inlay [h]ints" })
 
-vim.keymap.set("n", "<leader>cg", MiniDiff.toggle_overlay, {desc = "Toggle [g]it overlay"})
+vim.keymap.set("n", "<leader>cg", MiniDiff.toggle_overlay, { desc = "Toggle [g]it overlay" })
