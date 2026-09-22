@@ -123,7 +123,29 @@ require("mini.snippets").setup({
 
 require("lazydev").setup()
 require("mason").setup()
-require("mason-lspconfig").setup()
+
+-- not using cmake-language-server because of this:
+-- https://github.com/regen100/cmake-language-server/issues/108
+-- Apart from that, this started from Helix's default list.
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"bashls",
+		"clangd",
+		"eslint",
+		"neocmake",
+		"cssls",
+		"fish_lsp",
+		"gopls",
+		"html",
+		"jsonls",
+		"lua_ls",
+		"marksman",
+		"pyrefly",
+		"rust_analyzer",
+		"tombi",
+		"yamlls",
+	}
+})
 
 -- The following are intentionally the same as LazyVim:
 -- e, E (Explorers), e, E (find)
@@ -180,31 +202,6 @@ end
 vim.keymap.set("n", "<leader>ss", DocumentSymbolSearch, { desc = "[S]search [s]ymbols (document)" })
 
 vim.keymap.set("n", "<leader>sm", MiniExtra.pickers.marks, { desc = "[S]earch [m]arks" })
-
-
--- not using cmake-language-server because of this:
--- https://github.com/regen100/cmake-language-server/issues/108
-
--- These generally follow the languages.toml file I've set up for Helix, and are meant to run
--- on the same system.
-vim.lsp.enable({
-	"bashls",
-	"clangd",
-	"eslint",
-	"neocmake",
-	"cssls",
-	"fish_lsp",
-	"gopls",
-	"html",
-	"jsonls",
-	"lua_ls",
-	"marksman",
-	"pyrefly",
-	"rust_analyzer",
-	"tombi",
-	"yamlls",
-})
-
 vim.cmd.colorscheme("catppuccin-macchiato")
 
 vim.o.relativenumber = true
