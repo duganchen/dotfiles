@@ -76,6 +76,7 @@ require("mini.statusline").setup()
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 require("mini.git").setup()
+-- https://www.reddit.com/r/neovim/comments/1bq0cxy/minidiff_work_with_diff_hunks_interactively/
 require("mini.diff").setup()
 require("mini.cmdline").setup()
 require("mini.sessions").setup()
