@@ -38,7 +38,7 @@ the credential helper is an executable):
 
     sudo dnf install git-credential-libsecret
     git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
-    git config --global merge.tool meld
+    git config --global merge.tool nvimdiff
 
 ## "Plugin Manager" Explanation
 
