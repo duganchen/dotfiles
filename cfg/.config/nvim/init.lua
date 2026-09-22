@@ -147,9 +147,6 @@ require("mason-lspconfig").setup({
 	}
 })
 
--- The following are intentionally the same as LazyVim:
--- e, E (Explorers), e, E (find)
-
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
 -- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
