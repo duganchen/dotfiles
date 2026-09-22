@@ -197,7 +197,7 @@ vim.lsp.enable({
 	"jsonls",
 	"lua_ls",
 	"marksman",
-	"ruff",
+	"pyrefly",
 	"rust_analyzer",
 	"tombi",
 	"yamlls",
