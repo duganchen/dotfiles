@@ -24,7 +24,7 @@ mini_ai.setup({
 })
 
 -- Add function/class/parameter text objects and movement
-t
+
 -- I do want mini.bracketed, but I also want textobject movements. Exact mappings are
 -- neovim's.
 -- https://www.lazyvim.org/plugins/treesitter#nvim-treesitter-textobjects
