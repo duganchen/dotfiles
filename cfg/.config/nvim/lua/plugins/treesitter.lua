@@ -1,24 +1,9 @@
 -- Kickstart stuff
-require('nvim-treesitter').install({ 'bash', 'c', 'cpp', 'cmake', 'css', 'fish', 'go', 'hjson', 'html', 'javascript',
-	'json', 'lua',
-	'markdown',
-	'python', 'toml',
-	'yaml' })
-
+--
 -- [[ Configure Treesitter ]]
 --  Used to highlight, edit, and navigate code
 --
 --  See `:help nvim-treesitter-intro`
-
--- NOTE: You can also specify a branch or a specific commit
-
--- Ensure basic parsers are installed
-local parsers = { 'bash', 'c', 'cpp', 'cmake', 'css', 'fish', 'go', 'hjson', 'html', 'javascript',
-	'json', 'lua',
-	'markdown',
-	'python', 'toml',
-	'yaml' }
-require('nvim-treesitter').install(parsers)
 
 ---@param buf integer
 ---@param language string

@@ -21,9 +21,9 @@ vim.pack.add({
 	-- Yeah lets's just do all of these
 	{ src = "git@github.com:nvim-mini/mini.nvim.git", version = "stable" },
 	"git@github.com:rafamadriz/friendly-snippets.git",
+	"git@github.com:folke/lazydev.nvim.git",
 	"git@github.com:mason-org/mason.nvim.git",
 	"git@github.com:mason-org/mason-lspconfig.nvim.git",
-	"git@github.com:folke/lazydev.nvim.git",
 	"git@github.com:stevearc/conform.nvim.git",
 	"git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
 	-- This will eventually be able to go:
@@ -32,6 +32,15 @@ vim.pack.add({
 	-- Of course, I'll need Kitty protocol support
 	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
+})
+
+require("lazydev").setup({
+	library = {
+		path = "${3rd}/luv/library",
+		words = {
+			"vim%.uv"
+		}
+	}
 })
 
 -- These work well with Ubuntu's default purple terminal:
@@ -59,41 +68,53 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 require("catppuccin").setup({ transparent_background = true })
 
-require("mini.ai").setup()
-require("mini.basics").setup()
-
-require("mini.pairs").setup()
-require("mini.surround").setup()
-
-require("mini.completion").setup()
-require("mini.pick").setup()
-require("mini.extra").setup()
--- Think about replacing as of 0.13:
--- https://www.reddit.com/r/neovim/comments/1uh24id/new_builtin_directory_viewer/
-require("mini.files").setup()
-require("mini.hipatterns").setup()
-
 -- I like Lualine, fugitive, fidget, etc, but whatever. Let's go with this kit.
-require("mini.notify").setup()
-require("mini.statusline").setup()
-require("mini.icons").setup()
-MiniIcons.mock_nvim_web_devicons()
-require("mini.git").setup()
+-- Think about replacing as of 0.13:
 -- https://www.reddit.com/r/neovim/comments/1bq0cxy/minidiff_work_with_diff_hunks_interactively/
-require("mini.diff").setup()
-require("mini.cmdline").setup()
-require("mini.sessions").setup()
-local starter = require("mini.starter")
-starter.setup({
-	items = {
-		starter.sections.pick(),
-		starter.sections.recent_files(),
-		starter.sections.sessions(),
-		starter.sections.builtin_actions()
+-- https://www.reddit.com/r/neovim/comments/1uh24id/new_builtin_directory_viewer/
+
+-- Inspired by Lazyvim
+-- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
+-- https://www.lazyvim.org/plugins/coding#miniai
+local mini_ai = require('mini.ai')
+mini_ai.setup({
+	n_lines = 500,
+
+	custom_textobjects = {
+		f = mini_ai.gen_spec.treesitter({
+			a = '@function.outer',
+			i = '@function.inner',
+		}),
+
+		c = mini_ai.gen_spec.treesitter({
+			a = '@class.outer',
+			i = '@class.inner',
+		}),
+
+		a = mini_ai.gen_spec.treesitter({
+			a = '@parameter.outer',
+			i = '@parameter.inner',
+		}),
 	},
 })
-require("mini.trailspace").setup()
-require("mini.visits").setup()
+require("mini.basics").setup()
+
+require('mini.bracketed').setup({
+
+	-- f/F is now function call
+	file = { suffix = '' },
+	-- c/C is now class
+	comment = { suffix = '' },
+})
+
+require("mini.cmdline").setup()
+require("mini.completion").setup()
+require("mini.diff").setup()
+require("mini.extra").setup()
+require("mini.files").setup()
+require("mini.git").setup()
+require("mini.hipatterns").setup()
+require("mini.icons").setup()
 
 -- This works well. I'm also aware of this, but I don't feel like trying it right now:
 -- https://github.com/hakonharnes/img-clip.nvim
@@ -103,6 +124,28 @@ require("image").setup()
 require("mini.misc").setup()
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
+
+require("mini.notify").setup()
+require("mini.pairs").setup()
+require("mini.pick").setup()
+
+require("mini.sessions").setup()
+
+local starter = require("mini.starter")
+starter.setup({
+	items = {
+		starter.sections.pick(),
+		starter.sections.recent_files(),
+		starter.sections.sessions(),
+		starter.sections.builtin_actions()
+	},
+})
+
+require("mini.statusline").setup()
+require("mini.surround").setup()
+
+require("mini.trailspace").setup()
+require("mini.visits").setup()
 
 -- Copy and paste from the mini.snippets README
 local gen_loader = require("mini.snippets").gen_loader
@@ -117,7 +160,6 @@ require("mini.snippets").setup({
 	},
 })
 
-require("lazydev").setup()
 require("mason").setup()
 
 -- not using cmake-language-server because of this:
@@ -156,34 +198,6 @@ require("mason-lspconfig").setup({
 vim.keymap.set("n", "<leader>,", MiniPick.builtin.buffers, { desc = "[S]earch [B]uffers" })
 vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
--- I don't see a way to get MiniPick.files to open from a specific directory (like the lsp root).
--- So just open it from cwd.
-
--- https://github.com/nvim-mini/mini.nvim/issues/830
-
-require('mini.pick').setup()
-MiniPick.registry.files_fd = function()
-	local command = { 'fd', '--type=f', '--color=never', '--hidden', '-E', '.git' }
-	local show_with_icons = function(buf_id, items, query)
-		return MiniPick.default_show(buf_id, items, query, { show_icons = true })
-	end
-	local source = { name = 'Files fd', show = show_with_icons }
-	return MiniPick.builtin.cli({ command = command }, { source = source })
-end
-
-vim.keymap.set("n", "<leader>ff", function()
-	MiniPick.registry.files_fd()
-end, { desc = "[f]ind [f]iles (fd)" })
-
-vim.keymap.set("n", "<leader>fg", function()
-	MiniPick.builtin.files({ tool = 'git' })
-end, { desc = "[f]ind files (git)" })
-
--- Or <leader>/
-vim.keymap.set("n", "<leader>/", MiniPick.builtin.grep_live, { desc = "Live Grep" })
-
--- In LazyVim this is a plugin named "trouble" or something like it.
-vim.keymap.set("n", "<leader>x", MiniExtra.pickers.diagnostic, { desc = "Search diagnostics" })
 
 -- from LazyVim
 function WorkspaceSymbolSearch()
@@ -224,7 +238,6 @@ vim.opt.fillchars = {
 }
 
 -- More cargo-culting from Kickstart
-vim.g.have_nerd_font = true
 vim.loader.enable()
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
@@ -241,3 +254,11 @@ vim.keymap.set("n", "<leader>ch", function()
 end, { desc = "Toggle inlay [h]ints" })
 
 vim.keymap.set("n", "<leader>cg", MiniDiff.toggle_overlay, { desc = "Toggle [g]it overlay" })
+
+require('plugins.conform')
+require('plugins.diagnostics')
+require('plugins.minibufremove')
+require('plugins.miniclue')
+require('plugins.minipick')
+require('plugins.textobjects')
+require('plugins.treesitter')

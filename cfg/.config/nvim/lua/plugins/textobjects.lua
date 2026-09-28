@@ -7,14 +7,6 @@
 -- I couldn't get conditional/loop/block text objects to work. Honestly, after setting all this up,
 -- I realized that the traditional way to deal with all of these was with folds.
 
-require('mini.bracketed').setup({
-
-	-- f/F is now function call
-	file = { suffix = '' },
-	-- c/C is now class
-	comment = { suffix = '' },
-})
-
 require('nvim-treesitter-textobjects').setup({ move = { set_jumps = true } })
 
 local ts_move = require("nvim-treesitter-textobjects.move")
@@ -86,28 +78,3 @@ vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = t
 vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
--- mini.ai too.
--- Inspired by Lazyvim
--- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
--- https://www.lazyvim.org/plugins/coding#miniai
-local mini_ai = require('mini.ai')
-mini_ai.setup({
-	n_lines = 500,
-
-	custom_textobjects = {
-		f = mini_ai.gen_spec.treesitter({
-			a = '@function.outer',
-			i = '@function.inner',
-		}),
-
-		c = mini_ai.gen_spec.treesitter({
-			a = '@class.outer',
-			i = '@class.inner',
-		}),
-
-		a = mini_ai.gen_spec.treesitter({
-			a = '@parameter.outer',
-			i = '@parameter.inner',
-		}),
-	},
-})
