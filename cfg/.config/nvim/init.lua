@@ -73,30 +73,6 @@ require("catppuccin").setup({ transparent_background = true })
 -- https://www.reddit.com/r/neovim/comments/1bq0cxy/minidiff_work_with_diff_hunks_interactively/
 -- https://www.reddit.com/r/neovim/comments/1uh24id/new_builtin_directory_viewer/
 
--- Inspired by Lazyvim
--- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
--- https://www.lazyvim.org/plugins/coding#miniai
-local mini_ai = require('mini.ai')
-mini_ai.setup({
-	n_lines = 500,
-
-	custom_textobjects = {
-		f = mini_ai.gen_spec.treesitter({
-			a = '@function.outer',
-			i = '@function.inner',
-		}),
-
-		c = mini_ai.gen_spec.treesitter({
-			a = '@class.outer',
-			i = '@class.inner',
-		}),
-
-		a = mini_ai.gen_spec.treesitter({
-			a = '@parameter.outer',
-			i = '@parameter.inner',
-		}),
-	},
-})
 require("mini.basics").setup()
 
 require('mini.bracketed').setup({

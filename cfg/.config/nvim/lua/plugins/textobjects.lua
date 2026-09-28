@@ -1,5 +1,30 @@
--- Add function/class/parameter text objects and movement
+-- Inspired by Lazyvim
+-- https://www.reddit.com/r/neovim/comments/136vj6x/whats_the_difference_between_these_two_miniai/
+-- https://www.lazyvim.org/plugins/coding#miniai
+local mini_ai = require('mini.ai')
+mini_ai.setup({
+	n_lines = 500,
 
+	custom_textobjects = {
+		f = mini_ai.gen_spec.treesitter({
+			a = '@function.outer',
+			i = '@function.inner',
+		}),
+
+		c = mini_ai.gen_spec.treesitter({
+			a = '@class.outer',
+			i = '@class.inner',
+		}),
+
+		a = mini_ai.gen_spec.treesitter({
+			a = '@parameter.outer',
+			i = '@parameter.inner',
+		}),
+	},
+})
+
+-- Add function/class/parameter text objects and movement
+t
 -- I do want mini.bracketed, but I also want textobject movements. Exact mappings are
 -- neovim's.
 -- https://www.lazyvim.org/plugins/treesitter#nvim-treesitter-textobjects
