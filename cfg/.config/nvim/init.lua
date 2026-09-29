@@ -193,12 +193,6 @@ require('blink.cmp').setup({
 	},
 
 	completion = {
-		accept = {
-			-- experimental auto-brackets support
-			auto_brackets = {
-				enabled = true,
-			},
-		},
 		menu = {
 			draw = {
 				treesitter = { "lsp" },
@@ -210,7 +204,6 @@ require('blink.cmp').setup({
 		}
 	}
 })
-
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
