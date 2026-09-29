@@ -32,6 +32,7 @@ vim.pack.add({
 	-- Of course, I'll need Kitty protocol support
 	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
+	{ src = "git@github.com:saghen/blink.cmp.git", version = "v1" }
 })
 
 require("lazydev").setup({
@@ -84,13 +85,14 @@ require('mini.bracketed').setup({
 })
 
 require("mini.cmdline").setup()
-require("mini.completion").setup()
 require("mini.diff").setup()
 require("mini.extra").setup()
 require("mini.files").setup()
 require("mini.git").setup()
 require("mini.hipatterns").setup()
+
 require("mini.icons").setup()
+MiniIcons.mock_nvim_web_devicons()
 
 -- This works well. I'm also aware of this, but I don't feel like trying it right now:
 -- https://github.com/hakonharnes/img-clip.nvim
@@ -164,6 +166,42 @@ require("mason-lspconfig").setup({
 	automatic_enable = lsps,
 	ensure_installed = lsps
 })
+
+
+require('blink.cmp').setup({
+	snippets = {
+		preset = "default",
+	},
+
+	appearance = {
+		-- sets the fallback highlight groups to nvim-cmp's highlight groups
+		-- useful for when your theme doesn't support blink.cmp
+		-- will be removed in a future release, assuming themes add support
+		use_nvim_cmp_as_default = false,
+		-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+		-- adjusts spacing to ensure icons are aligned
+		nerd_font_variant = "mono",
+	},
+
+	completion = {
+		accept = {
+			-- experimental auto-brackets support
+			auto_brackets = {
+				enabled = true,
+			},
+		},
+		menu = {
+			draw = {
+				treesitter = { "lsp" },
+			},
+		},
+		documentation = {
+			auto_show = true,
+			auto_show_delay_ms = 200,
+		}
+	}
+})
+
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
