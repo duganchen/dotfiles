@@ -169,6 +169,7 @@ require("mason-lspconfig").setup({
 
 
 require('blink.cmp').setup({
+	-- Just a copy and paste from LazyGit.
 	snippets = {
 		preset = "default",
 	},
