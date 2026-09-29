@@ -4,3 +4,5 @@
 color cursor                            black       magenta
 color title-focus                       black       magenta
 color title-blur                        magenta     black
+
+# The git blame view still needs some work, but it's broken there too.

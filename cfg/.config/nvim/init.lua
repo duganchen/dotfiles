@@ -93,10 +93,15 @@ require('mini.bracketed').setup({
 })
 
 require("mini.cmdline").setup()
+
+-- The scope of mini-nvim's git support is correct.
+-- If you want a diff view, use "git difftool".
+-- And if you want blame, use tig.
 require("mini.diff").setup()
+require("mini.git").setup()
+
 require("mini.extra").setup()
 require("mini.files").setup()
-require("mini.git").setup()
 require("mini.hipatterns").setup()
 
 require("mini.icons").setup()
