@@ -39,8 +39,8 @@ vim.pack.add({
 	-- Popular and well-tested, so why not.
 	-- Telescope's recommendation is to pin to the latest releast tag.
 	"git@github.com:nvim-lua/plenary.nvim.git",
-	{ src = "git@github.com:nvim-telescope/telescope.nvim.git", version = "v0.2.1" }
-
+	{ src = "git@github.com:nvim-telescope/telescope.nvim.git", version = "v0.2.1" },
+	"git@github.com:nvim-telescope/telescope-file-browser.nvim.git"
 })
 
 require("lazydev").setup({
