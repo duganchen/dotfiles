@@ -32,7 +32,15 @@ vim.pack.add({
 	-- Of course, I'll need Kitty protocol support
 	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
-	{ src = "git@github.com:saghen/blink.cmp.git", version = "v1" }
+
+	-- There are other options, but let's go with LazyVim's setup
+	{ src = "git@github.com:saghen/blink.cmp.git",              version = "v1" },
+
+	-- Popular and well-tested, so why not.
+	-- Telescope's recommendation is to pin to the latest releast tag.
+	"git@github.com:nvim-lua/plenary.nvim.git",
+	{ src = "git@github.com:nvim-telescope/telescope.nvim.git", version = "v0.2.1" }
+
 })
 
 require("lazydev").setup({
@@ -105,14 +113,14 @@ MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
 require("mini.pairs").setup()
-require("mini.pick").setup()
+-- require("mini.pick").setup()
 
 require("mini.sessions").setup()
 
 local starter = require("mini.starter")
 starter.setup({
 	items = {
-		starter.sections.pick(),
+		starter.sections.telescope(),
 		starter.sections.recent_files(),
 		starter.sections.sessions(),
 		starter.sections.builtin_actions()
@@ -208,11 +216,16 @@ require('blink.cmp').setup({
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
 -- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
 
--- These match LazyVim's bindings
+-- These mostly match LazyVim's bindings
 
-vim.keymap.set("n", "<leader>,", MiniPick.builtin.buffers, { desc = "[S]earch [B]uffers" })
 vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
+local builtin = require('telescope.builtin')
+vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Search Buffers" })
+vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "[f]ind [f]les" })
+vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
+
+vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 -- from LazyVim
 function WorkspaceSymbolSearch()
@@ -274,6 +287,5 @@ require('plugins.conform')
 require('plugins.diagnostics')
 require('plugins.minibufremove')
 require('plugins.miniclue')
-require('plugins.minipick')
 require('plugins.textobjects')
 require('plugins.treesitter')

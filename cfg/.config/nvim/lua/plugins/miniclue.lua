@@ -55,7 +55,6 @@ miniclue.setup({
 		miniclue.gen_clues.windows(),
 		miniclue.gen_clues.z(),
 		{ mode = 'n', keys = '<leader>b', desc = '+buffer' },
-		{ mode = 'n', keys = '<leader>f', desc = '+file/find' },
 		{ mode = 'n', keys = '<leader>s', desc = '+search' },
 		{ mode = 'n', keys = '<leader>c', desc = '+code' }
 	},
