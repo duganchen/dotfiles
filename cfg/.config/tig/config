@@ -1,8 +1,8 @@
 # This is all I seem to actually need from:
 # https://github.com/io-PEAK/tig-catppuccin
-
 color cursor                            black       magenta
 color title-focus                       black       magenta
 color title-blur                        magenta     black
 
-# The git blame view still needs some work, but it's broken there too.
+# This shows up as light grey on green otherwise
+color cursor-blur black green
