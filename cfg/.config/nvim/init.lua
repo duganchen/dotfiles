@@ -180,6 +180,20 @@ require("mason-lspconfig").setup({
 	ensure_installed = lsps
 })
 
+vim.lsp.config('gopls', {
+	settings = {
+		gopls = {
+			-- WHY are inlay hints disabled by default
+			-- https://www.reddit.com/r/neovim/comments/172v2pn/comment/k3yys0v/
+			["ui.inlayhint.hints"] = {
+				compositeLiteralFields = true,
+				constantValues = true,
+				parameterNames = true
+			},
+
+		}
+	}
+})
 
 require('blink.cmp').setup({
 	-- Just a copy and paste from LazyGit.
