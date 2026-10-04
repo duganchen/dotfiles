@@ -218,11 +218,7 @@ vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Search Buffers" })
-<<<<<<< HEAD
-vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]les" })
-=======
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]iles" })
->>>>>>> 6abc3cc9d7669140c1b1d28655540a4b690d4c7a
 vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
 
 vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
