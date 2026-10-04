@@ -99,7 +99,7 @@ require("mini.cmdline").setup()
 
 -- The scope of mini-nvim's git support is correct.
 -- If you want a diff view, use "git difftool".
--- And if you want blame, use tig.
+-- And if you want blame, use tig ("tig blame").
 require("mini.diff").setup()
 require("mini.git").setup()
 
