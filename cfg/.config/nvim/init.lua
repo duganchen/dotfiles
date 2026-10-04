@@ -10,6 +10,9 @@
 -- the best way I could find to deal with the askpass/"Allow Inhibiting Shortcuts"
 -- spam (one pair for each plugin, all at the same time!) on GNOME.
 
+-- This is mostly a mini-nvim setup, although I've replaced mini.pick with Telescope and mini.completion
+-- (but no mini.pairs) with blink.
+
 vim.pack.add({
 	{ src = "git@github.com:catppuccin/nvim",         name = "catppuccin" },
 	"git@github.com:neovim/nvim-lspconfig.git",
@@ -96,7 +99,7 @@ require("mini.cmdline").setup()
 
 -- The scope of mini-nvim's git support is correct.
 -- If you want a diff view, use "git difftool".
--- And if you want blame, use tig.
+-- And if you want blame, use tig ("tig blame").
 require("mini.diff").setup()
 require("mini.git").setup()
 
@@ -117,8 +120,9 @@ MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
+
+-- No, the current blink setup does not take care of this.
 require("mini.pairs").setup()
--- require("mini.pick").setup()
 
 require("mini.sessions").setup()
 
@@ -156,7 +160,7 @@ require("mason").setup()
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
 -- Apart from that, this started from Helix's default list.
--- My setup ensures that, for a specific example, pyrefly is used as the lsp
+-- My setup ensures that, for the specific example of Python, pyrefly is used as the lsp
 -- and ruff is used as the formatter.
 local lsps = {
 	"bashls",
@@ -195,38 +199,18 @@ vim.lsp.config('gopls', {
 	}
 })
 
+-- "Works out of the box with no additional configuration"
 require('blink.cmp').setup({
-	-- Just a copy and paste from LazyGit.
-	snippets = {
-		preset = "default",
-	},
-
-	appearance = {
-		-- sets the fallback highlight groups to nvim-cmp's highlight groups
-		-- useful for when your theme doesn't support blink.cmp
-		-- will be removed in a future release, assuming themes add support
-		use_nvim_cmp_as_default = false,
-		-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-		-- adjusts spacing to ensure icons are aligned
-		nerd_font_variant = "mono",
-	},
-
-	completion = {
-		menu = {
-			draw = {
-				treesitter = { "lsp" },
-			},
-		},
-		documentation = {
-			auto_show = true,
-			auto_show_delay_ms = 200,
-		}
-	}
+	-- LazyVim setting
+	completion = { documentation = { auto_show = true, auto_show_delay_ms = 200 } },
+	-- We're using mini-snippets
+	snippets = { preset = 'mini_snippets' },
 })
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
--- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
+-- Should probably add a jumplist search, now that I've switch from MiniPick
+-- (which doesn't have it) to Telescope (which does)
 
 -- These mostly match LazyVim's bindings
 
@@ -234,23 +218,23 @@ vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Search Buffers" })
+<<<<<<< HEAD
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]les" })
+=======
+vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]iles" })
+>>>>>>> 6abc3cc9d7669140c1b1d28655540a4b690d4c7a
 vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
 
 vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 -- from LazyVim
-function WorkspaceSymbolSearch()
+vim.keymap.set("n", "<leader>sS", function()
 	MiniExtra.pickers.lsp({ scope = "workspace_symbol_live" })
-end
+end, { desc = "[S]earch [S]ymbols (workspace)" })
 
-vim.keymap.set("n", "<leader>sS", WorkspaceSymbolSearch, { desc = "[S]earch [S]ymbols (workspace)" })
-
-function DocumentSymbolSearch()
+vim.keymap.set("n", "<leader>ss", function()
 	MiniExtra.pickers.lsp({ scope = "document_symbol" })
-end
-
-vim.keymap.set("n", "<leader>ss", DocumentSymbolSearch, { desc = "[S]search [s]ymbols (document)" })
+end, { desc = "[S]search [s]ymbols (document)" })
 
 vim.keymap.set("n", "<leader>sm", MiniExtra.pickers.marks, { desc = "[S]earch [m]arks" })
 vim.cmd.colorscheme("catppuccin-macchiato")
