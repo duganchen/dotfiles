@@ -209,7 +209,8 @@ require('blink.cmp').setup({
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
--- No jumplist search though. Telescope has it, but AFAIK mini.pick doesn't
+-- Should probably add a jumplist search, now that I've switch from MiniPick
+-- (which doesn't have it) to Telescope (which does)
 
 -- These mostly match LazyVim's bindings
 
@@ -217,23 +218,19 @@ vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Search Buffers" })
-vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "[f]ind [f]les" })
+vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]iles" })
 vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
 
 vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 -- from LazyVim
-function WorkspaceSymbolSearch()
+vim.keymap.set("n", "<leader>sS", function()
 	MiniExtra.pickers.lsp({ scope = "workspace_symbol_live" })
-end
+end, { desc = "[S]earch [S]ymbols (workspace)" })
 
-vim.keymap.set("n", "<leader>sS", WorkspaceSymbolSearch, { desc = "[S]earch [S]ymbols (workspace)" })
-
-function DocumentSymbolSearch()
+vim.keymap.set("n", "<leader>ss", function()
 	MiniExtra.pickers.lsp({ scope = "document_symbol" })
-end
-
-vim.keymap.set("n", "<leader>ss", DocumentSymbolSearch, { desc = "[S]search [s]ymbols (document)" })
+end, { desc = "[S]search [s]ymbols (document)" })
 
 vim.keymap.set("n", "<leader>sm", MiniExtra.pickers.marks, { desc = "[S]earch [m]arks" })
 vim.cmd.colorscheme("catppuccin-macchiato")
