@@ -195,7 +195,12 @@ vim.lsp.config('gopls', {
 })
 
 -- "Works out of the box with no additional configuration"
-require('blink.cmp').setup({ snippets = { preset = 'mini_snippets' }, })
+require('blink.cmp').setup({
+	-- LazyVim setting
+	completion = { auto_show = true, auto_show_delay_ms = 200 },
+	-- We're using mini-snippets
+	snippets = { preset = 'mini_snippets' },
+})
 
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
