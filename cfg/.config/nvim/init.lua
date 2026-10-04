@@ -118,7 +118,6 @@ MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
 require("mini.pairs").setup()
--- require("mini.pick").setup()
 
 require("mini.sessions").setup()
 
