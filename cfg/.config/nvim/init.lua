@@ -10,6 +10,9 @@
 -- the best way I could find to deal with the askpass/"Allow Inhibiting Shortcuts"
 -- spam (one pair for each plugin, all at the same time!) on GNOME.
 
+-- This is mostly a mini-nvim setup, although I've replaced mini.pick with Telescope and mini.completion
+-- with blink.
+
 vim.pack.add({
 	{ src = "git@github.com:catppuccin/nvim",         name = "catppuccin" },
 	"git@github.com:neovim/nvim-lspconfig.git",
@@ -117,6 +120,8 @@ MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
+
+-- No, the current blink setup does not take care of this.
 require("mini.pairs").setup()
 
 require("mini.sessions").setup()
