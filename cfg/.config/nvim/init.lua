@@ -160,7 +160,7 @@ require("mason").setup()
 -- not using cmake-language-server because of this:
 -- https://github.com/regen100/cmake-language-server/issues/108
 -- Apart from that, this started from Helix's default list.
--- My setup ensures that, for a specific example, pyrefly is used as the lsp
+-- My setup ensures that, for the specific example of Python, pyrefly is used as the lsp
 -- and ruff is used as the formatter.
 local lsps = {
 	"bashls",
