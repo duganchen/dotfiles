@@ -11,7 +11,7 @@
 -- spam (one pair for each plugin, all at the same time!) on GNOME.
 
 -- This is mostly a mini-nvim setup, although I've replaced mini.pick with Telescope and mini.completion
--- (but no mini.pairs) with blink.
+-- (but not mini.pairs) with blink.
 
 vim.pack.add({
 	{ src = "git@github.com:catppuccin/nvim",         name = "catppuccin" },
