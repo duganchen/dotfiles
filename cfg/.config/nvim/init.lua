@@ -10,8 +10,7 @@
 -- the best way I could find to deal with the askpass/"Allow Inhibiting Shortcuts"
 -- spam (one pair for each plugin, all at the same time!) on GNOME.
 
--- This is mostly a mini-nvim setup, although I've replaced mini.pick with Telescope and mini.completion
--- (but not mini.pairs) with blink.
+-- This is mostly a mini-nvim setup, except with Telescope instead of mini.pick
 
 vim.pack.add({
 	{ src = "git@github.com:catppuccin/nvim",         name = "catppuccin" },
@@ -35,9 +34,6 @@ vim.pack.add({
 	-- Of course, I'll need Kitty protocol support
 	-- https://github.com/neovim/neovim/pull/39773
 	"git@github.com:3rd/image.nvim.git",
-
-	-- There are other options, but let's go with LazyVim's setup
-	{ src = "git@github.com:saghen/blink.cmp.git",              version = "v1" },
 
 	-- Popular and well-tested, so why not.
 	-- Telescope's recommendation is to pin to the latest releast tag.
@@ -96,6 +92,7 @@ require('mini.bracketed').setup({
 })
 
 require("mini.cmdline").setup()
+require("mini.completion").setup()
 
 -- The scope of mini-nvim's git support is correct.
 -- If you want a diff view, use "git difftool".
@@ -120,10 +117,7 @@ MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
-
--- No, the current blink setup does not take care of this.
 require("mini.pairs").setup()
-
 require("mini.sessions").setup()
 
 local starter = require("mini.starter")
@@ -197,14 +191,6 @@ vim.lsp.config('gopls', {
 
 		}
 	}
-})
-
--- "Works out of the box with no additional configuration"
-require('blink.cmp').setup({
-	-- LazyVim setting
-	completion = { documentation = { auto_show = true, auto_show_delay_ms = 200 } },
-	-- We're using mini-snippets
-	snippets = { preset = 'mini_snippets' },
 })
 
 -- Note that mini.basics has set the leader key to space
