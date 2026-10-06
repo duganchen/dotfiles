@@ -232,6 +232,7 @@ vim.o.foldtext = ""
 vim.opt.foldcolumn = "1"
 
 vim.opt.timeoutlen = 300
+vim.o.updatetime = 250
 
 -- https://www.lazyvim.org/configuration/general
 vim.opt.fillchars = {
