@@ -11,6 +11,7 @@
 -- spam (one pair for each plugin, all at the same time!) on GNOME.
 
 -- This is mostly a mini-nvim setup, except with Telescope instead of mini.pick
+-- and Oil instead of mini.files.
 
 vim.pack.add({
 	{ src = "git@github.com:catppuccin/nvim",         name = "catppuccin" },
@@ -39,7 +40,9 @@ vim.pack.add({
 	-- Telescope's recommendation is to pin to the latest releast tag.
 	"git@github.com:nvim-lua/plenary.nvim.git",
 	{ src = "git@github.com:nvim-telescope/telescope.nvim.git", version = "v0.2.1" },
-	"git@github.com:nvim-telescope/telescope-file-browser.nvim.git"
+	"git@github.com:nvim-telescope/telescope-file-browser.nvim.git",
+
+	"git@github.com:stevearc/oil.nvim.git"
 })
 
 require("lazydev").setup({
@@ -50,6 +53,9 @@ require("lazydev").setup({
 		}
 	}
 })
+
+require('oil').setup()
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- These work well with Ubuntu's default purple terminal:
 -- https://github.com/rose-pine/neovim
@@ -101,7 +107,6 @@ require("mini.diff").setup()
 require("mini.git").setup()
 
 require("mini.extra").setup()
-require("mini.files").setup()
 require("mini.hipatterns").setup()
 
 require("mini.icons").setup()
@@ -206,14 +211,10 @@ vim.lsp.config('rust_analyzer', {
 
 -- These mostly match LazyVim's bindings
 
-vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
-
 local builtin = require('telescope.builtin')
 vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Search Buffers" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]iles" })
 vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
-
-vim.keymap.set("n", "<leader>e", MiniFiles.open, { desc = "[e]xplorer" })
 
 -- from LazyVim
 vim.keymap.set("n", "<leader>sS", function()
