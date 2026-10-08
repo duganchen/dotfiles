@@ -193,6 +193,12 @@ vim.lsp.config('gopls', {
 	}
 })
 
+vim.lsp.config('rust_analyzer', {
+	settings = {
+		['rust-analyzer'] = { check = { command = 'clippy' } }
+	}
+})
+
 -- Note that mini.basics has set the leader key to space
 -- Mostly using Kickstart's setup, which starts finders with "<space>" s.
 -- Should probably add a jumplist search, now that I've switch from MiniPick
