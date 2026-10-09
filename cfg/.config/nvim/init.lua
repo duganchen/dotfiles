@@ -29,12 +29,6 @@ vim.pack.add({
 	"git@github.com:mason-org/mason-lspconfig.nvim.git",
 	"git@github.com:stevearc/conform.nvim.git",
 	"git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
-	-- This will eventually be able to go:
-	-- https://www.reddit.com/r/neovim/comments/1w4ie5n/markdown_images_in_neovim_013_no_plugin_needed/
-	-- https://www.reddit.com/r/neovim/comments/1w2rjor/vimuiimg_neovim_013s_new_api_for_images/
-	-- Of course, I'll need Kitty protocol support
-	-- https://github.com/neovim/neovim/pull/39773
-	"git@github.com:3rd/image.nvim.git",
 
 	-- Popular and well-tested, so why not.
 	-- Telescope's recommendation is to pin to the latest releast tag.
@@ -111,10 +105,6 @@ require("mini.hipatterns").setup()
 
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
-
--- This works well. I'm also aware of this, but I don't feel like trying it right now:
--- https://github.com/hakonharnes/img-clip.nvim
-require("image").setup()
 
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require("mini.misc").setup()
