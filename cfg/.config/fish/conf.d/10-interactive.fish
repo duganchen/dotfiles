@@ -32,5 +32,10 @@ if status is-interactive
 --color=selected-bg:#494D64 \
 --color=border:#6E738D,label:#CAD3F5"
 
+    # Needed to get hidden files to show in nvim Mini.Starter's built-in files
+    # picker. Which uses ripgrep.
+    # Use --no-hidden to turn *off* grepping hidden files.
+    set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
+
     fastfetch
 end
