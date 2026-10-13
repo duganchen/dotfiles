@@ -13,11 +13,11 @@ keybind=ctrl+alt+arrow_left=unbind
 keybind=ctrl+alt+arrow_right=unbind
 keybind=ctrl+alt+arrow_up=unbind
 
-# So use Terminator's.
-keybind = performable:alt+arrow_left=goto_split:left
-keybind = performable:alt+arrow_down=goto_split:down
-keybind = performable:alt+arrow_up=goto_split:up
-keybind = performable:alt+arrow_right=goto_split:right
+# Terminator has them as alt-cursor. But I use vim.
+keybind = performable:alt+h=goto_split:left
+keybind = performable:alt+j=goto_split:down
+keybind = performable:alt+k=goto_split:up
+keybind = performable:alt+h=goto_split:right
 
 # Resizing splits (ctrl+shift+cursor in Terminator) isn't bound because
 # it doesn't work well for me. Use the mouse.
