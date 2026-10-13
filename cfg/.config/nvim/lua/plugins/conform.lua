@@ -63,7 +63,7 @@ vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 
 -- Note that my default is to have auto-format off. I think toggling it on with
--- cF is a good balance.
+-- <space>cF is a good balance.
 -- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
 -- https://github.com/stevearc/conform.nvim/issues/192
 
@@ -77,7 +77,7 @@ vim.keymap.set('n', '<leader>cf',
 			vim.notify 'Enabled autoformat for current buffer'
 		end
 	end,
-	{ desc = 'auto[f]format buffer toggle' }
+	{ desc = 'auto[f]ormat buffer toggle' }
 )
 
 
@@ -91,5 +91,5 @@ vim.keymap.set('n', '<leader>cF',
 			vim.notify 'Enabled autoformat globally'
 		end
 	end,
-	{ desc = 'auto[F]format global toggle' }
+	{ desc = 'auto[F]ormat global toggle' }
 )
