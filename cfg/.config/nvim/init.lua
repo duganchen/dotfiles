@@ -108,7 +108,7 @@ MiniIcons.mock_nvim_web_devicons()
 
 -- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require("mini.misc").setup()
-MiniMisc.setup_auto_root()
+-- MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
