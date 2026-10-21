@@ -17,7 +17,7 @@ keybind=ctrl+alt+arrow_up=unbind
 keybind = performable:alt+h=goto_split:left
 keybind = performable:alt+j=goto_split:down
 keybind = performable:alt+k=goto_split:up
-keybind = performable:alt+h=goto_split:right
+keybind = performable:alt+l=goto_split:right
 
 # Resizing splits (ctrl+shift+cursor in Terminator) isn't bound because
 # it doesn't work well for me. Use the mouse.
