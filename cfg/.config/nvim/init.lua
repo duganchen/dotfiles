@@ -100,15 +100,13 @@ require("mini.completion").setup()
 require("mini.diff").setup()
 require("mini.git").setup()
 
-require("mini.extra").setup()
-require("mini.hipatterns").setup()
+-- Trying to figure out what putting artifacts in my Rust code. Has to be this.
+-- require("mini.hipatterns").setup()
 
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 
--- See: https://www.reddit.com/r/neovim/comments/zy5s0l/you_dont_need_vimrooter_usually_or_how_to_set_up/
 require("mini.misc").setup()
--- MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.notify").setup()
@@ -195,7 +193,7 @@ vim.lsp.config('rust_analyzer', {
 })
 
 -- Note that mini.basics has set the leader key to space
--- Mostly using Kickstart's setup, which starts finders with "<space>" s.
+-- Inspired by Kickstart's setup, which starts finders with "<space>" s.
 -- Should probably add a jumplist search, now that I've switch from MiniPick
 -- (which doesn't have it) to Telescope (which does)
 
@@ -207,15 +205,10 @@ vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search [f]iles" }
 vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
 
 -- from LazyVim
-vim.keymap.set("n", "<leader>sS", function()
-	MiniExtra.pickers.lsp({ scope = "workspace_symbol_live" })
-end, { desc = "[S]earch [S]ymbols (workspace)" })
+vim.keymap.set("n", "<leader>sS", builtin.lsp_workspace_symbols, { desc = "[S]earch [S]ymbols (workspace)" })
+vim.keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, { desc = "[S]search [s]ymbols (document)" })
+vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "[S]earch [m]arks" })
 
-vim.keymap.set("n", "<leader>ss", function()
-	MiniExtra.pickers.lsp({ scope = "document_symbol" })
-end, { desc = "[S]search [s]ymbols (document)" })
-
-vim.keymap.set("n", "<leader>sm", MiniExtra.pickers.marks, { desc = "[S]earch [m]arks" })
 vim.cmd.colorscheme("catppuccin-macchiato")
 
 vim.o.relativenumber = true
