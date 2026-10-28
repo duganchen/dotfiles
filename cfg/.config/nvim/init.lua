@@ -100,8 +100,7 @@ require("mini.completion").setup()
 require("mini.diff").setup()
 require("mini.git").setup()
 
--- Trying to figure out what putting artifacts in my Rust code. Has to be this.
--- require("mini.hipatterns").setup()
+require("mini.hipatterns").setup()
 
 require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
