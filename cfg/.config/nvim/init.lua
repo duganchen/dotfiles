@@ -95,7 +95,9 @@ require("mini.cmdline").setup()
 require("mini.completion").setup()
 
 -- The scope of mini-nvim's git support is correct.
--- If you want a diff view, use "git difftool".
+-- If you want a diff view, use "git difftool" (with git.mergetool set to nvimdiff).
+-- If manually copying and pasting from a previous state, difftool against the the working tree and save the right pane:
+-- git difftool commit-ish -- path/to/file.ext
 -- And if you want blame, use tig ("tig blame").
 require("mini.diff").setup()
 require("mini.git").setup()
