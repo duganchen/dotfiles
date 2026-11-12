@@ -45,6 +45,7 @@ require('conform').setup {
 		cpp      = { 'clang-format' },
 		fish     = { 'fish_indent' },
 		go       = { 'gofmt' },
+		json     = { 'prettier' },
 		markdown = { 'prettier' },
 		python   = { 'ruff format' },
 		sh       = { 'shfmt' },
