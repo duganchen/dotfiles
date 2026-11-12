@@ -1,6 +1,5 @@
 -- Conform. This started as a copy-and-paste from Kickstart.
 -- Formatting is changed to on-demand (a necessity when working on another person's project)
--- [[ Formatting ]]
 require('conform').setup {
 	formatters = {
 		par = { command = 'par' },
@@ -41,17 +40,22 @@ require('conform').setup {
 
 	formatters_by_ft = {
 
-		c        = { 'clang-format' },
-		cpp      = { 'clang-format' },
-		fish     = { 'fish_indent' },
-		go       = { 'gofmt' },
-		json     = { 'prettier' },
-		markdown = { 'prettier' },
-		python   = { 'ruff format' },
-		sh       = { 'shfmt' },
-		text     = { 'par', 'fmt', stop_after_first = true },
-		yaml     = { 'prettier' },
-		rust = { 'rustfmt' },
+		c          = { 'clang-format' },
+		css        = { 'prettier' },
+		cpp        = { 'clang-format' },
+		fish       = { 'fish_indent' },
+		go         = { 'gofmt' },
+		javascript = { 'prettier' },
+		json       = { 'prettier' },
+		markdown   = { 'prettier' },
+		python     = { 'ruff format' },
+		sh         = { 'shfmt' },
+		text       = { 'par', 'fmt', stop_after_first = true },
+		yaml       = { 'prettier' },
+		rust       = { 'rustfmt' },
+		sass       = { 'prettier' },
+		scss       = { 'prettier' },
+		typescript = { 'prettier' },
 		-- Conform can also run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		--
